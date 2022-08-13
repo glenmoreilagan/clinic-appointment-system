@@ -1,13 +1,15 @@
 <?php 
 
-$server = "localhost";
-$user = "root";
-$pass = "";
-$database = "ljcura_clinic";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ljcura_clinic";
 
-$conn = mysqli_connect($server, $user, $pass, $database);
-
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
 if (!$conn) {
-    die("<script>alert('Connection Failed.')</script>");
+    die("<script>alert('Connection Failed.'</script>");
 }
+
 ?>
