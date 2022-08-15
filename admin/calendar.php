@@ -24,7 +24,7 @@
 
 	<!-- BEGIN SETTINGS -->
 	<!-- Remove this after purchasing -->
-	<link class="js-stylesheet" href="css/light.css" rel="stylesheet">
+	<link class="js-stylesheet" href="./assets/css/light.css" rel="stylesheet">
 </head>
 <!--
   HOW TO USE: 
@@ -37,11 +37,11 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
 	<div class="wrapper">
     <!-- THIS IS FOR SIDEBAR NAVIGATION -->
-    <?php include_once 'display_side_nav.php' ?> 
+    <?php include_once './layouts/display_side_nav.php' ?> 
 
 		<div class="main">
       <!-- THIS IS FOR HEADER NAVIGATION BAR -->
-      <?php include_once 'display_head_nav.php' ?>
+      <?php include_once './layouts/display_head_nav.php' ?>
 
       <main class="content">
 				<div class="container-fluid p-0">
@@ -70,7 +70,7 @@
 		</div>
 	</div>
 
-	<script src="js/app.js"></script>
+	<script src="./assets/js/app.js"></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

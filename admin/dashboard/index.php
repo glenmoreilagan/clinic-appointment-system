@@ -13,7 +13,7 @@
   <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
   <meta name="author" content="Bootlab">
 
-  <title>Clinic System</title>
+  <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
   <link rel="canonical" href="calendar.html" />
   <link rel="shortcut icon" href="img/favicon.ico">
@@ -27,7 +27,7 @@
   <!-- BEGIN SETTINGS -->
   <!-- Remove this after purchasing -->
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
-  <link class="js-stylesheet" href="css/forms.css" rel="stylesheet">
+  <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
 </head>
 <!--
   HOW TO USE: 
@@ -40,22 +40,18 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
   <div class="wrapper">
     <!-- THIS IS FOR SIDEBAR NAVIGATION -->
-    <?php include_once 'display_side_nav.php' ?>
+    <?php include_once '../layouts/display_side_nav.php' ?>
 
     <div class="main">
       <!-- THIS IS FOR HEADER NAVIGATION BAR -->
-      <?php include_once 'display_head_nav.php' ?>
+      <?php include_once '../layouts/display_head_nav.php' ?>
 
       <main class="content">
         <div class="container-fluid p-0">
           <h1 class="h3 mb-3">Dashboard</h1>
 
-          <div class="card">
-            <div class="card-header">
-              <!-- <h5 class="card-title">FullCalendar</h5>
-							<h6 class="card-subtitle text-muted">Open source JavaScript jQuery plugin for a full-sized, drag & drop event calendar.</h6> -->
-            </div>
-            <div class="card-body">
+          <div class="card mb-3">
+            <div class="card-body mt-3">
               <div class="row">
                 <div class="col-12 col-sm-3 col-xxl d-flex">
                   <div class="card card-custom flex-fill">
@@ -129,20 +125,28 @@
             </div>
           </div>
 
+          <div class="card mb-3">
+            <div class="card-header">
+              <h4>Today's Appointments</h4>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
         </div>
       </main>
 
       <footer class="footer">
         <div class="col-6">
           <p class="mb-0">
-            &copy; 2020 - <a href="index.html" class="text-muted">AppStack</a>
+            &copy; 2022 - <a href="http://localhost/caps/" class="text-muted">LJ CURA OB-GYN ULTRASOUND CLINIC</a>
           </p>
         </div>
       </footer>
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="../assets/js/app.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {});
