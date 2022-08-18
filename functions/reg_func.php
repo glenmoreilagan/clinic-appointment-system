@@ -12,16 +12,14 @@ if (isset($_POST['submit'])) {
 	$address = mysqli_real_escape_string($conn, $_POST['address']);
 	$contactnumber = mysqli_real_escape_string($conn, $_POST['contactnumber']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	$password = md5($_POST['password']);
-	$password = mysqli_real_escape_string($conn, $password);
-	$cpassword = md5($_POST['cpassword']);
-	$cpassword = mysqli_real_escape_string($conn, $cpassword);
+	$password = mysqli_real_escape_string($conn, md5($_POST['password']));
+	$cpassword = mysqli_real_escape_string($conn,  md5($_POST['cpassword']));
 
 	if ($password == $cpassword) {
-		$sql = "SELECT * FROM useraccount WHERE email='$email'";
+		$sql = "SELECT * FROM tbl_user WHERE email='$email'";
 		$result = mysqli_query($conn, $sql);
-		if (!$result->num_rows > 0) {
-			$sql = "INSERT INTO useraccount (fullname, address, contactnumber, email, password)
+		if ($result->num_rows == 0) {
+			$sql = "INSERT INTO tbl_user (fullname, address, contactnumber, email, password)
 			VALUES ('$fullname', '$address', '$contactnumber', '$email', '$password')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {

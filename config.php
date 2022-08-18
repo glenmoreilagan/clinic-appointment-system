@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "ljcura_clinic";
+$dbname = "db_lj_clinic";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

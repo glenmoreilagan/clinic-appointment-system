@@ -15,10 +15,10 @@
 
   <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
-  <link rel="canonical" href="calendar.html" />
   <link rel="shortcut icon" href="img/favicon.ico">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Choose your prefered color scheme -->
   <!-- <link href="css/light.css" rel="stylesheet"> -->
@@ -48,14 +48,34 @@
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">Appointments</h1>
+          <h1 class="h3 mb-3">Feedback</h1>
 
           <div class="card mb-3">
-            <div class="card-header">
-              <h4>Pending Appointments</h4>
-            </div>
+            <!-- <div class="card-header">
+              
+            </div> -->
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <div class="rating mb-3">
+                <h4 class="card-text">Provide Feedback:</h4>
+                <br>
+                <h5 class="card-text">Please Help us to serve you better.</h5>
+
+                <p class="card-text">How satisfied were you with our service?</p>
+                <input name="rating" id="excellent" type="radio" value="5" checked>
+                <label for="excellent">Excellent</label>
+                <input name="rating" id="good" type="radio" value="4">
+                <label for="good">Good</label>
+                <input name="rating" id="neutral" type="radio" value="3">
+                <label for="neutral">Neutral</label>
+                <input name="rating" id="poor" type="radio" value="2">
+                <label for="poor">Poor</label>
+              </div>
+
+              <div class="feedback mb-3">
+                <label for="feedback">If you have specific feedback, please write to us.</label>
+                <textarea class="form-control" name="feedback" id="feedback" placeholder="Input your feedback"></textarea>
+              </div>
+              <button class="btn btn-primary btn-sm" id="btnSaveFeedback">Submit Feedback</button>
             </div>
           </div>
 
@@ -67,7 +87,30 @@
   <script src="../assets/js/app.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {});
+    $(document).ready(function() {
+      const save_new_feedback = (data) => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/save_feedback.php',
+          dataType: 'JSON',
+          data: data,
+          success: function(res) {
+            console.log(res);
+            $("textarea[name='feedback']").val('');
+          }
+        });
+      }
+
+      $("#btnSaveFeedback").click((e) => {
+        e.preventDefault();
+
+        let data_input = {
+          rating: $("input[name='rating']").val(),
+          feedback: $("textarea[name='feedback']").val(),
+        };
+        save_new_feedback(data_input);
+      });
+    });
   </script>
 </body>
 

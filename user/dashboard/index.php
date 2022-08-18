@@ -15,10 +15,10 @@
 
   <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
-  <link rel="canonical" href="calendar.html" />
   <link rel="shortcut icon" href="img/favicon.ico">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Choose your prefered color scheme -->
   <!-- <link href="css/light.css" rel="stylesheet"> -->
@@ -135,21 +135,15 @@
           </div>
         </div>
       </main>
-
-      <!-- <footer class="footer">
-        <div class="col-6">
-          <p class="mb-0">
-            &copy; 2022 - <a href="http://localhost/caps/" class="text-muted">LJ CURA OB-GYN ULTRASOUND CLINIC</a>
-          </p>
-        </div>
-      </footer> -->
     </div>
   </div>
 
   <script src="../assets/js/app.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {});
+    $(document).ready(function() {
+      
+    });
   </script>
 </body>
 
