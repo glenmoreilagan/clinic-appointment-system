@@ -108,6 +108,63 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="container stages">
+<div class="trimester-title">
+    <h4><b>Pregnancy Journey</b></h4>
+    <p>Here's the guide to pregnancy which is counted as 40 weeks. Starting 
+      from the first day of the mother's last menstrual period. Your<br> estimated 
+      date to birth is only to give you a guide. Babies come when they are ready 
+      and you need to be patient.</p>
+  </div>
+  <div class="row">
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/1st.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/2nd.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/3rd.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/4th.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/5th.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/6th.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/7th.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/8th.png" width="100%" alt="">
+      </div>
+    </div>
+    <div class="monthly col-md-4">
+      <div class="weekly">
+        <img src="image/months/9th.png" width="100%" alt="">
+      </div>
+    </div>
 
   </div>
 </div>

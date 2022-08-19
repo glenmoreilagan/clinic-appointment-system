@@ -42,6 +42,16 @@
 .row.panel {
     padding: 10px !important; 
 }
+/* .stages {
+    margin-top: -54em;
+} */
+.trimester-title {
+    text-align: center;
+    font-family: 'Lucida Sans';
+    font-size: medium;
+    margin-top: 1em;
+}
+
 
 .page-footer {
     background: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35));
