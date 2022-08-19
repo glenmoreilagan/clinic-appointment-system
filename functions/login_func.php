@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 		$row = mysqli_fetch_assoc($result);
 		$_SESSION['fullname'] = $row['fullname'];
 		$_SESSION['user_id'] = $row['id'];
-		header("Location: ../welcome.php");
+		header("Location: ../user/dashboard/index.php");
 	} else {
 		echo "<script>alert('Woops! Email or Password is wrong.')</script>";
 	}
