@@ -76,16 +76,16 @@
 
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
           <!-- <img src="../assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood" />  -->
-          <span class="text-dark">Chris Wood</span>
+          <span class="text-dark"><?php echo $_SESSION['email'] ?></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <!-- <a class="dropdown-item" href="pages-profile.html"><i class="align-middle mr-1" data-feather="user"></i> -->
-            <!-- Profile</a> -->
+          <!-- Profile</a> -->
           <!-- <a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a> -->
           <!-- <div class="dropdown-divider"></div> -->
           <a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a>
           <!-- <a class="dropdown-item" href="#">Help</a> -->
-          <a class="dropdown-item" href="#">Sign out</a>
+          <a class="dropdown-item" href="../../logout.php">Sign out</a>
         </div>
       </li>
     </ul>

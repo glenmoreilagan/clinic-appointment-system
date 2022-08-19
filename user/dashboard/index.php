@@ -1,3 +1,6 @@
+<?php
+include_once '../functions/session_config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +21,6 @@
   <link rel="shortcut icon" href="img/favicon.ico">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Choose your prefered color scheme -->
   <!-- <link href="css/light.css" rel="stylesheet"> -->
@@ -28,6 +30,36 @@
   <!-- Remove this after purchasing -->
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
+
+  <style>
+    /* .fc-prevYear-button,
+    .fc-nextYear-button,
+    .fc-prev-button,
+    .fc-next-button,
+    .fc-today-button {
+      background-color: #293042 !important;
+      border: #293042 !important;
+    }
+
+    .btn-primary.focus,
+    .btn-primary:focus {
+      box-shadow: none;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled).active:focus,
+    .btn-primary:not(:disabled):not(.disabled):active:focus,
+    .show>.btn-primary.dropdown-toggle:focus {
+      box-shadow: 0 0 0 .2rem rgba(41, 48, 66, .5);
+    } */
+
+    td.fc-daygrid-day:hover {
+      cursor: pointer;
+      background-color: #E0EAFC;
+    }
+  </style>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <!--
   HOW TO USE: 
@@ -126,6 +158,12 @@
           </div>
 
           <div class="card mb-3">
+            <div class="card-body">
+              <div id="fullcalendar"></div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
             <div class="card-header">
               <h4>Today's Appointments</h4>
             </div>
@@ -138,11 +176,92 @@
     </div>
   </div>
 
-  <script src="../assets/js/app.js"></script>
+  <?php include_once '../modals/newAppointment_modal.php' ?>
 
+  <script src="../assets/js/app.js"></script>
   <script>
     $(document).ready(function() {
-      
+      var calendarEl = document.getElementById('fullcalendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap',
+        initialView: 'dayGridMonth',
+        initialDate: '2022-08-19',
+        headerToolbar: {
+          left: 'prevYear,prev,next,nextYear today',
+          right: 'title',
+          // right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          center: ''
+        },
+        events: '../functions/display_appointment_calender.php',
+
+        // eventBackgroundColor: '#293042',
+        // eventBorderColor: '#293042',
+
+        // for inserting
+        dateClick: async function(e) {
+          // console.log(e);
+          let date_sched = e.dateStr;
+
+          $("input[name='date_sched']").val(date_sched);
+
+          $("#newAppointment_modal").modal('show');
+        },
+
+        // abang lang to para sa update function
+        eventClick: function(e) {
+          // console.log(e.event.extendedProps);
+          // console.log(e.el.style);
+
+          // e.el.style.backgroundColor = '#293042';
+          // e.el.style.borderColor = '#293042';
+
+          // let complaint = e.event.extendedProps.complaint;
+          // let age = e.event.extendedProps.age;
+          // let date_schedule = e.event.extendedProps.date_schedule;
+          // let time_schedule = e.event.extendedProps.time_schedule;
+
+          // $("textarea[name='complaint']").val(complaint);
+          // $("input[name='age']").val(age);
+          // $("input[name='date_sched']").val(date_schedule);
+          // $("input[name='time_sched']").val(time_schedule);
+
+          // $("#newAppointment_modal").modal('show');
+        },
+      });
+
+      setTimeout(function() {
+        calendar.render();
+      }, 250)
+
+      const save_new_appointment = (data) => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/save_appointment.php',
+          dataType: 'JSON',
+          data: data,
+          success: function(res) {
+            // console.log(res);
+
+            $("#newAppointment_modal").modal('hide');
+            $(".form-input").val('');
+
+            calendar.refetchEvents();
+          }
+        });
+      }
+
+      $("#btnSaveNewAppointment").click((e) => {
+        e.preventDefault();
+
+        let data_input = {
+          complaint: $("textarea[name='complaint']").val(),
+          date_schedule: $("input[name='date_sched']").val(),
+          time_schedule: $("input[name='time_sched']").val(),
+          age: $("input[name='age']").val()
+        };
+
+        save_new_appointment(data_input);
+      });
     });
   </script>
 </body>

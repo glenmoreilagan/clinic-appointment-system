@@ -1,5 +1,6 @@
 <?php
   include_once '../../config.php';
+  // session_start();
 
   $complaint = $_POST['complaint'];
   $date_schedule = $_POST['date_schedule'];
