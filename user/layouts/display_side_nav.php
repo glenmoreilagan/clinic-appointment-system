@@ -32,8 +32,18 @@
         </a>
       </li>
       <li class="sidebar-item">
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/announcements/index.php"; ?>>
+          <i class="align-middle"></i> <span class="align-middle">Announcements</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
         <a class="sidebar-link" href=<?php echo $host . "caps/user/myappointments/index.php"; ?>>
           <i class="align-middle"></i> <span class="align-middle">My Appointments</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/periodcalendar/index.php"; ?>>
+          <i class="align-middle"></i> <span class="align-middle">Period Calendar</span>
         </a>
       </li>
       <li class="sidebar-item">

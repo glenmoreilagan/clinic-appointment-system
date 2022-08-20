@@ -10,7 +10,7 @@
     when status = 1 and is_completed = 0 then 'Approved'
     when is_completed = 1 or status = 1 then 'Completed'
   end as status
-  FROM tbl_appoiments 
+  FROM tbl_appointments 
   order by id DESC";
 
   $result = $conn->query($qry);
