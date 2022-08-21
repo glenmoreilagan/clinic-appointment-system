@@ -27,27 +27,27 @@
         </ul>
       </li> -->
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/dashboard/index.php"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/dashboard/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Dashboard</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/announcements/index.php"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/announcements/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Announcements</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/myappointments/index.php"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/myappointments/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">My Appointments</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/periodcalendar/index.php"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/periodcalendar/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Period Calendar</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/feedback/index.php"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "caps/user/feedback/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Feedback</span>
         </a>
       </li>

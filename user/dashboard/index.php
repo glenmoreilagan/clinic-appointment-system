@@ -168,6 +168,7 @@ include_once '../functions/session_config.php';
   </div>
 
   <?php include_once '../modals/newAppointment_modal.php' ?>
+  <?php include_once '../modals/cancelAppointment_modal.php' ?>
 
   <script src="../assets/js/app.js"></script>
   <script>
@@ -178,7 +179,8 @@ include_once '../functions/session_config.php';
         initialView: 'dayGridMonth',
         initialDate: Date.now(),
         headerToolbar: {
-          left: 'prevYear,prev,next,nextYear today',
+          left: 'prev,next today',
+          // left: 'prevYear,prev,next,nextYear today',
           right: 'title',
           // right: 'dayGridMonth,timeGridWeek,timeGridDay'
           center: ''
@@ -200,6 +202,11 @@ include_once '../functions/session_config.php';
 
         // abang lang to para sa update function
         eventClick: function(e) {
+          console.log(e.event);
+          let id = e.event.id;
+          let title = e.event.title;
+          let start = e.event.startStr;
+          let end = e.event.endStr;
           // console.log(e.event.extendedProps);
           // console.log(e.el.style);
 
@@ -216,7 +223,9 @@ include_once '../functions/session_config.php';
           // $("input[name='date_sched']").val(date_schedule);
           // $("input[name='time_sched']").val(time_schedule);
 
-          // $("#newAppointment_modal").modal('show');
+          $("input[name='appointment_id']").val(id);
+          $("#appointment_title").text(title);
+          $("#cancelAppointment_modal").modal('show');
         },
       });
 
@@ -235,6 +244,23 @@ include_once '../functions/session_config.php';
 
             $("#newAppointment_modal").modal('hide');
             $(".form-input").val('');
+
+            calendar.refetchEvents();
+          }
+        });
+      }
+
+      const cancel_appointment = (data) => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/cancel_appointment.php',
+          dataType: 'JSON',
+          data: data,
+          success: function(res) {
+            console.log(res);
+
+            $("#cancelAppointment_modal").modal('hide');
+            $("input[name='appointment_id']").val(0);
 
             calendar.refetchEvents();
           }
@@ -270,6 +296,16 @@ include_once '../functions/session_config.php';
         };
 
         save_new_appointment(data_input);
+      });
+      
+      $("#btnCancelAppointment").click((e) => {
+        e.preventDefault();
+        
+        let data_input = {
+          appointment_id: $("input[name='appointment_id']").val(),
+        };
+
+        cancel_appointment(data_input);
       });
     });
   </script>

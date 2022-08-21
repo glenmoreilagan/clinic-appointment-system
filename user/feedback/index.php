@@ -51,7 +51,7 @@
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">Feedback</h1>
+          <h1 class="mb-3">Feedback</h1>
 
           <div class="card mb-3">
             <!-- <div class="card-header">
@@ -59,23 +59,23 @@
             </div> -->
             <div class="card-body">
               <div class="rating mb-3">
-                <h4 class="card-text">Provide Feedback:</h4>
+                <h1 class="card-text">Provide Feedback:</h1>
                 <br>
-                <h5 class="card-text">Please Help us to serve you better.</h5>
+                <h3 class="card-text">Please Help us to serve you better.</h3>
 
-                <p class="card-text">How satisfied were you with our service?</p>
+                <p class="card-text feedback-p">How satisfied were you with our service?</p>
                 <input name="rating" id="excellent" type="radio" value="5" checked>
-                <label for="excellent">Excellent</label>
+                <label class="feedback-label" for="excellent">Excellent</label> <br>
                 <input name="rating" id="good" type="radio" value="4">
-                <label for="good">Good</label>
+                <label class="feedback-label" for="good">Good</label> <br>
                 <input name="rating" id="neutral" type="radio" value="3">
-                <label for="neutral">Neutral</label>
+                <label class="feedback-label" for="neutral">Neutral</label> <br>
                 <input name="rating" id="poor" type="radio" value="2">
-                <label for="poor">Poor</label>
+                <label class="feedback-label" for="poor">Poor</label>
               </div>
 
               <div class="feedback mb-3">
-                <label for="feedback">If you have specific feedback, please write to us.</label>
+                <label class="feedback-label" for="feedback">If you have specific feedback, please write to us.</label>
                 <textarea class="form-control" name="feedback" id="feedback" placeholder="Input your feedback"></textarea>
               </div>
               <button class="btn btn-primary btn-sm" id="btnSaveFeedback">Submit Feedback</button>

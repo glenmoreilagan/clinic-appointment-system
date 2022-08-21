@@ -103,7 +103,8 @@ include_once '../functions/session_config.php';
         initialView: 'dayGridMonth',
         initialDate: Date.now(),
         headerToolbar: {
-          left: 'prevYear,prev,next,nextYear today',
+          left: 'prev,next today',
+          // left: 'prevYear,prev,next,nextYear today',
           right: 'title',
           // right: 'dayGridMonth,timeGridWeek,timeGridDay'
           center: ''
