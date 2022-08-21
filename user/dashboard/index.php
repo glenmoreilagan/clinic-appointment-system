@@ -233,6 +233,22 @@ include_once '../functions/session_config.php';
         calendar.render();
       }, 250)
 
+      const load_dashboard_summary = () => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/load_dashboard_summary.php',
+          dataType: 'JSON',
+          data: {},
+          success: function(res) {
+            console.log(res);
+            $("#summ_pending").text(res.data[0].pending)
+            $("#summ_confirmed").text(res.data[0].approved)
+            $("#summ_completed").text(res.data[0].completed)
+            $("#summ_cancelled").text(res.data[0].cancelled)
+          }
+        });
+      };
+
       const save_new_appointment = (data) => {
         $.ajax({
           method: 'POST',
@@ -267,22 +283,6 @@ include_once '../functions/session_config.php';
         });
       }
 
-      const load_dashboard_summary = () => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/load_dashboard_summary.php',
-          dataType: 'JSON',
-          data: {},
-          success: function(res) {
-            console.log(res);
-            $("#summ_pending").text(res.data[0].pending)
-            $("#summ_confirmed").text(res.data[0].approved)
-            $("#summ_completed").text(res.data[0].completed)
-            $("#summ_cancelled").text(res.data[0].cancelled)
-          }
-        });
-      };
-
       load_dashboard_summary();
 
       $("#btnSaveNewAppointment").click((e) => {
@@ -296,16 +296,18 @@ include_once '../functions/session_config.php';
         };
 
         save_new_appointment(data_input);
+        load_dashboard_summary();
       });
-      
+
       $("#btnCancelAppointment").click((e) => {
         e.preventDefault();
-        
+
         let data_input = {
           appointment_id: $("input[name='appointment_id']").val(),
         };
 
         cancel_appointment(data_input);
+        load_dashboard_summary();
       });
     });
   </script>
