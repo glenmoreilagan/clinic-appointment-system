@@ -53,10 +53,90 @@
 }
 
 
-.page-footer {
+footer{
+    bottom: 0px;
+    width: 100%;
     background: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35));
-}
-.page-footer .brief {
-    text-align: left;
+    font-family: 'Lucida Sans';
+  }
+  .main-content{
+    display: flex;
     font-size: small;
+  }
+  .main-content .box{
+    flex-basis: 50%;
+    padding: 10px 20px;
+  }
+  .box h2{
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .box .content{
+    margin: 20px 0 0 0;
+    position: relative;
+  }
+  
+.box .content:before{
+    position: absolute;
+    content: '';
+    top: -10px;
+    height: 2px;
+    width: 100%;
+    background: #1a1a1a;
+  }
+  .center .content .text{
+    font-size: small;
+  }
+.links .content .links {
+    text-align: center;
 }
+
+.right form .text{
+    font-size: 1rem;
+    margin-bottom: 2px;
+    color: #000;
+  }
+  .right form .msg{
+    margin-top: 10px;
+  }
+  .right form input, .right form textarea{
+    width: 100%;
+    font-size: 1rem;
+    padding-left: 10px;
+    border: 1px solid #222222;
+  }
+  .right form input:focus,
+  .right form textarea:focus{
+    outline-color: #3498db;
+  }
+  .right form input{
+    height: 30px;
+  }
+  .right form .btn{
+    margin-top: -3px;
+    text-align: right;
+  }
+  .right form .btn button{
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .3s;
+  }
+  @media screen and (max-width: 900px) {
+    footer{
+      position: relative;
+      bottom: 0px;
+    }
+    .main-content{
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+    .main-content .box{
+      margin: 5px 0;
+    }
+  }
