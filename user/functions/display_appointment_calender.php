@@ -14,7 +14,7 @@ $qry = "SELECT id, user_id, complaint,
     when is_completed = 1 or status = 1 then 'Completed'
   end as status
   FROM tbl_appointments 
-  WHERE user_id = '$user_id'
+  WHERE user_id = '$user_id' AND is_cancelled = 0
   order by id DESC";
 
 $result = $conn->query($qry);
