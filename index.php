@@ -21,7 +21,7 @@
   <link href="assets/css/swiper-bundle.min.css" rel="stylesheet">
   <title>Home</title>
 
-  <style>
+  <!-- <style>
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -65,52 +65,84 @@
       position: relative;
 
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
 
   <?php include('./includes/navbar.php'); ?>
 
-  <div class="container-fluid px-lg-2 mt-2">
-    <div class="swiper swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="image/carousel/1.jpg" class="w-100 d-block">
-          <div class="content">
-            <h3 style="color: white;"><b>Great care is always the best choice</b></h3>
+  <!-- carousel -->
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="image/carousel/1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Great care is always the best choice</h3>
+        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+          <div class="slider-btn">
+            <a href="#"><span>Our Services</span></a>
+            <a href="#"><span>Get Appointment</span></a>
+            <!-- <button class="btn btn-1">Our Services</button>
+            <button class="btn btn-2">Get Appointment!</button> -->
           </div>
-          <div class="content2">
-            <h4 style="color: white;"><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h4>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <img src="image/carousel/2.jpg" class="w-100 d-block">
-          <div class="content">
-            <h3 style="color: white;"><b>Great care is always the best choice</b></h3>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <img src="image/carousel/3.jpg" class="w-100 d-block">
-          <div class="content">
-            <h3 style="color: white;"><b>Great care is always the best choice</b></h3>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <img src="image/carousel/4.jpg" class="w-100 d-block">
-          <div class="content">
-            <h3 style="color: white;"><b>Great care is always the best choice</b></h3>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <img src="image/carousel/5.jpg" class="w-100 d-block">
-          <div class="content">
-            <h3 style="color: white;"><b>Great care is always the best choice</b></h3>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="image/carousel/2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Great care is always the best choice</h3>
+        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+          <div class="slider-btn">
+            <a href="#"><span>Our Services</span></a>
+            <a href="#"><span>Get Appointment</span></a>
+              <!-- <button class="btn btn-1">Our Services</button>
+              <button class="btn btn-2">Get Appointment!</button> -->
+            </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="image/carousel/3.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Great care is always the best choice</h3>
+        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+          <div class="slider-btn">
+            <a href="#"><span>Our Services</span></a>
+            <a href="#"><span>Get Appointment</span></a>
+              <!-- <button class="btn btn-1">Our Services</button>
+              <button class="btn btn-2">Get Appointment!</button> -->
+            </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="image/carousel/4.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Great care is always the best choice</h3>
+        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+          <div class="slider-btn">
+            <a href="#"><span>Our Services</span></a>
+            <a href="#"><span>Get Appointment</span></a>
+              <!-- <button class="btn btn-1">Our Services</button>
+              <button class="btn btn-2">Get Appointment!</button> -->
+            </div>
       </div>
     </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
   <div class="container offers">
     <div class="offers-title">
@@ -238,7 +270,7 @@
   </div>
 
   <?php include('includes/footer.php'); ?>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".swiper-container", {
       spaceBetween: 30,
@@ -249,7 +281,7 @@
         disableOnInteraction: false,
       }
     });
-  </script>
+  </script> -->
 </body>
 
 </html>
