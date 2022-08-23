@@ -30,6 +30,7 @@ include_once '../functions/session_config.php';
   <!-- Remove this after purchasing -->
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/toastr/build/toastr.min.css">
 
   <style>
     /* .fc-prevYear-button,
@@ -171,6 +172,9 @@ include_once '../functions/session_config.php';
   <?php include_once '../modals/cancelAppointment_modal.php' ?>
 
   <script src="../assets/js/app.js"></script>
+  <script src="../../assets/toastr/toastr.js"></script>
+  <script src="../../assets/toastr/toastr-customize.js"></script>
+
   <script>
     $(document).ready(function() {
       let calendarEl = document.getElementById('fullcalendar');
@@ -187,11 +191,9 @@ include_once '../functions/session_config.php';
         },
         events: '../functions/display_appointment_calender.php',
 
-        // eventBackgroundColor: '#293042',
-        // eventBorderColor: '#293042',
-
         // for inserting
         dateClick: async function(e) {
+          $(".form-input").val('');
           // console.log(e);
           let date_sched = e.dateStr;
 
@@ -200,9 +202,8 @@ include_once '../functions/session_config.php';
           $("#newAppointment_modal").modal('show');
         },
 
-        // abang lang to para sa update function
         eventClick: function(e) {
-          console.log(e.event);
+          // console.log(e.event);
           let id = e.event.id;
           let title = e.event.title;
           let start = e.event.startStr;
@@ -223,15 +224,17 @@ include_once '../functions/session_config.php';
           // $("input[name='date_sched']").val(date_schedule);
           // $("input[name='time_sched']").val(time_schedule);
 
-          $("input[name='appointment_id']").val(id);
-          $("#appointment_title").text(title);
-          $("#cancelAppointment_modal").modal('show');
+          if (e.event.backgroundColor === "#198754") {
+            $("input[name='appointment_id']").val(id);
+            $("#appointment_title").text(title);
+            $("#cancelAppointment_modal").modal('show');
+          }
         },
       });
 
       setTimeout(function() {
         calendar.render();
-      }, 250)
+      }, 250);
 
       const load_dashboard_summary = () => {
         $.ajax({
@@ -240,7 +243,7 @@ include_once '../functions/session_config.php';
           dataType: 'JSON',
           data: {},
           success: function(res) {
-            console.log(res);
+            // console.log(res);
             $("#summ_pending").text(res.data[0].pending)
             $("#summ_confirmed").text(res.data[0].approved)
             $("#summ_completed").text(res.data[0].completed)
@@ -257,14 +260,18 @@ include_once '../functions/session_config.php';
           data: data,
           success: function(res) {
             // console.log(res);
-
-            $("#newAppointment_modal").modal('hide');
-            $(".form-input").val('');
+            if (res.status) {
+              $("#newAppointment_modal").modal('hide');
+              $(".form-input").val('');
+              toastr.success(res.msg);
+            } else {
+              toastr.error(res.msg);
+            }
 
             calendar.refetchEvents();
           }
         });
-      }
+      };
 
       const cancel_appointment = (data) => {
         $.ajax({
@@ -273,17 +280,19 @@ include_once '../functions/session_config.php';
           dataType: 'JSON',
           data: data,
           success: function(res) {
-            console.log(res);
-
-            $("#cancelAppointment_modal").modal('hide');
-            $("input[name='appointment_id']").val(0);
+            // console.log(res);
+            if (res.status) {
+              $("#cancelAppointment_modal").modal('hide');
+              $("input[name='appointment_id']").val(0);
+              toastr.success(res.msg);
+            } else {
+              toastr.error(res.msg);
+            }
 
             calendar.refetchEvents();
           }
         });
-      }
-
-      load_dashboard_summary();
+      };
 
       $("#btnSaveNewAppointment").click((e) => {
         e.preventDefault();
@@ -293,6 +302,10 @@ include_once '../functions/session_config.php';
           date_schedule: $("input[name='date_sched']").val(),
           time_schedule: $("input[name='time_sched']").val(),
           age: $("input[name='age']").val()
+        };
+
+        if (data_input.time_schedule == "") {
+          return;
         };
 
         save_new_appointment(data_input);
@@ -309,6 +322,13 @@ include_once '../functions/session_config.php';
         cancel_appointment(data_input);
         load_dashboard_summary();
       });
+
+      $("#newAppointment_modal").on("click", ".available-time", function() {
+        let selected_time = $(this).attr('data-time');
+        $("#time_schedule").val(selected_time);
+      });
+
+      load_dashboard_summary();
     });
   </script>
 </body>

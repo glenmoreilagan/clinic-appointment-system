@@ -9,8 +9,8 @@
   WHERE id = '$appointment_id' AND user_id = '$user_id'";
 
   if ($conn->query($qry)) {
-    echo json_encode(['status' => true, 'msg' => 'Delete Success!']);
+    echo json_encode(['status' => true, 'msg' => 'Cancel Success!']);
   } else {
-    echo json_encode(['status' => false, 'msg' => 'Delete Failed!']);
+    echo json_encode(['status' => false, 'msg' => 'Cancel Failed!']);
   }
 ?>

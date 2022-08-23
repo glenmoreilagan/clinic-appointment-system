@@ -9,9 +9,9 @@ $qry = "SELECT id, user_id, complaint,
   TIME(date_schedule) as time_schedule, 
   age, remarks,
   case
-    when status = 0 then 'Pending'
-    when status = 1 and is_completed = 0 then 'Approved'
-    when is_completed = 1 or status = 1 then 'Completed'
+    when status = 0 AND is_completed = 0 then 'Pending'
+    when status = 1 AND is_completed = 0 then 'Approved'
+    when status = 1 AND is_completed = 1 then 'Completed'
   end as status
   FROM tbl_appointments 
   WHERE user_id = '$user_id' AND is_cancelled = 0
@@ -36,7 +36,8 @@ if ($result->num_rows > 0) {
       // required these 2 dates start and end column names
       'start' => !empty($row['date_schedule']) ? date('Y-m-d', strtotime($row['date_schedule'])) : '',
       'end' => !empty($row['date_schedule']) ? date('Y-m-d', strtotime($row['date_schedule'])) : '',
-      'title' => $row['complaint'], // required this to display on the calendar
+      'title' => "[".$row['status']."]".$row['complaint'], // required this to display on the calendar
+      'color' => $row['status'] == 'Pending' ? '#198754' : ($row['status'] == 'Approved' ? '#0D6EFD' : '#6F7275'),
     ];
   }
 

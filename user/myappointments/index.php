@@ -55,7 +55,8 @@ include_once '../functions/session_config.php';
 
           <div class="card mb-3">
             <div class="card-header">
-              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newAppointment_modal">New Appointment</button>
+              <!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newAppointment_modal">New Appointment</button> -->
+              <a class="btn btn-primary btn-sm" href="/caps/user/dashboard">New Appointment</a>
             </div>
             <div class="card-body">
               <div class="table-responsive table-appointments">
