@@ -1,13 +1,11 @@
 <?php
-  session_start();
+session_start();
 
-  if(!empty($_SESSION)) 
-  {
-    if(isset($_SESSION['email']) && isset($_SESSION['role']))
-    {
-      header("Location: ./user/dashboard/index.php");
-    }
+if (!empty($_SESSION)) {
+  if (isset($_SESSION['email']) && isset($_SESSION['role'])) {
+    header("Location: ./user/dashboard/index.php");
   }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -74,75 +72,75 @@
 
   <!-- carousel -->
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="image/carousel/1.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h3>Great care is always the best choice</h3>
-        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="image/carousel/1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Great care is always the best choice</h3>
+          <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
           <div class="slider-btn">
             <a href="#"><span>Our Services</span></a>
             <a href="#"><span>Get Appointment</span></a>
             <!-- <button class="btn btn-1">Our Services</button>
             <button class="btn btn-2">Get Appointment!</button> -->
           </div>
+        </div>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="image/carousel/2.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h3>Great care is always the best choice</h3>
-        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+      <div class="carousel-item">
+        <img src="image/carousel/2.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Great care is always the best choice</h3>
+          <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
           <div class="slider-btn">
             <a href="#"><span>Our Services</span></a>
             <a href="#"><span>Get Appointment</span></a>
-              <!-- <button class="btn btn-1">Our Services</button>
+            <!-- <button class="btn btn-1">Our Services</button>
               <button class="btn btn-2">Get Appointment!</button> -->
-            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="image/carousel/3.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h3>Great care is always the best choice</h3>
-        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+      <div class="carousel-item">
+        <img src="image/carousel/3.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Great care is always the best choice</h3>
+          <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
           <div class="slider-btn">
             <a href="#"><span>Our Services</span></a>
             <a href="#"><span>Get Appointment</span></a>
-              <!-- <button class="btn btn-1">Our Services</button>
+            <!-- <button class="btn btn-1">Our Services</button>
               <button class="btn btn-2">Get Appointment!</button> -->
-            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="image/carousel/4.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h3>Great care is always the best choice</h3>
-        <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
+      <div class="carousel-item">
+        <img src="image/carousel/4.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Great care is always the best choice</h3>
+          <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
           <div class="slider-btn">
             <a href="#"><span>Our Services</span></a>
             <a href="#"><span>Get Appointment</span></a>
-              <!-- <button class="btn btn-1">Our Services</button>
+            <!-- <button class="btn btn-1">Our Services</button>
               <button class="btn btn-2">Get Appointment!</button> -->
-            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
   <div class="container offers">
     <div class="offers-title">
@@ -287,3 +285,81 @@
 </html>
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $("#btnLogin").click(function(e) {
+      e.preventDefault();
+
+      let email = $("#signinModal input[name='email']").val();
+      let password = $("#signinModal input[name='password']").val();
+
+      $.ajax({
+        method: 'POST',
+        url: 'functions/login_func.php',
+        dataType: 'JSON',
+        data: {
+          email: email,
+          password: password
+        },
+        success: function(res) {
+          console.log(res);
+
+          if (res.status) {
+            $(".loginError").removeClass('text-danger');
+            $(".loginError").addClass('text-success');
+
+            window.location.href = './user/dashboard/';
+            $(".loginError").text(res.msg);
+          } else {
+            $(".loginError").removeClass('text-success');
+            $(".loginError").addClass('text-danger');
+            $(".loginError").text(res.msg);
+          }
+        }
+      })
+    });
+
+    $("#btnRegister").click(function(e) {
+      e.preventDefault();
+
+      let fullname = $("#signupModal input[name='fullname']").val();
+      let contactnumber = $("#signupModal input[name='contactnumber']").val();
+      let address = $("#signupModal input[name='address']").val();
+      let email = $("#signupModal input[name='email']").val();
+      let password = $("#signupModal input[name='password']").val();
+      let cpassword = $("#signupModal input[name='cpassword']").val();
+
+      $.ajax({
+        method: 'POST',
+        url: 'functions/reg_func.php',
+        dataType: 'JSON',
+        data: {
+          fullname: fullname,
+          contactnumber: contactnumber,
+          address: address,
+          email: email,
+          password: password,
+          cpassword: cpassword
+        },
+        success: function(res) {
+          console.log(res);
+          if (res.status) {
+            $(".loginError").removeClass('text-danger');
+            $(".loginError").addClass('text-success');
+            $(".loginError").text(res.msg);
+
+            $("#signupModal").modal('hide');
+            $("#signinModal").modal('show');
+            $(".loginError").text('');
+            $("#signupModal input").val('');
+          } else {
+            $(".loginError").removeClass('text-success');
+            $(".loginError").addClass('text-danger');
+            $(".loginError").text(res.msg);
+          }
+        }
+      })
+    });
+  });
+</script>

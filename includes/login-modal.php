@@ -17,11 +17,12 @@
         <label class="form-label">Password:</label>
         <input type="password" placeholder="Password" class="form-control shadow-none" name="password">
       </div>
-      <a href="javascript: void(0)" class="text-decoration-none">Forgot Password?</a>
+        <a href="javascript: void(0)" class="text-decoration-none">Forgot Password?</a><br>
+        <span class="text-danger loginError"></span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" name="submit" class="btn btn-primary">Login</button>
+        <button type="submit" name="submit" class="btn btn-primary" id="btnLogin">Login</button>
       </div>
     </form>
    </div>

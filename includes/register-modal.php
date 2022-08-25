@@ -29,13 +29,14 @@
               <label class="form-label">Confirm Password:</label>
               <input type="password" placeholder="Confirm Password" class="form-control shadow-none" name="cpassword">
             </div>
-            <a data-bs-target="#signinModal" data-bs-toggle="modal" data-bs-dismiss="modal">Already have an account?</a>
+            <a data-bs-target="#signinModal" data-bs-toggle="modal" data-bs-dismiss="modal">Already have an account?</a><br>
+            <span class="text-danger loginError"></span>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="submit" class="btn btn-primary">Sign up</button>
+            <button type="submit" name="submit" class="btn btn-primary" id="btnRegister">Sign up</button>
           </div>
-        </div> 
+        </div>
       </form>
     </div>
   </div>
