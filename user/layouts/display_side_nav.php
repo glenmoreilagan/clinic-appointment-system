@@ -13,8 +13,8 @@
       <span class="align-middle">LJ CURA OB-GYN ULTRASOUND CLINIC</span>
     </a>
     <?php
-    // change here to your domain name
-    $host = "http://localhost/";
+      // heres the settings for local or live
+      include '../../host_setting.php';
     ?>
     <ul class="sidebar-nav">
       <!-- <li class="sidebar-item">
@@ -27,27 +27,27 @@
         </ul>
       </li> -->
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/dashboard/"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "user/dashboard/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Dashboard</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/announcements/"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "user/announcements/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Announcements</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/myappointments/"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "user/myappointments/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">My Appointments</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/periodcalendar/"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "user/periodcalendar/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Period Calendar</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host . "caps/user/feedback/"; ?>>
+        <a class="sidebar-link" href=<?php echo $host . "user/feedback/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Feedback</span>
         </a>
       </li>

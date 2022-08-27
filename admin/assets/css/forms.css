@@ -24,3 +24,15 @@
 .card-custom {
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
 }
+
+.table-appointments {
+  max-height: 100vh;
+}
+
+li.sidebar-item {
+  font-size: 15px !important;
+}
+
+.feedback-p, .feedback-label, .feedback textarea {
+  font-size: 16px !important;
+}

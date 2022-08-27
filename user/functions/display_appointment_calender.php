@@ -36,8 +36,8 @@ if ($result->num_rows > 0) {
       // required these 2 dates start and end column names
       'start' => !empty($row['date_schedule']) ? date('Y-m-d', strtotime($row['date_schedule'])) : '',
       'end' => !empty($row['date_schedule']) ? date('Y-m-d', strtotime($row['date_schedule'])) : '',
-      'title' => "[".$row['status']."]".$row['complaint'], // required this to display on the calendar
-      'color' => $row['status'] == 'Pending' ? '#198754' : ($row['status'] == 'Approved' ? '#0D6EFD' : '#6F7275'),
+      'title' => "[" . $row['status'] . "]" . $row['complaint'], // required this to display on the calendar
+      'color' => $row['status'] == 'Pending' ? '#198754' : ($row['status'] == 'Approved' ? '#0D6EFD' : '#e56b6f'),
     ];
   }
 

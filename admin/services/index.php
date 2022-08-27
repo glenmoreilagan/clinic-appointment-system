@@ -51,11 +51,11 @@ include_once '../functions/session_config.php';
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">Appointments</h1>
+          <h1 class="h3 mb-3">Services</h1>
 
           <div class="card mb-3">
             <div class="card-header">
-              <h4>Pending Appointments</h4>
+              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newService_modal">New Service</button>
             </div>
             <div class="card-body">
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

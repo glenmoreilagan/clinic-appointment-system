@@ -1,10 +1,8 @@
 <?php
 include_once '../../config.php';
-session_start();
 
-$user_id = $_SESSION['user_id'];
-
-$qry = "SELECT id, title, description, created_at FROM tbl_announcements ORDER BY created_at DESC";
+$qry = "SELECT id, service_title, duration, amount
+  FROM tbl_services";
 
 $result = $conn->query($qry);
 
@@ -13,9 +11,9 @@ if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     $data[] = [
       'id' => $row['id'],
-      'title' => $row['title'],
-      'description' => $row['description'],
-      'created_at' => date('M d, Y', strtotime($row['created_at'])),
+      'service' => $row['service_title'],
+      'duration' => $row['duration'],
+      'amount' => number_format($row['amount'], 2),
     ];
   }
 

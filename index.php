@@ -303,7 +303,7 @@ if (!empty($_SESSION)) {
           password: password
         },
         success: function(res) {
-          console.log(res);
+          // console.log(res);
 
           if (res.status) {
             $(".loginError").removeClass('text-danger');

@@ -21,15 +21,16 @@
           <input name="date_sched" id="date_schedule" type="date" class="form-control form-input" readonly>
         </div>
         <div class="form-group mb-1">
+          <label>Services</label><br>
+          <select name="services" id="services" class="form-control form-input"></select>
+        </div>
+        <div class="form-group mb-1">
           <label>Selected Time</label><br>
           <input name="time_sched" id="time_schedule" type="time" class="form-control form-input mb-3" readonly>
         </div>
         <div class="form-group mb-1">
           <label>Available Time</label><br>
-          <button class="btn btn-primary btn-sm mb-1 available-time" data-time='11:00'>11:00 am</button>
-          <button class="btn btn-primary btn-sm mb-1 available-time" data-time='13:00'>1:00 pm</button>
-          <button class="btn btn-primary btn-sm mb-1 available-time" data-time='12:00'>12:00 nn</button>
-          <button class="btn btn-primary btn-sm mb-1 available-time" data-time='00:00'>12:00 am</button>
+          <div id="display_available_time"></div>
         </div>
       </div>
       <div class="modal-footer">

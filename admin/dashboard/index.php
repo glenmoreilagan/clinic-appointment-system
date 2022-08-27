@@ -1,3 +1,6 @@
+<?php
+include_once '../functions/session_config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +61,7 @@
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2">300</h3>
+                          <h3 class="mb-2" id="summ_pending"></h3>
                           <p class="mb-2">Pending Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -75,7 +78,7 @@
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2">300</h3>
+                          <h3 class="mb-2" id="summ_confirmed"></h3>
                           <p class="mb-2">Confirmed Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -92,7 +95,7 @@
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2">300</h3>
+                          <h3 class="mb-2" id="summ_completed"></h3>
                           <p class="mb-2">Completed Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -109,7 +112,7 @@
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2">300</h3>
+                          <h3 class="mb-2" id="summ_cancelled"></h3>
                           <p class="mb-2">Cancelled Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -145,12 +148,29 @@
       </footer> -->
     </div>
   </div>
-
-  <script src="../assets/js/app.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {});
-  </script>
 </body>
 
 </html>
+<script src="../assets/js/app.js"></script>
+
+<script>
+  $(document).ready(function() {
+    const load_dashboard_summary = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_dashboard_summary.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+          $("#summ_pending").text(res.data[0].pending)
+          $("#summ_confirmed").text(res.data[0].approved)
+          $("#summ_completed").text(res.data[0].completed)
+          $("#summ_cancelled").text(res.data[0].cancelled)
+        }
+      });
+    };
+
+    load_dashboard_summary();
+  })
+</script>

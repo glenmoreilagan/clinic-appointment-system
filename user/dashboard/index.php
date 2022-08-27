@@ -194,12 +194,14 @@ include_once '../functions/session_config.php';
         // for inserting
         dateClick: async function(e) {
           $(".form-input").val('');
+          $("#services").val(0).change();;
           // console.log(e);
           let date_sched = e.dateStr;
 
           $("input[name='date_sched']").val(date_sched);
 
           $("#newAppointment_modal").modal('show');
+          load_available_time(date_sched);
         },
 
         eventClick: function(e) {
@@ -252,6 +254,57 @@ include_once '../functions/session_config.php';
         });
       };
 
+      const load_services = () => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/load_services.php',
+          dataType: 'JSON',
+          data: {},
+          success: function(res) {
+            // console.log(res);
+            if (res.status) {
+              let str = `<option value="0" selected>Select Service</option>`;
+              for (let i in res.data) {
+                str += `
+                  <optgroup label='₱ ${res.data[i].amount} | ${res.data[i].duration}'>
+                    <option value='${res.data[i].id}'>${res.data[i].service}</option>
+                  </optgroup>
+                `;
+              }
+
+              $("#services").html(str);
+            }
+          }
+        });
+      }
+
+      const load_available_time = (selected_date) => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/load_available_time.php',
+          dataType: 'JSON',
+          data: {
+            selected_date: selected_date
+          },
+          success: function(res) {
+            // console.log(res);
+            if (res.status) {
+              let str = ``;
+              for (let i in res.data) {
+                let add_am_pm = new Date(`${res.data[i].available_date} ${res.data[i].available_time}`).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+                str += `
+                  <button class="btn btn-primary btn-sm mb-1 available-time" data-time='${res.data[i].available_time}'>${add_am_pm}</button>
+                `;
+              }
+
+              $("#display_available_time").html(str);
+            } else {
+              $("#display_available_time").html('<h4>No Available Time</h4>');
+            }
+          }
+        });
+      }
+
       const save_new_appointment = (data) => {
         $.ajax({
           method: 'POST',
@@ -263,6 +316,8 @@ include_once '../functions/session_config.php';
             if (res.status) {
               $("#newAppointment_modal").modal('hide');
               $(".form-input").val('');
+              load_dashboard_summary();
+
               toastr.success(res.msg);
             } else {
               toastr.error(res.msg);
@@ -284,6 +339,8 @@ include_once '../functions/session_config.php';
             if (res.status) {
               $("#cancelAppointment_modal").modal('hide');
               $("input[name='appointment_id']").val(0);
+              load_dashboard_summary();
+
               toastr.success(res.msg);
             } else {
               toastr.error(res.msg);
@@ -301,15 +358,26 @@ include_once '../functions/session_config.php';
           complaint: $("textarea[name='complaint']").val(),
           date_schedule: $("input[name='date_sched']").val(),
           time_schedule: $("input[name='time_sched']").val(),
-          age: $("input[name='age']").val()
+          age: $("input[name='age']").val(),
+          service_id: $("select[name='services']").val()
+        };
+
+        if (data_input.complaint == "") {
+          toastr.error('Please input your complaint.');
+          return;
+        };
+
+        if (data_input.service_id == 0) {
+          toastr.error('Please select service.');
+          return;
         };
 
         if (data_input.time_schedule == "") {
+          toastr.error('Please select time.');
           return;
         };
 
         save_new_appointment(data_input);
-        load_dashboard_summary();
       });
 
       $("#btnCancelAppointment").click((e) => {
@@ -320,7 +388,6 @@ include_once '../functions/session_config.php';
         };
 
         cancel_appointment(data_input);
-        load_dashboard_summary();
       });
 
       $("#newAppointment_modal").on("click", ".available-time", function() {
@@ -329,6 +396,7 @@ include_once '../functions/session_config.php';
       });
 
       load_dashboard_summary();
+      load_services();
     });
   </script>
 </body>

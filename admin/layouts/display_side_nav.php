@@ -13,8 +13,8 @@
       <span class="align-middle">LJ CURA OB-GYN ULTRASOUND CLINIC</span>
     </a>
     <?php
-      // change here to your domain name
-      $host = "http://localhost/";
+    // heres the settings for local or live
+    include '../../host_setting.php';
     ?>
     <ul class="sidebar-nav">
       <!-- <li class="sidebar-item">
@@ -27,12 +27,12 @@
         </ul>
       </li> -->
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host."caps/admin/dashboard/index.php";?>>
+        <a class="sidebar-link" href=<?php echo $host . "admin/dashboard/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Dashboard</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href=<?php echo $host."caps/admin/appointments/index.php";?>>
+        <a class="sidebar-link" href=<?php echo $host . "admin/appointments/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Appointments</span>
         </a>
       </li>
@@ -47,7 +47,7 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="index.php">
+        <a class="sidebar-link" href=<?php echo $host . "admin/services/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Services</span>
         </a>
       </li>
@@ -56,12 +56,7 @@
           <i class="align-middle"></i> <span class="align-middle">Analytics</span>
         </a>
       </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="../calendar.php">
-          <i class="align-middle"></i> <span class="align-middle">Calendar</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
+      <!-- <li class="sidebar-item">
         <a href="#multi" data-toggle="collapse" class="sidebar-link collapsed">
           <i class="align-middle"></i> <span class="align-middle">Multi Level</span>
         </a>
@@ -99,7 +94,7 @@
             </ul>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </nav>

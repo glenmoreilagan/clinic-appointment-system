@@ -1,10 +1,11 @@
 <?php
 include_once '../../config.php';
-session_start();
 
-$user_id = $_SESSION['user_id'];
+$selected_date = date('Y-m-d', strtotime($_POST['selected_date']));
 
-$qry = "SELECT id, title, description, created_at FROM tbl_announcements ORDER BY created_at DESC";
+$qry = "SELECT id, DATE(date_available) AS date_sched, TIME_FORMAT(date_available, '%h:%i') AS time_sched
+  FROM tbl_appointment_availability
+  WHERE DATE(date_available) = '$selected_date'";
 
 $result = $conn->query($qry);
 
@@ -13,9 +14,8 @@ if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     $data[] = [
       'id' => $row['id'],
-      'title' => $row['title'],
-      'description' => $row['description'],
-      'created_at' => date('M d, Y', strtotime($row['created_at'])),
+      'available_date' => $row['date_sched'],
+      'available_time' => $row['time_sched'],
     ];
   }
 

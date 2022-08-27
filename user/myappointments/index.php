@@ -31,6 +31,12 @@ include_once '../functions/session_config.php';
   <!-- Remove this after purchasing -->
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
+
+  <style>
+    .completed {
+      background: #e56b6f;
+    }
+  </style>
 </head>
 <!--
   HOW TO USE: 
@@ -65,7 +71,7 @@ include_once '../functions/session_config.php';
                     <tr>
                       <th>Date & Time</th>
                       <th>Chief Complaint</th>
-                      <th>Services</th>
+                      <th>Service</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -82,6 +88,7 @@ include_once '../functions/session_config.php';
 
   <!-- MODALS -->
   <?php include_once '../modals/newAppointment_modal.php'; ?>
+  <?php include_once '../modals/viewMyAppointment_modal.php'; ?>
 
   <script src="../assets/js/app.js"></script>
 
@@ -94,9 +101,15 @@ include_once '../functions/session_config.php';
           dataType: 'JSON',
           data: {},
           success: function(res) {
-            console.log(res);
+            // console.log(res);
             let str = ``;
             for (let i in res.data) {
+              let status_badge =
+                res.data[i].status === 'Pending' ?
+                `<span class="badge badge-success">${res.data[i].status}</span>` :
+                (res.data[i].status === 'Approved' ?
+                  `<span class="badge badge-primary">${res.data[i].status}</span>` :
+                  `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
               str += `
                 <tr>
                   <td>
@@ -105,12 +118,12 @@ include_once '../functions/session_config.php';
                     ${res.data[i].date_schedule}
                   </td>
                   <td>${res.data[i].complaint}</td>
-                  <td>----</td>
+                  <td>${res.data[i].service_title}</td>
                   <td>
-                    <span>${res.data[i].status}</span>
+                    ${status_badge}
                   </td>
                   <td>
-                    <button class="btn btn-primary btn-sm" id="r-${res.data[i].id}">View</button>
+                    <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}">View</button>
                   </td>
                 </tr>
               `;
@@ -120,37 +133,43 @@ include_once '../functions/session_config.php';
         });
       }
 
-      load_appointments();
+      $('.table-appointments').on("click", ".btnView", function(e) {
+        let appointment_id = $(this).attr('id').split('-')[1];
 
-      const save_new_appointment = (data) => {
         $.ajax({
           method: 'POST',
-          url: '../functions/save_appointment.php',
+          url: '../functions/load_appointment.php',
           dataType: 'JSON',
-          data: data,
+          data: {
+            appointment_id: appointment_id
+          },
           success: function(res) {
-            // console.log(res);
+            // console.log(res.data[0]);
+            let result = res.data[0];
+            let complaint = result.complaint;
+            let age = result.age;
+            let date_schedule = result.date_schedule;
+            let time_schedule = result.time_schedule;
+            let service = result.service_title;
+            let status_badge =
+              result.status === 'Pending' 
+              ? `<span class="badge badge-success">${result.status}</span>` 
+              : (result.status === 'Approved' 
+                ? `<span class="badge badge-primary">${result.status}</span>` 
+                : `<span class="badge badge-secondary completed">${result.status}</span>`
+              );
 
-            $("#newAppointment_modal").modal('hide');
-            $(".form-input").val('');
-
-            load_appointments();
+            $("#viewMyAppointment_modal #complaint").html(`${complaint}`);
+            $("#viewMyAppointment_modal #age").html(`${age}`);
+            $("#viewMyAppointment_modal #schedule").html(`${date_schedule} at ${time_schedule}`);
+            $("#viewMyAppointment_modal #service").html(`${service}`);
+            $("#viewMyAppointment_modal #status").html(`${status_badge}`);
           }
         });
-      }
-
-      $("#btnSaveNewAppointment").click((e) => {
-        e.preventDefault();
-
-        let data_input = {
-          complaint: $("textarea[name='complaint']").val(),
-          date_schedule: $("input[name='date_sched']").val(),
-          time_schedule: $("input[name='time_sched']").val(),
-          age: $("input[name='age']").val()
-        };
-        
-        save_new_appointment(data_input);
+        $("#viewMyAppointment_modal").modal('show');
       });
+
+      load_appointments();
     });
   </script>
 </body>
