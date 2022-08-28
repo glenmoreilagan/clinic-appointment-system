@@ -11,14 +11,14 @@ if ($service_id !== 0) {
 
 $qry = "SELECT id, service_title, description, duration, amount
   FROM tbl_services
-  WHERE 1=1 $added_filter";
+  WHERE is_deleted = 0 $added_filter";
 
 $result = $conn->query($qry);
 
 if ($result->num_rows > 0) {
   $data = [];
   while ($row = $result->fetch_assoc()) {
-    if($service_id !== 0) {
+    if ($service_id !== 0) {
       $description = strip_tags($row['description']);
     } else {
       $description = nl2br($row['description']);

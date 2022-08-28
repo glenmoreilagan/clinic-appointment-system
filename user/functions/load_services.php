@@ -2,7 +2,8 @@
 include_once '../../config.php';
 
 $qry = "SELECT id, service_title, duration, amount
-  FROM tbl_services";
+  FROM tbl_services
+  WHERE is_deleted = 0";
 
 $result = $conn->query($qry);
 

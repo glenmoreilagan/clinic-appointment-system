@@ -122,20 +122,7 @@ include_once '../functions/session_config.php';
       });
     }
 
-    $("#btnNewService").click(function(e) {
-      e.preventDefault();
-
-      service_id = 0;
-
-      $(".modal-title").text('New Service');
-      $("#service_modal").modal('show');
-    });
-
-    $(".table-services").on("click", ".btnEdit", function(e) {
-      e.preventDefault();
-
-      service_id = $(this).attr('id').split('-')[1];
-
+    const edit_service = (service_id) => {
       $.ajax({
         method: 'POST',
         url: '../functions/load_services.php',
@@ -156,12 +143,75 @@ include_once '../functions/session_config.php';
             $("textarea[name='description']").val(description);
             $("input[name='duration']").val(duration);
             $("input[name='amount']").val(amount);
+
+            $(".modal-title").text('Edit Service');
+            $("#service_modal").modal('show');
           }
         }
       });
+    }
 
-      $(".modal-title").text('Edit Service');
+    const save_service = (data_input) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/save_service.php',
+        dataType: 'JSON',
+        data: data_input,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+            $(".form-input").val('');
+
+            load_services();
+          }
+        }
+      });
+    }
+
+    const delete_service = (service_id) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/delete_services.php',
+        dataType: 'JSON',
+        data: {
+          service_id: service_id
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+            load_services();
+          }
+        }
+      });
+    }
+
+    $("#btnNewService").click(function(e) {
+      e.preventDefault();
+
+      service_id = 0;
+
+      $(".form-input").val('');
+      $(".modal-title").text('New Service');
       $("#service_modal").modal('show');
+    });
+
+    $(".table-services").on("click", ".btnEdit", function(e) {
+      e.preventDefault();
+
+      service_id = $(this).attr('id').split('-')[1];
+      edit_service(service_id);
+    });
+
+    $(".table-services").on("click", ".btnDelete", function(e) {
+      e.preventDefault();
+
+      service_id = $(this).attr('id').split('-')[1];
+
+      if (confirm("Are your sure to delete this service?") == true) {
+        delete_service(service_id);
+      }
     });
 
     $("#btnSaveService").click(function(e) {
@@ -190,23 +240,8 @@ include_once '../functions/session_config.php';
         return;
       };
 
-      $.ajax({
-        method: 'POST',
-        url: '../functions/save_service.php',
-        dataType: 'JSON',
-        data: data_input,
-        success: function(res) {
-          // console.log(res);
-          if (res.status) {
-            toastr.success(res.msg);
-            $(".form-input").val('');
-
-            load_services();
-          }
-        }
-      });
+      save_service(data_input);
     });
-
 
     load_services();
   });
