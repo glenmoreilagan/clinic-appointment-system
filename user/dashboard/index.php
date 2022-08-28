@@ -168,237 +168,243 @@ include_once '../functions/session_config.php';
     </div>
   </div>
 
+  <!-- MODALS -->
   <?php include_once '../modals/newAppointment_modal.php' ?>
   <?php include_once '../modals/cancelAppointment_modal.php' ?>
+</body>
 
-  <script src="../assets/js/app.js"></script>
-  <script src="../../assets/toastr/toastr.js"></script>
-  <script src="../../assets/toastr/toastr-customize.js"></script>
+</html>
+<script src="../assets/js/app.js"></script>
+<script src="../../assets/toastr/toastr.js"></script>
+<script src="../../assets/toastr/toastr-customize.js"></script>
 
-  <script>
-    $(document).ready(function() {
-      let calendarEl = document.getElementById('fullcalendar');
-      let calendar = new FullCalendar.Calendar(calendarEl, {
-        themeSystem: 'bootstrap',
-        initialView: 'dayGridMonth',
-        initialDate: Date.now(),
-        headerToolbar: {
-          left: 'prev,next today',
-          // left: 'prevYear,prev,next,nextYear today',
-          right: 'title',
-          // right: 'dayGridMonth,timeGridWeek,timeGridDay'
-          center: ''
-        },
-        events: '../functions/display_appointment_calender.php',
+<script>
+  $(document).ready(function() {
+    let calendarEl = document.getElementById('fullcalendar');
+    let calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: 'bootstrap',
+      initialView: 'dayGridMonth',
+      initialDate: Date.now(),
+      headerToolbar: {
+        left: 'prev,next today',
+        // left: 'prevYear,prev,next,nextYear today',
+        right: 'title',
+        // right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        center: ''
+      },
+      events: '../functions/display_appointment_calender.php',
 
-        // for inserting
-        dateClick: async function(e) {
-          $(".form-input").val('');
-          $("#services").val(0).change();;
-          // console.log(e);
-          let date_sched = e.dateStr;
+      // for inserting
+      dateClick: async function(e) {
+        $(".form-input").val('');
+        $("#services").val(0).change();;
+        // console.log(e);
+        let date_sched = e.dateStr;
 
-          $("input[name='date_sched']").val(date_sched);
+        $("input[name='date_sched']").val(date_sched);
 
-          $("#newAppointment_modal").modal('show');
-          load_available_time(date_sched);
-        },
+        $("#newAppointment_modal").modal('show');
+        load_available_time(date_sched);
+      },
 
-        eventClick: function(e) {
-          // console.log(e.event);
-          let id = e.event.id;
-          let title = e.event.title;
-          let start = e.event.startStr;
-          let end = e.event.endStr;
-          // console.log(e.event.extendedProps);
-          // console.log(e.el.style);
+      eventClick: function(e) {
+        // console.log(e.event);
+        let id = e.event.id;
+        let title = e.event.title;
+        let start = e.event.startStr;
+        let end = e.event.endStr;
+        // console.log(e.event.extendedProps);
+        // console.log(e.el.style);
 
-          // e.el.style.backgroundColor = '#293042';
-          // e.el.style.borderColor = '#293042';
+        // e.el.style.backgroundColor = '#293042';
+        // e.el.style.borderColor = '#293042';
 
-          // let complaint = e.event.extendedProps.complaint;
-          // let age = e.event.extendedProps.age;
-          // let date_schedule = e.event.extendedProps.date_schedule;
-          // let time_schedule = e.event.extendedProps.time_schedule;
+        // let complaint = e.event.extendedProps.complaint;
+        // let age = e.event.extendedProps.age;
+        // let date_schedule = e.event.extendedProps.date_schedule;
+        // let time_schedule = e.event.extendedProps.time_schedule;
 
-          // $("textarea[name='complaint']").val(complaint);
-          // $("input[name='age']").val(age);
-          // $("input[name='date_sched']").val(date_schedule);
-          // $("input[name='time_sched']").val(time_schedule);
+        // $("textarea[name='complaint']").val(complaint);
+        // $("input[name='age']").val(age);
+        // $("input[name='date_sched']").val(date_schedule);
+        // $("input[name='time_sched']").val(time_schedule);
 
-          if (e.event.backgroundColor === "#198754") {
-            $("input[name='appointment_id']").val(id);
-            $("#appointment_title").text(title);
-            $("#cancelAppointment_modal").modal('show');
-          }
-        },
+        if (e.event.backgroundColor === "#198754") {
+          $("input[name='appointment_id']").val(id);
+          $("#appointment_title").text(title);
+          $("#cancelAppointment_modal").modal('show');
+        }
+      },
+    });
+
+    setTimeout(function() {
+      calendar.render();
+    }, 250);
+
+    const load_dashboard_summary = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_dashboard_summary.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+          $("#summ_pending").text(res.data[0].pending)
+          $("#summ_confirmed").text(res.data[0].approved)
+          $("#summ_completed").text(res.data[0].completed)
+          $("#summ_cancelled").text(res.data[0].cancelled)
+        }
       });
+    };
 
-      setTimeout(function() {
-        calendar.render();
-      }, 250);
-
-      const load_dashboard_summary = () => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/load_dashboard_summary.php',
-          dataType: 'JSON',
-          data: {},
-          success: function(res) {
-            // console.log(res);
-            $("#summ_pending").text(res.data[0].pending)
-            $("#summ_confirmed").text(res.data[0].approved)
-            $("#summ_completed").text(res.data[0].completed)
-            $("#summ_cancelled").text(res.data[0].cancelled)
-          }
-        });
-      };
-
-      const load_services = () => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/load_services.php',
-          dataType: 'JSON',
-          data: {},
-          success: function(res) {
-            // console.log(res);
-            if (res.status) {
-              let str = `<option value="0" selected>Select Service</option>`;
-              for (let i in res.data) {
-                str += `
+    const load_services = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_services.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            let str = `<option value="0" selected>Select Service</option>`;
+            for (let i in res.data) {
+              str += `
                   <optgroup label='₱ ${res.data[i].amount} | ${res.data[i].duration}'>
                     <option value='${res.data[i].id}'>${res.data[i].service}</option>
                   </optgroup>
                 `;
-              }
-
-              $("#services").html(str);
             }
-          }
-        });
-      }
 
-      const load_available_time = (selected_date) => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/load_available_time.php',
-          dataType: 'JSON',
-          data: {
-            selected_date: selected_date
-          },
-          success: function(res) {
-            // console.log(res);
-            if (res.status) {
-              let str = ``;
-              for (let i in res.data) {
-                let add_am_pm = new Date(`${res.data[i].available_date} ${res.data[i].available_time}`).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-                str += `
+            $("#services").html(str);
+          }
+        }
+      });
+    }
+
+    const load_available_time = (selected_date) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_available_time.php',
+        dataType: 'JSON',
+        data: {
+          selected_date: selected_date
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            let str = ``;
+            for (let i in res.data) {
+              let add_am_pm = new Date(`${res.data[i].available_date} ${res.data[i].available_time}`).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+              str += `
                   <button class="btn btn-primary btn-sm mb-1 available-time" data-time='${res.data[i].available_time}'>${add_am_pm}</button>
                 `;
-              }
-
-              $("#display_available_time").html(str);
-            } else {
-              $("#display_available_time").html('<h4>No Available Time</h4>');
-            }
-          }
-        });
-      }
-
-      const save_new_appointment = (data) => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/save_appointment.php',
-          dataType: 'JSON',
-          data: data,
-          success: function(res) {
-            // console.log(res);
-            if (res.status) {
-              $("#newAppointment_modal").modal('hide');
-              $(".form-input").val('');
-              load_dashboard_summary();
-
-              toastr.success(res.msg);
-            } else {
-              toastr.error(res.msg);
             }
 
-            calendar.refetchEvents();
+            $("#display_available_time").html(str);
+          } else {
+            $("#display_available_time").html('<h4>No Available Time</h4>');
           }
-        });
+        }
+      });
+    }
+
+    const save_new_appointment = (data) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/save_appointment.php',
+        dataType: 'JSON',
+        data: data,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            $("#newAppointment_modal").modal('hide');
+            $(".form-input").val('');
+            load_dashboard_summary();
+
+            toastr.success(res.msg);
+          } else {
+            toastr.error(res.msg);
+          }
+
+          calendar.refetchEvents();
+        }
+      });
+    };
+
+    const cancel_appointment = (data) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/cancel_appointment.php',
+        dataType: 'JSON',
+        data: data,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            $("#cancelAppointment_modal").modal('hide');
+            $("input[name='appointment_id']").val(0);
+            load_dashboard_summary();
+
+            toastr.success(res.msg);
+          } else {
+            toastr.error(res.msg);
+          }
+
+          calendar.refetchEvents();
+        }
+      });
+    };
+
+    $("#btnSaveNewAppointment").click((e) => {
+      e.preventDefault();
+
+      let complaint = $("textarea[name='complaint']").val();
+      let date_schedule = $("input[name='date_sched']").val();
+      let time_schedule = $("input[name='time_sched']").val();
+      let age = $("input[name='age']").val();
+      let service_id = $("select[name='services']").val();
+
+      let data_input = {
+        complaint: complaint,
+        date_schedule: date_schedule,
+        time_schedule: time_schedule,
+        age: age,
+        service_id: service_id
       };
 
-      const cancel_appointment = (data) => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/cancel_appointment.php',
-          dataType: 'JSON',
-          data: data,
-          success: function(res) {
-            // console.log(res);
-            if (res.status) {
-              $("#cancelAppointment_modal").modal('hide');
-              $("input[name='appointment_id']").val(0);
-              load_dashboard_summary();
-
-              toastr.success(res.msg);
-            } else {
-              toastr.error(res.msg);
-            }
-
-            calendar.refetchEvents();
-          }
-        });
+      if (data_input.complaint == "") {
+        toastr.error('Please input complaint.');
+        return;
       };
 
-      $("#btnSaveNewAppointment").click((e) => {
-        e.preventDefault();
+      if (data_input.service_id == 0) {
+        toastr.error('Please select service.');
+        return;
+      };
 
-        let data_input = {
-          complaint: $("textarea[name='complaint']").val(),
-          date_schedule: $("input[name='date_sched']").val(),
-          time_schedule: $("input[name='time_sched']").val(),
-          age: $("input[name='age']").val(),
-          service_id: $("select[name='services']").val()
-        };
+      if (data_input.time_schedule == "") {
+        toastr.error('Please select time.');
+        return;
+      };
 
-        if (data_input.complaint == "") {
-          toastr.error('Please input your complaint.');
-          return;
-        };
-
-        if (data_input.service_id == 0) {
-          toastr.error('Please select service.');
-          return;
-        };
-
-        if (data_input.time_schedule == "") {
-          toastr.error('Please select time.');
-          return;
-        };
-
-        save_new_appointment(data_input);
-      });
-
-      $("#btnCancelAppointment").click((e) => {
-        e.preventDefault();
-
-        let data_input = {
-          appointment_id: $("input[name='appointment_id']").val(),
-        };
-
-        cancel_appointment(data_input);
-      });
-
-      $("#newAppointment_modal").on("click", ".available-time", function() {
-        let selected_time = $(this).attr('data-time');
-        $("#time_schedule").val(selected_time);
-      });
-
-      load_dashboard_summary();
-      load_services();
+      save_new_appointment(data_input);
     });
-  </script>
-</body>
 
-</html>
+    $("#btnCancelAppointment").click((e) => {
+      e.preventDefault();
+
+      let data_input = {
+        appointment_id: $("input[name='appointment_id']").val(),
+      };
+
+      cancel_appointment(data_input);
+    });
+
+    $("#newAppointment_modal").on("click", ".available-time", function() {
+      let selected_time = $(this).attr('data-time');
+      $("#time_schedule").val(selected_time);
+    });
+
+    load_dashboard_summary();
+    load_services();
+  });
+</script>

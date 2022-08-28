@@ -36,3 +36,7 @@ li.sidebar-item {
 .feedback-p, .feedback-label, .feedback textarea {
   font-size: 16px !important;
 }
+
+.th-actions {
+  width: 150px;
+}

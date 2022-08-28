@@ -31,6 +31,7 @@ include_once '../functions/session_config.php';
   <!-- Remove this after purchasing -->
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/toastr/build/toastr.min.css">
 </head>
 <!--
   HOW TO USE: 
@@ -55,10 +56,23 @@ include_once '../functions/session_config.php';
 
           <div class="card mb-3">
             <div class="card-header">
-              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newService_modal">New Service</button>
+              <button class="btn btn-primary btn-sm" id="btnNewService">New Service</button>
             </div>
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <div class="table-responsive table-services">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Description</th>
+                      <th>Duration</th>
+                      <th>Amount</th>
+                      <th class="th-actions">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="service_list"></tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -66,7 +80,134 @@ include_once '../functions/session_config.php';
       </main>
     </div>
   </div>
+
+  <!-- MODALS -->
+  <?php include_once '../modals/service_modal.php'; ?>
 </body>
 
 </html>
 <script src="../assets/js/app.js"></script>
+<script src="../../assets/toastr/toastr.js"></script>
+<script src="../../assets/toastr/toastr-customize.js"></script>
+
+<script>
+  $(document).ready(function() {
+    let service_id = 0;
+
+    const load_services = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_services.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+          let str = ``;
+          for (let i in res.data) {
+            str += `
+                <tr>
+                  <td>${res.data[i].service}</td>
+                  <td>${res.data[i].description}</td>
+                  <td>${res.data[i].duration}</td>
+                  <td>${res.data[i].amount}</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}">Edit</button>
+                    <button class="btn btn-danger btn-sm btnDelete" id="r-${res.data[i].id}">Delete</button>
+                  </td>
+                </tr>
+              `;
+          }
+          $("#service_list").html(str);
+        }
+      });
+    }
+
+    $("#btnNewService").click(function(e) {
+      e.preventDefault();
+
+      service_id = 0;
+
+      $(".modal-title").text('New Service');
+      $("#service_modal").modal('show');
+    });
+
+    $(".table-services").on("click", ".btnEdit", function(e) {
+      e.preventDefault();
+
+      service_id = $(this).attr('id').split('-')[1];
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_services.php',
+        dataType: 'JSON',
+        data: {
+          service_id: service_id
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            let result = res.data[0];
+            let service = result.service;
+            let description = result.description;
+            let duration = result.duration;
+            let amount = result.amount;
+
+            $("input[name='service']").val(service);
+            $("textarea[name='description']").val(description);
+            $("input[name='duration']").val(duration);
+            $("input[name='amount']").val(amount);
+          }
+        }
+      });
+
+      $(".modal-title").text('Edit Service');
+      $("#service_modal").modal('show');
+    });
+
+    $("#btnSaveService").click(function(e) {
+      e.preventDefault();
+
+      let service = $("input[name='service']").val();
+      let description = $("textarea[name='description']").val();
+      let duration = $("input[name='duration']").val();
+      let amount = $("input[name='amount']").val();
+
+      let data_input = {
+        service_id: service_id,
+        service: service,
+        description: description,
+        duration: duration,
+        amount: amount
+      }
+
+      if (data_input.service == "") {
+        toastr.error('Please input service.');
+        return;
+      };
+
+      if (data_input.amount == "") {
+        toastr.error('Please input amount.');
+        return;
+      };
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/save_service.php',
+        dataType: 'JSON',
+        data: data_input,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+            $(".form-input").val('');
+
+            load_services();
+          }
+        }
+      });
+    });
+
+
+    load_services();
+  });
+</script>

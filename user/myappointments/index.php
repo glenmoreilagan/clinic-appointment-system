@@ -89,28 +89,30 @@ include_once '../functions/session_config.php';
   <!-- MODALS -->
   <?php include_once '../modals/newAppointment_modal.php'; ?>
   <?php include_once '../modals/viewMyAppointment_modal.php'; ?>
+</body>
 
-  <script src="../assets/js/app.js"></script>
+</html>
+<script src="../assets/js/app.js"></script>
 
-  <script>
-    $(document).ready(function() {
-      const load_appointments = () => {
-        $.ajax({
-          method: 'POST',
-          url: '../functions/load_appointment.php',
-          dataType: 'JSON',
-          data: {},
-          success: function(res) {
-            // console.log(res);
-            let str = ``;
-            for (let i in res.data) {
-              let status_badge =
-                res.data[i].status === 'Pending' ?
-                `<span class="badge badge-success">${res.data[i].status}</span>` :
-                (res.data[i].status === 'Approved' ?
-                  `<span class="badge badge-primary">${res.data[i].status}</span>` :
-                  `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
-              str += `
+<script>
+  $(document).ready(function() {
+    const load_appointments = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_appointment.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+          let str = ``;
+          for (let i in res.data) {
+            let status_badge =
+              res.data[i].status === 'Pending' ?
+              `<span class="badge badge-success">${res.data[i].status}</span>` :
+              (res.data[i].status === 'Approved' ?
+                `<span class="badge badge-primary">${res.data[i].status}</span>` :
+                `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
+            str += `
                 <tr>
                   <td>
                     <b>${res.data[i].time_schedule}</b>
@@ -127,51 +129,48 @@ include_once '../functions/session_config.php';
                   </td>
                 </tr>
               `;
-            }
-            $("#myappointment_list").html(str);
           }
-        });
-      }
-
-      $('.table-appointments').on("click", ".btnView", function(e) {
-        let appointment_id = $(this).attr('id').split('-')[1];
-
-        $.ajax({
-          method: 'POST',
-          url: '../functions/load_appointment.php',
-          dataType: 'JSON',
-          data: {
-            appointment_id: appointment_id
-          },
-          success: function(res) {
-            // console.log(res.data[0]);
-            let result = res.data[0];
-            let complaint = result.complaint;
-            let age = result.age;
-            let date_schedule = result.date_schedule;
-            let time_schedule = result.time_schedule;
-            let service = result.service_title;
-            let status_badge =
-              result.status === 'Pending' 
-              ? `<span class="badge badge-success">${result.status}</span>` 
-              : (result.status === 'Approved' 
-                ? `<span class="badge badge-primary">${result.status}</span>` 
-                : `<span class="badge badge-secondary completed">${result.status}</span>`
-              );
-
-            $("#viewMyAppointment_modal #complaint").html(`${complaint}`);
-            $("#viewMyAppointment_modal #age").html(`${age}`);
-            $("#viewMyAppointment_modal #schedule").html(`${date_schedule} at ${time_schedule}`);
-            $("#viewMyAppointment_modal #service").html(`${service}`);
-            $("#viewMyAppointment_modal #status").html(`${status_badge}`);
-          }
-        });
-        $("#viewMyAppointment_modal").modal('show');
+          $("#myappointment_list").html(str);
+        }
       });
+    }
 
-      load_appointments();
+    $('.table-appointments').on("click", ".btnView", function(e) {
+      let appointment_id = $(this).attr('id').split('-')[1];
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_appointment.php',
+        dataType: 'JSON',
+        data: {
+          appointment_id: appointment_id
+        },
+        success: function(res) {
+          // console.log(res.data[0]);
+          let result = res.data[0];
+          let complaint = result.complaint;
+          let age = result.age;
+          let date_schedule = result.date_schedule;
+          let time_schedule = result.time_schedule;
+          let service = result.service_title;
+          let status_badge =
+            result.status === 'Pending' ?
+            `<span class="badge badge-success">${result.status}</span>` :
+            (result.status === 'Approved' ?
+              `<span class="badge badge-primary">${result.status}</span>` :
+              `<span class="badge badge-secondary completed">${result.status}</span>`
+            );
+
+          $("#viewMyAppointment_modal #complaint").html(`${complaint}`);
+          $("#viewMyAppointment_modal #age").html(`${age}`);
+          $("#viewMyAppointment_modal #schedule").html(`${date_schedule} at ${time_schedule}`);
+          $("#viewMyAppointment_modal #service").html(`${service}`);
+          $("#viewMyAppointment_modal #status").html(`${status_badge}`);
+        }
+      });
+      $("#viewMyAppointment_modal").modal('show');
     });
-  </script>
-</body>
 
-</html>
+    load_appointments();
+  });
+</script>
