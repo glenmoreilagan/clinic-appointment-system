@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- <link href="assets/css/swiper-bundle.min.css" rel="stylesheet"> -->
     <style>
-      /* Chrome, Safari, Edge, Opera */
+      /* Chrome, Safari, Edge, Opera
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
-      /* Firefox */
+      Firefox
       input[type=number] {
         -moz-appearance: textfield;
-      }
+      } */
 /* 
       .swiper-slide .content h3 {
         text-align: center;

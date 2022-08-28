@@ -1,6 +1,5 @@
 
 .carousel-item{
-  /* height: 35vw; */
   min-height: auto;
   background: no-repeat scroll center scroll;
   -webkit-background-size: cover;
@@ -58,43 +57,18 @@
   inset: 2px;
   background: #000;
   opacity: 0.5;
-  border: 1px solid #000;
 }
 .slider-btn a span {
   position: relative;
   z-index: 1;
 }
-/* .slider-btn .btn{
-  background-color: transparent;
-  color: white;
-  border-radius: 40px;
-  border: 2px solid #000000;
-  padding: 10px;
-  font-size: 1.2rem;
-  margin-right: 15px;
-} */
-
-/* span{
-	background: #000000;
-	height: 100%;
-	width: 0%;
-	border-radius: 25px;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	z-index: -1;
-	transition: 0.5s;
-} */
 button:hover span{
 	width: 100%;
 }
 button:hover{
 	border: none;
 }
-/* .row{
-    margin-top: -20%;
-    text-align: center;
-  } */
+  /* icons */
 .offers {
     margin-top: 1em;
 }
@@ -134,9 +108,6 @@ button:hover{
 .row.panel {
     padding: 10px !important; 
 }
-/* .stages {
-    margin-top: -54em;
-} */
 .trimester-title {
     text-align: center;
     font-family: 'Lucida Sans';
@@ -183,7 +154,9 @@ footer{
 .links .content .links {
     text-align: center;
 }
-
+.links .content .links a{
+  text-decoration: none;
+}
 .right form .text{
     font-size: 1rem;
     margin-bottom: 2px;
