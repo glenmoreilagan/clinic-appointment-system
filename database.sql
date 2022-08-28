@@ -90,7 +90,7 @@ INSERT INTO `tbl_appointments` (`id`, `user_id`, `complaint`, `date_schedule`, `
 	(19, 1, 'ATAY', '2022-08-09 05:51:00', 22, 0, 0, NULL, 0, 0, '2022-08-20 00:51:50', '2022-08-23 23:58:00'),
 	(21, 1, 'qw', '2022-08-03 17:28:00', 14, 0, 0, NULL, 0, 0, '2022-08-21 17:24:03', '2022-08-26 23:05:21'),
 	(22, 1, 'tqwe', '2022-08-03 13:16:00', 22, 0, 0, NULL, 0, 0, '2022-08-23 16:37:35', NULL),
-	(23, 1, '', '2022-08-23 11:45:00', 0, 0, 0, NULL, 0, 0, '2022-08-23 16:39:50', '2022-08-23 23:57:57'),
+	(23, 1, '', '2022-08-23 11:30:00', 0, 0, 0, NULL, 0, 0, '2022-08-23 16:39:50', '2022-08-28 22:10:26'),
 	(24, 1, 'TEST', '2022-08-06 13:00:00', 14, 0, 0, NULL, 0, 0, '2022-08-23 22:58:32', '2022-08-26 23:04:42'),
 	(25, 1, '', '2022-08-01 11:00:00', 0, 0, 0, NULL, 0, 0, '2022-08-23 23:28:48', '2022-08-26 23:08:32'),
 	(26, 1, 'NEW', '2022-08-05 13:00:00', 12, 0, 0, NULL, 0, 0, '2022-08-23 23:52:40', '2022-08-26 23:04:39'),
@@ -178,31 +178,41 @@ DROP TABLE IF EXISTS `tbl_services`;
 CREATE TABLE IF NOT EXISTS `tbl_services` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `service_title` varchar(50) DEFAULT NULL,
+  `description` varchar(150) DEFAULT NULL,
   `duration` varchar(50) DEFAULT NULL,
   `amount` double(10,2) NOT NULL DEFAULT 0.00,
+  `is_deleted` int(1) NOT NULL DEFAULT 0,
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_services: ~8 rows (approximately)
-INSERT INTO `tbl_services` (`id`, `service_title`, `duration`, `amount`, `created_at`, `updated_at`) VALUES
-	(1, 'OB-GYN Consultation / Check Up', '15 mins', 700.00, '2022-08-23 16:54:55', NULL),
-	(2, 'Pelvic Ultrasound', '15 mins', 700.00, '2022-08-23 16:55:08', NULL),
-	(3, 'BPS Ultrasound', '15 mins', 1300.00, '2022-08-23 16:55:24', NULL),
-	(4, 'TVS First Trimester Ultrasound', '15 mins', 1500.00, '2022-08-23 16:55:37', NULL),
-	(5, 'TVS Gyne Ultrasound', '15 mins', 2000.00, '2022-08-23 16:55:43', NULL),
-	(6, 'Transrectal Ultrasound', '15 mins', 2200.00, '2022-08-23 16:56:02', NULL),
-	(7, 'OB Doppler Ultrasound', '15 mins', 3500.00, '2022-08-23 16:56:10', NULL),
-	(8, 'Pap Smear', '15 mins', 1700.00, '2022-08-23 16:56:23', NULL),
-	(9, 'OTHERS', '15 mins', 0.00, '2022-08-23 16:56:33', NULL);
+-- Dumping data for table db_lj_clinic.tbl_services: ~17 rows (approximately)
+INSERT INTO `tbl_services` (`id`, `service_title`, `description`, `duration`, `amount`, `is_deleted`, `created_at`, `updated_at`) VALUES
+	(1, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-23 16:54:55', '2022-08-28 23:27:17'),
+	(2, 'Pelvic Ultrasound', 'qweqw', '15 mins', 700.00, 0, '2022-08-23 16:55:08', '2022-08-28 23:19:15'),
+	(3, 'BPS Ultrasound', NULL, '15 mins', 1300.00, 0, '2022-08-23 16:55:24', NULL),
+	(4, 'TVS First Trimester Ultrasound', NULL, '15 mins', 1500.00, 0, '2022-08-23 16:55:37', NULL),
+	(5, 'TVS Gyne Ultrasound', NULL, '15 mins', 2000.00, 0, '2022-08-23 16:55:43', NULL),
+	(6, 'Transrectal Ultrasound', NULL, '15 mins', 2200.00, 0, '2022-08-23 16:56:02', NULL),
+	(7, 'OB Doppler Ultrasound', NULL, '15 mins', 3500.00, 0, '2022-08-23 16:56:10', NULL),
+	(8, 'Pap Smear', NULL, '15 mins', 1700.00, 0, '2022-08-23 16:56:23', NULL),
+	(9, 'OTHERS', NULL, '15 mins', 0.00, 0, '2022-08-23 16:56:33', NULL),
+	(11, 'TEST', 'NO DESC', '1 hr', 1000.00, 0, '2022-08-28 21:17:43', NULL),
+	(12, 'qwe', 'qwe', 'qeq', 1200.00, 0, '2022-08-28 21:18:41', NULL),
+	(13, 'TEST', 'qwe\nqwe\nqwe\nqwe', '12', 125.00, 0, '2022-08-28 21:25:07', NULL),
+	(14, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-28 21:40:09', NULL),
+	(15, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-28 21:40:40', NULL),
+	(16, 'qwe', 'qwe', 'qqwe', 122.00, 0, '2022-08-28 21:44:21', '2022-08-28 21:48:02'),
+	(17, 'TEST123', 'DESC', '15 mins', 1500.00, 0, '2022-08-28 21:44:48', '2022-08-28 21:44:58'),
+	(18, 'qwe', 'qwe', 'qwe', 123.00, 0, '2022-08-28 23:19:03', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_user
 DROP TABLE IF EXISTS `tbl_user`;
 CREATE TABLE IF NOT EXISTS `tbl_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(50) DEFAULT NULL,
-  `address` varchar(50) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL,
   `contactno` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
