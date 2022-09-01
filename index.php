@@ -3,7 +3,7 @@ session_start();
 
 if (!empty($_SESSION)) {
   if (isset($_SESSION['email']) && isset($_SESSION['role'])) {
-    header("Location: ./user/dashboard/index.php");
+    header("Location: ./user/dashboard/");
   }
 }
 ?>

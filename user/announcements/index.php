@@ -108,7 +108,7 @@ include_once '../functions/session_config.php';
                 <div class="card-body">
                 <div style="display: flex; justify-content: space-between;">
                   <h4 class="card-title">${res.data[i].title}</h4>
-                  <span><i>${res.data[i].created_at}</i></span>
+                  <span><i>${res.data[i].effectivity_date}</i></span>
                 </div>
                   <p class="card-text">${res.data[i].description}</p>
                   <hr>
