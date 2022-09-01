@@ -32,6 +32,8 @@ include_once '../functions/session_config.php';
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/toastr/build/toastr.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
 </head>
 <!--
   HOW TO USE: 
@@ -52,25 +54,23 @@ include_once '../functions/session_config.php';
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">Services</h1>
+          <h1 class="h3 mb-3">Schedules</h1>
 
           <div class="card mb-3">
             <div class="card-header">
-              <button class="btn btn-primary btn-sm" id="btnNewService"><i class="align-middle fas fa-fw fa-plus"></i> New Service</button>
+              <button class="btn btn-primary btn-sm" id="btnNewSchedule"><i class="align-middle fas fa-fw fa-plus"></i> New Schedule</button>
             </div>
             <div class="card-body">
-              <div class="table-responsive div-table-services">
-                <table class="table table-striped table-hover table-services" id="table-services"  style="width: 100%;">
+              <div class="table-responsive div-table-schedule">
+                <table class="table table-striped table-hover table-schedule" id="table-schedule" style="width: 100%;">
                   <thead>
                     <tr>
-                      <th>Service</th>
-                      <th>Description</th>
-                      <th>Duration</th>
-                      <th>Amount</th>
+                      <th>Date</th>
+                      <th>Time</th>
                       <th class="th-actions">Action</th>
                     </tr>
                   </thead>
-                  <tbody id="service_list"></tbody>
+                  <tbody id="schedule_list"></tbody>
                 </table>
               </div>
             </div>
@@ -82,7 +82,7 @@ include_once '../functions/session_config.php';
   </div>
 
   <!-- MODALS -->
-  <?php include_once '../modals/service_modal.php'; ?>
+  <?php include_once '../modals/schedule_modal.php'; ?>
 </body>
 
 </html>
@@ -92,9 +92,9 @@ include_once '../functions/session_config.php';
 
 <script>
   $(document).ready(function() {
-    let service_id = 0;
+    let schedule_id = 0;
 
-    let tbl_services = $('#table-services').DataTable({
+    let tbl_services = $('#table-schedule').DataTable({
       "responsive": true,
       "dom": '<"top"f>rt<"bottom"ip><"clear">',
       "pageLength": 10,
@@ -103,10 +103,10 @@ include_once '../functions/session_config.php';
       "scrollCollapse": true,
       "fixedHeader": true,
     });
-    const load_services = () => {
+    const load_schedules = () => {
       $.ajax({
         method: 'POST',
-        url: '../functions/load_services.php',
+        url: '../functions/load_schedules.php',
         dataType: 'JSON',
         data: {},
         success: function(res) {
@@ -115,10 +115,8 @@ include_once '../functions/session_config.php';
           let ready_data = [];
           for (let i in res.data) {
             ready_data.push([
-              res.data[i].service,
-              res.data[i].description,
-              res.data[i].duration,
-              res.data[i].amount,
+              res.data[i].date_schedule,
+              res.data[i].time_schedule,
               `<tr>
                 <td>
                   <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-edit"></i> Edit</button>
@@ -132,127 +130,122 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const edit_service = (service_id) => {
+    const edit_shedule = (schedule_id) => {
       $.ajax({
         method: 'POST',
-        url: '../functions/load_services.php',
+        url: '../functions/load_schedules.php',
         dataType: 'JSON',
         data: {
-          service_id: service_id
+          schedule_id: schedule_id
         },
         success: function(res) {
           // console.log(res);
           if (res.status) {
             let result = res.data[0];
-            let service = result.service;
-            let description = result.description;
-            let duration = result.duration;
-            let amount = result.amount;
+            let date_schedule = result.date_schedule;
+            let time_schedule = result.time_schedule;
 
-            $("input[name='service']").val(service);
-            $("textarea[name='description']").val(description);
-            $("input[name='duration']").val(duration);
-            $("input[name='amount']").val(amount);
+            $("input[name='date_schedule']").val(date_schedule);
+            $("input[name='time_schedule']").val(time_schedule);
 
-            $(".modal-title").text('Edit Service');
-            $("#service_modal").modal('show');
+            $(".modal-title").text('Edit Schedule');
+            $("#schedule_modal").modal('show');
           }
         }
       });
     }
 
-    const save_service = (data_input) => {
+    const save_schedule = (data_input) => {
       $.ajax({
         method: 'POST',
-        url: '../functions/save_service.php',
+        url: '../functions/save_schedule.php',
         dataType: 'JSON',
         data: data_input,
         success: function(res) {
           // console.log(res);
           if (res.status) {
+            if(data_input.schedule_id != 0) {
+              $("#schedule_modal").modal('hide');
+            }
             toastr.success(res.msg);
             $(".form-input").val('');
 
-            load_services();
+            load_schedules();
           }
         }
       });
     }
 
-    const delete_service = (service_id) => {
+    const delete_schedule = (schedule_id) => {
       $.ajax({
         method: 'POST',
-        url: '../functions/delete_services.php',
+        url: '../functions/delete_schedule.php',
         dataType: 'JSON',
         data: {
-          service_id: service_id
+          schedule_id: schedule_id
         },
         success: function(res) {
           // console.log(res);
           if (res.status) {
             toastr.success(res.msg);
-            load_services();
+            load_schedules();
           }
         }
       });
     }
 
-    $("#btnNewService").click(function(e) {
+    $("#btnNewSchedule").click(function(e) {
       e.preventDefault();
 
-      service_id = 0;
+      schedule_id = 0;
 
       $(".form-input").val('');
-      $(".modal-title").text('New Service');
-      $("#service_modal").modal('show');
+      $(".modal-title").text('New Schedule');
+      $("#schedule_modal").modal('show');
     });
 
-    $(".table-services").on("click", ".btnEdit", function(e) {
+    $(".table-schedule").on("click", ".btnEdit", function(e) {
       e.preventDefault();
 
-      service_id = $(this).attr('id').split('-')[1];
-      edit_service(service_id);
+      schedule_id = $(this).attr('id').split('-')[1];
+      edit_shedule(schedule_id);
     });
 
-    $(".table-services").on("click", ".btnDelete", function(e) {
+    $(".table-schedule").on("click", ".btnDelete", function(e) {
       e.preventDefault();
 
-      service_id = $(this).attr('id').split('-')[1];
+      schedule_id = $(this).attr('id').split('-')[1];
 
       if (confirm("Are your sure to delete this service?") == true) {
-        delete_service(service_id);
+        delete_schedule(schedule_id);
       }
     });
 
-    $("#btnSaveService").click(function(e) {
+    $("#btnSaveSchedule").click(function(e) {
       e.preventDefault();
 
-      let service = $("input[name='service']").val();
-      let description = $("textarea[name='description']").val();
-      let duration = $("input[name='duration']").val();
-      let amount = $("input[name='amount']").val();
+      let date_schedule = $("input[name='date_schedule']").val();
+      let time_schedule = $("input[name='time_schedule']").val();
 
       let data_input = {
-        service_id: service_id,
-        service: service,
-        description: description,
-        duration: duration,
-        amount: amount
+        schedule_id: schedule_id,
+        date_schedule: date_schedule,
+        time_schedule: time_schedule
       }
 
-      if (data_input.service == "") {
-        toastr.error('Please input service.');
+      if (data_input.date_schedule == "") {
+        toastr.error('Please input Date.');
         return;
       };
 
-      if (data_input.amount == "") {
-        toastr.error('Please input amount.');
+      if (data_input.time_schedule == "") {
+        toastr.error('Please input Time.');
         return;
       };
 
-      save_service(data_input);
+      save_schedule(data_input);
     });
 
-    load_services();
+    load_schedules();
   });
 </script>

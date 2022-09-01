@@ -3,6 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">My Appointment</h4>
+        <h3 class="card-text ml-2" id="status"></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -17,14 +18,12 @@
             <p class="card-text" id="schedule"></p>
             <h5 class="card-title">Service</h5>
             <p class="card-text" id="service"></p>
-            <h5 class="card-title">Status</h5>
-            <p class="card-text" id="status"></p>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <!-- <button class="btn btn-danger btn-sm" id="btnCancelAppointment">YES</button> -->
-        <button class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+        <button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>
       </div>
     </div>
   </div>

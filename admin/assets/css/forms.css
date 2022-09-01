@@ -40,3 +40,9 @@ li.sidebar-item {
 .th-actions {
   width: 150px;
 }
+
+.btnEdit, 
+.btnDelete {
+  /* text-align: left; */
+  width: 75px !important;
+}

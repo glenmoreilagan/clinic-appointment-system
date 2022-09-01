@@ -13,8 +13,8 @@
         <h6 class="card-subtitle">Are you sure do you want to cancel this Appointment?</h6>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger btn-sm" id="btnCancelAppointment">YES</button>
-        <button class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary btn-sm" id="btnCancelAppointment"><i class="align-middle fas fa-fw fa-check"></i> YES</button>
+        <button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>
       </div>
     </div>
   </div>

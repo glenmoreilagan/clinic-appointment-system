@@ -36,3 +36,10 @@ li.sidebar-item {
 .feedback-p, .feedback-label, .feedback textarea {
   font-size: 16px !important;
 }
+
+.btnEdit, 
+.btnDelete,
+.btnView {
+  /* text-align: left; */
+  width: 75px !important;
+}

@@ -37,12 +37,17 @@
         </a>
       </li>
       <li class="sidebar-item">
+        <a class="sidebar-link" href=<?php echo $host . "admin/schedules/"; ?>>
+          <i class="align-middle"></i> <span class="align-middle">Schedules</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
         <a class="sidebar-link" href="index.php">
           <i class="align-middle"></i> <span class="align-middle">Patients</span>
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="index.php">
+        <a class="sidebar-link" href=<?php echo $host . "admin/announcements/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Announcements</span>
         </a>
       </li>

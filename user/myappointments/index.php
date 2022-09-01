@@ -62,11 +62,15 @@ include_once '../functions/session_config.php';
           <div class="card mb-3">
             <div class="card-header">
               <!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newAppointment_modal">New Appointment</button> -->
-              <a class="btn btn-primary btn-sm" href="/caps/user/dashboard">New Appointment</a>
+              <?php
+              // heres the settings for local or live
+              include '../../host_setting.php';
+              ?>
+              <a class="btn btn-primary btn-sm" href=<?php echo $host . "user/dashboard"; ?>><i class="align-middle fas fa-fw fa-plus"></i> New Appointment</a>
             </div>
             <div class="card-body">
               <div class="table-responsive table-appointments">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">
                   <thead>
                     <tr>
                       <th>Date & Time</th>
@@ -96,6 +100,15 @@ include_once '../functions/session_config.php';
 
 <script>
   $(document).ready(function() {
+    let tbl_services = $('#table-appointments').DataTable({
+      "responsive": true,
+      "dom": '<"top"f>rt<"bottom"ip><"clear">',
+      "pageLength": 10,
+      "scrollY": "20em",
+      "scrollX": true,
+      "scrollCollapse": true,
+      "fixedHeader": true,
+    });
     const load_appointments = () => {
       $.ajax({
         method: 'POST',
@@ -105,6 +118,7 @@ include_once '../functions/session_config.php';
         success: function(res) {
           // console.log(res);
           let str = ``;
+          let ready_data = [];
           for (let i in res.data) {
             let status_badge =
               res.data[i].status === 'Pending' ?
@@ -112,25 +126,24 @@ include_once '../functions/session_config.php';
               (res.data[i].status === 'Approved' ?
                 `<span class="badge badge-primary">${res.data[i].status}</span>` :
                 `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
-            str += `
-                <tr>
-                  <td>
-                    <b>${res.data[i].time_schedule}</b>
-                    <br>
-                    ${res.data[i].date_schedule}
-                  </td>
-                  <td>${res.data[i].complaint}</td>
-                  <td>${res.data[i].service_title}</td>
-                  <td>
-                    ${status_badge}
-                  </td>
-                  <td>
-                    <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}">View</button>
-                  </td>
-                </tr>
-              `;
+            ready_data.push([
+              `
+                <b>${res.data[i].time_schedule}</b>
+                <br>
+                ${res.data[i].date_schedule}
+              `,
+              res.data[i].complaint,
+              res.data[i].service_title,
+              status_badge,
+              `<tr>
+                <td>
+                  <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle far fa-fw fa-eye"></i> View</button>
+                </td>
+              </tr>`,
+            ]);
           }
-          $("#myappointment_list").html(str);
+          tbl_services.clear().rows.add(ready_data).draw();
+          // $("#myappointment_list").html(str);
         }
       });
     }
