@@ -25,35 +25,38 @@ DROP TABLE IF EXISTS `tbl_announcements`;
 CREATE TABLE IF NOT EXISTS `tbl_announcements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
-  `description` varchar(50) DEFAULT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  `effectivity_date` date DEFAULT NULL,
+  `is_deleted` int(1) DEFAULT 0 COMMENT '0 for not deleted 1 for deleted',
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_announcements: ~21 rows (approximately)
-INSERT INTO `tbl_announcements` (`id`, `title`, `description`, `created_at`, `updated_at`) VALUES
-	(1, 'TITLE', 'DESCRIPTION', '2022-08-20 21:04:35', NULL),
-	(2, 'SARADO', 'SA LINGGO', '2022-07-20 21:16:07', '2022-08-20 21:26:07'),
-	(3, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(4, 'SARADO', 'SA LINGGO', '2022-07-20 21:16:07', '2022-08-20 21:26:07'),
-	(5, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(6, 'TITLE', 'DESCRIPTION', '2022-08-20 21:04:35', NULL),
-	(7, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(8, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(9, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(10, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(11, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(12, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(13, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(14, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(15, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(16, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(17, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(18, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(19, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(20, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL),
-	(21, 'qwe', 'qwe', '2022-08-20 21:28:48', NULL);
+-- Dumping data for table db_lj_clinic.tbl_announcements: ~22 rows (approximately)
+INSERT INTO `tbl_announcements` (`id`, `title`, `description`, `effectivity_date`, `is_deleted`, `created_at`, `updated_at`) VALUES
+	(1, 'TITLE', 'DESCRIPTION', '2022-09-01', 0, '2022-08-20 21:04:35', '2022-09-01 23:03:24'),
+	(2, 'SARADO', 'SA LINGGO', '2022-09-01', 0, '2022-07-20 21:16:07', '2022-09-01 23:03:25'),
+	(3, 'NEW ANNOUNCEMENT', 'WALANG PASOK BUKAS', '2022-09-01', 0, '2022-08-20 21:28:48', '2022-09-01 23:44:03'),
+	(4, 'SARADO', 'SA LINGGO', '2022-09-01', 0, '2022-07-20 21:16:07', '2022-09-01 23:03:26'),
+	(5, 'qwe', 'qwe', '2022-09-01', 1, '2022-08-20 21:28:48', '2022-09-01 23:48:45'),
+	(6, 'TITLE', 'DESCRIPTION', '2022-09-01', 0, '2022-08-20 21:04:35', '2022-09-01 23:03:27'),
+	(7, 'qwe', 'qwe', '2022-09-01', 0, '2022-08-20 21:28:48', '2022-09-01 23:03:27'),
+	(8, 'qwe', 'qwe', '2022-09-01', 0, '2022-08-20 21:28:48', '2022-09-01 23:03:28'),
+	(9, 'qwe', 'qwe', NULL, 1, '2022-08-20 21:28:48', '2022-09-01 23:49:26'),
+	(10, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(11, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(12, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(13, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(14, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(15, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(16, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(17, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(18, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(19, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(20, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(21, 'qwe', 'qwe', NULL, 0, '2022-08-20 21:28:48', NULL),
+	(22, 'KC', 'BAGYO NA MALAKAS', '2022-09-02', 0, '2022-09-01 23:43:22', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_appointments
 DROP TABLE IF EXISTS `tbl_appointments`;
@@ -71,9 +74,9 @@ CREATE TABLE IF NOT EXISTS `tbl_appointments` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_appointments: ~24 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_appointments: ~25 rows (approximately)
 INSERT INTO `tbl_appointments` (`id`, `user_id`, `complaint`, `date_schedule`, `age`, `service_id`, `status`, `remarks`, `is_completed`, `is_cancelled`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'RED', '2022-08-01 21:35:00', 14, 0, 1, NULL, 1, 0, '2022-08-18 21:43:55', '2022-08-23 23:13:47'),
 	(2, 1, 'BLUE', '2022-08-02 21:46:01', 44, 0, 1, NULL, 0, 0, '2022-08-18 21:46:04', '2022-08-23 23:14:49'),
@@ -98,7 +101,8 @@ INSERT INTO `tbl_appointments` (`id`, `user_id`, `complaint`, `date_schedule`, `
 	(28, 1, 'MY COM', '2022-08-24 11:00:00', 12, 0, 0, NULL, 0, 0, '2022-08-24 00:02:33', NULL),
 	(29, 1, 'TEST COMPLAINT', '2022-08-24 11:30:00', 14, 8, 1, NULL, 1, 0, '2022-08-27 15:06:56', '2022-08-27 15:23:16'),
 	(30, 1, 'WQE', '2022-08-23 11:45:00', 12, 6, 1, NULL, 0, 1, '2022-08-27 15:15:53', '2022-08-27 15:23:07'),
-	(31, 2, 'QWEWQEW', '2022-08-27 23:35:12', 44, 0, 0, NULL, 0, 0, '2022-08-27 23:35:05', '2022-08-27 23:35:13');
+	(31, 2, 'QWEWQEW', '2022-08-27 23:35:12', 44, 0, 0, NULL, 0, 0, '2022-08-27 23:35:05', '2022-08-27 23:35:13'),
+	(32, 1, 'qwe', '2022-09-01 09:40:00', 12, 3, 0, NULL, 0, 0, '2022-09-01 22:09:04', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_appointment_availability
 DROP TABLE IF EXISTS `tbl_appointment_availability`;
@@ -107,17 +111,22 @@ CREATE TABLE IF NOT EXISTS `tbl_appointment_availability` (
   `services` varchar(50) DEFAULT NULL,
   `amount` double(10,2) DEFAULT 0.00,
   `date_available` datetime DEFAULT current_timestamp(),
+  `is_deleted` int(1) DEFAULT 0 COMMENT '0 is not delete 1 is for delete',
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_appointment_availability: ~3 rows (approximately)
-INSERT INTO `tbl_appointment_availability` (`id`, `services`, `amount`, `date_available`, `created_at`, `updated_at`) VALUES
-	(1, '', 0.00, '2022-08-24 11:15:33', '2022-08-23 16:31:43', NULL),
-	(2, NULL, 0.00, '2022-08-24 11:30:09', '2022-08-23 16:57:16', NULL),
-	(3, NULL, 0.00, '2022-08-23 11:45:23', '2022-08-23 16:57:31', NULL),
-	(4, NULL, 0.00, '2022-08-23 12:00:42', '2022-08-23 16:57:47', NULL);
+-- Dumping data for table db_lj_clinic.tbl_appointment_availability: ~7 rows (approximately)
+INSERT INTO `tbl_appointment_availability` (`id`, `services`, `amount`, `date_available`, `is_deleted`, `created_at`, `updated_at`) VALUES
+	(1, '', 0.00, '2022-08-24 11:15:33', 0, '2022-08-23 16:31:43', NULL),
+	(2, NULL, 0.00, '2022-08-24 11:30:09', 0, '2022-08-23 16:57:16', NULL),
+	(3, NULL, 0.00, '2022-08-23 11:45:00', 1, '2022-08-23 16:57:31', '2022-09-01 22:34:38'),
+	(4, NULL, 0.00, '2022-08-23 12:00:42', 1, '2022-08-23 16:57:47', '2022-09-01 22:36:02'),
+	(5, NULL, 0.00, '2022-09-01 09:40:00', 0, '2022-09-01 18:39:28', '2022-09-01 22:08:50'),
+	(6, NULL, 0.00, '2022-09-09 10:40:00', 0, '2022-09-01 18:40:09', '2022-09-01 22:14:04'),
+	(7, NULL, 0.00, '2022-03-09 22:00:00', 0, '2022-09-01 22:11:52', NULL),
+	(8, NULL, 0.00, '2022-05-09 13:30:00', 0, '2022-09-01 22:13:21', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_feedback
 DROP TABLE IF EXISTS `tbl_feedback`;
@@ -181,15 +190,15 @@ CREATE TABLE IF NOT EXISTS `tbl_services` (
   `description` varchar(150) DEFAULT NULL,
   `duration` varchar(50) DEFAULT NULL,
   `amount` double(10,2) NOT NULL DEFAULT 0.00,
-  `is_deleted` int(1) NOT NULL DEFAULT 0,
+  `is_deleted` int(1) NOT NULL DEFAULT 0 COMMENT '0 is not delete 1 is for delete',
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_services: ~17 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_services: ~26 rows (approximately)
 INSERT INTO `tbl_services` (`id`, `service_title`, `description`, `duration`, `amount`, `is_deleted`, `created_at`, `updated_at`) VALUES
-	(1, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-23 16:54:55', '2022-08-28 23:27:17'),
+	(1, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 1, '2022-08-23 16:54:55', '2022-09-01 21:13:33'),
 	(2, 'Pelvic Ultrasound', 'qweqw', '15 mins', 700.00, 0, '2022-08-23 16:55:08', '2022-08-28 23:19:15'),
 	(3, 'BPS Ultrasound', NULL, '15 mins', 1300.00, 0, '2022-08-23 16:55:24', NULL),
 	(4, 'TVS First Trimester Ultrasound', NULL, '15 mins', 1500.00, 0, '2022-08-23 16:55:37', NULL),
@@ -205,7 +214,16 @@ INSERT INTO `tbl_services` (`id`, `service_title`, `description`, `duration`, `a
 	(15, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-28 21:40:40', NULL),
 	(16, 'qwe', 'qwe', 'qqwe', 122.00, 0, '2022-08-28 21:44:21', '2022-08-28 21:48:02'),
 	(17, 'TEST123', 'DESC', '15 mins', 1500.00, 0, '2022-08-28 21:44:48', '2022-08-28 21:44:58'),
-	(18, 'qwe', 'qwe', 'qwe', 123.00, 0, '2022-08-28 23:19:03', NULL);
+	(18, 'qwe', 'qwe', 'qwe', 123.00, 0, '2022-08-28 23:19:03', NULL),
+	(19, 'WQE', 'qwe', '12', 123.00, 0, '2022-09-01 18:10:57', NULL),
+	(20, 'qwe', 'qwe', '123', 123.00, 0, '2022-09-01 18:11:12', NULL),
+	(21, 'ATE', 'WEQQ', '13', 333.00, 1, '2022-09-01 18:11:58', '2022-09-01 21:13:29'),
+	(22, '123', '123', '123', 123.00, 1, '2022-09-01 18:12:45', '2022-09-01 21:13:22'),
+	(23, 'LAST', 'LOAD ', '12 mins', 9000.00, 0, '2022-09-01 18:13:44', NULL),
+	(24, 'SAD', 'qwe', 'qwe', 123.00, 0, '2022-09-01 18:15:38', NULL),
+	(25, '123', '123', '123', 123.00, 1, '2022-09-01 18:18:47', '2022-09-01 21:13:25'),
+	(26, 'qwe', 'qwe', 'qw12', 2.00, 0, '2022-09-01 18:21:11', NULL),
+	(27, 'www', 'rrr', 'ttt', 111.00, 0, '2022-09-01 18:26:49', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_user
 DROP TABLE IF EXISTS `tbl_user`;
