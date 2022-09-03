@@ -119,7 +119,7 @@ include_once '../functions/session_config.php';
               res.data[i].time_schedule,
               `<tr>
                 <td>
-                  <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-edit"></i> Edit</button>
+                  <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Edit</button>
                   <button class="btn btn-danger btn-sm btnDelete" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Delete</button>
                 </td>
               </tr>`,
@@ -130,7 +130,7 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const edit_shedule = (schedule_id) => {
+    const edit_schedule = (schedule_id) => {
       $.ajax({
         method: 'POST',
         url: '../functions/load_schedules.php',
@@ -208,7 +208,7 @@ include_once '../functions/session_config.php';
       e.preventDefault();
 
       schedule_id = $(this).attr('id').split('-')[1];
-      edit_shedule(schedule_id);
+      edit_schedule(schedule_id);
     });
 
     $(".table-schedule").on("click", ".btnDelete", function(e) {

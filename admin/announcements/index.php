@@ -132,7 +132,7 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const edit_shedule = (announcement_id) => {
+    const edit_schedule = (announcement_id) => {
       $.ajax({
         method: 'POST',
         url: '../functions/load_announcements.php',
@@ -209,7 +209,7 @@ include_once '../functions/session_config.php';
       e.preventDefault();
 
       announcement_id = $(this).attr('id').split('-')[1];
-      edit_shedule(announcement_id);
+      edit_schedule(announcement_id);
     });
 
     $(".table-announcement").on("click", ".btnDelete", function(e) {

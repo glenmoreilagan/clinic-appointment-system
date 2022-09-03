@@ -2,7 +2,7 @@
 session_start();
 
 if (empty($_SESSION)) {
-  header("Location: ../login.php");
+  header("Location: ../");
 } else {
   if ($_SESSION['role'] == 0) {
     header("Location: ../../user/dashboard/");

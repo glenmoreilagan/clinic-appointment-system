@@ -55,7 +55,7 @@ if (!empty($_SESSION)) {
 
       $.ajax({
         method: 'POST',
-        url: 'functions/f_login.php',
+        url: './functions/f_login.php',
         dataType: 'JSON',
         data: {
           email: email,
@@ -69,6 +69,7 @@ if (!empty($_SESSION)) {
             $(".loginError").addClass('text-success');
 
             window.location.href = './dashboard/';
+
             $(".loginError").text(res.msg);
           } else {
             $(".loginError").removeClass('text-success');

@@ -77,7 +77,7 @@ include_once '../functions/session_config.php';
                       <th>Chief Complaint</th>
                       <th>Service</th>
                       <th>Status</th>
-                      <th>Action</th>
+                      <th class="th-actions">Action</th>
                     </tr>
                   </thead>
                   <tbody id="myappointment_list"></tbody>

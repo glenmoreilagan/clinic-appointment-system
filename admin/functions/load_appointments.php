@@ -24,8 +24,8 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   services.service_title
   FROM tbl_appointments as appointment 
   LEFT JOIN tbl_services as services on services.id = appointment.service_id
-  WHERE user_id = '$user_id' $added_filter
-  order by id DESC";
+  WHERE 1=1 $added_filter
+  order by appointment.date_schedule DESC";
 
 $result = $conn->query($qry);
 

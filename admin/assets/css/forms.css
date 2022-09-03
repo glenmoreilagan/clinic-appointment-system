@@ -38,7 +38,7 @@ li.sidebar-item {
 }
 
 .th-actions {
-  width: 150px;
+  width: 200px !important;
 }
 
 .btnEdit, 
