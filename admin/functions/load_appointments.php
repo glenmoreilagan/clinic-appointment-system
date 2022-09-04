@@ -7,9 +7,25 @@ $user_id = $_SESSION['user_id'];
 $added_filter = '';
 
 $appointment_id = isset($_POST['appointment_id']) ? $_POST['appointment_id'] : 0;
+$status = isset($_POST['status']) ? $_POST['status'] : 'all';
 
 if ($appointment_id !== 0) {
   $added_filter .= " AND appointment.id = '$appointment_id'";
+}
+
+switch ($status) {
+  case 'pending':
+    $added_filter .= " AND appointment.status = 0 AND appointment.is_cancelled = 0";
+    break;
+  case 'cancelled':
+    $added_filter .= " AND appointment.is_cancelled = 1 AND status = 0";
+    break;
+  case 'approved':
+    $added_filter .= " AND appointment.status = 1 AND is_completed = 0";
+    break;
+  case 'completed':
+    $added_filter .= " AND appointment.is_completed = 1 AND status = 1";
+    break;
 }
 
 $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint, 
@@ -17,13 +33,15 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
   appointment.age, appointment.remarks,
   case
-    when appointment.status = 0 then 'Pending'
-    when appointment.status = 1 and is_completed = 0 then 'Approved'
-    when appointment.is_completed = 1 or status = 1 then 'Completed'
+    when appointment.status = 0 AND appointment.is_cancelled = 0 then 'Pending'
+    when appointment.is_cancelled = 1 AND status = 0 then 'Cancelled'
+    when appointment.status = 1 AND is_completed = 0 then 'Approved'
+    when appointment.is_completed = 1 AND status = 1 then 'Completed'
   end as status,
-  services.service_title
+  services.service_title, user.fullname as client
   FROM tbl_appointments as appointment 
   LEFT JOIN tbl_services as services on services.id = appointment.service_id
+  LEFT JOIN tbl_user as user on user.id = appointment.user_id
   WHERE 1=1 $added_filter
   order by appointment.date_schedule DESC";
 

@@ -1,5 +1,5 @@
 <?php
-  include_once '../functions/session_config.php';
+include_once '../functions/session_config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
 
   <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
-  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="shortcut icon" href="../../image/favicon.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

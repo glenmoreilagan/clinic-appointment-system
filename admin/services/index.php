@@ -18,8 +18,7 @@ include_once '../functions/session_config.php';
 
   <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
-  <link rel="canonical" href="calendar.html" />
-  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="shortcut icon" href="../../image/favicon.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
 
@@ -52,15 +51,20 @@ include_once '../functions/session_config.php';
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">Services</h1>
+          <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+              <h3>Services</h3>
+            </div>
+
+            <div class="col-auto ml-auto text-right mt-n1">
+              <button class="btn btn-primary btn-sm" id="btnNewService"><i class="align-middle fas fa-fw fa-plus"></i> New</button>
+            </div>
+          </div>
 
           <div class="card mb-3">
-            <div class="card-header">
-              <button class="btn btn-primary btn-sm" id="btnNewService"><i class="align-middle fas fa-fw fa-plus"></i> New Service</button>
-            </div>
             <div class="card-body">
               <div class="table-responsive div-table-services">
-                <table class="table table-striped table-hover table-services" id="table-services"  style="width: 100%;">
+                <table class="table table-striped table-hover table-services" id="table-services" style="width: 100%;">
                   <thead>
                     <tr>
                       <th>Service</th>
@@ -219,7 +223,7 @@ include_once '../functions/session_config.php';
 
       service_id = $(this).attr('id').split('-')[1];
 
-      if (confirm("Are your sure to delete this service?") == true) {
+      if (confirm("Are you sure to delete this service?") == true) {
         delete_service(service_id);
       }
     });

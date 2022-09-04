@@ -18,7 +18,7 @@ include_once '../functions/session_config.php';
 
   <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
-  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="shortcut icon" href="../../image/favicon.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -57,17 +57,21 @@ include_once '../functions/session_config.php';
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">My Appointments</h1>
+          <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+              <h3>My Appointments</h3>
+            </div>
 
-          <div class="card mb-3">
-            <div class="card-header">
-              <!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newAppointment_modal">New Appointment</button> -->
+            <div class="col-auto ml-auto text-right mt-n1">
               <?php
               // heres the settings for local or live
               include '../../host_setting.php';
               ?>
-              <a class="btn btn-primary btn-sm" href=<?php echo $host . "user/dashboard"; ?>><i class="align-middle fas fa-fw fa-plus"></i> New Appointment</a>
+              <a class="btn btn-primary btn-sm" href=<?php echo $host . "user/dashboard"; ?>><i class="align-middle fas fa-fw fa-plus"></i> New</a>
             </div>
+          </div>
+
+          <div class="card mb-3">
             <div class="card-body">
               <div class="table-responsive table-appointments">
                 <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">

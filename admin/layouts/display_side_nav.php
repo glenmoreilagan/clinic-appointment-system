@@ -10,7 +10,8 @@
               c0.2,0.5,0,1.1-0.5,1.3l-9,4C10.3,20,10.1,20,10,20z" />
       </svg> -->
 
-      <span class="align-middle">LJ CURA OB-GYN ULTRASOUND CLINIC</span>
+      <!-- <span class="align-middle">LJ CURA OB-GYN ULTRASOUND CLINIC</span> -->
+      <span class="align-middle"><img width="200" height="70" src="../../image/logo.png" alt="LJ CURA OB-GYN ULTRA SOUND CLINIC"></span>
     </a>
     <?php
     // heres the settings for local or live

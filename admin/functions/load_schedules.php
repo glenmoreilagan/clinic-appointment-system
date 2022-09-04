@@ -11,7 +11,8 @@ if ($schedule_id !== 0) {
 
 $qry = "SELECT id, date_available
   FROM tbl_appointment_availability
-  WHERE is_deleted != 1 $added_filter";
+  WHERE is_deleted != 1 $added_filter
+  ORDER BY DATE(date_available) DESC";
 
 $result = $conn->query($qry);
 

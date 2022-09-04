@@ -18,8 +18,7 @@ include_once '../functions/session_config.php';
 
   <title>LJ CURA OB-GYN ULTRASOUND CLINIC</title>
 
-  <link rel="canonical" href="calendar.html" />
-  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="shortcut icon" href="../../image/favicon.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
 
@@ -35,10 +34,14 @@ include_once '../functions/session_config.php';
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
   <style>
-    .btnEdit,
-    .btnDelete {
+    .btnApprove,
+    .btnReject {
       /* text-align: left; */
       width: 90px !important;
+    }
+
+    .completed {
+      background: #FF6699;
     }
   </style>
 </head>
@@ -61,17 +64,45 @@ include_once '../functions/session_config.php';
 
       <main class="content">
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">Appointments</h1>
+          <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+              <h3>Appointments</h3>
+            </div>
+
+            <div class="col-auto ml-auto text-right mt-n1">
+              <span class="dropdown mr-2">
+                <button class="btn btn-light bg-white shadow-sm dropdown-toggle" id="day" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="align-middle mt-n1" data-feather="search"></i> Select Filter
+                </button>
+                <div class="dropdown-menu">
+                  <!-- <h6 class="dropdown-header">Settings</h6> -->
+                  <a class="dropdown-item filterMe" data-filter='pending'>Pending</a>
+                  <a class="dropdown-item filterMe" data-filter='approved'>Approved</a>
+                  <a class="dropdown-item filterMe" data-filter='completed'>Completed</a>
+                  <a class="dropdown-item filterMe" data-filter='cancelled'>Cancelled</a>
+                  <!-- <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a> -->
+                </div>
+              </span>
+
+              <!-- <button class="btn btn-primary shadow-sm">
+                <i class="align-middle" data-feather="filter">&nbsp;</i>
+              </button> -->
+              <button class="btn btn-primary shadow-sm refresh" title="Reset/Refresh">
+                <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+              </button>
+            </div>
+          </div>
 
           <div class="card mb-3">
-            <div class="card-header">
-              <button class="btn btn-primary btn-sm" id="btnNewAppointments"><i class="align-middle fas fa-fw fa-plus"></i> New Appointments</button>
-            </div>
+            <!-- <div class="card-header">
+            </div> -->
             <div class="card-body">
               <div class="table-responsive div-table-appointments">
                 <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">
                   <thead>
                     <tr>
+                      <th>Customer</th>
                       <th>Date & Time</th>
                       <th>Chief Complaint</th>
                       <th>Service</th>
@@ -91,7 +122,7 @@ include_once '../functions/session_config.php';
   </div>
 
   <!-- MODALS -->
-  <?php include_once '../modals/schedule_modal.php'; ?>
+  <?php include_once '../modals/reject_appointment_modal.php'; ?>
 </body>
 
 </html>
@@ -102,6 +133,7 @@ include_once '../functions/session_config.php';
 <script>
   $(document).ready(function() {
     let appointment_id = 0;
+    let filter_status = 'all';
 
     let tbl_services = $('#table-appointments').DataTable({
       "responsive": true,
@@ -113,7 +145,7 @@ include_once '../functions/session_config.php';
       "fixedHeader": true,
       "ordering": false,
     });
-    const load_appointments = (status = 0) => {
+    const load_appointments = (status = 'all') => {
       $.ajax({
         method: 'POST',
         url: '../functions/load_appointments.php',
@@ -126,13 +158,40 @@ include_once '../functions/session_config.php';
           let str = ``;
           let ready_data = [];
           for (let i in res.data) {
-            let status_badge =
+            let status_badge = '';
+
+            switch (res.data[i].status) {
+              case 'Approved':
+                status_badge = `<span class="badge badge-primary">${res.data[i].status}</span>`;
+                break;
+              case 'Completed':
+                status_badge = `<span class="badge badge-secondary completed">${res.data[i].status}</span>`;
+                break;
+              case 'Cancelled':
+                status_badge = `<span class="badge badge-danger">${res.data[i].status}</span>`;
+                break;
+              default:
+                status_badge = `<span class="badge badge-success">${res.data[i].status}</span>`;
+                break;
+            }
+
+            let action_buttons =
               res.data[i].status === 'Pending' ?
-              `<span class="badge badge-success">${res.data[i].status}</span>` :
+              `<tr>
+                <td>
+                  <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
+                  <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
+                </td>
+              </tr>` :
               (res.data[i].status === 'Approved' ?
-                `<span class="badge badge-primary">${res.data[i].status}</span>` :
-                `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
+                `<tr>
+                <td>
+                  <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
+                </td>
+              </tr>` : ``)
+
             ready_data.push([
+              res.data[i].complaint,
               `
                 <b>${res.data[i].time_schedule}</b>
                 <br>
@@ -141,12 +200,7 @@ include_once '../functions/session_config.php';
               res.data[i].complaint,
               res.data[i].service_title,
               status_badge,
-              `<tr>
-                <td>
-                  <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
-                  <button class="btn btn-danger btn-sm btnDelete" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
-                </td>
-              </tr>`,
+              action_buttons,
             ]);
           }
           tbl_services.clear().rows.add(ready_data).draw();
@@ -155,122 +209,70 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const edit_appointments = (appointment_id) => {
+    const update_appointments = (action, appointment_id) => {
       $.ajax({
         method: 'POST',
-        url: '../functions/load_schedules.php',
+        url: '../functions/approve_or_reject_appointment.php',
         dataType: 'JSON',
         data: {
-          appointment_id: appointment_id
+          action: action,
+          appointment_id: appointment_id,
+          remarks: $("textarea[name='remarks']").val()
         },
         success: function(res) {
           // console.log(res);
           if (res.status) {
-            let result = res.data[0];
-            let date_schedule = result.date_schedule;
-            let time_schedule = result.time_schedule;
+            appointment_id = 0;
 
-            $("input[name='date_schedule']").val(date_schedule);
-            $("input[name='time_schedule']").val(time_schedule);
-
-            $(".modal-title").text('Edit Appointment');
-            $("#schedule_modal").modal('show');
-          }
-        }
-      });
-    }
-
-    const save_appointments = (data_input) => {
-      $.ajax({
-        method: 'POST',
-        url: '../functions/save_schedule.php',
-        dataType: 'JSON',
-        data: data_input,
-        success: function(res) {
-          // console.log(res);
-          if (res.status) {
-            if (data_input.appointment_id != 0) {
-              $("#schedule_modal").modal('hide');
-            }
             toastr.success(res.msg);
-            $(".form-input").val('');
-
-            load_schedules();
+            load_appointments(filter_status);
           }
         }
       });
     }
 
-    const delete_appointments = (appointment_id) => {
-      $.ajax({
-        method: 'POST',
-        url: '../functions/delete_schedule.php',
-        dataType: 'JSON',
-        data: {
-          appointment_id: appointment_id
-        },
-        success: function(res) {
-          // console.log(res);
-          if (res.status) {
-            toastr.success(res.msg);
-            load_schedules();
-          }
-        }
-      });
-    }
-
-    $("#btnNewAppointments").click(function(e) {
+    $(".table-appointments").on("click", ".btnApprove", function(e) {
       e.preventDefault();
 
-      appointment_id = 0;
+      appointment_id = $(this).attr('id').split('-')[1];
+
+      if (confirm("Are you sure to approve?") == true) {
+        update_appointments('approve', appointment_id);
+      }
+    });
+
+    $(".table-appointments").on("click", ".btnReject", function(e) {
+      e.preventDefault();
+
+      appointment_id = $(this).attr('id').split('-')[1];
 
       $(".form-input").val('');
-      $(".modal-title").text('New Appointment');
-      $("#schedule_modal").modal('show');
+      $(".modal-title").text('Reject Appointment');
+      $("#reject_appointment_modal").modal('show');
     });
 
-    $(".table-appointments").on("click", ".btnEdit", function(e) {
+    $("#reject_appointment_modal").on("click", "#btnReject", function(e) {
       e.preventDefault();
 
-      appointment_id = $(this).attr('id').split('-')[1];
-      edit_appointments(appointment_id);
+      update_appointments('reject', appointment_id);
+      $("#reject_appointment_modal").modal('hide');
     });
 
-    $(".table-appointments").on("click", ".btnDelete", function(e) {
+    $(".refresh").click(function(e) {
       e.preventDefault();
+      filter_status = 'all';
 
-      appointment_id = $(this).attr('id').split('-')[1];
-
-      if (confirm("Are your sure to delete this service?") == true) {
-        delete_appointments(appointment_id);
-      }
+      load_appointments(filter_status);
     });
 
-    $("#btnSaveSchedule").click(function(e) {
+    $(".filterMe").click(function(e) {
       e.preventDefault();
+      let filter = $(this).data('filter');
 
-      let date_schedule = $("input[name='date_schedule']").val();
-      let time_schedule = $("input[name='time_schedule']").val();
-
-      let data_input = {
-        appointment_id: appointment_id,
-        date_schedule: date_schedule,
-        time_schedule: time_schedule
-      }
-
-      if (data_input.date_schedule == "") {
-        toastr.error('Please input Date.');
-        return;
-      };
-
-      if (data_input.time_schedule == "") {
-        toastr.error('Please input Time.');
-        return;
-      };
-
-      save_appointments(data_input);
+      filter_status = filter;
+      load_appointments(filter);
     });
 
-    load_appointments();
+    load_appointments(filter_status);
   });
 </script>
