@@ -19,6 +19,7 @@ if (!empty($_SESSION)) {
   <link href="assets/css/swiper-bundle.min.css" rel="stylesheet">
   <title>Home</title>
 
+  <link rel="shortcut icon" href="image/favicon.png">
 </head>
 
 <body>
