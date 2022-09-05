@@ -43,7 +43,7 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="index.php">
+        <a class="sidebar-link" href=<?php echo $host . "admin/patients/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Patients</span>
         </a>
       </li>

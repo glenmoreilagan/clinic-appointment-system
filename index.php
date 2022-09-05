@@ -306,7 +306,20 @@ if (!empty($_SESSION)) {
             $(".loginError").text(res.msg);
           }
         }
-      })
+      });
+    });
+
+    const onlyNumberKey = (evt) => {
+      // Only ASCII character in that range allowed
+      var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+      if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) {
+        return false;
+      }
+      return true;
+    }
+    
+    $("#signupModal input[name='contactnumber']").keypress(function(e) {
+      return onlyNumberKey(e);
     });
   });
 </script>

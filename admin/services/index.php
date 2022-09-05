@@ -102,7 +102,7 @@ include_once '../functions/session_config.php';
       "responsive": true,
       "dom": '<"top"f>rt<"bottom"ip><"clear">',
       "pageLength": 10,
-      "scrollY": "20em",
+      "scrollY": "80em",
       "scrollX": true,
       "scrollCollapse": true,
       "fixedHeader": true,

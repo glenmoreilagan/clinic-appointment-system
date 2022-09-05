@@ -99,15 +99,18 @@ include_once '../functions/session_config.php';
             </div> -->
             <div class="card-body">
               <div class="table-responsive div-table-appointments">
-                <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">
+                <table class="table table-striped table-hover table-appointments display nowrap" id="table-appointments" style="width: 100%;">
                   <thead>
                     <tr>
-                      <th>Customer</th>
+                      <th>Patient</th>
+                      <th>Age</th>
+                      <th>Address</th>
+                      <th>Contact No.</th>
                       <th>Date & Time</th>
                       <th>Chief Complaint</th>
                       <th>Service</th>
                       <th>Status</th>
-                      <th class="th-actions">Action</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody id="appointments_list"></tbody>
@@ -139,7 +142,7 @@ include_once '../functions/session_config.php';
       "responsive": true,
       "dom": '<"top"f>rt<"bottom"ip><"clear">',
       "pageLength": 10,
-      "scrollY": "20em",
+      "scrollY": "80em",
       "scrollX": true,
       "scrollCollapse": true,
       "fixedHeader": true,
@@ -191,7 +194,12 @@ include_once '../functions/session_config.php';
               </tr>` : ``)
 
             ready_data.push([
-              res.data[i].complaint,
+              `
+                <b>${res.data[i].client}</b>
+              `,
+              res.data[i].age,
+              res.data[i].address,
+              res.data[i].contactno,
               `
                 <b>${res.data[i].time_schedule}</b>
                 <br>

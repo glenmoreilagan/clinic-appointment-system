@@ -33,6 +33,17 @@ include_once '../functions/session_config.php';
   <link rel="stylesheet" href="../../assets/toastr/build/toastr.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
+  <style>
+    .btnApprove,
+    .btnReject {
+      /* text-align: left; */
+      width: 90px !important;
+    }
+
+    .completed {
+      background: #FF6699;
+    }
+  </style>
 </head>
 <!--
   HOW TO USE: 
@@ -55,26 +66,51 @@ include_once '../functions/session_config.php';
         <div class="container-fluid p-0">
           <div class="row mb-2 mb-xl-3">
             <div class="col-auto d-none d-sm-block">
-              <h3>Schedules</h3>
+              <h3>Patients</h3>
             </div>
 
             <div class="col-auto ml-auto text-right mt-n1">
-              <button class="btn btn-primary btn-sm" id="btnNewSchedule"><i class="align-middle fas fa-fw fa-plus"></i> New</button>
+              <!-- <span class="dropdown mr-2">
+                <button class="btn btn-light bg-white shadow-sm dropdown-toggle" id="day" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="align-middle mt-n1" data-feather="search"></i> Select Filter
+                </button> -->
+              <!-- <div class="dropdown-menu"> -->
+              <!-- <h6 class="dropdown-header">Settings</h6> -->
+              <!-- <a class="dropdown-item filterMe" data-filter='pending'>Pending</a>
+                  <a class="dropdown-item filterMe" data-filter='approved'>Approved</a>
+                  <a class="dropdown-item filterMe" data-filter='completed'>Completed</a>
+                  <a class="dropdown-item filterMe" data-filter='cancelled'>Cancelled</a> -->
+              <!-- <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a> -->
+              <!-- </div> -->
+              <!-- </span> -->
+
+              <!-- <button class="btn btn-primary shadow-sm">
+                <i class="align-middle" data-feather="filter">&nbsp;</i>
+              </button> -->
+              <button class="btn btn-primary shadow-sm refresh" title="Reset/Refresh">
+                <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+              </button>
             </div>
           </div>
 
           <div class="card mb-3">
+            <!-- <div class="card-header">
+            </div> -->
             <div class="card-body">
-              <div class="table-responsive div-table-schedule">
-                <table class="table table-striped table-hover table-schedule" id="table-schedule" style="width: 100%;">
+              <div class="table-responsive div-table-patients">
+                <table class="table table-striped table-hover table-patients" id="table-patients" style="width: 100%;">
                   <thead>
                     <tr>
-                      <th>Date</th>
-                      <th>Time</th>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Contatct No.</th>
+                      <th>Email</th>
                       <th class="th-actions">Action</th>
                     </tr>
                   </thead>
-                  <tbody id="schedule_list"></tbody>
+                  <tbody id="patients_list"></tbody>
                 </table>
               </div>
             </div>
@@ -86,7 +122,7 @@ include_once '../functions/session_config.php';
   </div>
 
   <!-- MODALS -->
-  <?php include_once '../modals/schedule_modal.php'; ?>
+  <?php include_once '../modals/patient_modal.php'; ?>
 </body>
 
 </html>
@@ -96,9 +132,10 @@ include_once '../functions/session_config.php';
 
 <script>
   $(document).ready(function() {
-    let schedule_id = 0;
+    let patient_id = 0;
+    let filter_status = 'all';
 
-    let tbl_services = $('#table-schedule').DataTable({
+    let tbl_patient = $('#table-patients').DataTable({
       "responsive": true,
       "dom": '<"top"f>rt<"bottom"ip><"clear">',
       "pageLength": 10,
@@ -108,149 +145,86 @@ include_once '../functions/session_config.php';
       "fixedHeader": true,
       "ordering": false,
     });
-    const load_schedules = () => {
+    const load_patients = (status = 'all') => {
       $.ajax({
         method: 'POST',
-        url: '../functions/load_schedules.php',
+        url: '../functions/load_patients.php',
         dataType: 'JSON',
-        data: {},
+        data: {
+          status: status
+        },
         success: function(res) {
           // console.log(res);
           let str = ``;
           let ready_data = [];
           for (let i in res.data) {
             ready_data.push([
-              res.data[i].date_schedule,
-              res.data[i].time_schedule,
+              res.data[i].id,
+              res.data[i].fullname,
+              res.data[i].address,
+              res.data[i].contactno,
+              res.data[i].email,
               `<tr>
                 <td>
-                  <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-edit"></i> Edit</button>
-                  <button class="btn btn-danger btn-sm btnDelete" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Delete</button>
+                  <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-eye"></i> View</button>
                 </td>
               </tr>`,
             ]);
           }
-          tbl_services.clear().rows.add(ready_data).draw();
+          tbl_patient.clear().rows.add(ready_data).draw();
         }
       });
     }
 
-    const edit_schedule = (schedule_id) => {
+    $(".table-patients").on("click", ".btnView", function(e) {
+      e.preventDefault();
+
+      patient_id = $(this).attr('id').split('-')[1];
+
       $.ajax({
         method: 'POST',
-        url: '../functions/load_schedules.php',
+        url: '../functions/load_patients.php',
         dataType: 'JSON',
         data: {
-          schedule_id: schedule_id
+          status: 'view-patient',
+          patient_id: patient_id
         },
         success: function(res) {
           // console.log(res);
-          if (res.status) {
-            let result = res.data[0];
-            let date_schedule = result.date_schedule;
-            let time_schedule = result.time_schedule;
-
-            $("input[name='date_schedule']").val(date_schedule);
-            $("input[name='time_schedule']").val(time_schedule);
-
-            $(".modal-title").text('Edit Schedule');
-            $("#schedule_modal").modal('show');
+          let str = ``;
+          let ready_data = [];
+          $("#patient_modal #pname").text(res.data[0].fullname);
+          for (let i in res.data) {
+            str += `
+              <tr>
+                <td>
+                  ${res.data[i].time_schedule}
+                  <br>
+                  <b>${res.data[i].date_schedule}</b>
+                </td>
+                <td>
+                  ${res.data[i].complaint}
+                </td>
+                <td>
+                  ${res.data[i].service_title}
+                </td>
+              </tr>
+            `;
           }
+          $("#patient_history_list").html(str);
+          $("#patient_modal").modal('show');
         }
       });
-    }
 
-    const save_schedule = (data_input) => {
-      $.ajax({
-        method: 'POST',
-        url: '../functions/save_schedule.php',
-        dataType: 'JSON',
-        data: data_input,
-        success: function(res) {
-          // console.log(res);
-          if (res.status) {
-            if (data_input.schedule_id != 0) {
-              $("#schedule_modal").modal('hide');
-            }
-            toastr.success(res.msg);
-            $(".form-input").val('');
-
-            load_schedules();
-          }
-        }
-      });
-    }
-
-    const delete_schedule = (schedule_id) => {
-      $.ajax({
-        method: 'POST',
-        url: '../functions/delete_schedule.php',
-        dataType: 'JSON',
-        data: {
-          schedule_id: schedule_id
-        },
-        success: function(res) {
-          // console.log(res);
-          if (res.status) {
-            toastr.success(res.msg);
-            load_schedules();
-          }
-        }
-      });
-    }
-
-    $("#btnNewSchedule").click(function(e) {
-      e.preventDefault();
-
-      schedule_id = 0;
-
-      $(".form-input").val('');
-      $(".modal-title").text('New Schedule');
-      $("#schedule_modal").modal('show');
     });
 
-    $(".table-schedule").on("click", ".btnEdit", function(e) {
+    $(".refresh").click(function(e) {
       e.preventDefault();
+      filter_status = 'all';
 
-      schedule_id = $(this).attr('id').split('-')[1];
-      edit_schedule(schedule_id);
+      load_patients(filter_status);
     });
 
-    $(".table-schedule").on("click", ".btnDelete", function(e) {
-      e.preventDefault();
-
-      schedule_id = $(this).attr('id').split('-')[1];
-
-      if (confirm("Are you sure to delete this schedule?") == true) {
-        delete_schedule(schedule_id);
-      }
-    });
-
-    $("#btnSaveSchedule").click(function(e) {
-      e.preventDefault();
-
-      let date_schedule = $("input[name='date_schedule']").val();
-      let time_schedule = $("input[name='time_schedule']").val();
-
-      let data_input = {
-        schedule_id: schedule_id,
-        date_schedule: date_schedule,
-        time_schedule: time_schedule
-      }
-
-      if (data_input.date_schedule == "") {
-        toastr.error('Please input Date.');
-        return;
-      };
-
-      if (data_input.time_schedule == "") {
-        toastr.error('Please input Time.');
-        return;
-      };
-
-      save_schedule(data_input);
-    });
-
-    load_schedules();
+    load_patients(filter_status);
   });
 </script>

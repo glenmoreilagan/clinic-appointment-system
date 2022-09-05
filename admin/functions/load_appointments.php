@@ -38,7 +38,7 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
     when appointment.status = 1 AND is_completed = 0 then 'Approved'
     when appointment.is_completed = 1 AND status = 1 then 'Completed'
   end as status,
-  services.service_title, user.fullname as client
+  services.service_title, user.fullname as client, user.address, user.contactno
   FROM tbl_appointments as appointment 
   LEFT JOIN tbl_services as services on services.id = appointment.service_id
   LEFT JOIN tbl_user as user on user.id = appointment.user_id
@@ -60,6 +60,9 @@ if ($result->num_rows > 0) {
       'remarks' => $row['remarks'],
       'status' => $row['status'],
       'service_title' => $row['service_title'] !== NULL ? $row['service_title'] : '-',
+      'client' => $row['client'],
+      'address' => $row['address'],
+      'contactno' => $row['contactno'],
     ];
   }
 

@@ -12,7 +12,12 @@
               <label class="form-label">Fullname:</label>
               <input type="text" placeholder="Fullname" class="form-control shadow-none" name="fullname">
               <label class="form-label">Contact Number:</label>
-              <input type="tel" placeholder="Contact Number" class="form-control shadow-none" name="contactnumber">
+              <input type="tel" placeholder="Contact Number (ex. 09xxxxx)" class="form-control shadow-none" name="contactnumber"
+                onCopy="return false" 
+                onDrag="return false" 
+                onDrop="return false" 
+                onPaste="return false" 
+                autocomplete="off">
 
               <label class="form-label">Address:</label>
               <input type="text" placeholder="Address" class="form-control shadow-none" name="address">
