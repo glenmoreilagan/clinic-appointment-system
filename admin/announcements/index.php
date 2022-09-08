@@ -59,7 +59,7 @@ include_once '../functions/session_config.php';
             </div>
 
             <div class="col-auto ml-auto text-right mt-n1">
-              <button class="btn btn-primary btn-sm" id="btnNewAnnouncement"><i class="align-middle fas fa-fw fa-plus"></i> New</button>
+              <button class="btn btn-primary" id="btnNewAnnouncement"><i class="align-middle fas fa-fw fa-plus"></i> New</button>
             </div>
           </div>
 

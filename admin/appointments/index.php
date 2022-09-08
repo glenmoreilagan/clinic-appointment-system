@@ -43,6 +43,18 @@ include_once '../functions/session_config.php';
     .completed {
       background: #FF6699;
     }
+
+    .modal:nth-of-type(even) {
+      z-index: 1062 !important;
+    }
+
+    .modal-backdrop.show:nth-of-type(even) {
+      z-index: 1061 !important;
+    }
+
+    .cust_info {
+      font-weight: 100;
+    }
   </style>
 </head>
 <!--
@@ -99,18 +111,18 @@ include_once '../functions/session_config.php';
             </div> -->
             <div class="card-body">
               <div class="table-responsive div-table-appointments">
-                <table class="table table-striped table-hover table-appointments display nowrap" id="table-appointments" style="width: 100%;">
+                <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">
                   <thead>
                     <tr>
                       <th>Patient</th>
-                      <th>Age</th>
-                      <th>Address</th>
-                      <th>Contact No.</th>
+                      <!-- <th>Age</th> -->
+                      <!-- <th>Address</th> -->
+                      <!-- <th>Contact No.</th> -->
                       <th>Date & Time</th>
                       <th>Chief Complaint</th>
                       <th>Service</th>
                       <th>Status</th>
-                      <th>Action</th>
+                      <th class="th-actions">Action</th>
                     </tr>
                   </thead>
                   <tbody id="appointments_list"></tbody>
@@ -126,6 +138,8 @@ include_once '../functions/session_config.php';
 
   <!-- MODALS -->
   <?php include_once '../modals/reject_appointment_modal.php'; ?>
+  <?php include_once '../modals/view_appointment_modal.php'; ?>
+  <?php include '../modals/ILoader.php'; ?>
 </body>
 
 </html>
@@ -149,6 +163,7 @@ include_once '../functions/session_config.php';
       "ordering": false,
     });
     const load_appointments = (status = 'all') => {
+      $("#ILoader").modal('show');
       $.ajax({
         method: 'POST',
         url: '../functions/load_appointments.php',
@@ -178,32 +193,36 @@ include_once '../functions/session_config.php';
                 break;
             }
 
-            let action_buttons =
-              res.data[i].status === 'Pending' ?
-              `<tr>
+            let action_buttons = `<tr>
                 <td>
-                  <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
-                  <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
+                  <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-eye"></i> View</button>
                 </td>
-              </tr>` :
-              (res.data[i].status === 'Approved' ?
-                `<tr>
-                <td>
-                  <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
-                </td>
-              </tr>` : ``)
+              </tr>`;
+            // res.data[i].status === 'Pending' ?
+            // `<tr>
+            //   <td>
+            //     <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
+            //     <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
+            //   </td>
+            // </tr>` :
+            // (res.data[i].status === 'Approved' ?
+            //   `<tr>
+            //   <td>
+            //     <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
+            //   </td>
+            // </tr>` : ``)
 
             ready_data.push([
               `
                 <b>${res.data[i].client}</b>
               `,
-              res.data[i].age,
-              res.data[i].address,
-              res.data[i].contactno,
+              // res.data[i].age,
+              // res.data[i].address,
+              // res.data[i].contactno,
               `
-                <b>${res.data[i].time_schedule}</b>
+                ${res.data[i].time_schedule}
                 <br>
-                ${res.data[i].date_schedule}
+                <b>${res.data[i].date_schedule}</b>
               `,
               res.data[i].complaint,
               res.data[i].service_title,
@@ -212,7 +231,9 @@ include_once '../functions/session_config.php';
             ]);
           }
           tbl_services.clear().rows.add(ready_data).draw();
-          // $("#myappointment_list").html(str);
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 500);
         }
       });
     }
@@ -232,6 +253,9 @@ include_once '../functions/session_config.php';
           if (res.status) {
             appointment_id = 0;
 
+            $("#view_appointment_modal").modal('hide');
+            $("#reject_appointment_modal").modal('hide');
+
             toastr.success(res.msg);
             load_appointments(filter_status);
           }
@@ -239,7 +263,7 @@ include_once '../functions/session_config.php';
       });
     }
 
-    $(".table-appointments").on("click", ".btnApprove", function(e) {
+    $("#view_appointment_modal").on("click", ".btnApprove", function(e) {
       e.preventDefault();
 
       appointment_id = $(this).attr('id').split('-')[1];
@@ -249,7 +273,7 @@ include_once '../functions/session_config.php';
       }
     });
 
-    $(".table-appointments").on("click", ".btnReject", function(e) {
+    $("#view_appointment_modal").on("click", ".btnReject", function(e) {
       e.preventDefault();
 
       appointment_id = $(this).attr('id').split('-')[1];
@@ -259,11 +283,90 @@ include_once '../functions/session_config.php';
       $("#reject_appointment_modal").modal('show');
     });
 
+    $(".table-appointments").on("click", ".btnView", function(e) {
+      e.preventDefault();
+
+      appointment_id = $(this).attr('id').split('-')[1];
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_appointments.php',
+        dataType: 'JSON',
+        data: {
+          status: status,
+          appointment_id: appointment_id,
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            let status_badge = '';
+            let action_buttons = '';
+
+            switch (res.data[0].status) {
+              case 'Approved':
+                status_badge = `<span class="badge badge-primary">${res.data[0].status}</span>`;
+                break;
+              case 'Completed':
+                status_badge = `<span class="badge badge-secondary completed">${res.data[0].status}</span>`;
+                break;
+              case 'Cancelled':
+                status_badge = `<span class="badge badge-danger">${res.data[0].status}</span>`;
+                break;
+              default:
+                status_badge = `<span class="badge badge-success">${res.data[0].status}</span>`;
+                break;
+            }
+
+            $("#view_appointment_modal #pname").text(res.data[0].client);
+            $("#view_appointment_modal #age").text(res.data[0].age);
+            $("#view_appointment_modal #address").text(res.data[0].address);
+            $("#view_appointment_modal #contactno").text(res.data[0].contactno);
+            $("#view_appointment_modal #status").html(status_badge);
+
+            action_buttons = res.data[0].status === 'Pending' ?
+              ` <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
+                <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
+              ` : ``;
+            // (res.data[0].status === 'Approved' ?
+            //   `
+            //     <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
+            //   ` : ``)
+            action_buttons += '<button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>';
+
+
+            let str = `
+              <tr>
+                <td>
+                  ${res.data[0].time_schedule}
+                  <br>
+                  <b>${res.data[0].date_schedule}</b>
+                </td>
+                <td>
+                  ${res.data[0].complaint}
+                </td>
+                <td>
+                  ${res.data[0].service_title}
+                </td>
+              </tr>
+            `;
+
+            $("#appointment_details_list").html(str);
+
+            $("#view_appointment_modal .modal-footer").html(action_buttons);
+            $("#view_appointment_modal").modal('show');
+          } else {
+            toastr.error(res.msg);
+          }
+        }
+      });
+
+
+    });
+
     $("#reject_appointment_modal").on("click", "#btnReject", function(e) {
       e.preventDefault();
 
       update_appointments('reject', appointment_id);
-      $("#reject_appointment_modal").modal('hide');
     });
 
     $(".refresh").click(function(e) {

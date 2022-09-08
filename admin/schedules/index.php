@@ -59,7 +59,7 @@ include_once '../functions/session_config.php';
             </div>
 
             <div class="col-auto ml-auto text-right mt-n1">
-              <button class="btn btn-primary btn-sm" id="btnNewSchedule"><i class="align-middle fas fa-fw fa-plus"></i> New</button>
+              <button class="btn btn-primary" id="btnNewSchedule"><i class="align-middle fas fa-fw fa-plus"></i> New</button>
             </div>
           </div>
 
@@ -87,6 +87,7 @@ include_once '../functions/session_config.php';
 
   <!-- MODALS -->
   <?php include_once '../modals/schedule_modal.php'; ?>
+  <?php include_once '../modals/ILoader.php'; ?>
 </body>
 
 </html>
@@ -109,6 +110,7 @@ include_once '../functions/session_config.php';
       "ordering": false,
     });
     const load_schedules = () => {
+      $("#ILoader").modal('show');
       $.ajax({
         method: 'POST',
         url: '../functions/load_schedules.php',
@@ -131,6 +133,9 @@ include_once '../functions/session_config.php';
             ]);
           }
           tbl_services.clear().rows.add(ready_data).draw();
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 500);
         }
       });
     }

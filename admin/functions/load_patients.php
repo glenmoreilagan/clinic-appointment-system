@@ -29,15 +29,17 @@ if ($status == 'all') {
     echo json_encode(['status' => false, 'msg' => 'Fetching Failed!', 'data' => []]);
   }
 } else {
+  $patient_id = $_POST['patient_id'];
+
   $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email,
-  appointment.complaint,
+  appointment.complaint, appointment.age, 
   DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
   service.service_title, service.description
   FROM tbl_user AS cust
   INNER JOIN tbl_appointments AS appointment ON appointment.user_id = cust.id
   INNER JOIN tbl_services AS service ON service.id = appointment.service_id
-  WHERE appointment.status = 1 AND appointment.is_completed = 1
+  WHERE appointment.status = 1 AND appointment.is_completed = 1 AND cust.id = '$patient_id'
   
   $added_filter";
 
@@ -49,6 +51,7 @@ if ($status == 'all') {
       $data[] = [
         'id' => $row['id'],
         'fullname' => $row['fullname'],
+        'age' => $row['age'],
         'address' => $row['address'],
         'contactno' => $row['contactno'],
         'email' => $row['email'],

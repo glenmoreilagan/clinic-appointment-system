@@ -60,7 +60,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_pending"></h3>
+                          <h1 class="mb-2" id="summ_pending"></h1>
                           <p class="mb-2">Pending Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -77,7 +77,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_confirmed"></h3>
+                          <h1 class="mb-2" id="summ_confirmed"></h1>
                           <p class="mb-2">Confirmed Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -94,7 +94,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_completed"></h3>
+                          <h1 class="mb-2" id="summ_completed"></h1>
                           <p class="mb-2">Completed Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -111,7 +111,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_cancelled"></h3>
+                          <h1 class="mb-2" id="summ_cancelled"></h1>
                           <p class="mb-2">Cancelled Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -147,6 +147,9 @@ include_once '../functions/session_config.php';
       </footer> -->
     </div>
   </div>
+
+  <!-- MODALS -->
+  <?php include '../modals/ILoader.php'; ?>
 </body>
 
 </html>
@@ -155,6 +158,8 @@ include_once '../functions/session_config.php';
 <script>
   $(document).ready(function() {
     const load_dashboard_summary = () => {
+      $("#ILoader").modal('show');
+
       $.ajax({
         method: 'POST',
         url: '../functions/load_dashboard_summary.php',
@@ -166,6 +171,9 @@ include_once '../functions/session_config.php';
           $("#summ_confirmed").text(res.data[0].approved)
           $("#summ_completed").text(res.data[0].completed)
           $("#summ_cancelled").text(res.data[0].cancelled)
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 500);
         }
       });
     };

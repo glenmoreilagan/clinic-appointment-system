@@ -43,6 +43,10 @@ include_once '../functions/session_config.php';
     .completed {
       background: #FF6699;
     }
+
+    .cust_info {
+      font-weight: 100;
+    }
   </style>
 </head>
 <!--
@@ -123,6 +127,7 @@ include_once '../functions/session_config.php';
 
   <!-- MODALS -->
   <?php include_once '../modals/patient_modal.php'; ?>
+  <?php include '../modals/ILoader.php'; ?>
 </body>
 
 </html>
@@ -146,6 +151,7 @@ include_once '../functions/session_config.php';
       "ordering": false,
     });
     const load_patients = (status = 'all') => {
+      $("#ILoader").modal('show');
       $.ajax({
         method: 'POST',
         url: '../functions/load_patients.php',
@@ -172,6 +178,9 @@ include_once '../functions/session_config.php';
             ]);
           }
           tbl_patient.clear().rows.add(ready_data).draw();
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 500);
         }
       });
     }
@@ -191,28 +200,40 @@ include_once '../functions/session_config.php';
         },
         success: function(res) {
           // console.log(res);
-          let str = ``;
-          let ready_data = [];
-          $("#patient_modal #pname").text(res.data[0].fullname);
-          for (let i in res.data) {
-            str += `
-              <tr>
-                <td>
-                  ${res.data[i].time_schedule}
-                  <br>
-                  <b>${res.data[i].date_schedule}</b>
-                </td>
-                <td>
-                  ${res.data[i].complaint}
-                </td>
-                <td>
-                  ${res.data[i].service_title}
-                </td>
-              </tr>
-            `;
+          if(res.status) {
+            let str = ``;
+            let ready_data = [];
+            $("#patient_modal #pname").text(res.data[0].fullname);
+            $("#patient_modal #age").text(res.data[0].age);
+            $("#patient_modal #address").text(res.data[0].address);
+            $("#patient_modal #contactno").text(res.data[0].contactno);
+            $("#patient_modal #email").text(res.data[0].email);
+            for (let i in res.data) {
+              str += `
+                <tr>
+                  <td>
+                    ${res.data[i].time_schedule}
+                    <br>
+                    <b>${res.data[i].date_schedule}</b>
+                  </td>
+                  <td>
+                    ${res.data[i].complaint}
+                  </td>
+                  <td>
+                    ${res.data[i].service_title}
+                  </td>
+                </tr>
+              `;
+            }
+            $("#patient_history_list").html(str);
+            $("#patient_modal").modal('show');
+          } else {
+            if(res.data.length <= 0) {
+              toastr.error("No Record Found.");
+            } else {
+              toastr.error(res.msg);
+            }
           }
-          $("#patient_history_list").html(str);
-          $("#patient_modal").modal('show');
         }
       });
 

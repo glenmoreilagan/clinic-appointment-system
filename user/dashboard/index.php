@@ -91,7 +91,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_pending">0</h3>
+                          <h1 class="mb-2" id="summ_pending">0</h1>
                           <p class="mb-2">Pending Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -108,7 +108,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_confirmed">0</h3>
+                          <h1 class="mb-2" id="summ_confirmed">0</h1>
                           <p class="mb-2">Confirmed Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -125,7 +125,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_completed">0</h3>
+                          <h1 class="mb-2" id="summ_completed">0</h1>
                           <p class="mb-2">Completed Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
@@ -142,7 +142,7 @@ include_once '../functions/session_config.php';
                     <div class="card-body py-4">
                       <div class="media">
                         <div class="media-body">
-                          <h3 class="mb-2" id="summ_cancelled">0</h3>
+                          <h1 class="mb-2" id="summ_cancelled">0</h1>
                           <p class="mb-2">Cancelled Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
