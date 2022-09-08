@@ -67,7 +67,7 @@ include_once '../functions/session_config.php';
               // heres the settings for local or live
               include '../../host_setting.php';
               ?>
-              <a class="btn btn-primary btn-sm" href=<?php echo $host . "user/dashboard"; ?>><i class="align-middle fas fa-fw fa-plus"></i> New</a>
+              <a class="btn btn-primary" href=<?php echo $host . "user/dashboard"; ?>><i class="align-middle fas fa-fw fa-plus"></i> New</a>
             </div>
           </div>
 
