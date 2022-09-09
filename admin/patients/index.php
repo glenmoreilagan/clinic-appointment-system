@@ -92,6 +92,9 @@ include_once '../functions/session_config.php';
               <!-- <button class="btn btn-primary shadow-sm">
                 <i class="align-middle" data-feather="filter">&nbsp;</i>
               </button> -->
+              <button class="btn btn-primary shadow-sm downloadPDF" title="Download PDF">
+                <i class="fas fa-fw fa-download"></i> Download PDF
+              </button>
               <button class="btn btn-primary shadow-sm refresh" title="Reset/Refresh">
                 <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
               </button>
@@ -180,7 +183,7 @@ include_once '../functions/session_config.php';
           tbl_patient.clear().rows.add(ready_data).draw();
           setTimeout(() => {
             $("#ILoader").modal('hide');
-          }, 500);
+          }, 1000);
         }
       });
     }
@@ -200,7 +203,7 @@ include_once '../functions/session_config.php';
         },
         success: function(res) {
           // console.log(res);
-          if(res.status) {
+          if (res.status) {
             let str = ``;
             let ready_data = [];
             $("#patient_modal #pname").text(res.data[0].fullname);
@@ -228,7 +231,7 @@ include_once '../functions/session_config.php';
             $("#patient_history_list").html(str);
             $("#patient_modal").modal('show');
           } else {
-            if(res.data.length <= 0) {
+            if (res.data.length <= 0) {
               toastr.error("No Record Found.");
             } else {
               toastr.error(res.msg);
@@ -244,6 +247,22 @@ include_once '../functions/session_config.php';
       filter_status = 'all';
 
       load_patients(filter_status);
+    });
+
+    $(".downloadPDF").click(function(e) {
+      e.preventDefault();
+
+      $.ajax({
+        method: 'GET',
+        url: '../functions/PDFsample.php',
+        // dataType: 'HTML',
+        // data: {
+        //   status: status
+        // },
+        success: function(res) {
+          // console.log(res);
+        }
+      });
     });
 
     load_patients(filter_status);

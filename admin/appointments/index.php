@@ -233,7 +233,7 @@ include_once '../functions/session_config.php';
           tbl_services.clear().rows.add(ready_data).draw();
           setTimeout(() => {
             $("#ILoader").modal('hide');
-          }, 500);
+          }, 1000);
         }
       });
     }

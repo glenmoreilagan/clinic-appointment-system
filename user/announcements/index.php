@@ -91,9 +91,9 @@ include_once '../functions/session_config.php';
       <main class="content">
         <div class="container-fluid p-0">
           <h1 class="h3 mb-3">Announcements</h1>
-          
+
           <!-- REFERENCE FOR THE CAROUSEL https://www.codeply.com/go/OJHdvdXimm -->
-          <div id="carouselContent" class="carousel slide" data-ride="carousel" style="background: #E0EAFC; height: 300px;">
+          <!-- <div id="carouselContent" class="carousel slide" data-ride="carousel" style="background: #E0EAFC; height: 300px;">
             <div class="carousel-inner" role="listbox"></div>
             <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -103,11 +103,11 @@ include_once '../functions/session_config.php';
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
-          </div>
-
-          <!-- <div class="card mb-3">
-            <div id="display_announcements" style="max-height: 100vh; overflow-y: scroll;"></div>
           </div> -->
+
+          <div class="card mb-3">
+            <div id="display_announcements" style="max-height: 100vh; overflow-y: scroll;"></div>
+          </div>
         </div>
       </main>
     </div>
@@ -123,43 +123,23 @@ include_once '../functions/session_config.php';
           dataType: 'JSON',
           data: {},
           success: function(res) {
-            console.log(res);
+            // console.log(res);
 
             let str = '';
-            let str1 = `
-              <div class="carousel-item active text-center p-4" style="color: #4182EA;">
-                <h3 style="margin-top: 5em; color: #4182EA; text-transform: uppercase; font-weight: 800 !important;">${res.data[0].title}</h3>
-                <p ${res.data[0].description}</p>
-                <p style="font-style: italic;">${res.data[0].effectivity_date}</p>
-              </div>
-            `;
             for (let i in res.data) {
-              let counter = parseInt(i) + 1;
-              // str += `
-              //   <div class="card-body">
-              //   <div style="display: flex; justify-content: space-between;">
-              //     <h4 class="card-title">${res.data[i].title}</h4>
-              //     <span><i>${res.data[i].effectivity_date}</i></span>
-              //   </div>
-              //     <p class="card-text">${res.data[i].description}</p>
-              //     <hr>
-              //   </div>
-              // `;
-              
-              if(counter > 1 && counter < res.data.length) {
-                str1 += `
-                  <div class="carousel-item text-center p-4" style="color: #4182EA;">
-                    <h3 style="margin-top: 5em; color: #4182EA; text-transform: uppercase; font-weight: 800 !important;">${res.data[i].title}</h3>
-                    <p>${res.data[i].description}</p>
-                    <p style="font-style: italic;">${res.data[i].effectivity_date}</p>
-                  </div>
-                `;
-              }
-
+              str += `
+                <div class="card-body">
+                <div style="display: flex; justify-content: space-between;">
+                  <h4 class="card-title"><span style='font-weight: 700;'>Title:</span> ${res.data[i].title}</h4>
+                </div>
+                  <p class="card-text"><span style='font-weight: 700;'>Date:</span> ${res.data[i].effectivity_date}</p>
+                  <p class="card-text"><span style='font-weight: 700;'>Description:</span> ${res.data[i].description}</p>
+                  <hr>
+                </div>
+              `;
             }
 
-            // $("#display_announcements").html(str);
-            $(".carousel-inner").html(str1);
+            $("#display_announcements").html(str);
           }
         });
       };

@@ -8,9 +8,14 @@ $added_filter = '';
 
 $appointment_id = isset($_POST['appointment_id']) ? $_POST['appointment_id'] : 0;
 $status = isset($_POST['status']) ? $_POST['status'] : 'all';
+$today = isset($_POST['today']) ? $_POST['today'] : '';
 
 if ($appointment_id !== 0) {
   $added_filter .= " AND appointment.id = '$appointment_id'";
+}
+
+if($today != '') {
+  $added_filter .= " AND DATE(appointment.date_schedule) = '$today'";
 }
 
 switch ($status) {

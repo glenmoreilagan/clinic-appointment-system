@@ -9,17 +9,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="card">
-          <div class="card-header"><h3 id="complaint"></h3></div>
-          <div class="card-body">
-            <h5 class="card-title">Age</h5>
-            <p class="card-text" id="age"></p>
-            <h5 class="card-title">Date & Time</h5>
-            <p class="card-text" id="schedule"></p>
-            <h5 class="card-title">Service</h5>
-            <p class="card-text" id="service"></p>
-          </div>
-        </div>
+        <h5 class="card-title"><span style="font-weight: 700;">Chief Complaint: </span> <span style="font-weight: 100;" class="card-text" id="complaint"></span></h5>
+        <h5 class="card-title"><span style="font-weight: 700;">Age: </span> <span style="font-weight: 100;" class="card-text" id="age"></span></h5>
+        <h5 class="card-title"><span style="font-weight: 700;">Date & Time: </span> <span style="font-weight: 100;" class="card-text" id="schedule"></span></h5>
+        <h5 class="card-title"><span style="font-weight: 700;">Service: </span> <span style="font-weight: 100;" class="card-text" id="service"></span></h5>
       </div>
       <div class="modal-footer">
         <!-- <button class="btn btn-danger btn-sm" id="btnCancelAppointment">YES</button> -->

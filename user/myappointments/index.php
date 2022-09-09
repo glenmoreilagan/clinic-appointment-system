@@ -73,7 +73,7 @@ include_once '../functions/session_config.php';
 
           <div class="card mb-3">
             <div class="card-body">
-              <div class="table-responsive table-appointments">
+              <div class="table-responsive div-table-appointments">
                 <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">
                   <thead>
                     <tr>

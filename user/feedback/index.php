@@ -78,7 +78,7 @@ include_once '../functions/session_config.php';
                 <label class="feedback-label" for="feedback">If you have specific feedback, please write to us.</label>
                 <textarea class="form-control" name="feedback" id="feedback" placeholder="Input your feedback"></textarea>
               </div>
-              <button class="btn btn-primary btn-sm" id="btnSaveFeedback">Submit Feedback</button>
+              <button class="btn btn-primary" id="btnSaveFeedback">Submit Feedback</button>
             </div>
           </div>
 
