@@ -252,17 +252,7 @@ include_once '../functions/session_config.php';
     $(".downloadPDF").click(function(e) {
       e.preventDefault();
 
-      $.ajax({
-        method: 'GET',
-        url: '../functions/PDFsample.php',
-        // dataType: 'HTML',
-        // data: {
-        //   status: status
-        // },
-        success: function(res) {
-          // console.log(res);
-        }
-      });
+      window.open('../functions/download_PDF_Patients.php','_blank');
     });
 
     load_patients(filter_status);

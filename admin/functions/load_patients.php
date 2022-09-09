@@ -6,8 +6,16 @@ $added_filter = '';
 $status = $_POST['status'];
 
 if ($status == 'all') {
-  $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email
+  $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email,
+  appointment.complaint, appointment.age, 
+  DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
+  TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
+  service.service_title, service.description
   FROM tbl_user AS cust
+  INNER JOIN tbl_appointments AS appointment ON appointment.user_id = cust.id
+  INNER JOIN tbl_services AS service ON service.id = appointment.service_id
+  WHERE appointment.status = 1 AND appointment.is_completed = 1
+  GROUP BY cust.id
   $added_filter";
 
   $result = $conn->query($qry);
@@ -40,7 +48,6 @@ if ($status == 'all') {
   INNER JOIN tbl_appointments AS appointment ON appointment.user_id = cust.id
   INNER JOIN tbl_services AS service ON service.id = appointment.service_id
   WHERE appointment.status = 1 AND appointment.is_completed = 1 AND cust.id = '$patient_id'
-  
   $added_filter";
 
   $result = $conn->query($qry);
