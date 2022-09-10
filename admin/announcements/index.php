@@ -88,6 +88,7 @@ include_once '../functions/session_config.php';
 
   <!-- MODALS -->
   <?php include_once '../modals/announcement_modal.php'; ?>
+  <?php include '../modals/ILoader.php'; ?>
 </body>
 
 </html>
@@ -109,6 +110,7 @@ include_once '../functions/session_config.php';
       "fixedHeader": true,
     });
     const load_announcements = () => {
+      $("#ILoader").modal('show');
       $.ajax({
         method: 'POST',
         url: '../functions/load_announcements.php',
@@ -132,6 +134,9 @@ include_once '../functions/session_config.php';
             ]);
           }
           tbl_services.clear().rows.add(ready_data).draw();
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 1000);
         }
       });
     }

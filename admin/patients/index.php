@@ -130,6 +130,7 @@ include_once '../functions/session_config.php';
 
   <!-- MODALS -->
   <?php include_once '../modals/patient_modal.php'; ?>
+  <?php include_once '../modals/pdf_filter_modal.php'; ?>
   <?php include '../modals/ILoader.php'; ?>
 </body>
 
@@ -251,9 +252,34 @@ include_once '../functions/session_config.php';
 
     $(".downloadPDF").click(function(e) {
       e.preventDefault();
+      
+      $("input[name='date_start']").val('');
+      $("input[name='date_end']").val('');
 
-      window.open('../functions/download_PDF_Patients.php','_blank');
+      $("#pdf_filter_modal").modal('show');
+      // window.open('../functions/download_PDF_Patients.php','_blank');
     });
+
+    $("#pdf_filter_modal #btnDownload").click(function(e) {
+      e.preventDefault();
+
+      
+      const date_start = $("input[name='date_start']").val();
+      const date_end = $("input[name='date_end']").val();
+
+      if(!date_start) {
+        toastr.error("Date Start Required.");
+        return;
+      }
+      
+      if(!date_end) {
+        toastr.error("Date End Required.");
+        return;
+      }
+
+      let filter = `?date_start=${date_start}&date_end=${date_end}`;
+      window.open(`../functions/download_PDF_Patients.php${filter}`,'_blank');
+    })
 
     load_patients(filter_status);
   });
