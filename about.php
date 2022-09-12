@@ -26,9 +26,9 @@ if (!empty($_SESSION)) {
 
     <?php include('./includes/navbar.php'); ?>
 
-    <div class="aboutus">
-        <img src="image/au.jpg" class="d-block w-100" alt="...">
-        <div class="container panel">
+    <div class="container">
+        <div class="aboutus">
+            <img src="image/au.jpg" class="d-block w-100" alt="...">
             <div class="content-about">
                 <div class="title">
                     <h1> About Us</h1>
@@ -53,13 +53,7 @@ if (!empty($_SESSION)) {
                     <div class="title-name">Address</div>
                     <div class="text-one">A. Mabini Avenue, near Maligaya Compound,
                         Barangay Sambat, Tanauan City Batangas</div>
-                    <!-- <h4>Visit Us Here:</h4>
-          <p>Our clinic Lj Cura Ob-Gyn Ultrasound Clinic established in 2015 and located at Barangay 
-            Sambat Tanauan City Batangas near the corner of Maligaya Compound Poblacion Barangay VII 
-            Tanauan City Batanagas</p> -->
                 </div>
-                <!-- <div class="loc-brief"> -->
-                <!-- <h4>Contact Us Here:</h4> -->
                 <div class="phone details">
                     <i class="bi bi-phone-vibrate-fill"></i>
                     <div class="title-name">Phone</div>
