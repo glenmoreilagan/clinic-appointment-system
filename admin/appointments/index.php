@@ -249,8 +249,15 @@ include_once '../functions/session_config.php';
           remarks: $("textarea[name='remarks']").val()
         },
         success: function(res) {
-          // console.log(res);
+          const dd = JSON.parse(res.dd);
+          console.log(dd);
+          
           if (res.status) {
+            if(dd.Error) {
+              // pag error yung text mag aalert
+              toastr.error(dd.Message);
+            }
+
             appointment_id = 0;
 
             $("#view_appointment_modal").modal('hide');
