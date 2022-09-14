@@ -11,6 +11,7 @@ class Email
 {
   private $email;
   private $message;
+  
   public function __construct($email, $message)
   {
     $this->email = $email;
