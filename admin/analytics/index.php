@@ -105,8 +105,8 @@ include_once '../functions/session_config.php';
                   <table class="table my-0">
                     <thead>
                       <tr>
-                        <th>Service</th>
-                        <th class="text-right w-50">Patients</th>
+                        <th class="w-50">Service</th>
+                        <th class="text-right w-10">Patients</th>
                         <th class="d-none d-xl-table-cell w-75">%</th>
                       </tr>
                     </thead>
