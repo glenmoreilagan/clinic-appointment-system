@@ -12,66 +12,8 @@
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
-          <div class="dropdown-menu-header">
-            4 New Notifications
-          </div>
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <div class="row no-gutters align-items-center">
-                <div class="col-2">
-                  <i class="text-primary" data-feather="bell"></i>
-                </div>
-                <div class="col-10">
-                  <div class="text-dark">Appointment Approved</div>
-                  <div class="text-muted small mt-1">
-                    <span><b>Kaye Celine</b><span><br />
-                    <span>TEST COMPLAINT</span><br />
-                    <span>OB Doppler Ultrasound</span><br />
-                    <span>Sep 1, 2022 10am</span><br />
-                  </div>
-                  <!-- <div class="text-muted small mt-1">2h ago</div> -->
-                </div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item">
-              <div class="row no-gutters align-items-center">
-                <div class="col-2">
-                  <i class="text-warning" data-feather="bell"></i>
-                </div>
-                <div class="col-10">
-                  <div class="text-dark">Lorem ipsum</div>
-                  <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-                  <div class="text-muted small mt-1">6h ago</div>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item">
-              <div class="row no-gutters align-items-center">
-                <div class="col-2">
-                  <i class="text-primary" data-feather="home"></i>
-                </div>
-                <div class="col-10">
-                  <div class="text-dark">Login from 192.186.1.1</div>
-                  <div class="text-muted small mt-1">8h ago</div>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item">
-              <div class="row no-gutters align-items-center">
-                <div class="col-2">
-                  <i class="text-success" data-feather="user-plus"></i>
-                </div>
-                <div class="col-10">
-                  <div class="text-dark">New connection</div>
-                  <div class="text-muted small mt-1">Anna accepted your request.</div>
-                  <div class="text-muted small mt-1">12h ago</div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <!-- <div class="dropdown-menu-footer">
-            <a href="#" class="text-muted">Show all notifications</a>
-          </div> -->
+          <div class="dropdown-menu-header" id="notif-count"></div>
+          <div class="list-group" id="notif-details"></div>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -96,3 +38,45 @@
     </ul>
   </div>
 </nav>
+
+<script>
+  $(document).ready(function() {
+    const load_notification = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_notification.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+
+          const notif_count = res.data.length;
+          $("#notif-count").text(notif_count > 0 ? `${notif_count} New Notification` : '0 New Notification');
+          let str = ``;
+
+          if (notif_count > 0) {
+            for (let i in res.data) {
+              str += `
+                <a href="#" class="list-group-item">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-2">
+                      <i class="text-primary far fa-fw fa-bell" style='font-size: 22px;'></i>
+                    </div>
+                    <div class="col-10">
+                      <div class="text-dark">${res.data[i].title}</div>
+                      <div class="text-muted mt-1">${res.data[i].description}</div>
+                    </div>
+                  </div>
+                </a>
+              `;
+            }
+
+            $("#notif-details").html(str);
+          }
+        }
+      });
+    }
+
+    load_notification();
+  });
+</script>

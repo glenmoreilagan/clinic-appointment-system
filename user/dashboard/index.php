@@ -143,7 +143,7 @@ include_once '../functions/session_config.php';
                       <div class="media">
                         <div class="media-body">
                           <h1 class="mb-2" id="summ_cancelled">0</h1>
-                          <p class="mb-2">Cancelled Appointments</p>
+                          <p class="mb-2">Rejected/Cancelled Appointments</p>
                         </div>
                         <div class="d-inline-block ml-3">
                           <div class="stat">

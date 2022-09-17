@@ -58,7 +58,7 @@
         </a>
       </li>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="index.php">
+        <a class="sidebar-link" href=<?php echo $host . "admin/analytics/"; ?>>
           <i class="align-middle"></i> <span class="align-middle">Analytics</span>
         </a>
       </li>

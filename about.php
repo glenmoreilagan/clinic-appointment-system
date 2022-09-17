@@ -86,3 +86,5 @@ if (!empty($_SESSION)) {
     <?php include('includes/footer.php'); ?>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/auth.js"></script>

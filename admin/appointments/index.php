@@ -198,27 +198,11 @@ include_once '../functions/session_config.php';
                   <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-eye"></i> View</button>
                 </td>
               </tr>`;
-            // res.data[i].status === 'Pending' ?
-            // `<tr>
-            //   <td>
-            //     <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
-            //     <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
-            //   </td>
-            // </tr>` :
-            // (res.data[i].status === 'Approved' ?
-            //   `<tr>
-            //   <td>
-            //     <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
-            //   </td>
-            // </tr>` : ``)
 
             ready_data.push([
               `
                 <b>${res.data[i].client}</b>
               `,
-              // res.data[i].age,
-              // res.data[i].address,
-              // res.data[i].contactno,
               `
                 ${res.data[i].time_schedule}
                 <br>
@@ -239,6 +223,7 @@ include_once '../functions/session_config.php';
     }
 
     const update_appointments = (action, appointment_id) => {
+      $("#ILoader").modal('show');
       $.ajax({
         method: 'POST',
         url: '../functions/approve_or_reject_appointment.php',
@@ -249,23 +234,32 @@ include_once '../functions/session_config.php';
           remarks: $("textarea[name='remarks']").val()
         },
         success: function(res) {
-          const dd = JSON.parse(res.dd);
-          console.log(dd);
-          
-          if (res.status) {
-            if(dd.Error) {
-              // pag error yung text mag aalert
-              toastr.error(dd.Message);
-            }
+          const sms_error = res.sms_error ? JSON.parse(res.sms_error) : '';
+          const email_error = res.email_error ? JSON.parse(res.email_error) : '';
+          console.log(sms_error, email_error);
 
-            appointment_id = 0;
-
-            $("#view_appointment_modal").modal('hide');
-            $("#reject_appointment_modal").modal('hide');
-
-            toastr.success(res.msg);
-            load_appointments(filter_status);
+          // if (res.status) {
+          if (sms_error.Error) {
+            // pag error yung text mag aalert
+            toastr.error(sms_error.Message);
           }
+
+          if (email_error) {
+            // pag error yung text mag aalert
+            toastr.error(email_error);
+          }
+
+          appointment_id = 0;
+          // }
+
+          $("#view_appointment_modal").modal('hide');
+          $("#reject_appointment_modal").modal('hide');
+
+          toastr.success(res.msg);
+          load_appointments(filter_status);
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 1000);
         }
       });
     }
