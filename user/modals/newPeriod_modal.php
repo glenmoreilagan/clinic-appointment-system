@@ -16,11 +16,11 @@
           <label for="description">Description</label>
           <textarea name="description" id="description" type="text" class="form-control form-input"></textarea>
         </div> -->
-        <div class="form-group mb-1">
+        <div class="form-group mb-1" style="display: none;">
           <label for="start">Start Date</label>
           <input name="start" id="start" type="date" class="form-control form-input">
         </div>
-        <div class="form-group mb-1">
+        <div class="form-group mb-1" style="display: none;">
           <label for="end">End Date</label>
           <input name="end" id="end" type="date" class="form-control form-input">
           <input name="end_hidden" id="end_hidden" type="hidden" class="form-control form-input">

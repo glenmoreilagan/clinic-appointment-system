@@ -85,7 +85,7 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0">Monthly Appointment Top 3 Services</h5>
+                        <h5 class="card-title mb-0">Monthly Top 3 Services</h5>
                       </div>
 
                       <div class="col-auto ml-auto text-right mt-n1">
@@ -235,10 +235,6 @@ include_once '../functions/session_config.php';
 
     $("#chartjs-dashboard-line-year-filter, #chartjs-dashboard-pie-year-filter, #chartjs-dashboard-bar-year-filter").val(d.getFullYear());
 
-    $.ajaxSetup({
-      cache: false
-    });
-
     const my_line_chart = new Chart(document.getElementById("chartjs-dashboard-line"), {
       type: "line",
       data: {
@@ -318,10 +314,18 @@ include_once '../functions/session_config.php';
       let pie_chart_label = [];
 
       const random_colors = () => {
-        var r = Math.floor(Math.random() * 255);
-        var g = Math.floor(Math.random() * 255);
-        var b = Math.floor(Math.random() * 255);
-        return `rgb(${r},${g},${g})`;
+        const colors = [
+          '#FA7171', '#FBF2CF', '#C6EBC5', 
+          '#B1B2FF', '#D2DAFF', '#3FA796', 
+          '#DEB6AB', '#C9BBCF', '#404F50',
+          '#F4E06D', '#C499BA', '#CC9C75'
+        ];
+        // var r = Math.floor(Math.random() * 255);
+        // var g = Math.floor(Math.random() * 255);
+        // var b = Math.floor(Math.random() * 255);
+        // return `rgb(${r},${g},${g})`;
+
+        return colors[Math.floor(Math.random() * colors.length)];
       };
 
       $.ajax({
