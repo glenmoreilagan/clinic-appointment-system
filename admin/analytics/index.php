@@ -35,6 +35,16 @@ include_once '../functions/session_config.php';
     .cust_info {
       font-weight: 100;
     }
+
+    .chart-lg {
+      position: relative;
+    }
+
+    #chartjs-dashboard-bar {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <!--
@@ -73,7 +83,28 @@ include_once '../functions/session_config.php';
               <div class="col-12 col-lg-12 d-flex">
                 <div class="card flex-fill w-100">
                   <div class="card-header">
-                    <h5 class="card-title mb-0">Monthly Appointment Top 3 Services</h5>
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0">Monthly Appointment Top 3 Services</h5>
+                      </div>
+
+                      <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="text-left">
+                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" id="chartjs-dashboard-line-year-filter" class="form-control form-control-sm" autocomplete="off">
+                            <span class="input-group-append">
+                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-line-year-search" title="Search">
+                                <i class="align-middle" data-feather="search">&nbsp;</i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="card-body d-flex w-100">
                     <div class="chart-lg" style="width: 100%;">
@@ -91,7 +122,28 @@ include_once '../functions/session_config.php';
               <div class="col-12 col-lg-6 d-flex">
                 <div class="card flex-fill w-100">
                   <div class="card-header">
-                    <h5 class="card-title mb-0">Services & Total Patients</h5>
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0">Services & Total Patients</h5>
+                      </div>
+
+                      <div class="col-5 ml-auto text-right mt-n1">
+                        <div class="text-left">
+                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" id="chartjs-dashboard-pie-year-filter" class="form-control form-control-sm" autocomplete="off">
+                            <span class="input-group-append">
+                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-pie-year-search" title="Search">
+                                <i class="align-middle" data-feather="search">&nbsp;</i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="card-body d-flex">
                     <div class="align-self-center w-100">
@@ -102,23 +154,46 @@ include_once '../functions/session_config.php';
                       </div>
                     </div>
                   </div>
-                  <table class="table my-0">
-                    <thead>
-                      <tr>
-                        <th class="w-50">Service</th>
-                        <th class="text-right w-10">Patients</th>
-                        <th class="d-none d-xl-table-cell w-75">%</th>
-                      </tr>
-                    </thead>
-                    <tbody id="loadServicePercentage"></tbody>
-                  </table>
+                  <div style="max-height: 350px; overflow-y: scroll;">
+                    <table class="table my-0">
+                      <thead>
+                        <tr>
+                          <th class="w-50">Service</th>
+                          <th class="text-right w-10">Patients</th>
+                          <th class="d-none d-xl-table-cell w-75">%</th>
+                        </tr>
+                      </thead>
+                      <tbody id="loadServicePercentage"></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
               <div class="col-12 col-lg-6 d-flex">
                 <div class="card flex-fill w-100">
                   <div class="card-header">
-                    <h5 class="card-title mb-0">Appointment Monthly Status</h5>
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0">Appointment Monthly Status</h5>
+                      </div>
+
+                      <div class="col-5 ml-auto text-right mt-n1">
+                        <div class="text-left">
+                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" id="chartjs-dashboard-bar-year-filter" class="form-control form-control-sm" autocomplete="off">
+                            <span class="input-group-append">
+                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-bar-year-search" title="Search">
+                                <i class="align-middle" data-feather="search">&nbsp;</i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="card-body d-flex w-100">
                     <div class="chart-lg" style="width: 100%;">
@@ -158,8 +233,85 @@ include_once '../functions/session_config.php';
     let todayDate = d.toISOString().split('T')[0];
     let appointment_id = 0;
 
-    const loadCharts = (action) => {
-      $("#ILoader").modal('show');
+    $("#chartjs-dashboard-line-year-filter, #chartjs-dashboard-pie-year-filter, #chartjs-dashboard-bar-year-filter").val(d.getFullYear());
+
+    $.ajaxSetup({
+      cache: false
+    });
+
+    const my_line_chart = new Chart(document.getElementById("chartjs-dashboard-line"), {
+      type: "line",
+      data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July",
+          "August", "September", "October", "November", "December"
+        ],
+        datasets: []
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 5
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
+    const my_bar_chart = new Chart(document.getElementById("chartjs-dashboard-bar"), {
+      type: "bar",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: []
+      },
+      options: {
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 5
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
+    const loadCharts = (action, filter) => {
+      // $("#ILoader").modal('show');
 
       let pie_chart_color = [];
       let pie_chart_data = [];
@@ -177,7 +329,8 @@ include_once '../functions/session_config.php';
         url: '../functions/load_analytics.php',
         dataType: 'JSON',
         data: {
-          action: action
+          action: action,
+          filter: filter
         },
         success: function(res) {
           // console.log(res.data);
@@ -208,7 +361,7 @@ include_once '../functions/session_config.php';
           }
 
           $("#loadServicePercentage").html(str);
-          
+
           loadServicePercentageChart({
             pie_chart_color,
             pie_chart_data,
@@ -217,88 +370,74 @@ include_once '../functions/session_config.php';
           loadAppointmentMonthlyStatusChart(res.data_loadAppointmentMonthlyStatus);
           loadServicesChart(res.data_loadServicesChart);
 
-          setTimeout(() => {
-            $("#ILoader").modal('hide');
-          }, 1000);
+          // setTimeout(() => {
+          //   $("#ILoader").modal('hide');
+          // }, 1000);
         }
       });
     }
 
     const loadServicesChart = (data) => {
-      new Chart(document.getElementById("chartjs-dashboard-line"), {
-        type: "line",
-        data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July",
-            "August", "September", "October", "November", "December"
+      let new_data = [];
+
+      if (data[0]) {
+        new_data.push({
+          label: `${data[0].service_title}`,
+          // backgroundColor: window.theme.success,
+          fill: false,
+          borderColor: '#FFB1C1',
+          // hoverBackgroundColor: window.theme.success,
+          // hoverBorderColor: window.theme.success,
+          data: [data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may, data[0].jun,
+            data[0].jul, data[0].aug, data[0].sep, data[0].oct, data[0].nov, data[0].dece
           ],
-          datasets: [{
-            label: `${data[0].service_title}`,
-            // backgroundColor: window.theme.success,
-            fill: false,
-            borderColor: '#FFB1C1',
-            // hoverBackgroundColor: window.theme.success,
-            // hoverBorderColor: window.theme.success,
-            data: [data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may, data[0].jun,
-              data[0].jul, data[0].aug, data[0].sep, data[0].oct, data[0].nov, data[0].dece
-            ],
-            // barPercentage: .325,
-            // categoryPercentage: .5
-          }, {
-            label: data[1].service_title,
-            // backgroundColor: window.theme.primary,
-            fill: false,
-            borderColor: '#9AD0F5',
-            // hoverBackgroundColor: window.theme.primary,
-            // hoverBorderColor: window.theme.primary,
-            data: [data[1].jan, data[1].feb, data[1].mar, data[1].apr, data[1].may, data[1].jun,
-              data[1].jul, data[1].aug, data[1].sep, data[1].oct, data[1].nov, data[1].dece
-            ],
-            // barPercentage: .325,
-            // categoryPercentage: .5
-          }, {
-            label: data[2].service_title,
-            // backgroundColor: window.theme.danger,
-            fill: false,
-            borderColor: '#FFE6AA',
-            // hoverBackgroundColor: window.theme.danger,
-            // hoverBorderColor: window.theme.danger,
-            data: [data[2].jan, data[2].feb, data[2].mar, data[2].apr, data[2].may, data[2].jun,
-              data[2].jul, data[2].aug, data[2].sep, data[2].oct, data[2].nov, data[2].dece
-            ],
-            // barPercentage: .325,
-            // categoryPercentage: .5
-          }]
-        },
-        options: {
-          maintainAspectRatio: false,
-          cornerRadius: 15,
-          legend: {
-            display: true
-          },
-          scales: {
-            yAxes: [{
-              gridLines: {
-                display: false
-              },
-              stacked: false,
-              ticks: {
-                stepSize: 5
-              },
-              stacked: false,
-            }],
-            xAxes: [{
-              stacked: false,
-              gridLines: {
-                color: "transparent"
-              },
-              stacked: false,
-            }]
-          }
-        }
-      });
+          // barPercentage: .325,
+          // categoryPercentage: .5
+        });
+      }
+
+      if (data[1]) {
+        new_data.push({
+          label: data[1].service_title,
+          // backgroundColor: window.theme.primary,
+          fill: false,
+          borderColor: '#9AD0F5',
+          // hoverBackgroundColor: window.theme.primary,
+          // hoverBorderColor: window.theme.primary,
+          data: [data[1].jan, data[1].feb, data[1].mar, data[1].apr, data[1].may, data[1].jun,
+            data[1].jul, data[1].aug, data[1].sep, data[1].oct, data[1].nov, data[1].dece
+          ],
+          // barPercentage: .325,
+          // categoryPercentage: .5
+        });
+      }
+
+      if (data[2]) {
+        new_data.push({
+          label: data[2].service_title,
+          // backgroundColor: window.theme.danger,
+          fill: false,
+          borderColor: '#FFE6AA',
+          // hoverBackgroundColor: window.theme.danger,
+          // hoverBorderColor: window.theme.danger,
+          data: [data[2].jan, data[2].feb, data[2].mar, data[2].apr, data[2].may, data[2].jun,
+            data[2].jul, data[2].aug, data[2].sep, data[2].oct, data[2].nov, data[2].dece
+          ],
+          // barPercentage: .325,
+          // categoryPercentage: .5
+        });
+      }
+
+      my_line_chart.data.datasets = new_data;
+      my_line_chart.update();
     }
 
     const loadServicePercentageChart = (chart_infos) => {
+      if (chart_infos.pie_chart_data.length <= 0) {
+        new Chart(document.getElementById("chartjs-dashboard-pie")).destroy();
+        return;
+      }
+
       new Chart(document.getElementById("chartjs-dashboard-pie"), {
         type: "pie",
         data: {
@@ -322,76 +461,77 @@ include_once '../functions/session_config.php';
     }
 
     const loadAppointmentMonthlyStatusChart = (data) => {
-      new Chart(document.getElementById("chartjs-dashboard-bar"), {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [{
-            label: "Pending",
-            backgroundColor: '#97DBAE',
-            // borderColor: window.theme.success,
-            // hoverBackgroundColor: window.theme.success,
-            // hoverBorderColor: window.theme.success,
-            data: [data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may, data[0].jun,
-              data[0].jul, data[0].aug, data[0].sep, data[0].oct, data[0].nov, data[0].dece
-            ],
-            barPercentage: .8,
-            categoryPercentage: .8
-          }, {
-            label: "Approved",
-            backgroundColor: '#9AD0F5',
-            // borderColor: window.theme.primary,
-            // hoverBackgroundColor: window.theme.primary,
-            // hoverBorderColor: window.theme.primary,
-            data: [data[1].jan, data[1].feb, data[1].mar, data[1].apr, data[1].may, data[1].jun,
-              data[1].jul, data[1].aug, data[1].sep, data[1].oct, data[1].nov, data[1].dece
-            ],
-            barPercentage: .8,
-            categoryPercentage: .8
-          }, {
-            label: "Rejected/Cancelled",
-            backgroundColor: '#FFB1C1',
-            // borderColor: window.theme.danger,
-            // hoverBackgroundColor: window.theme.danger,
-            // hoverBorderColor: window.theme.danger,
-            data: [data[2].jan, data[2].feb, data[2].mar, data[2].apr, data[2].may, data[2].jun,
-              data[2].jul, data[2].aug, data[2].sep, data[2].oct, data[2].nov, data[2].dece
-            ],
-            barPercentage: .8,
-            categoryPercentage: .8
-          }]
-        },
-        options: {
-          maintainAspectRatio: false,
-          cornerRadius: 15,
-          legend: {
-            display: true
-          },
-          scales: {
-            yAxes: [{
-              gridLines: {
-                display: false
-              },
-              stacked: false,
-              ticks: {
-                stepSize: 5
-              },
-              stacked: false,
-            }],
-            xAxes: [{
-              stacked: false,
-              gridLines: {
-                color: "transparent"
-              },
-              stacked: false,
-            }]
-          }
-        }
-      });
+      // new Chart(document.getElementById("chartjs-dashboard-bar")).destroy();
+      const new_data = [{
+        label: "Pending",
+        backgroundColor: '#97DBAE',
+        // borderColor: window.theme.success,
+        // hoverBackgroundColor: window.theme.success,
+        // hoverBorderColor: window.theme.success,
+        data: [data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may, data[0].jun,
+          data[0].jul, data[0].aug, data[0].sep, data[0].oct, data[0].nov, data[0].dece
+        ],
+        barPercentage: .8,
+        categoryPercentage: .8
+      }, {
+        label: "Approved",
+        backgroundColor: '#9AD0F5',
+        // borderColor: window.theme.primary,
+        // hoverBackgroundColor: window.theme.primary,
+        // hoverBorderColor: window.theme.primary,
+        data: [data[1].jan, data[1].feb, data[1].mar, data[1].apr, data[1].may, data[1].jun,
+          data[1].jul, data[1].aug, data[1].sep, data[1].oct, data[1].nov, data[1].dece
+        ],
+        barPercentage: .8,
+        categoryPercentage: .8
+      }, {
+        label: "Rejected/Cancelled",
+        backgroundColor: '#FFB1C1',
+        // borderColor: window.theme.danger,
+        // hoverBackgroundColor: window.theme.danger,
+        // hoverBorderColor: window.theme.danger,
+        data: [data[2].jan, data[2].feb, data[2].mar, data[2].apr, data[2].may, data[2].jun,
+          data[2].jul, data[2].aug, data[2].sep, data[2].oct, data[2].nov, data[2].dece
+        ],
+        barPercentage: .8,
+        categoryPercentage: .8
+      }];
+
+      my_bar_chart.data.datasets = new_data;
+      my_bar_chart.update();
     }
 
-    
 
-    loadCharts('default');
+    const filter = {
+      top_services: $("#chartjs-dashboard-line-year-filter").val(),
+      service_percentage: $("#chartjs-dashboard-pie-year-filter").val(),
+      appointment_status: $("#chartjs-dashboard-bar-year-filter").val()
+    }
+
+    $(".chartjs-dashboard-line-year-search").click(function(e) {
+      e.preventDefault();
+
+      filter.top_services = $("#chartjs-dashboard-line-year-filter").val();
+
+      loadCharts('default', filter);
+    });
+
+    $(".chartjs-dashboard-pie-year-search").click(function(e) {
+      e.preventDefault();
+
+      filter.service_percentage = $("#chartjs-dashboard-pie-year-filter").val();
+
+      loadCharts('default', filter);
+    });
+
+    $(".chartjs-dashboard-bar-year-search").click(function(e) {
+      e.preventDefault();
+
+      filter.appointment_status = $("#chartjs-dashboard-bar-year-filter").val();
+
+      loadCharts('default', filter);
+    });
+
+    loadCharts('default', filter);
   });
 </script>
