@@ -16,7 +16,7 @@
             4 New Notifications
           </div>
           <div class="list-group">
-            <a href="#" class="list-group-item">
+            <!-- <a href="#" class="list-group-item">
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <i class="text-danger" data-feather="alert-circle"></i>
@@ -27,8 +27,8 @@
                   <div class="text-muted small mt-1">2h ago</div>
                 </div>
               </div>
-            </a>
-            <a href="#" class="list-group-item">
+            </a> -->
+            <!-- <a href="#" class="list-group-item">
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <i class="text-warning" data-feather="bell"></i>
@@ -39,8 +39,8 @@
                   <div class="text-muted small mt-1">6h ago</div>
                 </div>
               </div>
-            </a>
-            <a href="#" class="list-group-item">
+            </a> -->
+            <!-- <a href="#" class="list-group-item">
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <i class="text-primary" data-feather="home"></i>
@@ -50,7 +50,7 @@
                   <div class="text-muted small mt-1">8h ago</div>
                 </div>
               </div>
-            </a>
+            </a> -->
             <a href="#" class="list-group-item">
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
@@ -59,14 +59,14 @@
                 <div class="col-10">
                   <div class="text-dark">New connection</div>
                   <div class="text-muted small mt-1">Anna accepted your request.</div>
-                  <div class="text-muted small mt-1">12h ago</div>
+                  <!-- <div class="text-muted small mt-1">12h ago</div> -->
                 </div>
               </div>
             </a>
           </div>
-          <div class="dropdown-menu-footer">
+          <!-- <div class="dropdown-menu-footer">
             <a href="#" class="text-muted">Show all notifications</a>
-          </div>
+          </div> -->
         </div>
       </li>
       <li class="nav-item dropdown">

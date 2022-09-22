@@ -64,7 +64,8 @@
                     </div>
                     <div class="col-10">
                       <div class="text-dark">${res.data[i].title}</div>
-                      <div class="text-muted mt-1">${res.data[i].description}</div>
+                      ${res.data[i].description}
+                      <div class="text-muted mt-1"></div>
                     </div>
                   </div>
                 </a>

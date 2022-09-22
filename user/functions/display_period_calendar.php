@@ -18,7 +18,7 @@ if ($result->num_rows > 0) {
       'id' => $row['id'],
       'user_id' => $user_id,
       'title' => $row['title'],
-      'description' => $row['description'],
+      'description' => $row['title'],
       'start' => $row['start'],
       'end' => $row['end'],
     ];

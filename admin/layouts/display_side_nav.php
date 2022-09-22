@@ -62,6 +62,11 @@
           <i class="align-middle"></i> <span class="align-middle">Analytics</span>
         </a>
       </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href=<?php echo $host . "admin/periodcalendar/"; ?>>
+          <i class="align-middle"></i> <span class="align-middle">Period Calendar</span>
+        </a>
+      </li>
       <!-- <li class="sidebar-item">
         <a href="#multi" data-toggle="collapse" class="sidebar-link collapsed">
           <i class="align-middle"></i> <span class="align-middle">Multi Level</span>

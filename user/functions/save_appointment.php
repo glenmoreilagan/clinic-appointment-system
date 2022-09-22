@@ -33,13 +33,13 @@ if ($conn->query($qry)) {
     $complaint = $row['complaint'];
     $service_title = $row['service_title'];
 
-    $desc = "
-      <span><b>$fullname</b><span><br>
-      <span>$complaint</span><br>
-      <span>$service_title</span><br>
-    ";
-    $qry = "INSERT INTO tbl_notification(title, description)values('New Appointment', '$desc')";
-    $conn->query($qry);
+    // $desc = "
+    //   <span><b>$fullname</b><span><br>
+    //   <span>$complaint</span><br>
+    //   <span>$service_title</span><br>
+    // ";
+    // $qry = "INSERT INTO tbl_notification(title, description)values('New Appointment', '$desc')";
+    // $conn->query($qry);
   }
 
   echo json_encode(['status' => true, 'msg' => 'Saving Success!']);

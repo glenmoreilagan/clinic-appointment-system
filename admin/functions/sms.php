@@ -1,9 +1,9 @@
 <?php
 class Sms
 {
-  private $apicode = 'TR-KAYEC329869_2490E';
-  private $passwd = 'eliana15';
-  private $email = 'kayecelineurayan@gmail.com';
+  private $apicode = 'TR-JOYCE607872_FWM5U';
+  private $passwd = 'ljcclinic';
+  private $email = 'jycnnmntr@gmail.com';
   private $message;
   private $number = [];
 
