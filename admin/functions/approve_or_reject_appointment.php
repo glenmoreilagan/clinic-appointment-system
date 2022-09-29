@@ -50,7 +50,8 @@ if ($action == 'approve') {
 
       $sms_response = '';
       $email_response = '';
-      $message = "Hi $fullname! Your confirmed appointment to Lj Cura Ob-Gyn Ultrasound Clinic.";
+      $patient_name = explode(' ', trim($fullname))[0];
+      $message = "Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
       if ($contactno !== '') {
         $sms = new Sms($contactno, $message);
         $sms_response = $sms->itexmo();

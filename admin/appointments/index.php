@@ -44,13 +44,13 @@ include_once '../functions/session_config.php';
       background: #FF6699;
     }
 
-    .modal:nth-of-type(even) {
+    /* .modal:nth-of-type(even) {
       z-index: 1062 !important;
     }
 
     .modal-backdrop.show:nth-of-type(even) {
       z-index: 1061 !important;
-    }
+    } */
 
     .cust_info {
       font-weight: 100;
@@ -139,6 +139,7 @@ include_once '../functions/session_config.php';
   <!-- MODALS -->
   <?php include_once '../modals/reject_appointment_modal.php'; ?>
   <?php include_once '../modals/view_appointment_modal.php'; ?>
+  <?php include_once '../modals/statcompleted_modal.php'; ?>
   <?php include '../modals/ILoader.php'; ?>
 </body>
 
@@ -264,23 +265,23 @@ include_once '../functions/session_config.php';
       });
     }
 
-    $("#view_appointment_modal").on("click", ".btnApprove", function(e) {
+    $("#view_appointment_modal").on("click", ".btnUpdate", function(e) {
       e.preventDefault();
 
       appointment_id = $(this).attr('id').split('-')[1];
-
-      if (confirm("Are you sure to approve?") == true) {
-        update_appointments('approve', appointment_id);
-      }
+      
+      $("#view_appointment_modal").modal('hide');
+      $("#statcompleted_modal").modal('show');
     });
-
+   
     $("#view_appointment_modal").on("click", ".btnReject", function(e) {
       e.preventDefault();
 
       appointment_id = $(this).attr('id').split('-')[1];
 
+      $("#view_appointment_modal").modal('hide');
       $(".form-input").val('');
-      $(".modal-title").text('Reject Appointment');
+      $("#reject_appointment_modal .modal-title").text('Cancel Appointment');
       $("#reject_appointment_modal").modal('show');
     });
 
@@ -327,11 +328,12 @@ include_once '../functions/session_config.php';
             action_buttons = res.data[0].status === 'Pending' ?
               ` <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
                 <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
-              ` : ``;
-            // (res.data[0].status === 'Approved' ?
-            //   `
-            //     <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
-            //   ` : ``)
+              ` :
+              (res.data[0].status === 'Approved' ?
+                `
+                <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Complete</button>
+                <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Cancel</button>
+              ` : ``)
             action_buttons += '<button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>';
 
 

@@ -355,7 +355,7 @@ include_once '../functions/session_config.php';
       appointment_id = $(this).attr('id').split('-')[1];
 
       $(".form-input").val('');
-      $(".modal-title").text('Reject Appointment');
+      $("#reject_appointment_modal .modal-title").text('Cancel Appointment');
       $("#reject_appointment_modal").modal('show');
     });
 
@@ -402,11 +402,12 @@ include_once '../functions/session_config.php';
             action_buttons = res.data[0].status === 'Pending' ?
               ` <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
                 <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>
-              ` : ``;
-            // (res.data[0].status === 'Approved' ?
-            //   `
-            //     <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Update</button>
-            //   ` : ``)
+              ` :
+              (res.data[0].status === 'Approved' ?
+                `
+                <button class="btn btn-warning btn-sm btnUpdate" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Complete</button>
+                <button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Cancel</button>
+              ` : ``)
             action_buttons += '<button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>';
 
 

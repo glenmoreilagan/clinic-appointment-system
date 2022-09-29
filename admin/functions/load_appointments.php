@@ -14,7 +14,7 @@ if ($appointment_id !== 0) {
   $added_filter .= " AND appointment.id = '$appointment_id'";
 }
 
-if($today != '') {
+if ($today != '') {
   $added_filter .= " AND DATE(appointment.date_schedule) = '$today'";
 }
 
@@ -23,13 +23,13 @@ switch ($status) {
     $added_filter .= " AND appointment.status = 0 AND appointment.is_cancelled = 0";
     break;
   case 'cancelled':
-    $added_filter .= " AND appointment.is_cancelled = 1 AND status = 0";
+    $added_filter .= " AND appointment.is_cancelled = 1";
     break;
   case 'approved':
-    $added_filter .= " AND appointment.status = 1 AND is_completed = 0";
+    $added_filter .= " AND appointment.status = 1 AND appointment.is_completed = 0 AND appointment.is_cancelled = 0";
     break;
   case 'completed':
-    $added_filter .= " AND appointment.is_completed = 1 AND status = 1";
+    $added_filter .= " AND appointment.is_completed = 1 AND appointment.status = 1 AND appointment.is_cancelled = 0";
     break;
 }
 
@@ -39,9 +39,9 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   appointment.age, appointment.remarks,
   case
     when appointment.status = 0 AND appointment.is_cancelled = 0 then 'Pending'
-    when appointment.is_cancelled = 1 AND status = 0 then 'Cancelled'
-    when appointment.status = 1 AND is_completed = 0 then 'Approved'
-    when appointment.is_completed = 1 AND status = 1 then 'Completed'
+    when appointment.is_cancelled = 1 AND appointment.status = 0 then 'Cancelled'
+    when appointment.status = 1 AND appointment.is_completed = 0 then 'Approved'
+    when appointment.is_completed = 1 AND appointment.status = 1 then 'Completed'
   end as status,
   services.service_title, user.fullname as client, user.address, user.contactno
   FROM tbl_appointments as appointment 
