@@ -144,13 +144,14 @@ include_once '../functions/session_config.php';
 
           let newEndStr = new Date(end);
           newEndStr.setDate(newEndStr.getDate() - 1);
-          newEndStr.setMonth(newEndStr.getMonth());
+          newEndStr.setMonth(newEndStr.getMonth() + 1);
           newEndStr.setFullYear(newEndStr.getFullYear());
 
           let year = newEndStr.getFullYear();
           let month = newEndStr.getMonth() < 10 ? `0${newEndStr.getMonth()}` : newEndStr.getMonth();
           let day = newEndStr.getDate() < 10 ? `0${newEndStr.getDate()}` : newEndStr.getDate();
           let new_end_date = `${year}-${month}-${day}`;
+
 
           $("input[name='patient']").val(fullname);
           $("textarea[name='title']").val(description);

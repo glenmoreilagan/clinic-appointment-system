@@ -204,11 +204,22 @@ include_once '../functions/session_config.php';
                 break;
             }
 
-            let action_buttons = `<tr>
+            let action_buttons = ``;
+
+            if (res.data[i].status == 'Completed') {
+              action_buttons = `<tr>
+                <td>
+                  <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-eye"></i> View</button>
+                  <button class="btn btn-primary btn-sm btnSendResult" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-file-image"></i> Send Result</button>
+                </td>
+              </tr>`
+            } else {
+              action_buttons = `<tr>
                 <td>
                   <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-eye"></i> View</button>
                 </td>
-              </tr>`;
+              </tr>`
+            }
 
             ready_data.push([
               `
