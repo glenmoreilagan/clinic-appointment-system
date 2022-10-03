@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Official Receipt</title>
+</head>
+
+<body>
+  <table style='font-family: Courier New, Courier, monospace; font-size: 13px; border: 1px solid; width: 800px;'>
+    <tr>
+      <td colspan='10' style='text-align: center; font-size: 2em;'>OFFICIAL RECEIPT</td>
+    </tr>
+    <tr>
+      <td><strong>REF NO.:</strong> $reference_no</td>
+    </tr>
+    <tr>
+      <td><strong>DATE:</strong> $date_paid</td>
+    </tr>
+    <tr>
+      <td><strong>FULLNAME:</strong> $fullname</td>
+    </tr>
+    <tr>
+      <td><strong>ADDRESS:</strong> $address</td>
+    </tr>
+    <tr>
+      <td><strong>PREGNANCY STATUS:</strong> $pregnant_status</td>
+    </tr>
+  </table>
+
+  <table
+    style='font-family: Courier New, Courier, monospace; border: 1px solid; width: 800px; border-collapse: collapse;'>
+    <tr style='font-size: 13px; border: 1px solid; font-weight: bold;'>
+      <td style='padding: 5px; text-align: center; width: 25%;'>SERVICE</td>
+      <td style='padding: 5px; text-align: center; width: 25%;'>FINDINGS</td>
+      <td style='padding: 5px; text-align: center; width: 15%;'>COST</td>
+      <td style='padding: 5px; text-align: center; width: 15%;'>OTHER COST</td>
+      <td style='padding: 5px; text-align: center; width: 15%;'>TOTAL COST</td>
+    </tr>
+    <tr style='font-size: 12px;'>
+      <td style='padding: 5px; text-align: left;'>$service_title <br> $other_services</td>
+      <td style='padding: 5px; text-align: left;'>$findings</td>
+      <td style='padding: 5px; text-align: right;'>" . number_format($cost, 2) . "</td>
+      <td style='padding: 5px; text-align: right;'>" . number_format($other_cost, 2) . "</td>
+      <td style='padding: 5px; text-align: right;'>" . number_format($total_cost, 2) . "</td>
+    </tr>
+    <tr style='font-size: 13px; border: 1px solid;'>
+      <td style='padding: 5px; text-align: left;'></td>
+      <td style='padding: 5px; text-align: left;'></td>
+      <td style='padding: 5px; text-align: right;'></td>
+      <td style='padding: 5px; text-align: right; font-weight: bold;'>GRAND TOTAL</td>
+      <td style='padding: 5px; text-align: right; font-weight: bold;'>" . number_format($total_cost, 2) . "</td>
+    </tr>
+  </table>
+</body>
+
+</html>

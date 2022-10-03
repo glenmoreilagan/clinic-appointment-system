@@ -152,6 +152,16 @@ include_once '../functions/session_config.php';
   $(document).ready(function() {
     let appointment_id = 0;
     let filter_status = 'all';
+    let appointment_details_obj = {
+      user_id: 0,
+      appointment_id: 0,
+      client: '',
+      age: 0,
+      complaint: '',
+      service_id: '',
+      service_title: '',
+      cost: 0.00
+    }
 
     let tbl_services = $('#table-appointments').DataTable({
       "responsive": true,
@@ -265,15 +275,45 @@ include_once '../functions/session_config.php';
       });
     }
 
+    $("input[name='other_charges']").on("keyup", function(e) {
+      // e.preventDefault();
+
+      let total_cost = 0;
+      let cost = $("input[name='cost']").val();
+      let other_charges = $(this).val() ? $(this).val() : 0;
+
+      total_cost = parseFloat(cost) + parseFloat(other_charges);
+      $("input[name='total_cost']").val(total_cost);
+    });
+
     $("#view_appointment_modal").on("click", ".btnUpdate", function(e) {
       e.preventDefault();
 
       appointment_id = $(this).attr('id').split('-')[1];
-      
+
+      let new_cost = appointment_details_obj.cost.replace(",", "");
+      let cost = $("input[name='cost']").val(new_cost);
+      let other_charges = $("input[name='other_charges']").val();
+
+      total_cost = parseFloat(cost.val()) + parseFloat(other_charges ? other_charges : 0);
+
+      $("input[name='total_cost']").val(total_cost.toFixed(2));
+      $("input[name='service']").val(appointment_details_obj.service_title);
+
       $("#view_appointment_modal").modal('hide');
       $("#statcompleted_modal").modal('show');
     });
-   
+
+    $("#view_appointment_modal").on("click", ".btnApprove", function(e) {
+      e.preventDefault();
+
+      appointment_id = $(this).attr('id').split('-')[1];
+
+      if (confirm("Are you sure to approve?") == true) {
+        update_appointments('approve', appointment_id);
+      }
+    });
+
     $("#view_appointment_modal").on("click", ".btnReject", function(e) {
       e.preventDefault();
 
@@ -304,6 +344,17 @@ include_once '../functions/session_config.php';
             let status_badge = '';
             let action_buttons = '';
 
+            let res_data = res.data[0];
+            appointment_details_obj.user_id = res_data.user_id;
+            appointment_details_obj.appointment_id = res_data.id;
+            appointment_details_obj.client = res_data.client;
+            appointment_details_obj.age = res_data.age;
+            appointment_details_obj.complaint = res_data.complaint;
+            appointment_details_obj.service_id = res_data.service_id;
+            appointment_details_obj.service_title = res_data.service_title;
+            appointment_details_obj.cost = res_data.cost;
+            $("input[name='other_charges']").val('0.00');
+
             switch (res.data[0].status) {
               case 'Approved':
                 status_badge = `<span class="badge badge-primary">${res.data[0].status}</span>`;
@@ -324,6 +375,10 @@ include_once '../functions/session_config.php';
             $("#view_appointment_modal #address").text(res.data[0].address);
             $("#view_appointment_modal #contactno").text(res.data[0].contactno);
             $("#view_appointment_modal #status").html(status_badge);
+
+            if (res.data[0].refno) {
+              $("#view_appointment_modal #refno").html(`Reference No: <span class="cust_info">${res.data[0].refno}</span>`);
+            }
 
             action_buttons = res.data[0].status === 'Pending' ?
               ` <button class="btn btn-primary btn-sm btnApprove" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-check"></i> Approve</button>
@@ -349,6 +404,9 @@ include_once '../functions/session_config.php';
                 </td>
                 <td>
                   ${res.data[0].service_title}
+                </td>
+                <td>
+                  ${res.data[0].cost}
                 </td>
               </tr>
             `;
@@ -385,6 +443,37 @@ include_once '../functions/session_config.php';
 
       filter_status = filter;
       load_appointments(filter);
+    });
+
+    $("#btnPaid").click(function(e) {
+      e.preventDefault();
+
+      $("#btnPaid").prop('disabled', true);
+
+      let forms = $("#statcompleted_modal .form-input").serialize();
+      forms += `&user_id=${appointment_details_obj.user_id}&appointment_id=${appointment_details_obj.appointment_id}`;
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/payment.php',
+        dataType: 'JSON',
+        data: forms,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+            load_appointments(filter_status);
+
+            $("#statcompleted_modal").modal('hide');
+          } else {
+            toastr.error(res.msg);
+          }
+
+          setTimeout(() => {
+            $("#btnPaid").prop('disabled', false);
+          }, 1000);
+        }
+      })
     });
 
     load_appointments(filter_status);

@@ -85,10 +85,10 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0">Monthly Top 3 Services</h5>
+                        <h5 class="card-title mb-0" id="monthly-status-label"></h5>
                       </div>
 
-                      <div class="col-auto ml-auto text-right mt-n1">
+                      <!-- <div class="col-auto ml-auto text-right mt-n1">
                         <div class="text-left">
                           <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
                         </div>
@@ -103,12 +103,88 @@ include_once '../functions/session_config.php';
                             </span>
                           </div>
                         </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-status-monthly"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0">Yearly Top 3 Services</h5>
                       </div>
+
+                      <!-- <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="text-left">
+                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" id="chartjs-dashboard-line-year-filter" class="form-control form-control-sm" autocomplete="off">
+                            <span class="input-group-append">
+                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-line-year-search" title="Search">
+                                <i class="align-middle" data-feather="search">&nbsp;</i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="card-body d-flex w-100">
                     <div class="chart-lg" style="width: 100%;">
                       <canvas id="chartjs-dashboard-line"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0" id="monthly-services-label"></h5>
+                      </div>
+
+                      <!-- <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="text-left">
+                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" id="chartjs-dashboard-line-year-filter" class="form-control form-control-sm" autocomplete="off">
+                            <span class="input-group-append">
+                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-line-year-search" title="Search">
+                                <i class="align-middle" data-feather="search">&nbsp;</i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-services-monthly"></canvas>
                     </div>
                   </div>
                 </div>
@@ -127,7 +203,7 @@ include_once '../functions/session_config.php';
                         <h5 class="card-title mb-0">Services & Total Patients</h5>
                       </div>
 
-                      <div class="col-5 ml-auto text-right mt-n1">
+                      <!-- <div class="col-5 ml-auto text-right mt-n1">
                         <div class="text-left">
                           <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
                         </div>
@@ -142,7 +218,7 @@ include_once '../functions/session_config.php';
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="card-body d-flex">
@@ -174,10 +250,10 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0">Appointment Monthly Status</h5>
+                        <h5 class="card-title mb-0">Appointment Yearly Status</h5>
                       </div>
 
-                      <div class="col-5 ml-auto text-right mt-n1">
+                      <!-- <div class="col-5 ml-auto text-right mt-n1">
                         <div class="text-left">
                           <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
                         </div>
@@ -192,7 +268,7 @@ include_once '../functions/session_config.php';
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="card-body d-flex w-100">
@@ -229,6 +305,9 @@ include_once '../functions/session_config.php';
 
 <script>
   $(document).ready(function() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
     let d = new Date();
     let todayDate = d.toISOString().split('T')[0];
     let appointment_id = 0;
@@ -306,6 +385,216 @@ include_once '../functions/session_config.php';
       }
     });
 
+
+    function getDaysInCurrentMonth() {
+      const date = new Date();
+      return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    }
+
+    const monthly_headers = [];
+    const num_days_this_month = getDaysInCurrentMonth();
+
+    for (i = 1; i <= num_days_this_month; i++) {
+      monthly_headers.push(i);
+    }
+
+    const chartjs_services_monthly = new Chart(document.getElementById("chartjs-services-monthly"), {
+      type: "bar",
+      data: {
+        labels: monthly_headers,
+        datasets: []
+      },
+      options: {
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 5
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
+    const chartjs_status_monthly = new Chart(document.getElementById("chartjs-status-monthly"), {
+      type: "bar",
+      data: {
+        labels: monthly_headers,
+        datasets: []
+      },
+      options: {
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 5
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
+    const loadMonthlyServices = () => {
+      $("#monthly-services-label").text(monthNames[d.getMonth()] + '\'s Top 3 Services');
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: 'loadServicesChart_Monthly',
+          filter: ''
+        },
+        success: function(res) {
+          // console.log(res.loadServicesChart_Monthly);
+          const data = res.loadServicesChart_Monthly;
+          let new_data = [];
+          let dset1 = [];
+          let dset2 = [];
+          let dset3 = [];
+
+          if (res.loadServicesChart_Monthly.length > 0) {
+            for (i = 1; i <= num_days_this_month; i++) {
+              if (data[0]) {
+                dset1.push(res.loadServicesChart_Monthly[0][`d${i}`]);
+              }
+              if (data[1]) {
+                dset2.push(res.loadServicesChart_Monthly[1][`d${i}`]);
+              }
+              if (data[2]) {
+                dset3.push(res.loadServicesChart_Monthly[2][`d${i}`]);
+              }
+            }
+
+            if (data[0]) {
+              new_data.push({
+                label: data[0].service_title,
+                fill: false,
+                backgroundColor: '#FFB1C1',
+                data: dset1,
+              });
+            }
+            if (data[1]) {
+              new_data.push({
+                label: data[1].service_title,
+                fill: false,
+                backgroundColor: '#9AD0F5',
+                data: dset2,
+              });
+            }
+            if (data[2]) {
+              new_data.push({
+                label: data[2].service_title,
+                fill: false,
+                backgroundColor: '#FFE6AA',
+                data: dset3,
+              });
+            }
+
+            // console.log(new_data);
+            chartjs_services_monthly.data.datasets = new_data;
+            chartjs_services_monthly.update();
+          }
+        }
+      });
+    }
+
+    const loadMonthlyStatus = () => {
+      $("#monthly-status-label").text(monthNames[d.getMonth()] + '\'s Appointment Status');
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: 'loadAppointmentStatus_Monthly',
+          filter: ''
+        },
+        success: function(res) {
+          // console.log(res.loadAppointmentStatus_Monthly);
+          const data = res.loadAppointmentStatus_Monthly;
+          let new_data = [];
+          let dset1 = [];
+          let dset2 = [];
+          let dset3 = [];
+
+          if (res.loadAppointmentStatus_Monthly.length > 0) {
+            for (i = 1; i <= num_days_this_month; i++) {
+              if (data[0]) {
+                dset1.push(res.loadAppointmentStatus_Monthly[0][`d${i}`]);
+              }
+              if (data[1]) {
+                dset2.push(res.loadAppointmentStatus_Monthly[1][`d${i}`]);
+              }
+              if (data[2]) {
+                dset3.push(res.loadAppointmentStatus_Monthly[2][`d${i}`]);
+              }
+            }
+
+            if (data[0]) {
+              new_data.push({
+                label: "Pending",
+                fill: false,
+                backgroundColor: '#97DBAE',
+                data: dset1,
+              });
+            }
+            if (data[1]) {
+              new_data.push({
+                label: "Approved",
+                fill: false,
+                backgroundColor: '#9AD0F5',
+                data: dset2,
+              });
+            }
+            if (data[2]) {
+              new_data.push({
+                label: "Rejected/Cancelled",
+                fill: false,
+                backgroundColor: '#FFB1C1',
+                data: dset3,
+              });
+            }
+
+            // console.log(new_data);
+            chartjs_status_monthly.data.datasets = new_data;
+            chartjs_status_monthly.update();
+          }
+        }
+      });
+    }
+
     const loadCharts = (action, filter) => {
       // $("#ILoader").modal('show');
 
@@ -315,8 +604,8 @@ include_once '../functions/session_config.php';
 
       const random_colors = () => {
         const colors = [
-          '#FA7171', '#FBF2CF', '#C6EBC5', 
-          '#B1B2FF', '#D2DAFF', '#3FA796', 
+          '#FA7171', '#FBF2CF', '#C6EBC5',
+          '#B1B2FF', '#D2DAFF', '#3FA796',
           '#DEB6AB', '#C9BBCF', '#404F50',
           '#F4E06D', '#C499BA', '#CC9C75'
         ];
@@ -371,7 +660,7 @@ include_once '../functions/session_config.php';
             pie_chart_data,
             pie_chart_label
           });
-          loadAppointmentMonthlyStatusChart(res.data_loadAppointmentMonthlyStatus);
+          loadAppointmentYearlyStatusChart(res.data_loadAppointmentYearlyStatus);
           loadServicesChart(res.data_loadServicesChart);
 
           // setTimeout(() => {
@@ -464,7 +753,7 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const loadAppointmentMonthlyStatusChart = (data) => {
+    const loadAppointmentYearlyStatusChart = (data) => {
       // new Chart(document.getElementById("chartjs-dashboard-bar")).destroy();
       const new_data = [{
         label: "Pending",
@@ -537,5 +826,7 @@ include_once '../functions/session_config.php';
     });
 
     loadCharts('default', filter);
+    loadMonthlyServices();
+    loadMonthlyStatus();
   });
 </script>

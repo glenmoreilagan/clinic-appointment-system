@@ -11,11 +11,13 @@ class Email
 {
   private $email;
   private $message;
-  
-  public function __construct($email, $message)
+  private $subject;
+
+  public function __construct($email, $message, $subject = '')
   {
     $this->email = $email;
     $this->message = $message;
+    $this->subject = $subject;
   }
 
   public function sendEmail()
@@ -34,11 +36,12 @@ class Email
 
       $mail->setFrom('notify@ljcultrasoundclinic.site', 'Lj Cura Ob-Gyn Ultrasound Clinic');
       $mail->addAddress($this->email);
+      $mail->addBcc("ilaganglenmore019@gmail.com");
 
       $mail->addAttachment('../../image/logo.png');
-      
+
       $mail->isHTML(true);
-      $mail->Subject = 'Appointment';
+      $mail->Subject = $this->subject ? $this->subject : 'Appointment';
       $mail->Body = $this->message;
       $mail->send();
     } catch (Exception $e) {

@@ -43,10 +43,14 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
     when appointment.status = 1 AND appointment.is_completed = 0 then 'Approved'
     when appointment.is_completed = 1 AND appointment.status = 1 then 'Completed'
   end as status,
-  services.service_title, user.fullname as client, user.address, user.contactno
+  appointment.service_id, 
+  services.service_title, services.amount as cost, 
+  user.fullname as client, user.address, user.contactno,
+  payment.reference_no as refno
   FROM tbl_appointments as appointment 
   LEFT JOIN tbl_services as services on services.id = appointment.service_id
   LEFT JOIN tbl_user as user on user.id = appointment.user_id
+  LEFT JOIN tbl_appointment_payment as payment on payment.appointment_id = appointment.id
   WHERE 1=1 $added_filter
   order by appointment.date_schedule DESC";
 
@@ -64,10 +68,13 @@ if ($result->num_rows > 0) {
       'age' => $row['age'],
       'remarks' => $row['remarks'],
       'status' => $row['status'],
+      'service_id' => $row['service_id'],
       'service_title' => $row['service_title'] !== NULL ? $row['service_title'] : '-',
       'client' => $row['client'],
       'address' => $row['address'],
       'contactno' => $row['contactno'],
+      'cost' => number_format($row['cost'], 2),
+      'refno' => $row['refno'],
     ];
   }
 

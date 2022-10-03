@@ -13,12 +13,14 @@
         <label class="card-title">Address: <span id="address" class="cust_info"></span></label> <br>
         <label class="card-title">Contact No.: <span id="contactno" class="cust_info"></span></label> <br>
         <label class="card-title">Status: <span id="status" class="cust_info"></span></label> <br>
+        <label class="card-title" id="refno"></label> <br>
         <table class="table table-striped">
           <thead>
             <tr>
               <th>Date & Time</th>
               <th>Chief Complaint</th>
               <th>Service</th>
+              <th>Cost</th>
             </tr>
           </thead>
           <tbody id="appointment_details_list"></tbody>
