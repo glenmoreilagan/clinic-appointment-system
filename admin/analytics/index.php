@@ -504,6 +504,7 @@ include_once '../functions/session_config.php';
                 fill: false,
                 backgroundColor: '#FFB1C1',
                 data: dset1,
+                categoryPercentage: .5
               });
             }
             if (data[1]) {
@@ -512,6 +513,7 @@ include_once '../functions/session_config.php';
                 fill: false,
                 backgroundColor: '#9AD0F5',
                 data: dset2,
+                categoryPercentage: .5
               });
             }
             if (data[2]) {
@@ -520,6 +522,7 @@ include_once '../functions/session_config.php';
                 fill: false,
                 backgroundColor: '#FFE6AA',
                 data: dset3,
+                categoryPercentage: .5
               });
             }
 
@@ -568,6 +571,7 @@ include_once '../functions/session_config.php';
                 fill: false,
                 backgroundColor: '#97DBAE',
                 data: dset1,
+                categoryPercentage: .5
               });
             }
             if (data[1]) {
@@ -576,6 +580,7 @@ include_once '../functions/session_config.php';
                 fill: false,
                 backgroundColor: '#9AD0F5',
                 data: dset2,
+                categoryPercentage: .5
               });
             }
             if (data[2]) {
@@ -584,6 +589,7 @@ include_once '../functions/session_config.php';
                 fill: false,
                 backgroundColor: '#FFB1C1',
                 data: dset3,
+                categoryPercentage: .5
               });
             }
 
