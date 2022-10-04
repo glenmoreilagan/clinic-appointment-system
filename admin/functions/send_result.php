@@ -61,7 +61,7 @@ if (count($attachments) > 0) {
     $message = "Hello $fullname, this is your result";
 
     if ($email !== '') {
-      $email = new Email('ilaganglenmore019@gmail.com', $message, 'Appointment Result', $file_to_attach_email);
+      $email = new Email($email, $message, 'Appointment Result', $file_to_attach_email);
       $email->sendEmail();
     }
   }
