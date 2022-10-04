@@ -74,36 +74,41 @@ CREATE TABLE IF NOT EXISTS `tbl_appointments` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_appointments: ~26 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_appointments: ~28 rows (approximately)
 INSERT INTO `tbl_appointments` (`id`, `user_id`, `complaint`, `date_schedule`, `age`, `service_id`, `status`, `remarks`, `is_completed`, `is_cancelled`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'RED', '2022-08-01 21:35:00', 14, 0, 1, NULL, 0, 0, '2022-08-18 21:43:55', '2022-09-05 21:32:03'),
-	(2, 1, 'BLUE', '2022-08-02 21:46:01', 44, 0, 1, NULL, 0, 0, '2022-08-18 21:46:04', '2022-08-23 23:14:49'),
-	(3, 1, 'GREEN', '2022-08-03 00:00:00', 22, 0, 1, NULL, 0, 0, '2022-08-18 22:36:05', '2022-09-08 23:18:42'),
-	(4, 1, 'GG', '2022-08-05 00:00:00', 22, 0, 0, 'qwewqe', 0, 0, '2022-08-18 22:36:36', '2022-09-08 23:22:04'),
-	(10, 1, '', '0000-00-00 00:00:00', 0, 0, 1, NULL, 0, 0, '2022-08-18 23:00:29', '2022-09-08 23:19:43'),
-	(11, 1, '', '0000-00-00 00:00:00', 0, 0, 0, 'we', 0, 0, '2022-08-18 23:00:31', '2022-09-08 23:22:03'),
-	(12, 1, '', '0000-00-00 00:00:00', 0, 0, 0, NULL, 0, 0, '2022-08-18 23:00:35', NULL),
-	(13, 1, 'BEFORE END', '2022-08-19 05:20:00', 22, 0, 1, 'DI PWEDE', 0, 0, '2022-08-19 23:20:59', '2022-09-04 19:46:11'),
-	(14, 1, 'SOSAD', '2022-08-19 17:29:00', 12, 0, 0, 'REJECTED', 0, 0, '2022-08-19 23:23:33', '2022-09-08 23:22:02'),
-	(16, 1, 'SASA123', '2022-08-19 23:30:00', 12, 0, 1, NULL, 0, 0, '2022-08-19 23:26:29', '2022-09-04 19:56:24'),
-	(17, 1, 'SIGE NGA', '2022-08-02 06:39:00', 123, 8, 1, NULL, 1, 0, '2022-08-20 00:39:37', '2022-09-08 21:44:57'),
-	(18, 1, 'sad', '2022-08-04 00:00:00', 44, 0, 0, 'wag', 0, 0, '2022-08-20 00:41:46', '2022-09-08 23:21:59'),
-	(19, 1, 'ATAY', '2022-08-09 05:51:00', 22, 0, 1, NULL, 0, 0, '2022-08-20 00:51:50', '2022-09-04 20:47:38'),
-	(21, 1, 'qw', '2022-08-03 17:28:00', 14, 0, 0, 'wew', 0, 0, '2022-08-21 17:24:03', '2022-09-08 23:22:00'),
-	(22, 1, 'tqwe', '2022-08-03 13:16:00', 22, 0, 1, NULL, 0, 0, '2022-08-23 16:37:35', '2022-09-08 23:18:11'),
-	(23, 1, '', '2022-08-23 11:30:00', 0, 0, 0, 'WEW', 0, 0, '2022-08-23 16:39:50', '2022-09-08 23:22:03'),
-	(24, 1, 'TEST', '2022-08-06 13:00:00', 14, 0, 1, NULL, 0, 0, '2022-08-23 22:58:32', '2022-09-04 20:48:17'),
-	(25, 1, '', '2022-08-01 11:00:00', 0, 0, 0, 'qwe', 0, 0, '2022-08-23 23:28:48', '2022-09-08 23:22:02'),
-	(26, 1, 'NEW', '2022-08-05 13:00:00', 12, 0, 1, NULL, 0, 0, '2022-08-23 23:52:40', '2022-09-04 20:50:36'),
-	(27, 1, 'WQEQWE', '2022-08-05 13:00:00', 123, 0, 1, NULL, 0, 0, '2022-08-23 23:58:26', '2022-09-04 20:50:34'),
-	(28, 1, 'MY COM', '2022-08-24 11:00:00', 12, 0, 1, 'TEST', 0, 0, '2022-08-24 00:02:33', '2022-09-04 19:44:21'),
-	(29, 1, 'TEST COMPLAINT', '2022-08-24 11:30:00', 14, 8, 1, NULL, 0, 0, '2022-08-27 15:06:56', '2022-09-08 21:44:04'),
-	(30, 1, 'WQE', '2022-08-23 11:45:00', 12, 6, 1, NULL, 1, 0, '2022-08-27 15:15:53', '2022-09-08 23:22:05'),
-	(31, 2, 'QWEWQEW', '2022-08-27 23:35:12', 44, 0, 1, NULL, 0, 0, '2022-08-27 23:35:05', '2022-09-04 19:32:32'),
-	(32, 1, 'qwe', '2022-09-01 09:40:00', 12, 3, 0, 'WEW', 0, 0, '2022-09-01 22:09:04', '2022-09-08 23:22:06'),
-	(33, 1, 'TEST', '2022-09-04 09:00:00', 12, 5, 1, NULL, 0, 0, '2022-09-04 21:14:24', '2022-09-04 21:14:34');
+	(1, 1, 'RED', '2021-09-25 21:35:00', 14, 9, 1, NULL, 0, 0, '2022-08-18 21:43:55', '2022-10-03 17:09:45'),
+	(2, 1, 'BLUE', '2022-01-02 21:46:01', 44, 0, 0, NULL, 0, 1, '2022-08-18 21:46:04', '2022-09-17 23:02:20'),
+	(3, 3, 'GREEN', '2022-03-03 00:00:00', 22, 0, 0, NULL, 0, 1, '2022-08-18 22:36:05', '2022-09-17 23:02:52'),
+	(4, 4, 'GG', '2022-04-05 00:00:00', 22, 7, 0, 'qwewqe', 0, 1, '2022-08-18 22:36:36', '2022-09-17 23:02:55'),
+	(10, 1, '', '2022-01-01 00:00:00', 0, 0, 0, NULL, 0, 1, '2022-08-18 23:00:29', '2022-09-17 23:02:21'),
+	(11, 1, '', '2022-02-01 00:00:00', 0, 0, 0, 'we', 0, 1, '2022-08-18 23:00:31', '2022-09-17 23:02:49'),
+	(12, 2, '', '2022-01-01 01:00:00', 0, 0, 1, NULL, 0, 0, '2022-08-18 23:00:35', '2022-09-17 23:02:41'),
+	(13, 5, 'BEFORE END', '2022-08-19 05:20:00', 22, 3, 1, 'DI PWEDE', 0, 0, '2022-08-19 23:20:59', '2022-09-17 23:02:25'),
+	(14, 4, 'SOSAD', '2022-08-19 17:29:00', 12, 8, 1, 'REJECTED', 0, 0, '2022-08-19 23:23:33', '2022-09-17 23:02:25'),
+	(16, 1, 'SASA123', '2022-08-19 23:30:00', 12, 0, 1, NULL, 0, 0, '2022-08-19 23:26:29', '2022-09-17 23:02:26'),
+	(17, 1, 'SIGE NGA', '2022-08-02 06:39:00', 123, 8, 1, NULL, 0, 0, '2022-08-20 00:39:37', '2022-09-17 23:02:26'),
+	(18, 9, 'sad', '2022-08-04 00:00:00', 44, 8, 1, 'wag', 0, 0, '2022-08-20 00:41:46', '2022-09-17 23:02:27'),
+	(19, 3, 'ATAY', '2022-08-09 05:51:00', 22, 3, 1, NULL, 0, 0, '2022-08-20 00:51:50', '2022-09-17 23:02:30'),
+	(21, 1, 'qw', '2022-08-03 17:28:00', 14, 0, 0, 'wew', 0, 1, '2022-08-21 17:24:03', '2022-09-17 23:03:02'),
+	(22, 7, 'tqwe', '2022-08-03 13:16:00', 22, 0, 0, NULL, 0, 1, '2022-08-23 16:37:35', '2022-09-17 23:03:02'),
+	(23, 1, '', '2022-08-23 11:30:00', 0, 0, 0, 'WEW', 0, 1, '2022-08-23 16:39:50', '2022-09-17 23:03:03'),
+	(24, 1, 'TEST', '2022-09-25 13:00:00', 14, 6, 0, NULL, 0, 1, '2022-08-23 22:58:32', '2022-10-03 17:10:34'),
+	(25, 1, '', '2022-03-01 11:00:00', 0, 0, 0, 'qwe', 0, 1, '2022-08-23 23:28:48', '2022-09-17 23:03:35'),
+	(26, 1, 'NEW', '2022-08-05 13:00:00', 12, 0, 1, NULL, 0, 0, '2022-08-23 23:52:40', '2022-09-17 23:03:08'),
+	(27, 1, 'WQEQWE', '2022-09-09 13:00:00', 123, 0, 1, NULL, 0, 0, '2022-08-23 23:58:26', '2022-09-17 23:03:09'),
+	(28, 1, 'MY COM', '2022-02-24 11:00:00', 12, 0, 1, 'TEST', 0, 0, '2022-08-24 00:02:33', '2022-09-17 23:03:24'),
+	(29, 1, 'TEST COMPLAINT', '2022-02-24 11:30:00', 14, 8, 1, NULL, 0, 0, '2022-08-27 15:06:56', '2022-09-17 23:03:28'),
+	(30, 1, 'WQE', '2022-08-23 11:45:00', 12, 6, 1, NULL, 0, 0, '2022-08-27 15:15:53', '2022-09-17 23:03:11'),
+	(31, 2, 'QWEWQEW', '2022-08-27 23:35:12', 44, 6, 0, NULL, 0, 0, '2022-08-27 23:35:05', '2022-09-14 21:51:42'),
+	(32, 2, 'qwe', '2022-09-01 09:40:00', 12, 3, 0, 'WEW', 0, 0, '2022-09-01 22:09:04', '2022-09-14 21:51:39'),
+	(33, 1, 'TEST', '2022-09-04 09:00:00', 12, 5, 0, NULL, 0, 0, '2022-09-04 21:14:24', '2022-09-14 21:51:54'),
+	(34, 10, 'TESTWAW', '2022-09-09 10:40:00', 22, 2, 1, NULL, 0, 0, '2022-09-09 21:46:49', '2022-10-03 21:35:32'),
+	(36, 1, 'TEST COMPLAINT', '2022-09-11 12:00:00', 21, 7, 1, NULL, 0, 0, '2022-09-11 00:04:39', '2022-09-18 00:36:14'),
+	(37, 2, 'Test Complaint', '2022-09-16 10:00:00', 12, 5, 1, 'wew', 0, 0, '2022-09-16 21:22:17', '2022-09-17 22:24:59'),
+	(38, 1, 'WEW', '2022-10-03 08:30:00', 22, 9, 1, NULL, 0, 0, '2022-09-22 16:22:53', '2022-10-03 21:35:03'),
+	(39, 1, 'NWEWW', '2022-10-03 10:30:00', 22, 4, 1, NULL, 1, 0, '2022-09-25 21:30:10', '2022-10-03 21:49:37');
 
 -- Dumping structure for table db_lj_clinic.tbl_appointment_availability
 DROP TABLE IF EXISTS `tbl_appointment_availability`;
@@ -116,9 +121,9 @@ CREATE TABLE IF NOT EXISTS `tbl_appointment_availability` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_appointment_availability: ~7 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_appointment_availability: ~11 rows (approximately)
 INSERT INTO `tbl_appointment_availability` (`id`, `services`, `amount`, `date_available`, `is_deleted`, `created_at`, `updated_at`) VALUES
 	(1, '', 0.00, '2022-08-24 11:15:33', 0, '2022-08-23 16:31:43', NULL),
 	(2, NULL, 0.00, '2022-08-24 11:30:09', 0, '2022-08-23 16:57:16', NULL),
@@ -128,7 +133,37 @@ INSERT INTO `tbl_appointment_availability` (`id`, `services`, `amount`, `date_av
 	(6, NULL, 0.00, '2022-09-09 10:40:00', 0, '2022-09-01 18:40:09', '2022-09-01 22:14:04'),
 	(7, NULL, 0.00, '2022-03-09 22:00:00', 0, '2022-09-01 22:11:52', NULL),
 	(8, NULL, 0.00, '2022-05-09 13:30:00', 0, '2022-09-01 22:13:21', NULL),
-	(9, NULL, 0.00, '2022-09-04 09:00:00', 0, '2022-09-04 21:12:04', NULL);
+	(9, NULL, 0.00, '2022-09-04 09:00:00', 0, '2022-09-04 21:12:04', NULL),
+	(10, NULL, 0.00, '2022-09-11 12:00:00', 0, '2022-09-11 00:00:16', NULL),
+	(11, NULL, 0.00, '2022-09-11 10:01:00', 0, '2022-09-11 00:01:30', NULL),
+	(12, NULL, 0.00, '2022-09-11 12:00:00', 0, '2022-09-11 00:03:06', NULL),
+	(13, NULL, 0.00, '2022-09-16 10:00:00', 0, '2022-09-16 21:21:56', NULL),
+	(14, NULL, 0.00, '2022-09-22 20:30:00', 0, '2022-09-22 16:22:39', NULL),
+	(15, NULL, 0.00, '2022-09-25 10:30:00', 0, '2022-09-25 21:29:46', NULL);
+
+-- Dumping structure for table db_lj_clinic.tbl_appointment_payment
+DROP TABLE IF EXISTS `tbl_appointment_payment`;
+CREATE TABLE IF NOT EXISTS `tbl_appointment_payment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reference_no` varchar(50) NOT NULL DEFAULT '',
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `appointment_id` int(3) NOT NULL DEFAULT 0,
+  `pregnant_status` varchar(50) NOT NULL DEFAULT '',
+  `service_title` varchar(50) NOT NULL DEFAULT '',
+  `other_services` varchar(50) NOT NULL DEFAULT '',
+  `findings` varchar(50) NOT NULL DEFAULT '',
+  `cost` decimal(10,2) unsigned NOT NULL DEFAULT 0.00,
+  `other_cost` decimal(10,2) unsigned NOT NULL DEFAULT 0.00,
+  `total_cost` decimal(10,2) unsigned NOT NULL DEFAULT 0.00,
+  `file_name` varchar(50) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table db_lj_clinic.tbl_appointment_payment: ~1 rows (approximately)
+INSERT INTO `tbl_appointment_payment` (`id`, `reference_no`, `user_id`, `appointment_id`, `pregnant_status`, `service_title`, `other_services`, `findings`, `cost`, `other_cost`, `total_cost`, `file_name`, `created_at`, `updated_at`) VALUES
+	(10, 'REF-yH5f-2IXF-1-39', 1, 39, 'Not Pregnant', 'TVS First Trimester Ultrasound', 'extra service', 'miss you', 1500.00, 143.00, 1643.00, NULL, '2022-10-03 21:49:37', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_feedback
 DROP TABLE IF EXISTS `tbl_feedback`;
@@ -155,13 +190,25 @@ DROP TABLE IF EXISTS `tbl_notification`;
 CREATE TABLE IF NOT EXISTS `tbl_notification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
-  `description` varchar(50) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `date_action` datetime DEFAULT current_timestamp(),
+  `user_id` int(3) DEFAULT 0,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_notification: ~0 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_notification: ~9 rows (approximately)
+INSERT INTO `tbl_notification` (`id`, `title`, `description`, `date_action`, `user_id`, `created_at`, `updated_at`) VALUES
+	(7, 'Appointment Approved', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>glen</b></span><br>\r\n          <span>Test Complaint</span><br>\r\n          <span>TVS Gyne Ultrasound</span><br>\r\n          <span>Sep 16, 2022 15:45 PM</span><br>\r\n        </div>', '2022-09-16 21:45:32', 2, NULL, NULL),
+	(9, 'Appointment Rejected/Cancelled', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>glen</b></span><br>\r\n          <span>Test Complaint</span><br>\r\n          <span>TVS Gyne Ultrasound</span><br>\r\n          <span>Sep 16, 2022 16:17 PM</span><br>\r\n        </div>', '2022-09-16 22:17:43', 2, NULL, '2022-09-16 22:18:29'),
+	(10, 'Appointment Approved', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>glen</b></span><br>\r\n          <span>Test Complaint</span><br>\r\n          <span>TVS Gyne Ultrasound</span><br>\r\n          <span>Sep 16, 2022 16:23 PM</span><br>\r\n        </div>', '2022-09-16 22:23:09', 2, NULL, NULL),
+	(11, 'Appointment Rejected/Cancelled', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>glen</b></span><br>\r\n          <span>Test Complaint</span><br>\r\n          <span>TVS Gyne Ultrasound</span><br>\r\n          <span>Sep 16, 2022 16:27 PM</span><br>\r\n        </div>', '2022-09-16 22:27:13', 2, NULL, NULL),
+	(12, 'Appointment Approved', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>Kaye Celine Urayan</b></span><br>\r\n          <span>TEST COMPLAINT</span><br>\r\n          <span>OB Doppler Ultrasound</span><br>\r\n          <span>Sep 17, 2022 18:36 PM</span><br>\r\n        </d', '2022-09-18 00:36:14', 1, NULL, NULL),
+	(13, 'New Appointment', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>Kaye Celine Urayan</b></span><br>\r\n          <span>WEW</span><br>\r\n          <span>OTHERS</span><br>\r\n          <span>Sep 22, 2022 10:23 AM</span><br>\r\n        </div>', '2022-09-22 16:22:53', 0, NULL, '2022-09-22 16:41:07'),
+	(14, 'Appointment Approved', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>Kaye Celine Urayan</b></span><br>\r\n          <span>WEW</span><br>\r\n          <span>OTHERS</span><br>\r\n          <span>Sep 22, 2022 10:23 AM</span><br>\r\n        </div>', '2022-09-22 16:23:00', 1, NULL, NULL),
+	(15, 'Appointment Approved', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>Kaye Celine Urayan</b></span><br>\r\n          <span>NWEWW</span><br>\r\n          <span>TVS First Trimester Ultrasound</span><br>\r\n          <span>Sep 25, 2022 15:30 PM</span><br>\r\n        </d', '2022-09-25 21:30:23', 1, NULL, NULL),
+	(16, 'Appointment Approved', '\r\n        <div class=\'text-muted small mt-1\'>\r\n          <span><b>qw</b></span><br>\r\n          <span>TESTWAW</span><br>\r\n          <span>Pelvic Ultrasound</span><br>\r\n          <span>Oct 03, 2022 15:35 PM</span><br>\r\n        </div>', '2022-10-03 21:35:32', 10, NULL, NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_period_calendar
 DROP TABLE IF EXISTS `tbl_period_calendar`;
@@ -175,14 +222,26 @@ CREATE TABLE IF NOT EXISTS `tbl_period_calendar` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_period_calendar: ~4 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_period_calendar: ~14 rows (approximately)
 INSERT INTO `tbl_period_calendar` (`id`, `user_id`, `title`, `description`, `start`, `end`, `created_at`, `updated_at`) VALUES
 	(1, 1, '1st', 'DESC1', '2022-08-16', '2022-08-20', '2022-08-20 21:44:21', '2022-08-20 21:47:57'),
 	(2, 1, '2nd', 'DESC2', '2022-08-20', '2022-08-24', '2022-08-20 21:44:21', '2022-08-20 21:47:42'),
 	(7, 1, 'TESTWEW', NULL, '2022-08-01', '2022-08-04', '2022-08-20 22:26:02', '2022-08-21 16:25:36'),
-	(8, 1, 'qweqwe', NULL, '2022-08-09', '2022-08-12', '2022-08-20 22:26:37', NULL);
+	(8, 1, 'qweqwe', NULL, '2022-08-09', '2022-08-12', '2022-08-20 22:26:37', NULL),
+	(9, 1, 'TEST DESCRIPTION', NULL, '2022-09-01', '2022-09-18', '2022-09-18 23:36:16', NULL),
+	(10, 1, 'qwe', NULL, '2022-09-18', '2022-09-21', '2022-09-18 23:38:35', NULL),
+	(11, 1, 'qweqwe', NULL, '2022-09-06', '2022-09-09', '2022-09-18 23:40:04', NULL),
+	(12, 1, 'qweqw', NULL, '2022-09-06', '2022-09-09', '2022-09-18 23:40:08', NULL),
+	(13, 1, 'wqeqwe', NULL, '2022-09-04', '2022-09-09', '2022-09-18 23:40:11', NULL),
+	(14, 1, 'swqwe', NULL, '2022-09-06', '2022-09-10', '2022-09-18 23:40:16', NULL),
+	(15, 1, 'qwewe', NULL, '2022-09-06', '2022-09-09', '2022-09-18 23:40:19', NULL),
+	(16, 1, 'qweqweqeqw', NULL, '2022-08-31', '2022-09-10', '2022-09-18 23:40:24', NULL),
+	(17, 1, 'sADqweqwew', NULL, '2022-08-31', '2022-09-11', '2022-09-18 23:40:38', NULL),
+	(18, 1, 'qew', NULL, '2022-09-11', '2022-09-25', '2022-09-18 23:40:56', NULL),
+	(19, 1, 'qweqeqe', NULL, '2022-09-25', '2022-10-01', '2022-09-18 23:40:59', NULL),
+	(20, 1, 'SADWEW', NULL, '2022-09-18', '2022-10-08', '2022-09-18 23:41:05', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_services
 DROP TABLE IF EXISTS `tbl_services`;
@@ -198,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `tbl_services` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_lj_clinic.tbl_services: ~26 rows (approximately)
+-- Dumping data for table db_lj_clinic.tbl_services: ~9 rows (approximately)
 INSERT INTO `tbl_services` (`id`, `service_title`, `description`, `duration`, `amount`, `is_deleted`, `created_at`, `updated_at`) VALUES
 	(1, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 1, '2022-08-23 16:54:55', '2022-09-01 21:13:33'),
 	(2, 'Pelvic Ultrasound', 'qweqw', '15 mins', 700.00, 0, '2022-08-23 16:55:08', '2022-08-28 23:19:15'),
@@ -208,24 +267,7 @@ INSERT INTO `tbl_services` (`id`, `service_title`, `description`, `duration`, `a
 	(6, 'Transrectal Ultrasound', NULL, '15 mins', 2200.00, 0, '2022-08-23 16:56:02', NULL),
 	(7, 'OB Doppler Ultrasound', NULL, '15 mins', 3500.00, 0, '2022-08-23 16:56:10', NULL),
 	(8, 'Pap Smear', NULL, '15 mins', 1700.00, 0, '2022-08-23 16:56:23', NULL),
-	(9, 'OTHERS', NULL, '15 mins', 0.00, 0, '2022-08-23 16:56:33', NULL),
-	(11, 'TEST', 'NO DESC', '1 hr', 1000.00, 0, '2022-08-28 21:17:43', NULL),
-	(12, 'qwe', 'qwe', 'qeq', 1200.00, 0, '2022-08-28 21:18:41', NULL),
-	(13, 'TEST', 'qwe\nqwe\nqwe\nqwe', '12', 125.00, 0, '2022-08-28 21:25:07', NULL),
-	(14, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-28 21:40:09', NULL),
-	(15, 'OB-GYN Consultation / Check Up', 'OB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up\nOB-GYN Consultation / Check Up', '15 mins', 700.00, 0, '2022-08-28 21:40:40', NULL),
-	(16, 'qwe', 'qwe', 'qqwe', 122.00, 0, '2022-08-28 21:44:21', '2022-08-28 21:48:02'),
-	(17, 'TEST123', 'DESC', '15 mins', 1500.00, 0, '2022-08-28 21:44:48', '2022-08-28 21:44:58'),
-	(18, 'qwe', 'qwe', 'qwe', 123.00, 0, '2022-08-28 23:19:03', NULL),
-	(19, 'WQE', 'qwe', '12', 123.00, 0, '2022-09-01 18:10:57', NULL),
-	(20, 'qwe', 'qwe', '123', 123.00, 0, '2022-09-01 18:11:12', NULL),
-	(21, 'ATE', 'WEQQ', '13', 333.00, 1, '2022-09-01 18:11:58', '2022-09-01 21:13:29'),
-	(22, '123', '123', '123', 123.00, 1, '2022-09-01 18:12:45', '2022-09-01 21:13:22'),
-	(23, 'LAST', 'LOAD ', '12 mins', 9000.00, 0, '2022-09-01 18:13:44', NULL),
-	(24, 'SAD', 'qwe', 'qwe', 123.00, 0, '2022-09-01 18:15:38', NULL),
-	(25, '123', '123', '123', 123.00, 1, '2022-09-01 18:18:47', '2022-09-01 21:13:25'),
-	(26, 'qwe', 'qwe', 'qw12', 2.00, 0, '2022-09-01 18:21:11', NULL),
-	(27, 'www', 'rrr', 'ttt', 111.00, 0, '2022-09-01 18:26:49', NULL);
+	(9, 'OTHERS', NULL, '15 mins', 0.00, 0, '2022-08-23 16:56:33', NULL);
 
 -- Dumping structure for table db_lj_clinic.tbl_user
 DROP TABLE IF EXISTS `tbl_user`;
@@ -244,8 +286,8 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
 
 -- Dumping data for table db_lj_clinic.tbl_user: ~11 rows (approximately)
 INSERT INTO `tbl_user` (`id`, `fullname`, `address`, `contactno`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
-	(1, 'test', 'addr', '123123', 'qweqwe@gmail.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-18 23:27:17', '2022-08-18 23:29:09'),
-	(2, 'glen', '123', '123', 'qweqwe123@gmail.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-25 19:43:05', NULL),
+	(1, 'Kaye Celine Urayan', 'addr', '09125041626', 'kayecelineurayan@gmail.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-18 23:27:17', '2022-09-14 21:39:30'),
+	(2, 'glen', '123', '123', 'glenilagan@llibi.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-25 19:43:05', '2022-09-16 21:44:01'),
 	(3, 'qwe', '', '123qwe', 'gggqwe@gmail.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-25 19:45:41', NULL),
 	(4, 'qweqeqw', 'qweqwe', 'qweqwe', 'qeqweqw123@gmail.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-25 19:46:38', NULL),
 	(5, 'qwe', 'qwe', 'qwe', 'qwe2123@gmail.com', '4297f44b13955235245b2497399d7a93', 0, '2022-08-25 19:46:59', NULL),

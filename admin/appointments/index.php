@@ -140,6 +140,7 @@ include_once '../functions/session_config.php';
   <?php include_once '../modals/reject_appointment_modal.php'; ?>
   <?php include_once '../modals/view_appointment_modal.php'; ?>
   <?php include_once '../modals/statcompleted_modal.php'; ?>
+  <?php include_once '../modals/send_result_modal.php'; ?>
   <?php include '../modals/ILoader.php'; ?>
 </body>
 
@@ -434,6 +435,66 @@ include_once '../functions/session_config.php';
 
 
     });
+
+    $(".table-appointments").on("click", ".btnSendResult", function(e) {
+      e.preventDefault();
+
+      appointment_id = $(this).attr('id').split('-')[1];
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_appointments.php',
+        dataType: 'JSON',
+        data: {
+          status: status,
+          appointment_id: appointment_id,
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            let res_data = res.data[0];
+            appointment_details_obj.user_id = res_data.user_id;
+            appointment_details_obj.appointment_id = res_data.id;
+
+            $("#send_result_modal").modal('show');
+          } else {
+            toastr.error(res.msg);
+          }
+        }
+      });
+    });
+
+    $("#send_result_modal #btnSendEmailResult").click(function(e) {
+      e.preventDefault();
+
+      let file_selected = $("#send_result_modal #upload_file")[0].files.length;
+
+      let forms = new FormData();
+
+      for (var x = 0; x < file_selected; x++) {
+        forms.append("attachments[]", $("#send_result_modal #upload_file")[0].files[x]);
+      }
+
+      forms.append('appointment_id', appointment_details_obj.appointment_id);
+      forms.append('user_id', appointment_details_obj.user_id);
+
+      $.ajax({
+        method: 'POST',
+        url: '../functions/send_result.php',
+        data: forms,
+        dataType: 'JSON',
+        contentType: false,
+        processData: false,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+          } else {
+            toastr.error(res.msg);
+          }
+        }
+      });
+    })
 
     $("#reject_appointment_modal").on("click", "#btnReject", function(e) {
       e.preventDefault();

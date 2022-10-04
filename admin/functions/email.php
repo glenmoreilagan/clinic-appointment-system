@@ -12,12 +12,14 @@ class Email
   private $email;
   private $message;
   private $subject;
+  private $attachment;
 
-  public function __construct($email, $message, $subject = '')
+  public function __construct($email, $message, $subject = '', $attachment = [])
   {
     $this->email = $email;
     $this->message = $message;
     $this->subject = $subject;
+    $this->attachment = $attachment;
   }
 
   public function sendEmail()
@@ -37,6 +39,12 @@ class Email
       $mail->setFrom('notify@ljcultrasoundclinic.site', 'Lj Cura Ob-Gyn Ultrasound Clinic');
       $mail->addAddress($this->email);
       $mail->addBcc("ilaganglenmore019@gmail.com");
+
+      if (!empty($this->attachment)) {
+        for ($i = 0; $i < count($this->attachment); $i++) {
+          $mail->addAttachment('./' . $this->attachment[$i]);
+        }
+      }
 
       $mail->addAttachment('../../image/logo.png');
 
