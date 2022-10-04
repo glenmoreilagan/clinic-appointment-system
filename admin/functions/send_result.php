@@ -36,7 +36,7 @@ if (count($attachments) > 0) {
     $temp_name = $tmp[$i];
 
     // can upload same image function
-    $final_file = date('Ymd_His') . $file_name;
+    $final_file = date('Ymd_His') . '_' . $file_name;
 
     $new_path = $path . strtolower($final_file);
 
