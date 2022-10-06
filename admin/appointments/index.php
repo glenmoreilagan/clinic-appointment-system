@@ -471,6 +471,12 @@ include_once '../functions/session_config.php';
 
       let forms = new FormData();
 
+
+      if (file_selected > 3) {
+        toastr.error('Please select file maximum of 3');
+        return;
+      }
+
       for (var x = 0; x < file_selected; x++) {
         forms.append("attachments[]", $("#send_result_modal #upload_file")[0].files[x]);
       }
@@ -492,6 +498,7 @@ include_once '../functions/session_config.php';
           } else {
             toastr.error(res.msg);
           }
+          $("#send_result_modal #upload_file").val('');
         }
       });
     })
