@@ -26,13 +26,11 @@ if (!empty($_SESSION)) {
 
     <?php include('./includes/navbar.php'); ?>
 
-    <div class="container">
+    <div class="container-fluid p-0">
         <div class="aboutus">
             <img src="image/au.jpg" class="d-block w-100" alt="...">
             <div class="content-about">
-                <div class="title">
-                    <h1> About Us</h1>
-                </div>
+                <div class="title">About Us</div>
                 <div class="about">
                     <p>Women's bodies are intricate and stunning, so when a problem emerges, you
                         want a professional to identify it and provide a solution. Once the issue
@@ -72,10 +70,11 @@ if (!empty($_SESSION)) {
             </div>
             <div class="map-visit">
                 <div class="visit-loc">Visit Us Here:</div>
-                <p><iframe
+                <div class="iframe-container">
+                    <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3869.8838817287487!2d121.14102701449355!3d14.084031293303104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6f667d548e0d%3A0x8c83da36f918f390!2sLj%20Cura%20Ob-Gyn%20Ultrasound%20Clinic!5e0!3m2!1sen!2sph!4v1662817446762!5m2!1sen!2sph"
-                        width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                        width="600" height="300" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </div>
