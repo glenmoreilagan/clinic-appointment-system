@@ -6,15 +6,15 @@
 	background-size: cover;
 
 } */
-/* .panel img{
-	height: 70vh;
+.aboutus img{
+	height: 88vh;
 	background-size: cover;
 	width: 74%;
 	min-height: 35vw;
 	color: #fff;
     font-size: 1.5rem;
     font-family: 'lucida sans';
-} */
+}
 /* .container .aboutus{
 	width: 85%;
 	display: block;
@@ -28,18 +28,14 @@
 	width: 40%;
 	height: 270px;
 	padding: 20px 30px;
-  margin-left: -7%;
-  margin-top: -42%;
+  margin-left: 1%;
+  margin-top: -44%;
   color: white;
 	background-color: rgba(0,0,0,0.7);
   position: absolute;
 
 }
-/* .content-about .title{
-	font-size: small;
-	text-transform: uppercase;
-} */
-.content-about .title h1{
+.content-about .title{
     font-size: 1.5rem;
     text-transform: uppercase;
 }
@@ -73,7 +69,7 @@
 } */
 .map{
   width: 70%;
-  margin-top: -6%;
+  margin-top: 1%;
   background: #f1f1f1;
   border-radius: 6px;
   padding: 0px 53px 0px 46px;
@@ -118,6 +114,25 @@
   font-size: 16px;
   font-weight: 500;
 }
+/* .iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  Ratio 16:9 ( 100%/16*9 = 56.25% )
+}
+
+.iframe-container>* {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+} */
 
 
 
