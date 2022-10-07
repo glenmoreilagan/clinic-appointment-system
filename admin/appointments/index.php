@@ -211,9 +211,10 @@ include_once '../functions/session_config.php';
               action_buttons = `<tr>
                 <td>
                   <button class="btn btn-primary btn-sm btnView" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-eye"></i> View</button>
-                  <button class="btn btn-primary btn-sm btnSendResult" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-file-image"></i> Send Result</button>
-                </td>
-              </tr>`
+                  </td>
+                  </tr>`
+              // button for send result
+              // <button class="btn btn-primary btn-sm btnSendResult" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-file-image"></i> Send Result</button>
             } else {
               action_buttons = `<tr>
                 <td>
