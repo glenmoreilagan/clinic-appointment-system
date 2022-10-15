@@ -85,25 +85,87 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0" id="monthly-status-label"></h5>
+                        <h5 class="card-title mb-0">Yearly Income Status</h5>
                       </div>
 
-                      <!-- <div class="col-auto ml-auto text-right mt-n1">
-                        <div class="text-left">
-                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
-                        </div>
-
+                      <div class="col-auto ml-auto text-right mt-n1">
                         <div class="form-group">
                           <div class="input-group">
-                            <input type="text" id="chartjs-dashboard-line-year-filter" class="form-control form-control-sm" autocomplete="off">
-                            <span class="input-group-append">
-                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-line-year-search" title="Search">
-                                <i class="align-middle" data-feather="search">&nbsp;</i>
-                              </button>
-                            </span>
+                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyIncomeStatus" id="yearlyIncomeStatus"></select>
                           </div>
                         </div>
-                      </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-yearly-income-status-line"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0" id="monthly-income-status-label"></h5>
+                      </div>
+
+                      <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyIncomeStatus" id="monthlyIncomeStatus"></select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-monthly-income-status"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0" id="monthly-status-label">Monthly Appointment Status</h5>
+                      </div>
+
+                      <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyStatus" id="monthlyStatus">
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="card-body d-flex w-100">
@@ -126,22 +188,13 @@ include_once '../functions/session_config.php';
                         <h5 class="card-title mb-0">Yearly Top 3 Services</h5>
                       </div>
 
-                      <!-- <div class="col-auto ml-auto text-right mt-n1">
-                        <div class="text-left">
-                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
-                        </div>
-
+                      <div class="col-auto ml-auto text-right mt-n1">
                         <div class="form-group">
                           <div class="input-group">
-                            <input type="text" id="chartjs-dashboard-line-year-filter" class="form-control form-control-sm" autocomplete="off">
-                            <span class="input-group-append">
-                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-line-year-search" title="Search">
-                                <i class="align-middle" data-feather="search">&nbsp;</i>
-                              </button>
-                            </span>
+                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyTopServices" id="yearlyTopServices"></select>
                           </div>
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                   </div>
                   <div class="card-body d-flex w-100">
@@ -161,25 +214,29 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0" id="monthly-services-label"></h5>
+                        <h5 class="card-title mb-0" id="monthly-services-label">Monthly Top 3 Services</h5>
                       </div>
 
-                      <!-- <div class="col-auto ml-auto text-right mt-n1">
-                        <div class="text-left">
-                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
-                        </div>
-
+                      <div class="col-auto ml-auto text-right mt-n1">
                         <div class="form-group">
                           <div class="input-group">
-                            <input type="text" id="chartjs-dashboard-line-year-filter" class="form-control form-control-sm" autocomplete="off">
-                            <span class="input-group-append">
-                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-line-year-search" title="Search">
-                                <i class="align-middle" data-feather="search">&nbsp;</i>
-                              </button>
-                            </span>
+                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyServices" id="monthlyServices">
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                            </select>
                           </div>
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                   </div>
                   <div class="card-body d-flex w-100">
@@ -253,22 +310,13 @@ include_once '../functions/session_config.php';
                         <h5 class="card-title mb-0">Appointment Yearly Status</h5>
                       </div>
 
-                      <!-- <div class="col-5 ml-auto text-right mt-n1">
-                        <div class="text-left">
-                          <label>Date Year: </label> <small class="font-13 text-muted">(e.g 2020)</small>
-                        </div>
-
+                      <div class="col-auto ml-auto text-right mt-n1">
                         <div class="form-group">
                           <div class="input-group">
-                            <input type="text" id="chartjs-dashboard-bar-year-filter" class="form-control form-control-sm" autocomplete="off">
-                            <span class="input-group-append">
-                              <button class="btn btn-primary btn-sm shadow-sm chartjs-dashboard-bar-year-search" title="Search">
-                                <i class="align-middle" data-feather="search">&nbsp;</i>
-                              </button>
-                            </span>
+                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyAppointmentStatus" id="yearlyAppointmentStatus"></select>
                           </div>
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                   </div>
                   <div class="card-body d-flex w-100">
@@ -305,6 +353,39 @@ include_once '../functions/session_config.php';
 
 <script>
   $(document).ready(function() {
+    $(".yearly-dropdown").html(`
+      <option value="">Choose Year</option>
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+      <option value="2027">2027</option>
+      <option value="2028">2028</option>
+      <option value="2029">2029</option>
+      <option value="2030">2030</option>
+    `);
+
+    $(".monthly-dropdown").html(`
+      <option value="">Choose Month</option>
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    `);
+
+
+
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
@@ -384,7 +465,6 @@ include_once '../functions/session_config.php';
         }
       }
     });
-
 
     function getDaysInCurrentMonth() {
       const date = new Date();
@@ -466,8 +546,80 @@ include_once '../functions/session_config.php';
       }
     });
 
-    const loadMonthlyServices = () => {
-      $("#monthly-services-label").text(monthNames[d.getMonth()] + '\'s Top 3 Services');
+    const chartjs_monthly_income_status = new Chart(document.getElementById("chartjs-monthly-income-status"), {
+      type: "bar",
+      data: {
+        labels: monthly_headers,
+        datasets: []
+      },
+      options: {
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 1000
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
+    const my_line_chart_yearly_income_status = new Chart(document.getElementById("chartjs-yearly-income-status-line"), {
+      type: "line",
+      data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July",
+          "August", "September", "October", "November", "December"
+        ],
+        datasets: []
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 1000
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
+    // Monthly Top 3 Services
+    const loadMonthlyServices = (month = '') => {
+      // $("#monthly-services-label").text('Monthly Top 3 Services');
 
       $.ajax({
         method: 'POST',
@@ -475,7 +627,8 @@ include_once '../functions/session_config.php';
         dataType: 'JSON',
         data: {
           action: 'loadServicesChart_Monthly',
-          filter: ''
+          filter: '',
+          month: month
         },
         success: function(res) {
           // console.log(res.loadServicesChart_Monthly);
@@ -534,15 +687,17 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const loadMonthlyStatus = () => {
-      $("#monthly-status-label").text(monthNames[d.getMonth()] + '\'s Appointment Status');
+    // Monthly Appointment Status
+    const loadMonthlyStatus = (month_appointment = '') => {
+      // $("#monthly-status-label").text('Monthly Appointment Status');
       $.ajax({
         method: 'POST',
         url: '../functions/load_analytics.php',
         dataType: 'JSON',
         data: {
           action: 'loadAppointmentStatus_Monthly',
-          filter: ''
+          filter: '',
+          month_appointment: month_appointment
         },
         success: function(res) {
           // console.log(res.loadAppointmentStatus_Monthly);
@@ -601,7 +756,8 @@ include_once '../functions/session_config.php';
       });
     }
 
-    const loadCharts = (action, filter) => {
+    // Services & Total Patients
+    const service_total_patient = (action, filter) => {
       // $("#ILoader").modal('show');
 
       let pie_chart_color = [];
@@ -666,12 +822,39 @@ include_once '../functions/session_config.php';
             pie_chart_data,
             pie_chart_label
           });
-          loadAppointmentYearlyStatusChart(res.data_loadAppointmentYearlyStatus);
-          loadServicesChart(res.data_loadServicesChart);
+          // loadServicesChart(res.data_loadServicesChart);
+        }
+      });
+    }
 
-          // setTimeout(() => {
-          //   $("#ILoader").modal('hide');
-          // }, 1000);
+    // Appointment Yearly Status
+    const appointment_yearly_status = (action, filter) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: action,
+          filter: filter
+        },
+        success: function(res) {
+          loadAppointmentYearlyStatusChart(res.data_loadAppointmentYearlyStatus);
+        }
+      });
+    }
+    
+    // Yearly Top 3 Services
+    const yearlyTopServices = (action, filter) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: action,
+          filter: filter
+        },
+        success: function(res) {
+          loadServicesChart(res.data_loadServicesChart);
         }
       });
     }
@@ -759,6 +942,7 @@ include_once '../functions/session_config.php';
       });
     }
 
+    // Appointment Yearly Status
     const loadAppointmentYearlyStatusChart = (data) => {
       // new Chart(document.getElementById("chartjs-dashboard-bar")).destroy();
       const new_data = [{
@@ -800,39 +984,157 @@ include_once '../functions/session_config.php';
       my_bar_chart.update();
     }
 
+    // Monthly Income Status
+    const loadMonthlyIncome = (month = '') => {
+      $("#monthly-income-status-label").text('Monthly Income Status');
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: 'loadMonthlyIncome',
+          filter: '',
+          month: month
+        },
+        success: function(res) {
+          // console.log(res);
+          const data = res.loadMonthlyIncome;
+          let new_data = [];
+          let dset1 = [];
 
-    const filter = {
-      top_services: $("#chartjs-dashboard-line-year-filter").val(),
-      service_percentage: $("#chartjs-dashboard-pie-year-filter").val(),
-      appointment_status: $("#chartjs-dashboard-bar-year-filter").val()
+          if (res.loadMonthlyIncome.length > 0) {
+            for (i = 1; i <= num_days_this_month; i++) {
+              dset1.push(res.loadMonthlyIncome[0][`d${i}`]);
+            }
+
+            if (data[0]) {
+              new_data.push({
+                label: "Pesos",
+                fill: false,
+                backgroundColor: '#9AD0F5',
+                data: dset1,
+                categoryPercentage: .2
+              });
+            }
+
+            chartjs_monthly_income_status.data.datasets = new_data;
+            chartjs_monthly_income_status.update();
+          }
+        }
+      });
     }
 
-    $(".chartjs-dashboard-line-year-search").click(function(e) {
+    // Yearly Income Status
+    const loadYearlyIncome = (year = '') => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: 'loadYearlyIncome',
+          filter: '',
+          year: year
+        },
+        success: function(res) {
+          // console.log(res);
+          const data = res.loadYearlyIncome;
+          let new_data = [];
+
+          if (res.loadYearlyIncome.length > 0) {
+            if (data[0]) {
+              new_data.push({
+                label: `Pesos`,
+                // backgroundColor: window.theme.success,
+                fill: false,
+                borderColor: '#FFB1C1',
+                // hoverBackgroundColor: window.theme.success,
+                // hoverBorderColor: window.theme.success,
+                data: [data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may, data[0].jun,
+                  data[0].jul, data[0].aug, data[0].sep, data[0].oct, data[0].nov, data[0].dece
+                ],
+                // barPercentage: .325,
+                // categoryPercentage: .5
+              });
+            }
+
+
+            my_line_chart_yearly_income_status.data.datasets = new_data;
+            my_line_chart_yearly_income_status.update();
+          }
+        }
+      });
+    }
+
+    // Yearly Income Status
+    $("#yearlyIncomeStatus").change(function(e) {
       e.preventDefault();
 
-      filter.top_services = $("#chartjs-dashboard-line-year-filter").val();
+      let selected_year = $(this).val();
 
-      loadCharts('default', filter);
+      loadYearlyIncome(selected_year);
     });
 
-    $(".chartjs-dashboard-pie-year-search").click(function(e) {
+    // Monthly Income Status
+    $("#monthlyIncomeStatus").change(function(e) {
       e.preventDefault();
 
-      filter.service_percentage = $("#chartjs-dashboard-pie-year-filter").val();
+      let selected_month = $(this).val();
 
-      loadCharts('default', filter);
+      loadMonthlyIncome(selected_month);
     });
 
-    $(".chartjs-dashboard-bar-year-search").click(function(e) {
+    // Monthly Appointment Status
+    $("#monthlyStatus").change(function(e) {
       e.preventDefault();
 
-      filter.appointment_status = $("#chartjs-dashboard-bar-year-filter").val();
+      let selected_month = $(this).val();
 
-      loadCharts('default', filter);
+      loadMonthlyStatus(selected_month);
     });
 
-    loadCharts('default', filter);
+    // Monthly Top 3 Services
+    $("#monthlyServices").change(function(e) {
+      e.preventDefault();
+
+      let selected_month = $(this).val();
+
+      loadMonthlyServices(selected_month);
+    });
+    
+    
+    let filter = {
+      top_services: '',
+      appointment_status: '',
+    }
+
+    // Yearly Top 3 Services
+    $("#yearlyTopServices").change(function(e) {
+      e.preventDefault();
+
+      let selected_year = $(this).val();
+
+      filter.top_services = selected_year;
+
+      yearlyTopServices('default', filter);
+    });
+    
+    // Appointment Yearly Status
+    $("#yearlyAppointmentStatus").change(function(e) {
+      e.preventDefault();
+
+      let selected_year = $(this).val();
+
+      filter.appointment_status = selected_year;
+
+      appointment_yearly_status('default', filter);
+    });
+
+    service_total_patient('default', filter);
+    appointment_yearly_status('default', filter);
+    yearlyTopServices('default', filter);
     loadMonthlyServices();
     loadMonthlyStatus();
+    loadMonthlyIncome();
+    loadYearlyIncome();
   });
 </script>

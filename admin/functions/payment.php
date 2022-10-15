@@ -12,6 +12,7 @@ $user_id = $_POST['user_id'] ? $_POST['user_id'] : '0';
 $appointment_id = $_POST['appointment_id'] ? $_POST['appointment_id'] : '0';
 
 $total_cost = $cost + $other_cost;
+$date_paid = date('Y-m-d');
 
 if ($user_id && $appointment_id) {
   $qry = "UPDATE tbl_appointments SET is_completed = 1 
@@ -22,10 +23,10 @@ if ($user_id && $appointment_id) {
     $reference_no = GetSerialCode($user_id, $appointment_id);
 
     $qry = "INSERT INTO tbl_appointment_payment
-    (reference_no, user_id, appointment_id, pregnant_status, 
+    (reference_no, user_id, date_paid, appointment_id, pregnant_status, 
     service_title, other_services, findings, cost, other_cost, total_cost)
     VALUES
-    ('$reference_no', '$user_id', '$appointment_id', '$pregnant_status', 
+    ('$reference_no', '$user_id', '$date_paid', '$appointment_id', '$pregnant_status', 
     '$service_title', '$other_services', '$findings', '$cost', '$other_cost', '$total_cost')";
 
     if ($conn->query($qry)) {
@@ -41,49 +42,49 @@ if ($user_id && $appointment_id) {
         $email = $row['email'];
 
         $message = "<table style='font-family: Courier New, Courier, monospace; font-size: 13px; border: 1px solid; width: 800px;'>
-        <tr>
-          <td colspan='10' style='text-align: center; font-size: 2em;'>OFFICIAL RECEIPT</td>
-        </tr>
-        <tr>
-          <td><strong>REF NO.:</strong> $reference_no</td>
-        </tr>
-        <tr>
-          <td><strong>DATE:</strong> $date_paid</td>
-        </tr>
-        <tr>
-          <td><strong>FULLNAME:</strong> $fullname</td>
-        </tr>
-        <tr>
-          <td><strong>ADDRESS:</strong> $address</td>
-        </tr>
-        <tr>
-          <td><strong>PREGNANCY STATUS:</strong> $pregnant_status</td>
-        </tr>
-      </table>
+          <tr>
+            <td colspan='10' style='text-align: center; font-size: 2em;'>OFFICIAL RECEIPT</td>
+          </tr>
+          <tr>
+            <td><strong>REF NO.:</strong> $reference_no</td>
+          </tr>
+          <tr>
+            <td><strong>DATE:</strong> $date_paid</td>
+          </tr>
+          <tr>
+            <td><strong>FULLNAME:</strong> $fullname</td>
+          </tr>
+          <tr>
+            <td><strong>ADDRESS:</strong> $address</td>
+          </tr>
+          <tr>
+            <td><strong>PREGNANCY STATUS:</strong> $pregnant_status</td>
+          </tr>
+        </table>
     
-      <table style='font-family: Courier New, Courier, monospace; border: 1px solid; width: 800px; border-collapse: collapse;'>
-        <tr style='font-size: 13px; border: 1px solid; font-weight: bold;'>
-          <td style='padding: 5px; text-align: center; width: 25%;'>SERVICE</td>
-          <td style='padding: 5px; text-align: center; width: 25%;'>FINDINGS</td>
-          <td style='padding: 5px; text-align: center; width: 15%;'>COST</td>
-          <td style='padding: 5px; text-align: center; width: 15%;'>OTHER COST</td>
-          <td style='padding: 5px; text-align: center; width: 15%;'>TOTAL COST</td>
-        </tr>
-        <tr style='font-size: 12px;'>
-          <td style='padding: 5px; text-align: left;'>$service_title <br> $other_services</td>
-          <td style='padding: 5px; text-align: left;'>$findings</td>
-          <td style='padding: 5px; text-align: right;'>" . number_format($cost, 2) . "</td>
-          <td style='padding: 5px; text-align: right;'>" . number_format($other_cost, 2) . "</td>
-          <td style='padding: 5px; text-align: right;'>" . number_format($total_cost, 2) . "</td>
-        </tr>
-        <tr style='font-size: 13px; border: 1px solid;'>
-          <td style='padding: 5px; text-align: left;'></td>
-          <td style='padding: 5px; text-align: left;'></td>
-          <td style='padding: 5px; text-align: right;'></td>
-          <td style='padding: 5px; text-align: right; font-weight: bold;'>GRAND TOTAL</td>
-          <td style='padding: 5px; text-align: right; font-weight: bold;'>" . number_format($total_cost, 2) . "</td>
-        </tr>
-      </table>";
+        <table style='font-family: Courier New, Courier, monospace; border: 1px solid; width: 800px; border-collapse: collapse;'>
+          <tr style='font-size: 13px; border: 1px solid; font-weight: bold;'>
+            <td style='padding: 5px; text-align: center; width: 25%;'>SERVICE</td>
+            <td style='padding: 5px; text-align: center; width: 25%;'>FINDINGS</td>
+            <td style='padding: 5px; text-align: center; width: 15%;'>COST</td>
+            <td style='padding: 5px; text-align: center; width: 15%;'>OTHER COST</td>
+            <td style='padding: 5px; text-align: center; width: 15%;'>TOTAL COST</td>
+          </tr>
+          <tr style='font-size: 12px;'>
+            <td style='padding: 5px; text-align: left;'>$service_title <br> $other_services</td>
+            <td style='padding: 5px; text-align: left;'>$findings</td>
+            <td style='padding: 5px; text-align: right;'>" . number_format($cost, 2) . "</td>
+            <td style='padding: 5px; text-align: right;'>" . number_format($other_cost, 2) . "</td>
+            <td style='padding: 5px; text-align: right;'>" . number_format($total_cost, 2) . "</td>
+          </tr>
+          <tr style='font-size: 13px; border: 1px solid;'>
+            <td style='padding: 5px; text-align: left;'></td>
+            <td style='padding: 5px; text-align: left;'></td>
+            <td style='padding: 5px; text-align: right;'></td>
+            <td style='padding: 5px; text-align: right; font-weight: bold;'>GRAND TOTAL</td>
+            <td style='padding: 5px; text-align: right; font-weight: bold;'>" . number_format($total_cost, 2) . "</td>
+          </tr>
+        </table>";
 
         if ($email !== '') {
           $email = new Email($email, $message, 'Official Receipt');

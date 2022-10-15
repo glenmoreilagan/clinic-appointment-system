@@ -6,24 +6,35 @@ include_once '../../config.php';
 
 $action = $_POST['action'];
 $top_services = isset($_POST['filter']['top_services']) ? $_POST['filter']['top_services'] : '';
-$service_percentage = isset($_POST['filter']['service_percentage']) ? $_POST['filter']['service_percentage'] : '';
 $appointment_status = isset($_POST['filter']['appointment_status']) ? $_POST['filter']['appointment_status'] : '';
 
 switch ($action) {
   case 'loadServicesChart_Monthly':
-    $loadServicesChart_Monthly = loadServicesChart_Monthly($conn);
+    $loadServicesChart_Monthly = loadServicesChart_Monthly($conn, $_POST['month']);
     echo json_encode([
       'loadServicesChart_Monthly' => $loadServicesChart_Monthly,
     ]);
     break;
   case 'loadAppointmentStatus_Monthly':
-    $loadAppointmentStatus_Monthly = loadAppointmentStatus_Monthly($conn);
+    $loadAppointmentStatus_Monthly = loadAppointmentStatus_Monthly($conn, $_POST['month_appointment']);
     echo json_encode([
       'loadAppointmentStatus_Monthly' => $loadAppointmentStatus_Monthly,
     ]);
     break;
+  case 'loadMonthlyIncome':
+    $loadMonthlyIncome = loadMonthlyIncome($conn, $_POST['month']);
+    echo json_encode([
+      'loadMonthlyIncome' => $loadMonthlyIncome,
+    ]);
+    break;
+  case 'loadYearlyIncome':
+    $loadYearlyIncome = loadYearlyIncome($conn, $_POST['year']);
+    echo json_encode([
+      'loadYearlyIncome' => $loadYearlyIncome,
+    ]);
+    break;
   default:
-    $data_loadServicePercentage = loadServicePercentage($conn, $service_percentage);
+    $data_loadServicePercentage = loadServicePercentage($conn);
     $data_loadAppointmentYearlyStatus = loadAppointmentYearlyStatus($conn, $appointment_status);
     $data_loadServicesChart = loadServicesChart($conn, $top_services);
 
@@ -36,12 +47,9 @@ switch ($action) {
 }
 
 
-function loadServicePercentage($conn, $service_percentage)
+function loadServicePercentage($conn)
 {
   $added_filter = '';
-  if ($service_percentage != '') {
-    $added_filter .= " AND YEAR(appt.date_schedule) = '$service_percentage'";
-  }
 
   $qry = "SELECT COUNT(appt.service_id) as total_service_count
     FROM tbl_appointments as appt
@@ -245,9 +253,9 @@ function loadServicesChart($conn, $top_services)
   }
 }
 
-function loadAppointmentStatus_Monthly($conn)
+function loadAppointmentStatus_Monthly($conn, $month)
 {
-  $today_month = date('m');
+  $today_month = $month != '' ? $month : date('m');
   $num_day_month = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
   $added_filter = '';
   $added_filter .= " AND MONTH(date_schedule) = $today_month";
@@ -304,37 +312,37 @@ function loadAppointmentStatus_Monthly($conn)
     while ($row = $result->fetch_assoc()) {
       $data[] = [
         'status' => $row['status'],
-        'd1' => $row['d1'],
-        'd2' => $row['d2'],
-        'd3' => $row['d3'],
-        'd4' => $row['d4'],
-        'd5' => $row['d5'],
-        'd6' => $row['d6'],
-        'd7' => $row['d7'],
-        'd8' => $row['d8'],
-        'd9' => $row['d9'],
-        'd10' => $row['d10'],
-        'd11' => $row['d11'],
-        'd12' => $row['d12'],
-        'd13' => $row['d13'],
-        'd14' => $row['d14'],
-        'd15' => $row['d15'],
-        'd16' => $row['d16'],
-        'd17' => $row['d17'],
-        'd18' => $row['d18'],
-        'd19' => $row['d19'],
-        'd20' => $row['d20'],
-        'd21' => $row['d21'],
-        'd22' => $row['d22'],
-        'd23' => $row['d23'],
-        'd24' => $row['d24'],
-        'd25' => $row['d25'],
-        'd26' => $row['d26'],
-        'd27' => $row['d27'],
-        'd28' => $row['d28'],
-        'd29' => $row['d29'],
-        'd30' => $row['d30'],
-        'd31' => $row['d31'],
+        'd1' => number_format($row['d1'], 2, '.', ''),
+        'd2' => number_format($row['d2'], 2, '.', ''),
+        'd3' => number_format($row['d3'], 2, '.', ''),
+        'd4' => number_format($row['d4'], 2, '.', ''),
+        'd5' => number_format($row['d5'], 2, '.', ''),
+        'd6' => number_format($row['d6'], 2, '.', ''),
+        'd7' => number_format($row['d7'], 2, '.', ''),
+        'd8' => number_format($row['d8'], 2, '.', ''),
+        'd9' => number_format($row['d9'], 2, '.', ''),
+        'd10' => number_format($row['d10'], 2, '.', ''),
+        'd11' => number_format($row['d11'], 2, '.', ''),
+        'd12' => number_format($row['d12'], 2, '.', ''),
+        'd13' => number_format($row['d13'], 2, '.', ''),
+        'd14' => number_format($row['d14'], 2, '.', ''),
+        'd15' => number_format($row['d15'], 2, '.', ''),
+        'd16' => number_format($row['d16'], 2, '.', ''),
+        'd17' => number_format($row['d17'], 2, '.', ''),
+        'd18' => number_format($row['d18'], 2, '.', ''),
+        'd19' => number_format($row['d19'], 2, '.', ''),
+        'd20' => number_format($row['d20'], 2, '.', ''),
+        'd21' => number_format($row['d21'], 2, '.', ''),
+        'd22' => number_format($row['d22'], 2, '.', ''),
+        'd23' => number_format($row['d23'], 2, '.', ''),
+        'd24' => number_format($row['d24'], 2, '.', ''),
+        'd25' => number_format($row['d25'], 2, '.', ''),
+        'd26' => number_format($row['d26'], 2, '.', ''),
+        'd27' => number_format($row['d27'], 2, '.', ''),
+        'd28' => number_format($row['d28'], 2, '.', ''),
+        'd29' => number_format($row['d29'], 2, '.', ''),
+        'd30' => number_format($row['d30'], 2, '.', ''),
+        'd31' => isset($row['d31']) ? number_format($row['d31'], 2, '.', '') : 0,
       ];
     }
 
@@ -344,9 +352,9 @@ function loadAppointmentStatus_Monthly($conn)
   }
 }
 
-function loadServicesChart_Monthly($conn)
+function loadServicesChart_Monthly($conn, $month)
 {
-  $today_month = date('m');
+  $today_month = $month != '' ? $month : date('m');
   $num_day_month = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
   $added_filter = '';
   $added_filter .= " AND MONTH(date_schedule) = $today_month";
@@ -380,37 +388,181 @@ function loadServicesChart_Monthly($conn)
     while ($row = $result->fetch_assoc()) {
       $data[] = [
         'service_title' => $row['service_title'],
-        'd1' => $row['d1'],
-        'd2' => $row['d2'],
-        'd3' => $row['d3'],
-        'd4' => $row['d4'],
-        'd5' => $row['d5'],
-        'd6' => $row['d6'],
-        'd7' => $row['d7'],
-        'd8' => $row['d8'],
-        'd9' => $row['d9'],
-        'd10' => $row['d10'],
-        'd11' => $row['d11'],
-        'd12' => $row['d12'],
-        'd13' => $row['d13'],
-        'd14' => $row['d14'],
-        'd15' => $row['d15'],
-        'd16' => $row['d16'],
-        'd17' => $row['d17'],
-        'd18' => $row['d18'],
-        'd19' => $row['d19'],
-        'd20' => $row['d20'],
-        'd21' => $row['d21'],
-        'd22' => $row['d22'],
-        'd23' => $row['d23'],
-        'd24' => $row['d24'],
-        'd25' => $row['d25'],
-        'd26' => $row['d26'],
-        'd27' => $row['d27'],
-        'd28' => $row['d28'],
-        'd29' => $row['d29'],
-        'd30' => $row['d30'],
-        'd31' => $row['d31'],
+        'd1' => number_format($row['d1'], 2, '.', ''),
+        'd2' => number_format($row['d2'], 2, '.', ''),
+        'd3' => number_format($row['d3'], 2, '.', ''),
+        'd4' => number_format($row['d4'], 2, '.', ''),
+        'd5' => number_format($row['d5'], 2, '.', ''),
+        'd6' => number_format($row['d6'], 2, '.', ''),
+        'd7' => number_format($row['d7'], 2, '.', ''),
+        'd8' => number_format($row['d8'], 2, '.', ''),
+        'd9' => number_format($row['d9'], 2, '.', ''),
+        'd10' => number_format($row['d10'], 2, '.', ''),
+        'd11' => number_format($row['d11'], 2, '.', ''),
+        'd12' => number_format($row['d12'], 2, '.', ''),
+        'd13' => number_format($row['d13'], 2, '.', ''),
+        'd14' => number_format($row['d14'], 2, '.', ''),
+        'd15' => number_format($row['d15'], 2, '.', ''),
+        'd16' => number_format($row['d16'], 2, '.', ''),
+        'd17' => number_format($row['d17'], 2, '.', ''),
+        'd18' => number_format($row['d18'], 2, '.', ''),
+        'd19' => number_format($row['d19'], 2, '.', ''),
+        'd20' => number_format($row['d20'], 2, '.', ''),
+        'd21' => number_format($row['d21'], 2, '.', ''),
+        'd22' => number_format($row['d22'], 2, '.', ''),
+        'd23' => number_format($row['d23'], 2, '.', ''),
+        'd24' => number_format($row['d24'], 2, '.', ''),
+        'd25' => number_format($row['d25'], 2, '.', ''),
+        'd26' => number_format($row['d26'], 2, '.', ''),
+        'd27' => number_format($row['d27'], 2, '.', ''),
+        'd28' => number_format($row['d28'], 2, '.', ''),
+        'd29' => number_format($row['d29'], 2, '.', ''),
+        'd30' => number_format($row['d30'], 2, '.', ''),
+        'd31' => isset($row['d31']) ? number_format($row['d31'], 2, '.', '') : 0,
+      ];
+    }
+
+    return $data;
+  } else {
+    return [];
+  }
+}
+
+function loadMonthlyIncome($conn, $month)
+{
+  $today_month = $month != '' ? $month : date('m');
+  // get number of days in today month
+  $num_day_month = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+  $added_filter = '';
+  $added_filter .= " AND MONTH(date_paid) = $today_month";
+
+  $main_concat = '';
+  $str_concat = '';
+  $order_concat = '';
+
+  for ($i = 1; $i <= $num_day_month; $i++) {
+    // if i not equal sa number ng araw ngayong buwan
+    // cocompute lang tas i aapend lang yung string para maging 
+    // sql query may comma sa dulo
+    if ($i != $num_day_month) {
+      $main_concat .= "SUM(d$i) as d$i,";
+      $str_concat .= "IF (DAY(date_paid) = $i, SUM(total_cost), 0) AS d$i, ";
+      $order_concat .= "d$i ASC, ";
+    } else {
+      // eto naman pag yung i at last day ay equal
+      // same lang naman ginagawa pero 
+      // inalis lang yung comma sa dulo ng string
+      $main_concat .= "SUM(d$i) as d$i";
+      $str_concat .= "IF (DAY(date_paid) = $i, SUM(total_cost), 0) AS d$i ";
+      $order_concat .= "d$i ASC ";
+    }
+  }
+
+
+  $qry = "SELECT $main_concat FROM (
+    SELECT
+    $str_concat
+    FROM tbl_appointment_payment
+    WHERE 1=1 $added_filter
+    GROUP BY DAY(date_paid)
+    ORDER BY $order_concat) as tbl";
+
+  $result = $conn->query($qry);
+
+  if ($result->num_rows > 0) {
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+      $data[] = [
+        // 'service_title' => $row['service_title'],
+        'd1' => number_format($row['d1'], 2, '.', ''),
+        'd2' => number_format($row['d2'], 2, '.', ''),
+        'd3' => number_format($row['d3'], 2, '.', ''),
+        'd4' => number_format($row['d4'], 2, '.', ''),
+        'd5' => number_format($row['d5'], 2, '.', ''),
+        'd6' => number_format($row['d6'], 2, '.', ''),
+        'd7' => number_format($row['d7'], 2, '.', ''),
+        'd8' => number_format($row['d8'], 2, '.', ''),
+        'd9' => number_format($row['d9'], 2, '.', ''),
+        'd10' => number_format($row['d10'], 2, '.', ''),
+        'd11' => number_format($row['d11'], 2, '.', ''),
+        'd12' => number_format($row['d12'], 2, '.', ''),
+        'd13' => number_format($row['d13'], 2, '.', ''),
+        'd14' => number_format($row['d14'], 2, '.', ''),
+        'd15' => number_format($row['d15'], 2, '.', ''),
+        'd16' => number_format($row['d16'], 2, '.', ''),
+        'd17' => number_format($row['d17'], 2, '.', ''),
+        'd18' => number_format($row['d18'], 2, '.', ''),
+        'd19' => number_format($row['d19'], 2, '.', ''),
+        'd20' => number_format($row['d20'], 2, '.', ''),
+        'd21' => number_format($row['d21'], 2, '.', ''),
+        'd22' => number_format($row['d22'], 2, '.', ''),
+        'd23' => number_format($row['d23'], 2, '.', ''),
+        'd24' => number_format($row['d24'], 2, '.', ''),
+        'd25' => number_format($row['d25'], 2, '.', ''),
+        'd26' => number_format($row['d26'], 2, '.', ''),
+        'd27' => number_format($row['d27'], 2, '.', ''),
+        'd28' => number_format($row['d28'], 2, '.', ''),
+        'd29' => number_format($row['d29'], 2, '.', ''),
+        'd30' => number_format($row['d30'], 2, '.', ''),
+        'd31' => isset($row['d31']) ? number_format($row['d31'], 2, '.', '') : 0,
+      ];
+    }
+
+    return $data;
+  } else {
+    return [];
+  }
+}
+
+function loadYearlyIncome($conn, $year)
+{
+  $today_year = $year != '' ? $year : date('Y');
+  $added_filter = '';
+
+  $added_filter .= " AND YEAR(date_paid) = '$today_year'";
+
+  $qry = "SELECT SUM(jan) as jan, SUM(feb) as feb,
+    SUM(mar) as mar, SUM(apr) as apr, SUM(may) as may, 
+    SUM(jun) as jun, SUM(jul) as jul, SUM(aug) as aug, 
+    SUM(sep) as sep, SUM(oct) as oct, SUM(nov) as nov, SUM(dece)as dece
+    FROM (
+      SELECT DATE_FORMAT(date_paid, '%b') AS month_name,
+      IF (MONTH(date_paid) = 1, SUM(total_cost), 0) AS jan,
+      IF (MONTH(date_paid) = 2, SUM(total_cost), 0) AS feb,
+      IF (MONTH(date_paid) = 3, SUM(total_cost), 0) AS mar,
+      IF (MONTH(date_paid) = 4, SUM(total_cost), 0) AS apr,
+      IF (MONTH(date_paid) = 5, SUM(total_cost), 0) AS may,
+      IF (MONTH(date_paid) = 6, SUM(total_cost), 0) AS jun,
+      IF (MONTH(date_paid) = 7, SUM(total_cost), 0) AS jul,
+      IF (MONTH(date_paid) = 8, SUM(total_cost), 0) AS aug,
+      IF (MONTH(date_paid) = 9, SUM(total_cost), 0) AS sep,
+      IF (MONTH(date_paid) = 10, SUM(total_cost), 0) AS oct,
+      IF (MONTH(date_paid) = 11, SUM(total_cost), 0) AS nov,
+      IF (MONTH(date_paid) = 12, SUM(total_cost), 0) AS dece
+      FROM tbl_appointment_payment
+      WHERE 1=1 $added_filter
+      GROUP BY MONTH(date_paid)
+      ORDER BY MONTH(date_paid)
+    ) AS tbl";
+
+  $result = $conn->query($qry);
+
+  if ($result->num_rows > 0) {
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+      $data[] = [
+        'jan' => $row['jan'] ? number_format($row['jan'], 2, '.', '') : 0,
+        'feb' => $row['feb'] ? number_format($row['feb'], 2, '.', '') : 0,
+        'mar' => $row['mar'] ? number_format($row['mar'], 2, '.', '') : 0,
+        'apr' => $row['apr'] ? number_format($row['apr'], 2, '.', '') : 0,
+        'may' => $row['may'] ? number_format($row['may'], 2, '.', '') : 0,
+        'jun' => $row['jun'] ? number_format($row['jun'], 2, '.', '') : 0,
+        'jul' => $row['jul'] ? number_format($row['jul'], 2, '.', '') : 0,
+        'aug' => $row['aug'] ? number_format($row['aug'], 2, '.', '') : 0,
+        'sep' => $row['sep'] ? number_format($row['sep'], 2, '.', '') : 0,
+        'oct' => $row['oct'] ? number_format($row['oct'], 2, '.', '') : 0,
+        'nov' => $row['nov'] ? number_format($row['nov'], 2, '.', '') : 0,
+        'dece' => $row['dece'] ? number_format($row['dece'], 2, '.', '') : 0,
       ];
     }
 
