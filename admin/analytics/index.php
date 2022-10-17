@@ -78,64 +78,7 @@ include_once '../functions/session_config.php';
             </div> -->
           </div>
 
-          <div class="card-body mt-3" style="padding: 0 !important;">
-            <div class="row">
-              <div class="col-12 col-lg-12 d-flex">
-                <div class="card flex-fill w-100">
-                  <div class="card-header">
-                    <div class="row mb-2 mb-xl-3">
-                      <div class="col-auto">
-                        <h5 class="card-title mb-0">Yearly Income Status</h5>
-                      </div>
-
-                      <div class="col-auto ml-auto text-right mt-n1">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyIncomeStatus" id="yearlyIncomeStatus"></select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body d-flex w-100">
-                    <div class="chart-lg" style="width: 100%;">
-                      <canvas id="chartjs-yearly-income-status-line"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body mt-3" style="padding: 0 !important;">
-            <div class="row">
-              <div class="col-12 col-lg-12 d-flex">
-                <div class="card flex-fill w-100">
-                  <div class="card-header">
-                    <div class="row mb-2 mb-xl-3">
-                      <div class="col-auto">
-                        <h5 class="card-title mb-0" id="monthly-income-status-label"></h5>
-                      </div>
-
-                      <div class="col-auto ml-auto text-right mt-n1">
-                        <div class="form-group">
-                          <div class="input-group">
-                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyIncomeStatus" id="monthlyIncomeStatus"></select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body d-flex w-100">
-                    <div class="chart-lg" style="width: 100%;">
-                      <canvas id="chartjs-monthly-income-status"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <!-- Monthly Appointment Status -->
           <div class="card-body mt-3" style="padding: 0 !important;">
             <div class="row">
               <div class="col-12 col-lg-12 d-flex">
@@ -178,6 +121,7 @@ include_once '../functions/session_config.php';
             </div>
           </div>
 
+          <!-- Monthly Pregnancy Status -->
           <div class="card-body mt-3" style="padding: 0 !important;">
             <div class="row">
               <div class="col-12 col-lg-12 d-flex">
@@ -185,13 +129,26 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0">Yearly Top 3 Services</h5>
+                        <h5 class="card-title mb-0" id="monthly-pregnancy-label">Monthly Pregnancy Status</h5>
                       </div>
 
                       <div class="col-auto ml-auto text-right mt-n1">
                         <div class="form-group">
                           <div class="input-group">
-                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyTopServices" id="yearlyTopServices"></select>
+                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyPregnancyStatus" id="monthlyPregnancyStatus">
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -199,7 +156,7 @@ include_once '../functions/session_config.php';
                   </div>
                   <div class="card-body d-flex w-100">
                     <div class="chart-lg" style="width: 100%;">
-                      <canvas id="chartjs-dashboard-line"></canvas>
+                      <canvas id="chartjs-pregnancy-status-monthly"></canvas>
                     </div>
                   </div>
                 </div>
@@ -207,6 +164,7 @@ include_once '../functions/session_config.php';
             </div>
           </div>
 
+          <!-- Monthly Top 3 Services -->
           <div class="card-body mt-3" style="padding: 0 !important;">
             <div class="row">
               <div class="col-12 col-lg-12 d-flex">
@@ -249,6 +207,37 @@ include_once '../functions/session_config.php';
             </div>
           </div>
 
+          <!-- Monthly Income Status -->
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0" id="monthly-income-status-label">Monthly Income Status</h5>
+                      </div>
+
+                      <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyIncomeStatus" id="monthlyIncomeStatus"></select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-monthly-income-status"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Services & Total Patients and Appointment Yearly Status -->
           <!-- <div class="card mb-3"> -->
           <div class="card-body mt-3" style="padding: 0 !important;">
             <div class="row">
@@ -328,7 +317,9 @@ include_once '../functions/session_config.php';
               </div>
             </div>
           </div>
+          <!-- </div> -->
 
+          <!-- Yearly Income Status -->
           <div class="card-body mt-3" style="padding: 0 !important;">
             <div class="row">
               <div class="col-12 col-lg-12 d-flex">
@@ -336,26 +327,13 @@ include_once '../functions/session_config.php';
                   <div class="card-header">
                     <div class="row mb-2 mb-xl-3">
                       <div class="col-auto">
-                        <h5 class="card-title mb-0" id="monthly-pregnancy-label">Monthly Pregnancy Status</h5>
+                        <h5 class="card-title mb-0">Yearly Income Status</h5>
                       </div>
 
                       <div class="col-auto ml-auto text-right mt-n1">
                         <div class="form-group">
                           <div class="input-group">
-                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyPregnancyStatus" id="monthlyPregnancyStatus">
-                              <option value="1">January</option>
-                              <option value="2">February</option>
-                              <option value="3">March</option>
-                              <option value="4">April</option>
-                              <option value="5">May</option>
-                              <option value="6">June</option>
-                              <option value="7">July</option>
-                              <option value="8">August</option>
-                              <option value="9">September</option>
-                              <option value="10">October</option>
-                              <option value="11">November</option>
-                              <option value="12">December</option>
-                            </select>
+                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyIncomeStatus" id="yearlyIncomeStatus"></select>
                           </div>
                         </div>
                       </div>
@@ -363,14 +341,43 @@ include_once '../functions/session_config.php';
                   </div>
                   <div class="card-body d-flex w-100">
                     <div class="chart-lg" style="width: 100%;">
-                      <canvas id="chartjs-pregnancy-status-monthly"></canvas>
+                      <canvas id="chartjs-yearly-income-status-line"></canvas>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- </div> -->
+
+          <!-- Yearly Top 3 Services -->
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0">Yearly Top 3 Services</h5>
+                      </div>
+
+                      <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <select class="yearly-dropdown form-control form-control-sm" name="yearlyTopServices" id="yearlyTopServices"></select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-dashboard-line"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
 
@@ -607,7 +614,14 @@ include_once '../functions/session_config.php';
             },
             stacked: false,
             ticks: {
-              stepSize: 1000
+              stepSize: 1000,
+              callback: function(value, index, values) {
+                if (parseInt(value) >= 1000) {
+                  return '₱ ' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                } else {
+                  return '₱ ' + value;
+                }
+              }
             },
             stacked: false,
           }],
@@ -618,6 +632,13 @@ include_once '../functions/session_config.php';
             },
             stacked: false,
           }]
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return '₱ ' + tooltipItem.yLabel.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            }
+          }
         }
       }
     });
@@ -644,7 +665,14 @@ include_once '../functions/session_config.php';
             },
             stacked: false,
             ticks: {
-              stepSize: 1000
+              stepSize: 1000,
+              callback: function(value, index, values) {
+                if (parseInt(value) >= 1000) {
+                  return '₱ ' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                } else {
+                  return '₱ ' + value;
+                }
+              }
             },
             stacked: false,
           }],
@@ -654,7 +682,14 @@ include_once '../functions/session_config.php';
               color: "transparent"
             },
             stacked: false,
-          }]
+          }],
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return '₱ ' + tooltipItem.yLabel.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            }
+          }
         }
       }
     });
@@ -1058,7 +1093,7 @@ include_once '../functions/session_config.php';
 
     // Monthly Income Status
     const loadMonthlyIncome = (month = '') => {
-      $("#monthly-income-status-label").text('Monthly Income Status');
+      // $("#monthly-income-status-label").text('Monthly Income Status');
       $.ajax({
         method: 'POST',
         url: '../functions/load_analytics.php',
