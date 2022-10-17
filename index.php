@@ -36,7 +36,7 @@ if (!empty($_SESSION)) {
     </div> -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="image/carousel/1.jpg" class="d-block w-100" alt="...">
+                <img src="image/carousel/1.webp" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Great care is always the best choice</h3>
                     <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i>
@@ -48,7 +48,7 @@ if (!empty($_SESSION)) {
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="image/carousel/2.jpg" class="d-block w-100" alt="...">
+                <img src="image/carousel/2.webp" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Great care is always the best choice</h3>
                     <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i>
@@ -59,19 +59,8 @@ if (!empty($_SESSION)) {
                     </div>
                 </div>
             </div>
-            <!-- <div class="carousel-item">
-        <img src="image/carousel/3.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>Great care is always the best choice</h3>
-          <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i></h5>
-          <div class="slider-btn">
-            <a href="#"><span>Our Services</span></a>
-            <a href="#"><span>Get Appointment</span></a>
-          </div>
-        </div>
-      </div> -->
             <div class="carousel-item">
-                <img src="image/carousel/4.jpg" class="d-block w-100" alt="...">
+                <img src="image/carousel/3.webp" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Great care is always the best choice</h3>
                     <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i>
@@ -173,47 +162,47 @@ if (!empty($_SESSION)) {
         <div class="row">
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/1st.png" width="100%" alt="">
+                    <img src="image/months/1st.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/2nd.png" width="100%" alt="">
+                    <img src="image/months/2nd.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/3rd.png" width="100%" alt="">
+                    <img src="image/months/3rd.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/4th.png" width="100%" alt="">
+                    <img src="image/months/4th.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/5th.png" width="100%" alt="">
+                    <img src="image/months/5th.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/6th.png" width="100%" alt="">
+                    <img src="image/months/6th.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/7th.png" width="100%" alt="">
+                    <img src="image/months/7th.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/8th.png" width="100%" alt="">
+                    <img src="image/months/8th.webp" width="100%" alt="">
                 </div>
             </div>
             <div class="monthly col-md-4">
                 <div class="weekly">
-                    <img src="image/months/9th.png" width="100%" alt="">
+                    <img src="image/months/9th.webp" width="100%" alt="">
                 </div>
             </div>
 
