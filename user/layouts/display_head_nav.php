@@ -71,7 +71,6 @@
                 </a>
               `;
             }
-
             $("#notif-details").html(str);
           }
         }

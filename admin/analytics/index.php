@@ -328,6 +328,48 @@ include_once '../functions/session_config.php';
               </div>
             </div>
           </div>
+
+          <div class="card-body mt-3" style="padding: 0 !important;">
+            <div class="row">
+              <div class="col-12 col-lg-12 d-flex">
+                <div class="card flex-fill w-100">
+                  <div class="card-header">
+                    <div class="row mb-2 mb-xl-3">
+                      <div class="col-auto">
+                        <h5 class="card-title mb-0" id="monthly-pregnancy-label">Monthly Pregnancy Status</h5>
+                      </div>
+
+                      <div class="col-auto ml-auto text-right mt-n1">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <select class="monthly-dropdown form-control form-control-sm" name="monthlyPregnancyStatus" id="monthlyPregnancyStatus">
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex w-100">
+                    <div class="chart-lg" style="width: 100%;">
+                      <canvas id="chartjs-pregnancy-status-monthly"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- </div> -->
         </div>
       </main>
@@ -617,6 +659,40 @@ include_once '../functions/session_config.php';
       }
     });
 
+    const chartjs_pregnancy_status_monthly = new Chart(document.getElementById("chartjs-pregnancy-status-monthly"), {
+      type: "bar",
+      data: {
+        labels: monthly_headers,
+        datasets: []
+      },
+      options: {
+        maintainAspectRatio: false,
+        cornerRadius: 15,
+        legend: {
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            stacked: false,
+            ticks: {
+              stepSize: 5
+            },
+            stacked: false,
+          }],
+          xAxes: [{
+            stacked: false,
+            gridLines: {
+              color: "transparent"
+            },
+            stacked: false,
+          }]
+        }
+      }
+    });
+
     // Monthly Top 3 Services
     const loadMonthlyServices = (month = '') => {
       // $("#monthly-services-label").text('Monthly Top 3 Services');
@@ -678,11 +754,9 @@ include_once '../functions/session_config.php';
                 categoryPercentage: .5
               });
             }
-
-            // console.log(new_data);
-            chartjs_services_monthly.data.datasets = new_data;
-            chartjs_services_monthly.update();
           }
+          chartjs_services_monthly.data.datasets = new_data;
+          chartjs_services_monthly.update();
         }
       });
     }
@@ -722,7 +796,7 @@ include_once '../functions/session_config.php';
 
             if (data[0]) {
               new_data.push({
-                label: "Pending",
+                label: "Approved",
                 fill: false,
                 backgroundColor: '#97DBAE',
                 data: dset1,
@@ -731,7 +805,7 @@ include_once '../functions/session_config.php';
             }
             if (data[1]) {
               new_data.push({
-                label: "Approved",
+                label: "Completed",
                 fill: false,
                 backgroundColor: '#9AD0F5',
                 data: dset2,
@@ -747,11 +821,9 @@ include_once '../functions/session_config.php';
                 categoryPercentage: .5
               });
             }
-
-            // console.log(new_data);
-            chartjs_status_monthly.data.datasets = new_data;
-            chartjs_status_monthly.update();
           }
+          chartjs_status_monthly.data.datasets = new_data;
+          chartjs_status_monthly.update();
         }
       });
     }
@@ -842,7 +914,7 @@ include_once '../functions/session_config.php';
         }
       });
     }
-    
+
     // Yearly Top 3 Services
     const yearlyTopServices = (action, filter) => {
       $.ajax({
@@ -946,7 +1018,7 @@ include_once '../functions/session_config.php';
     const loadAppointmentYearlyStatusChart = (data) => {
       // new Chart(document.getElementById("chartjs-dashboard-bar")).destroy();
       const new_data = [{
-        label: "Pending",
+        label: "Approved",
         backgroundColor: '#97DBAE',
         // borderColor: window.theme.success,
         // hoverBackgroundColor: window.theme.success,
@@ -957,7 +1029,7 @@ include_once '../functions/session_config.php';
         barPercentage: .8,
         categoryPercentage: .8
       }, {
-        label: "Approved",
+        label: "Completed",
         backgroundColor: '#9AD0F5',
         // borderColor: window.theme.primary,
         // hoverBackgroundColor: window.theme.primary,
@@ -1016,10 +1088,9 @@ include_once '../functions/session_config.php';
                 categoryPercentage: .2
               });
             }
-
-            chartjs_monthly_income_status.data.datasets = new_data;
-            chartjs_monthly_income_status.update();
           }
+          chartjs_monthly_income_status.data.datasets = new_data;
+          chartjs_monthly_income_status.update();
         }
       });
     }
@@ -1056,11 +1127,9 @@ include_once '../functions/session_config.php';
                 // categoryPercentage: .5
               });
             }
-
-
-            my_line_chart_yearly_income_status.data.datasets = new_data;
-            my_line_chart_yearly_income_status.update();
           }
+          my_line_chart_yearly_income_status.data.datasets = new_data;
+          my_line_chart_yearly_income_status.update();
         }
       });
     }
@@ -1100,8 +1169,70 @@ include_once '../functions/session_config.php';
 
       loadMonthlyServices(selected_month);
     });
-    
-    
+
+    // Monthly pregnant status
+    $("#monthlyPregnancyStatus").change(function(e) {
+      e.preventDefault();
+
+      let selected_month = $(this).val();
+
+      loadMonthlypregnantStatus(selected_month);
+    });
+
+    // Monthly pregnant status
+    const loadMonthlypregnantStatus = (month = '') => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_analytics.php',
+        dataType: 'JSON',
+        data: {
+          action: 'loadMonthlypregnantStatus',
+          filter: '',
+          month: month
+        },
+        success: function(res) {
+          const data = res.loadMonthlypregnantStatus;
+
+          let new_data = [];
+          let dset1 = [];
+          let dset2 = [];
+
+          if (data.length > 0) {
+            for (i = 1; i <= num_days_this_month; i++) {
+              if (data[0]) {
+                dset1.push(data[0][`d${i}`]);
+              }
+              if (data[1]) {
+                dset2.push(data[1][`d${i}`]);
+              }
+            }
+
+            if (data[0]) {
+              new_data.push({
+                label: 'Not Pregnant',
+                fill: false,
+                backgroundColor: '#FFB1C1',
+                data: dset1,
+                categoryPercentage: .5
+              });
+            }
+            if (data[1]) {
+              new_data.push({
+                label: 'Pregnant',
+                fill: false,
+                backgroundColor: '#9AD0F5',
+                data: dset2,
+                categoryPercentage: .5
+              });
+            }
+          }
+          chartjs_pregnancy_status_monthly.data.datasets = new_data;
+          chartjs_pregnancy_status_monthly.update();
+        }
+      });
+    }
+
+
     let filter = {
       top_services: '',
       appointment_status: '',
@@ -1117,7 +1248,7 @@ include_once '../functions/session_config.php';
 
       yearlyTopServices('default', filter);
     });
-    
+
     // Appointment Yearly Status
     $("#yearlyAppointmentStatus").change(function(e) {
       e.preventDefault();
@@ -1136,5 +1267,6 @@ include_once '../functions/session_config.php';
     loadMonthlyStatus();
     loadMonthlyIncome();
     loadYearlyIncome();
+    loadMonthlypregnantStatus();
   });
 </script>

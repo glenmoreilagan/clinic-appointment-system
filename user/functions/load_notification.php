@@ -24,5 +24,5 @@ if ($result->num_rows > 0) {
 
   echo json_encode(['data' => $data]);
 } else {
-  echo json_encode([]);
+  echo json_encode(['data' => []]);
 }

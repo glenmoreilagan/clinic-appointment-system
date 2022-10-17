@@ -9,8 +9,14 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6">
-              <label class="form-label">Fullname:</label>
-              <input type="text" placeholder="Fullname" class="form-control shadow-none" name="fullname">
+              <!-- <label class="form-label">Fullname:</label>
+              <input type="text" placeholder="Fullname" class="form-control shadow-none" name="fullname"> -->
+              <label class="form-label">First Name:</label>
+              <input type="text" placeholder="First Name" class="form-control shadow-none" name="fname">
+              <label class="form-label">Middle Name:</label>
+              <input type="text" placeholder="Middle Name" class="form-control shadow-none" name="mname">
+              <label class="form-label">Last Name:</label>
+              <input type="text" placeholder="Last Name" class="form-control shadow-none" name="lname">
               <label class="form-label">Contact Number:</label>
               <input type="tel" placeholder="Contact Number (ex. 09xxxxx)" class="form-control shadow-none" name="contactnumber"
                 onCopy="return false" 

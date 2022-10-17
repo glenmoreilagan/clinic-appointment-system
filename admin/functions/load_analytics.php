@@ -33,6 +33,12 @@ switch ($action) {
       'loadYearlyIncome' => $loadYearlyIncome,
     ]);
     break;
+  case 'loadMonthlypregnantStatus':
+    $loadMonthlypregnantStatus = loadMonthlypregnantStatus($conn, $_POST['month']);
+    echo json_encode([
+      'loadMonthlypregnantStatus' => $loadMonthlypregnantStatus,
+    ]);
+    break;
   default:
     $data_loadServicePercentage = loadServicePercentage($conn);
     $data_loadAppointmentYearlyStatus = loadAppointmentYearlyStatus($conn, $appointment_status);
@@ -114,7 +120,7 @@ function loadAppointmentYearlyStatus($conn, $appointment_status)
       IF (MONTH(date_schedule) = 11, COUNT(STATUS), 0) AS nov,
       IF (MONTH(date_schedule) = 12, COUNT(STATUS), 0) AS dece
       FROM tbl_appointments
-      WHERE STATUS = 0 AND is_cancelled = 0 $added_filter
+      WHERE STATUS = 1 AND is_cancelled = 0 $added_filter
       GROUP BY MONTH(date_schedule)
       ORDER BY MONTH(date_schedule)
     ) AS tbl
@@ -138,7 +144,7 @@ function loadAppointmentYearlyStatus($conn, $appointment_status)
       IF (MONTH(date_schedule) = 11, COUNT(STATUS), 0) AS nov,
       IF (MONTH(date_schedule) = 12, COUNT(STATUS), 0) AS dece
       FROM tbl_appointments
-      WHERE STATUS = 1 AND is_cancelled = 0 $added_filter
+      WHERE STATUS = 1 AND is_completed = 1 AND is_cancelled = 0 $added_filter
       GROUP BY MONTH(date_schedule)
       ORDER BY MONTH(date_schedule)
     ) AS tbl
@@ -275,22 +281,22 @@ function loadAppointmentStatus_Monthly($conn, $month)
     }
   }
 
-  $qry = "SELECT 'pending' as status, $sum_concat
-    FROM (
-      SELECT DATE_FORMAT(date_schedule, '%b') AS month_name,
-      $str_concat
-      FROM tbl_appointments
-      WHERE STATUS = 0 AND is_cancelled = 0 $added_filter
-      GROUP BY DAY(date_schedule)
-      ORDER BY $order_concat
-    ) AS tbl
-    UNION ALL
-    SELECT 'approved' as status, $sum_concat
+  $qry = "SELECT 'approved' as status, $sum_concat
     FROM (
       SELECT DATE_FORMAT(date_schedule, '%b') AS month_name,
       $str_concat
       FROM tbl_appointments
       WHERE STATUS = 1 AND is_cancelled = 0 $added_filter
+      GROUP BY DAY(date_schedule)
+      ORDER BY $order_concat
+    ) AS tbl
+    UNION ALL
+    SELECT 'completed' as status, $sum_concat
+    FROM (
+      SELECT DATE_FORMAT(date_schedule, '%b') AS month_name,
+      $str_concat
+      FROM tbl_appointments
+      WHERE STATUS = 1 AND is_completed = 1 AND is_cancelled = 0 $added_filter
       GROUP BY DAY(date_schedule)
       ORDER BY $order_concat
     ) AS tbl
@@ -563,6 +569,113 @@ function loadYearlyIncome($conn, $year)
         'oct' => $row['oct'] ? number_format($row['oct'], 2, '.', '') : 0,
         'nov' => $row['nov'] ? number_format($row['nov'], 2, '.', '') : 0,
         'dece' => $row['dece'] ? number_format($row['dece'], 2, '.', '') : 0,
+      ];
+    }
+
+    return $data;
+  } else {
+    return [];
+  }
+}
+
+function loadMonthlypregnantStatus($conn, $month)
+{
+  // $today_month = $month != '' ? $month : date('m');
+  // $added_filter = '';
+  // $added_filter .= " AND MONTH(date_paid) = $today_month";
+
+  // $qry = "SELECT COUNT(pregnant_status) AS total_pregnant 
+  // FROM tbl_appointment_payment
+  // WHERE pregnant_status = 'Not Pregnant' $added_filter
+  // UNION ALL
+  // SELECT COUNT(pregnant_status) AS total_pregnant
+  // FROM tbl_appointment_payment
+  // WHERE pregnant_status <> 'Not Pregnant' $added_filter";
+
+  $today_month = $month != '' ? $month : date('m');
+  // get number of days in today month
+  $num_day_month = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+  $added_filter = '';
+  $added_filter .= " AND MONTH(date_paid) = $today_month";
+
+  $main_concat = '';
+  $str_concat = '';
+  $str_concat1 = '';
+  $order_concat = '';
+
+  for ($i = 1; $i <= $num_day_month; $i++) {
+    // if i not equal sa number ng araw ngayong buwan
+    // cocompute lang tas i aapend lang yung string para maging 
+    // sql query may comma sa dulo
+    if ($i != $num_day_month) {
+      $main_concat .= "SUM(d$i) as d$i,";
+      $str_concat .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i, ";
+      $str_concat1 .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i, ";
+      $order_concat .= "d$i ASC, ";
+    } else {
+      // eto naman pag yung i at last day ay equal
+      // same lang naman ginagawa pero 
+      // inalis lang yung comma sa dulo ng string
+      $main_concat .= "SUM(d$i) as d$i";
+      $str_concat .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i ";
+      $str_concat1 .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i ";
+      $order_concat .= "d$i ASC ";
+    }
+  }
+
+
+  $qry = "SELECT pregnant_status, $main_concat FROM (
+    SELECT pregnant_status, 
+    $str_concat
+    FROM tbl_appointment_payment
+    WHERE pregnant_status = 'Not Pregnant' $added_filter
+    GROUP BY DAY(date_paid)
+    UNION ALL
+    SELECT pregnant_status, 
+    $str_concat1
+    FROM tbl_appointment_payment
+    WHERE pregnant_status <> 'Not Pregnant' $added_filter
+    GROUP BY DAY(date_paid)
+    ORDER BY $order_concat) as tbl GROUP BY tbl.pregnant_status";
+
+  $result = $conn->query($qry);
+
+  if ($result->num_rows > 0) {
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+      $data[] = [
+        'pregnant_status' => $row['pregnant_status'],
+        'd1' => number_format($row['d1'], 2, '.', ''),
+        'd2' => number_format($row['d2'], 2, '.', ''),
+        'd3' => number_format($row['d3'], 2, '.', ''),
+        'd4' => number_format($row['d4'], 2, '.', ''),
+        'd5' => number_format($row['d5'], 2, '.', ''),
+        'd6' => number_format($row['d6'], 2, '.', ''),
+        'd7' => number_format($row['d7'], 2, '.', ''),
+        'd8' => number_format($row['d8'], 2, '.', ''),
+        'd9' => number_format($row['d9'], 2, '.', ''),
+        'd10' => number_format($row['d10'], 2, '.', ''),
+        'd11' => number_format($row['d11'], 2, '.', ''),
+        'd12' => number_format($row['d12'], 2, '.', ''),
+        'd13' => number_format($row['d13'], 2, '.', ''),
+        'd14' => number_format($row['d14'], 2, '.', ''),
+        'd15' => number_format($row['d15'], 2, '.', ''),
+        'd16' => number_format($row['d16'], 2, '.', ''),
+        'd17' => number_format($row['d17'], 2, '.', ''),
+        'd18' => number_format($row['d18'], 2, '.', ''),
+        'd19' => number_format($row['d19'], 2, '.', ''),
+        'd20' => number_format($row['d20'], 2, '.', ''),
+        'd21' => number_format($row['d21'], 2, '.', ''),
+        'd22' => number_format($row['d22'], 2, '.', ''),
+        'd23' => number_format($row['d23'], 2, '.', ''),
+        'd24' => number_format($row['d24'], 2, '.', ''),
+        'd25' => number_format($row['d25'], 2, '.', ''),
+        'd26' => number_format($row['d26'], 2, '.', ''),
+        'd27' => number_format($row['d27'], 2, '.', ''),
+        'd28' => number_format($row['d28'], 2, '.', ''),
+        'd29' => number_format($row['d29'], 2, '.', ''),
+        'd30' => number_format($row['d30'], 2, '.', ''),
+        'd31' => isset($row['d31']) ? number_format($row['d31'], 2, '.', '') : 0,
       ];
     }
 

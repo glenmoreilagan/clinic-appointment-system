@@ -34,7 +34,9 @@ $(document).ready(function () {
   $("#btnRegister").click(function (e) {
     e.preventDefault();
 
-    let fullname = $("#signupModal input[name='fullname']").val();
+    let fname = $("#signupModal input[name='fname']").val();
+    let mname = $("#signupModal input[name='mname']").val();
+    let lname = $("#signupModal input[name='lname']").val();
     let contactnumber = $("#signupModal input[name='contactnumber']").val();
     let address = $("#signupModal input[name='address']").val();
     let email = $("#signupModal input[name='email']").val();
@@ -46,7 +48,9 @@ $(document).ready(function () {
       url: 'functions/reg_func.php',
       dataType: 'JSON',
       data: {
-        fullname: fullname,
+        fname: fname,
+        mname: mname,
+        lname: lname,
         contactnumber: contactnumber,
         address: address,
         email: email,
