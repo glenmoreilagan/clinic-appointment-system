@@ -15,6 +15,11 @@
 	background-size: cover;
 
 } */
+
+body {
+  font-family: var(--main-font);
+}
+
 .aboutus img {
   height: 88vh;
   background-size: cover;
@@ -193,7 +198,7 @@ footer {
   bottom: 0px;
   width: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
-  font-family: 'Lucida Sans';
+  font-family: var(--main-font);
 }
 
 .main-content {
