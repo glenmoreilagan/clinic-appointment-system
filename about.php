@@ -23,7 +23,46 @@ if (!empty($_SESSION)) {
 </head>
 
 <body>
-    <?php include('./includes/navbar.php'); ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-3 py-lg-2 shadow-sm sticky-top">
+        <a class="navbar-brand" href="#">
+            <img src="image/logo.png" width="200" height="58" alt="Lj Cura">
+        </a>
+
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="services.php">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="about.php">About Us</a>
+                </li>
+            </ul>
+
+            <form class="d-flex">
+                <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-2" data-bs-toggle="modal"
+                    data-bs-target="#signupModal">Sign up</button>
+                <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal"
+                    data-bs-target="#signinModal">Sign in</button>
+            </form>
+
+        </div>
+        </ul>
+        </div>
+        </div>
+    </nav>
+
+    <?php include('includes/register-modal.php'); ?>
+    <?php include('includes/login-modal.php'); ?>
+
 
     <div class="container-fluid p-0">
         <div class="aboutus">
@@ -42,43 +81,46 @@ if (!empty($_SESSION)) {
         </div>
     </div>
 
-    <div class="map">
-        <div class="l-visit-us">
-            <div class="loc-brief">
-                <h4 class="mb-5" style="font-weight: 600;">Contact Information</h4>
-                <div class="address details">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    <div class="title-name">Address</div>
-                    <div class="text-one">A. Mabini Avenue, near Maligaya Compound,
-                        Barangay Sambat, Tanauan City Batangas</div>
+    <div class="container px-4 py-4">
+        <div class="map">
+            <div class="l-visit-us">
+                <div class="loc-brief">
+                    <h4 class="mb-3" style="font-weight: 600;">Contact Information</h4>
+                    <div class="address details">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <div class="title-name">Address</div>
+                        <div class="text-one">A. Mabini Avenue, near Maligaya Compound,
+                            Barangay Sambat, Tanauan City Batangas</div>
+                    </div>
+                    <div class="phone details">
+                        <i class="bi bi-phone-vibrate-fill"></i>
+                        <div class="title-name">Phone</div>
+                        <div class="text-one">0927-035-1312</div>
+                    </div>
+                    <div class="tele details">
+                        <i class="bi bi-telephone-inbound-fill"></i>
+                        <div class="title-name">Telephone</div>
+                        <div class="text-one">(043) 406-7079 </div>
+                    </div>
+                    <div class="email details">
+                        <i class="bi bi-envelope-fill"></i>
+                        <div class="title-name">Email</div>
+                        <div class="text-one">ex@example.com</div>
+                    </div>
                 </div>
-                <div class="phone details">
-                    <i class="bi bi-phone-vibrate-fill"></i>
-                    <div class="title-name">Phone</div>
-                    <div class="text-one">0927-035-1312</div>
-                </div>
-                <div class="tele details">
-                    <i class="bi bi-telephone-inbound-fill"></i>
-                    <div class="title-name">Telephone</div>
-                    <div class="text-one">(043) 406-7079 </div>
-                </div>
-                <div class="email details">
-                    <i class="bi bi-envelope-fill"></i>
-                    <div class="title-name">Email</div>
-                    <div class="text-one">ex@example.com</div>
-                </div>
-            </div>
-            <div class="map-visit">
-                <div class="visit-loc">Visit Us Here:</div>
-                <div class="iframe-container">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3869.8838817287487!2d121.14102701449355!3d14.084031293303104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6f667d548e0d%3A0x8c83da36f918f390!2sLj%20Cura%20Ob-Gyn%20Ultrasound%20Clinic!5e0!3m2!1sen!2sph!4v1662817446762!5m2!1sen!2sph"
-                        width="600" height="300" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-visit">
+                    <div class="visit-loc">Visit Us Here:</div>
+                    <div class="iframe-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3869.8838817287487!2d121.14102701449355!3d14.084031293303104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6f667d548e0d%3A0x8c83da36f918f390!2sLj%20Cura%20Ob-Gyn%20Ultrasound%20Clinic!5e0!3m2!1sen!2sph!4v1662817446762!5m2!1sen!2sph"
+                            width="600" height="300" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
 
     <div class="container px-4 py-4">
         <h2 class="pb-2 border-bottom">Feedbacks</h2>
@@ -102,7 +144,7 @@ if (!empty($_SESSION)) {
 </body>
 
 </html>
-<script src="assets/js/bootsdtrap.bundle.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script src="./assets/js/auth.js"></script>
 
