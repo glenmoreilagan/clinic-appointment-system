@@ -3,9 +3,9 @@ include_once '../../config.php';
 session_start();
 
 $service_id = $_POST['service_id'];
-$service = $_POST['service'];
-$description = $_POST['description'];
-$duration = $_POST['duration'];
+$service = isset($_POST['service']) ? mysqli_escape_string($conn, $_POST['service']) : '';
+$description = isset($_POST['description']) ? mysqli_escape_string($conn, $_POST['description']) : '';
+$duration = isset($_POST['duration']) ? mysqli_escape_string($conn, $_POST['duration']) : '';
 $amount = $_POST['amount'] != 0 ? str_replace(",", "", $_POST['amount']) : 0;
 
 if ($service_id == 0) {

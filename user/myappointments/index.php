@@ -112,6 +112,7 @@ include_once '../functions/session_config.php';
       "scrollX": true,
       "scrollCollapse": true,
       "fixedHeader": true,
+      "ordering": false,
     });
     const load_appointments = () => {
       $.ajax({
@@ -132,7 +133,7 @@ include_once '../functions/session_config.php';
                 `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
             ready_data.push([
               `
-                <b>${res.data[i].time_schedule}</b>
+                <b>${res.data[i].id} ${res.data[i].time_schedule}</b>
                 <br>
                 ${res.data[i].date_schedule}
               `,
@@ -146,6 +147,7 @@ include_once '../functions/session_config.php';
               </tr>`,
             ]);
           }
+
           tbl_services.clear().rows.add(ready_data).draw();
           // $("#myappointment_list").html(str);
         }
