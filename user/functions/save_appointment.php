@@ -3,7 +3,7 @@ include_once '../../config.php';
 session_start();
 
 $user_id = $_SESSION['user_id'];
-$complaint = $_POST['complaint'];
+$complaint = isset($_POST['complaint']) ? mysqli_escape_string($conn, $_POST['complaint']) : '';
 $date_schedule = $_POST['date_schedule'];
 $time_schedule = $_POST['time_schedule'];
 $age = $_POST['age'];

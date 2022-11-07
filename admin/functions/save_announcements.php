@@ -3,8 +3,8 @@ include_once '../../config.php';
 session_start();
 
 $announcement_id = $_POST['announcement_id'];
-$title = $_POST['title'];
-$description = $_POST['description'];
+$title = isset($_POST['title']) ? mysqli_escape_string($conn, $_POST['title']) : '';
+$description = isset($_POST['description']) ? mysqli_escape_string($conn, $_POST['description']) : '';
 $effectivity_date = $_POST['effectivity_date'];
 
 if ($announcement_id == 0) {

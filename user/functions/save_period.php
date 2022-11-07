@@ -3,7 +3,7 @@ include_once '../../config.php';
 session_start();
 
 $user_id = $_SESSION['user_id'];
-$title = $_POST['title'];
+$title = isset($_POST['title']) ? mysqli_escape_string($conn, $_POST['title']) : '';
 $start = $_POST['start'];
 $end = $_POST['end'];
 $end_hidden = date('Y-m-d', strtotime($_POST['end_hidden']));

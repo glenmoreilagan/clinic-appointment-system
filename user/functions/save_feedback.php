@@ -4,7 +4,7 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 $rating = $_POST['rating'];
-$feedback = $_POST['feedback'];
+$feedback = isset($_POST['feedback']) ? mysqli_escape_string($conn, $_POST['feedback']) : '';
 
 
 $qry = "INSERT INTO tbl_feedback
