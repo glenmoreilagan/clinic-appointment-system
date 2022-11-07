@@ -3,6 +3,7 @@ include_once '../../config.php';
 include './sms.php';
 include './email.php';
 include './notification_class.php';
+include '../../host_setting.php';
 
 session_start();
 
@@ -59,7 +60,7 @@ if ($action == 'approve') {
         <br>
         Please fill out this 24 hours before your scheduled appointment.
         <br>
-        <a href='http://localhost/caps/health-declaration-form.php'>Health Declaration Form</a>
+        <a href='" . $host . "health-declaration-form.php'>Health Declaration Form</a>
       ";
       if ($contactno !== '') {
         $sms = new Sms($contactno, $messageSms);
