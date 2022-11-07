@@ -38,7 +38,6 @@ class Email
 
       $mail->setFrom('notify@ljcultrasoundclinic.site', 'Lj Cura Ob-Gyn Ultrasound Clinic');
       $mail->addAddress($this->email);
-      $mail->addBcc("ilaganglenmore019@gmail.com");
 
       if (!empty($this->attachment)) {
         for ($i = 0; $i < count($this->attachment); $i++) {
@@ -46,7 +45,7 @@ class Email
         }
       }
 
-      $mail->addAttachment('../../image/logo.png');
+      // $mail->addAttachment('../../image/logo.png');
 
       $mail->isHTML(true);
       $mail->Subject = $this->subject ? $this->subject : 'Appointment';

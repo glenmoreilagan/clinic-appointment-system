@@ -114,15 +114,15 @@ include_once '../functions/session_config.php';
                 <table class="table table-striped table-hover table-appointments" id="table-appointments" style="width: 100%;">
                   <thead>
                     <tr>
-                      <th>Patient</th>
+                      <th style="width: 150px;">Patient</th>
                       <!-- <th>Age</th> -->
                       <!-- <th>Address</th> -->
                       <!-- <th>Contact No.</th> -->
-                      <th>Date & Time</th>
+                      <th style="width: 150px;">Date & Time</th>
                       <th>Chief Complaint</th>
                       <th>Service</th>
                       <th>Status</th>
-                      <th class="th-actions">Action</th>
+                      <th style="width: 100px;">Action</th>
                     </tr>
                   </thead>
                   <tbody id="appointments_list"></tbody>

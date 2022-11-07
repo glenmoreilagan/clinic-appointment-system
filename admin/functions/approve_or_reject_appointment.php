@@ -51,14 +51,23 @@ if ($action == 'approve') {
       $sms_response = '';
       $email_response = '';
       $patient_name = explode(' ', trim($fullname))[0];
-      $message = "Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
+
+      $messageSms = "Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
+      $messageEmail = "
+        Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.
+        <br>
+        <br>
+        Please fill out this 24 hours before your scheduled appointment.
+        <br>
+        <a href='http://localhost/caps/health-declaration-form.php'>Health Declaration Form</a>
+      ";
       if ($contactno !== '') {
-        $sms = new Sms($contactno, $message);
+        $sms = new Sms($contactno, $messageSms);
         $sms_response = $sms->itexmo();
       }
 
       if ($email !== '') {
-        $email = new Email($email, $message);
+        $email = new Email($email, $messageEmail);
         $email->sendEmail();
       }
 

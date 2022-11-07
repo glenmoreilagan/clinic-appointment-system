@@ -52,6 +52,7 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   LEFT JOIN tbl_user as user on user.id = appointment.user_id
   LEFT JOIN tbl_appointment_payment as payment on payment.appointment_id = appointment.id
   WHERE 1=1 $added_filter
+  GROUP BY user.id, appointment.id
   order by appointment.date_schedule DESC";
 
 $result = $conn->query($qry);

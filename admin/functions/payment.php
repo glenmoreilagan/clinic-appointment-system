@@ -30,8 +30,12 @@ if ($user_id && $appointment_id) {
     '$service_title', '$other_services', '$findings', '$cost', '$other_cost', '$total_cost')";
 
     if ($conn->query($qry)) {
-      $qry = "SELECT fullname, address, email
-      FROM tbl_user WHERE id = '$user_id' LIMIT 1";
+      $qry = "SELECT user.fullname, user.address, user.email, app.age
+      FROM tbl_user as user
+      INNER JOIN tbl_appointments as app on app.user_id = user.id
+      WHERE user.id = '$user_id' 
+      GROUP BY user.id
+      LIMIT 1";
       $result = $conn->query($qry);
 
       if (!empty($result)) {
@@ -40,10 +44,17 @@ if ($user_id && $appointment_id) {
         $address = $row['address'];
         $date_paid = date('F d, Y');
         $email = $row['email'];
+        $age = $row['age'];
 
         $message = "<table style='font-family: Courier New, Courier, monospace; font-size: 13px; border: 1px solid; width: 800px;'>
           <tr>
             <td colspan='10' style='text-align: center; font-size: 2em;'>OFFICIAL RECEIPT</td>
+          </tr>
+          <tr>
+            <td colspan='10' style='text-align: center;'><strong>Lj Cura Ob-Gyn Ultrasound Clinic</strong></td>
+          </tr>
+          <tr>
+            <td colspan='10' style='text-align: center;'><strong>A Mabini Avenue, Barangay Sambat, Tanauan City Batangas</strong></td>
           </tr>
           <tr>
             <td><strong>REF NO.:</strong> $reference_no</td>
@@ -53,6 +64,9 @@ if ($user_id && $appointment_id) {
           </tr>
           <tr>
             <td><strong>FULLNAME:</strong> $fullname</td>
+          </tr>
+          <tr>
+            <td><strong>AGE:</strong> $age</td>
           </tr>
           <tr>
             <td><strong>ADDRESS:</strong> $address</td>

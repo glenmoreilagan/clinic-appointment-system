@@ -23,7 +23,7 @@ if ($time_sched->num_rows > 0) {
 // AND TIME_FORMAT(date_available, '%h:%i') NOT IN ($imploded_time)
 // kinukuha kona dito yung available date and time for appointments
 // para yun lang amg didisplay na mga buttons na maseselect ng user
-$qry = "SELECT id, DATE(date_available) AS date_sched, TIME_FORMAT(date_available, '%h:%i') AS time_sched
+$qry = "SELECT id, DATE(date_available) AS date_sched, TIME_FORMAT(date_available, '%H:%i') AS time_sched
   FROM tbl_appointment_availability
   WHERE DATE(date_available) = '$selected_date' AND is_deleted = 0
   $added_filter";

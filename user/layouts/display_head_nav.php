@@ -8,7 +8,8 @@
       <li class="nav-item dropdown">
         <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown">
           <div class="position-relative">
-            <i class="align-middle" data-feather="bell-off"></i>
+            <i class="align-middle far fa-fw fa-bell"></i>
+
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
@@ -20,7 +21,10 @@
         <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
           <i class="align-middle" data-feather="settings"></i>
         </a>
-
+        <?php
+        // heres the settings for local or live
+        include '../../host_setting.php';
+        ?>
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
           <!-- <img src="../assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood" />  -->
           <span class="text-dark"><?php echo $_SESSION['email'] ?></span>
@@ -30,7 +34,7 @@
           <!-- Profile</a> -->
           <!-- <a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a> -->
           <!-- <div class="dropdown-divider"></div> -->
-          <a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a>
+          <a class="dropdown-item" href=<?php echo $host . "user/profile/"; ?>>Profile</a>
           <!-- <a class="dropdown-item" href="#">Help</a> -->
           <a class="dropdown-item" href="../../logout.php">Sign out</a>
         </div>

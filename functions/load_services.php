@@ -1,9 +1,18 @@
 <?php
 include '../config.php';
 
+$search = mysqli_escape_string($conn, $_POST['search']);
+
+$added_str = "";
+
+if ($search != '') {
+  $added_str .= " AND service_title LIKE '%$search%' || description LIKE '%$search%'";
+}
+
 $qry = "SELECT id, service_title, description, duration, amount
   FROM tbl_services
-  WHERE is_deleted = 0";
+  WHERE is_deleted = 0 
+  $added_str";
 
 $result = $conn->query($qry);
 
