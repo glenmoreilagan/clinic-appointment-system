@@ -133,7 +133,7 @@ include_once '../functions/session_config.php';
                 `<span class="badge badge-secondary completed">${res.data[i].status}</span>`)
             ready_data.push([
               `
-                <b>${res.data[i].id} ${res.data[i].time_schedule}</b>
+                <b>${res.data[i].time_schedule}</b>
                 <br>
                 ${res.data[i].date_schedule}
               `,
