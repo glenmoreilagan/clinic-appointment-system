@@ -42,11 +42,15 @@ body {
 }
 
 .carousel-caption h3 {
+  font-family: Poppins;
+  text-transform: uppercase;
   font-size: 31px;
   font-weight: 600;
+
 }
 
 .carousel-caption h5 {
+  font-family: Poppins;
   font-size: 18px;
   top: 2rem;
 }
@@ -58,7 +62,9 @@ body {
 .slider-btn {
   margin-top: 15px;
 }
-
+button#slider-btn{
+  margin-top: 15px;
+}
 .slider-btn a {
   position: relative;
   background: transparent;
@@ -70,14 +76,37 @@ body {
   transition: 0.5s;
   text-transform: uppercase;
 }
-
+button#slider-btn{
+  position: relative;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 30px;
+  transition: 0.5s;
+  text-transform: uppercase;
+  border: none;
+}
+button#slider-btn:hover{
+  background: #FFDEE9;
+  color: #FFDEE9;
+  letter-spacing: 0.25em;
+  box-shadow: 0 0 35px #FFDEE9;
+}
 .slider-btn a:hover {
   background: #FFDEE9;
   color: #FFDEE9;
   letter-spacing: 0.25em;
   box-shadow: 0 0 35px #FFDEE9;
 }
-
+button#slider-btn:before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #000;
+  opacity: 0.5;
+}
 .slider-btn a:before {
   content: '';
   position: absolute;
@@ -85,16 +114,23 @@ body {
   background: #000;
   opacity: 0.5;
 }
-
+button#slider-btn span {
+  position: relative;
+  z-index: 1;
+}
 .slider-btn a span {
   position: relative;
   z-index: 1;
 }
-
+button#slider-btn:hover span {
+  width: 100%;
+}
 button:hover span {
   width: 100%;
 }
-
+button#slider-btn:hover {
+  border: none;
+}
 button:hover {
   border: none;
 }
@@ -106,7 +142,6 @@ button:hover {
 
 .offers-title {
   text-align: center;
-  /* font-family: 'Lucida Sans'; */
   font-size: medium;
 }
 
@@ -119,12 +154,8 @@ button:hover {
   min-height: 350px;
   background: #FFDEE9;
   background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
-  /* font-family: 'Lucida Sans'; */
   font-size: 14px;
   margin: 5px 5px;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-items: center; */
   text-align: center;
   padding: 10px;
   border-radius: 5%;
@@ -148,7 +179,6 @@ button:hover {
 
 .trimester-title {
   text-align: center;
-  /* font-family: 'Lucida Sans'; */
   font-size: medium;
   margin-top: 1em;
 }

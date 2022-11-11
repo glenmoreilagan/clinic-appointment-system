@@ -1,3 +1,9 @@
+<style>
+a {
+    color: black;
+}
+</style>
+
 <footer>
     <div class="main-content">
         <div class="left box">
@@ -27,7 +33,7 @@
                 </div>
                 <div class="email">
                     <span class="bi bi-envelope-fill"></span>
-                    <span class="text">ex@example.com</span>
+                    <span class="text">ljcultrasoundclinic@gmail.com</span>
                 </div>
             </div>
         </div>
@@ -39,36 +45,18 @@
                     <ul class="list-unstyled">
                         <li>
                             <i class="bi bi-house-heart-fill"></i>
-                            <a href="index.php">Home</a>
+                            <a aria-current="page" href="index">Home</a>
                         </li>
                         <li>
                             <i class="bi bi-clipboard2-check-fill"></i>
-                            <a href="services.php">Services</a>
+                            <a aria-current="page" href="services">Services</a>
                         </li>
                         <li>
                             <i class="bi bi-person-heart"></i>
-                            <a href="about.php">About Us</a>
+                            <a aria-current="page" href="about">About Us</a>
                         </li>
                 </div>
             </div>
         </div>
-
-        <div class="right box">
-            <h2>Contact us</h2>
-            <div class="content">
-                <form action="#">
-                    <div class="email">
-                        <input type="email" placeholder="Email" required>
-                    </div>
-                    <div class="msg">
-                        <textarea rows="2" cols="25" placeholder="Message" required></textarea>
-                    </div>
-                    <div class="btn">
-                        <button type="submit">Send</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
     </div>
 </footer>

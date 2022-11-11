@@ -37,13 +37,13 @@ if (!empty($_SESSION)) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                    <a class="nav-link active" aria-current="page" href="index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="services.php">Services</a>
+                    <a class="nav-link" href="services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.php">About Us</a>
+                    <a class="nav-link" href="about">About Us</a>
                 </li>
             </ul>
 
@@ -65,12 +65,6 @@ if (!empty($_SESSION)) {
 
     <!-- carousel -->
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <!-- <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-    </div> -->
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="image/carousel/1.webp" class="d-block w-100" alt="...">
@@ -79,8 +73,10 @@ if (!empty($_SESSION)) {
                     <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i>
                     </h5>
                     <div class="slider-btn">
-                        <a href="#"><span>Our Services</span></a>
-                        <a href="#"><span>Get Appointment</span></a>
+                        <a href="services"><span>Our Services</span></a>
+                        <button type="button" id="slider-btn" class="slider-btn" data-bs-toggle="modal"
+                            data-bs-target="#signinModal"><span>Get
+                                Appointment</span></button>
                     </div>
                 </div>
             </div>
@@ -91,8 +87,10 @@ if (!empty($_SESSION)) {
                     <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i>
                     </h5>
                     <div class="slider-btn">
-                        <a href="#"><span>Our Services</span></a>
-                        <a href="#"><span>Get Appointment</span></a>
+                        <a href="services"><span>Our Services</span></a>
+                        <button type="button" id="slider-btn" class="slider-btn" data-bs-toggle="modal"
+                            data-bs-target="#signinModal"><span>Get
+                                Appointment</span></button>
                     </div>
                 </div>
             </div>
@@ -103,8 +101,10 @@ if (!empty($_SESSION)) {
                     <h5><i>Your health is our top priority with comprehensive, and affordable women's health care!</i>
                     </h5>
                     <div class="slider-btn">
-                        <a href="#"><span>Our Services</span></a>
-                        <a href="#"><span>Get Appointment</span></a>
+                        <a href="services"><span>Our Services</span></a>
+                        <button type="button" id="slider-btn" class="slider-btn" data-bs-toggle="modal"
+                            data-bs-target="#signinModal"><span>Get
+                                Appointment</span></button>
                     </div>
                 </div>
             </div>
@@ -121,67 +121,70 @@ if (!empty($_SESSION)) {
         </button>
     </div>
 
-    <div class="container offers">
-        <div class="offers-title">
-            <h4><b>Why you should choose us?</b></h4>
-            <p>We support women in having wonderful and empowered birthing experiences <br>
-                and work to ensure that they and their offspring experience optimal health outcomes.</p>
-        </div>
-        <div class="row">
-            <div class="panel col-md-3">
-                <div class="child-panel">
-                    <div id="icon-case">
-                        <img src="image/icons/ultrasound.png" alt="">
-                        <h5 style="color: #00ccc5;"><b>Reliable Services</b></h5>
-                    </div>
-                    <div id="box">
-                        <p>We provide reliable and dependable services that you can trust. Our clinic use
-                            the most recent diagnostic equipment to identify conditions like endometriosis,
-                            pelvic organ prolapse, PCOS, and malignancy.</p>
+    <div class="container px-2 py-2">
+        <div class="container offers">
+            <div class="offers-title">
+                <h4><b>Why you should choose us?</b></h4>
+                <p>We support women in having wonderful and empowered birthing experiences <br>
+                    and work to ensure that they and their offspring experience optimal health outcomes.</p>
+            </div>
+            <div class="row">
+                <div class="panel col-md-3">
+                    <div class="child-panel">
+                        <div id="icon-case">
+                            <img src="image/icons/ultrasound.png" alt="">
+                            <h5 style="color: #00ccc5;"><b>Reliable Services</b></h5>
+                        </div>
+                        <div id="box">
+                            <p>We provide reliable and dependable services that you can trust. Our clinic use
+                                the most recent diagnostic equipment to identify conditions like endometriosis,
+                                pelvic organ prolapse, PCOS, and malignancy.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel col-md-3">
-                <div class="child-panel">
-                    <div id="icon-case">
-                        <img src="image/icons/appointment.png">
-                        <h5 style="color: #00ccc5;"><b>Quick Appointments</b></h5>
-                    </div>
-                    <div id="box">
-                        <p>You can choose the date and time that you like, a day or two prior to the scheduled meeting.
-                            Confirmation will be sent through SMS upon checking the availability
-                            of the scheduled appointment.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="panel col-md-3">
-                <div class="child-panel">
-                    <div id="icon-case">
-                        <img src="image/icons/open.png" alt="">
-                        <h5 style="color: #00ccc5;"><b>Open Hours</b></h5>
-                    </div>
-                    <div id="box">
-                        <p>Sunday - Closed<br>
-                            Monday - 9:00am-3:00pm<br>
-                            Tuesday - 9:00am-3:00pm<br>
-                            Wednesday - 9:00am-3:00pm<br>
-                            Thursday - Closed<br>
-                            Friday - 9:00am-3:00pm<br>
-                            Saturday - 9:00am-3:00pm</p>
+                <div class="panel col-md-3">
+                    <div class="child-panel">
+                        <div id="icon-case">
+                            <img src="image/icons/appointment.png">
+                            <h5 style="color: #00ccc5;"><b>Quick Appointments</b></h5>
+                        </div>
+                        <div id="box">
+                            <p>You can choose the date and time that you like, a day or two prior to the scheduled
+                                meeting.
+                                Confirmation will be sent through SMS upon checking the availability
+                                of the scheduled appointment.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel col-md-3">
-                <div class="child-panel">
-                    <div id="icon-case">
-                        <img src="image/icons/care.png" alt="">
-                        <h5 style="color: #00ccc5;"><b>We care for you</b></h5>
+                <div class="panel col-md-3">
+                    <div class="child-panel">
+                        <div id="icon-case">
+                            <img src="image/icons/open.png" alt="">
+                            <h5 style="color: #00ccc5;"><b>Open Hours</b></h5>
+                        </div>
+                        <div id="box">
+                            <p>Sunday - Closed<br>
+                                Monday - 9:00am-3:00pm<br>
+                                Tuesday - 9:00am-3:00pm<br>
+                                Wednesday - 9:00am-3:00pm<br>
+                                Thursday - Closed<br>
+                                Friday - 9:00am-3:00pm<br>
+                                Saturday - 9:00am-3:00pm</p>
+                        </div>
                     </div>
-                    <div id="box">
-                        <p>Health of the patient is important so the clinic makes sure that the equipments
-                            that will be used are sanitized as well as the clinic.<br> We want to ensure a positive
-                            experience for all patients, so that every moment with us brings
-                            them closer to good health and wellness.</p>
+                </div>
+                <div class="panel col-md-3">
+                    <div class="child-panel">
+                        <div id="icon-case">
+                            <img src="image/icons/care.png" alt="">
+                            <h5 style="color: #00ccc5;"><b>We care for you</b></h5>
+                        </div>
+                        <div id="box">
+                            <p>Health of the patient is important so the clinic makes sure that the equipments
+                                that will be used are sanitized as well as the clinic.<br> We want to ensure a positive
+                                experience for all patients, so that every moment with us brings
+                                them closer to good health and wellness.</p>
+                        </div>
                     </div>
                 </div>
             </div>
