@@ -36,7 +36,7 @@ body {
 }
 
 .carousel-caption {
-  bottom: 155px;
+  bottom: 120px;
   padding-left: 100px;
   padding-right: 100px;
 }
@@ -157,7 +157,7 @@ button:hover {
   font-size: 14px;
   margin: 5px 5px;
   text-align: center;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
