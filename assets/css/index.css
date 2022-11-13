@@ -62,9 +62,11 @@ body {
 .slider-btn {
   margin-top: 15px;
 }
-button#slider-btn{
+
+button#slider-btn {
   margin-top: 15px;
 }
+
 .slider-btn a {
   position: relative;
   background: transparent;
@@ -76,7 +78,8 @@ button#slider-btn{
   transition: 0.5s;
   text-transform: uppercase;
 }
-button#slider-btn{
+
+button#slider-btn {
   position: relative;
   background: transparent;
   color: white;
@@ -88,18 +91,21 @@ button#slider-btn{
   text-transform: uppercase;
   border: none;
 }
-button#slider-btn:hover{
+
+button#slider-btn:hover {
   background: #FFDEE9;
   color: #FFDEE9;
   letter-spacing: 0.25em;
   box-shadow: 0 0 35px #FFDEE9;
 }
+
 .slider-btn a:hover {
   background: #FFDEE9;
   color: #FFDEE9;
   letter-spacing: 0.25em;
   box-shadow: 0 0 35px #FFDEE9;
 }
+
 button#slider-btn:before {
   content: '';
   position: absolute;
@@ -107,6 +113,7 @@ button#slider-btn:before {
   background: #000;
   opacity: 0.5;
 }
+
 .slider-btn a:before {
   content: '';
   position: absolute;
@@ -114,23 +121,29 @@ button#slider-btn:before {
   background: #000;
   opacity: 0.5;
 }
+
 button#slider-btn span {
   position: relative;
   z-index: 1;
 }
+
 .slider-btn a span {
   position: relative;
   z-index: 1;
 }
+
 button#slider-btn:hover span {
   width: 100%;
 }
+
 button:hover span {
   width: 100%;
 }
+
 button#slider-btn:hover {
   border: none;
 }
+
 button:hover {
   border: none;
 }
@@ -273,6 +286,95 @@ footer {
   cursor: pointer;
   transition: .3s;
 }
+
+#navbarSupportedContent {
+  padding: 20px;
+}
+
+@media screen and (max-width: 980px) {
+  .carousel {
+    height: 350px;
+  }
+
+  .carousel-item img {
+    height: 350px;
+  }
+
+  button#slider-btn {
+    position: relative;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 20px;
+    transition: 0.5s;
+    text-transform: uppercase;
+    border: none;
+  }
+
+  .carousel-caption {
+    text-align: center;
+    width: 100%;
+    bottom: none !important;
+    left: 0;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .carousel-caption h3 {
+    font-size: 18px;
+  }
+
+  .carousel-caption h5 {
+    font-size: 12px;
+  }
+
+  .slider-btn a {
+    /* width: 150px; */
+    position: relative;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 8px 20px;
+    transition: 0.5s;
+    text-transform: uppercase;
+  }
+
+  .slider-btn a:hover {
+    letter-spacing: 0;
+  }
+
+  button#slider-btn {
+    /* width: 150px; */
+    position: relative;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 8px 20px;
+    transition: 0.5s;
+    text-transform: uppercase;
+    border: none;
+  }
+
+  button#slider-btn:hover {
+    letter-spacing: 0;
+  }
+
+  .row .panel{
+    display: flex;
+    justify-content: center;
+  }
+
+  .child-panel {
+    width: 90%;
+  }
+}
+
 
 @media screen and (max-width: 900px) {
   footer {
