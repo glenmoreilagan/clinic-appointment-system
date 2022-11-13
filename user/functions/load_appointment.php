@@ -18,7 +18,7 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   appointment.age, appointment.remarks,
   case
     when appointment.status = 0 AND appointment.is_cancelled = 0 then 'Pending'
-    when appointment.is_cancelled = 1 AND appointment.status = 0 then 'Cancelled'
+    when (appointment.is_cancelled = 1 AND appointment.status = 0) OR (appointment.is_cancelled = 1 AND appointment.status = 1) then 'Cancelled'
     when appointment.status = 1 AND appointment.is_completed = 0 then 'Approved'
     when appointment.is_completed = 1 AND appointment.status = 1 then 'Completed'
   end as status,

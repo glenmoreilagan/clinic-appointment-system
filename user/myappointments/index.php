@@ -186,6 +186,7 @@ include_once '../functions/session_config.php';
 
           let action_buttons = '';
           action_buttons = result.status === 'Pending' ? `<button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>` : '';
+          action_buttons = result.status === 'Approved' ? `<button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>` : '';
           action_buttons += `<button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>`;
 
           $("#viewMyAppointment_modal #complaint").html(`${complaint}`);
