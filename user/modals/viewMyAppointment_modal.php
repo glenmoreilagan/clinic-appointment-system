@@ -16,7 +16,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button class="btn btn-danger btn-sm" id="btnCancelAppointment">YES</button> -->
-        <button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>
+        <!-- <button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button> -->
       </div>
     </div>
   </div>

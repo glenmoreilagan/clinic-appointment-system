@@ -59,7 +59,7 @@
     <?php include('includes/login-modal.php'); ?>
 
 
-    <div class="container px-4 py-2" style="height: 100vh;">
+    <div class="container px-4 py-2" style="min-height: 100vh;">
         <h2 class="pb-2 border-bottom">Our Services</h2>
 
         <label for="">Search</label>

@@ -31,6 +31,7 @@ include_once '../functions/session_config.php';
   <!-- Remove this after purchasing -->
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/toastr/build/toastr.min.css">
 
   <style>
     .completed {
@@ -95,12 +96,15 @@ include_once '../functions/session_config.php';
   </div>
 
   <!-- MODALS -->
+  <?php include_once '../modals/reject_appointment_modal.php'; ?>
   <?php include_once '../modals/newAppointment_modal.php'; ?>
   <?php include_once '../modals/viewMyAppointment_modal.php'; ?>
 </body>
 
 </html>
 <script src="../assets/js/app.js"></script>
+<script src="../../assets/toastr/toastr.js"></script>
+<script src="../../assets/toastr/toastr-customize.js"></script>
 
 <script>
   $(document).ready(function() {
@@ -180,14 +184,74 @@ include_once '../functions/session_config.php';
               `<span class="badge badge-secondary completed">${result.status}</span>`
             );
 
+          let action_buttons = '';
+          action_buttons = result.status === 'Pending' ? `<button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>` : '';
+          action_buttons += `<button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>`;
+
           $("#viewMyAppointment_modal #complaint").html(`${complaint}`);
           $("#viewMyAppointment_modal #age").html(`${age}`);
           $("#viewMyAppointment_modal #schedule").html(`${date_schedule} at ${time_schedule}`);
           $("#viewMyAppointment_modal #service").html(`${service}`);
           $("#viewMyAppointment_modal #status").html(`${status_badge}`);
+          $("#viewMyAppointment_modal .modal-footer").html(`${action_buttons}`);
         }
       });
       $("#viewMyAppointment_modal").modal('show');
+    });
+
+    const update_appointments = (action, appointment_id) => {
+      $.ajax({
+        method: 'POST',
+        url: '../../admin/functions/approve_or_reject_appointment.php',
+        dataType: 'JSON',
+        data: {
+          action: action,
+          appointment_id: appointment_id,
+          remarks: $("textarea[name='remarks']").val()
+        },
+        success: function(res) {
+          const sms_error = res.sms_error ? JSON.parse(res.sms_error) : '';
+          const email_error = res.email_error ? JSON.parse(res.email_error) : '';
+          console.log(sms_error, email_error);
+
+          // if (res.status) {
+          if (sms_error.Error) {
+            // pag error yung text mag aalert
+            toastr.error(sms_error.Message);
+          }
+
+          if (email_error) {
+            // pag error yung text mag aalert
+            toastr.error(email_error);
+          }
+
+          appointment_id = 0;
+          // }
+
+          $("#viewMyAppointment_modal").modal('hide');
+          $("#reject_appointment_modal").modal('hide');
+
+          toastr.success(res.msg);
+          load_appointments();
+        }
+      });
+    }
+
+    $("#viewMyAppointment_modal").on("click", ".btnReject", function(e) {
+      e.preventDefault();
+
+      appointment_id = $(this).attr('id').split('-')[1];
+
+      $("#viewMyAppointment_modal").modal('hide');
+      $(".form-input").val('');
+      $("#reject_appointment_modal .modal-title").text('Cancel Appointment');
+      $("#reject_appointment_modal").modal('show');
+    });
+
+    $("#reject_appointment_modal").on("click", "#btnReject", function(e) {
+      e.preventDefault();
+
+      update_appointments('reject', appointment_id);
     });
 
     load_appointments();

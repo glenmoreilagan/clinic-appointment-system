@@ -115,7 +115,7 @@ if ($action == 'approve') {
         $email->sendEmail();
       }
 
-      echo json_encode(['status' => true, 'msg' => 'Approve Success!', 'sms_error' => $sms_response, 'email_error' => $email_response]);
+      echo json_encode(['status' => true, 'msg' => 'Reject Success!', 'sms_error' => $sms_response, 'email_error' => $email_response]);
     }
   } else {
     echo json_encode(['status' => false, 'msg' => 'Reject Failed!', 'sms_error' => '', 'email_error' => '']);
