@@ -39,7 +39,8 @@
                             <input type="password" placeholder="Confirm Password" class="form-control shadow-none"
                                 name="cpassword">
                         </div>
-                        <a data-bs-target="#signinModal" data-bs-toggle="modal" data-bs-dismiss="modal">Already have an
+                        <a data-bs-target="#signinModal" data-bs-toggle="modal" style="color: blue;"
+                            data-bs-dismiss="modal">Already have an
                             account?</a><br>
                         <span class="text-danger loginError"></span>
                     </div>
