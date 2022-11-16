@@ -6,19 +6,19 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  
-  background: #f1f1f1; 
+
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #CCCCCC; 
+  background: #CCCCCC;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 .card-custom {
@@ -37,9 +37,14 @@ li.sidebar-item {
   font-size: 16px !important;
 }
 
-.btnEdit, 
+.btnEdit,
 .btnDelete,
 .btnView {
   /* text-align: left; */
   width: 75px !important;
+}
+
+.dropdown-menu.dropdown-menu-lg.dropdown-menu-right.py-0.show {
+  height: 420px;
+  overflow: scroll;
 }

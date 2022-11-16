@@ -29,6 +29,7 @@ $qry = "UPDATE tbl_user SET
   fname = '$fname',
   mname = '$mname',
   lname = '$lname',
+  fullname = '$fname $mname $lname',
   contactno = '$contactno',
   address = '$address',
   email = '$email',

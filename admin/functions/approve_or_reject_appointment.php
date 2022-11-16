@@ -15,7 +15,7 @@ $remarks = $_POST['remarks'];
 
 
 $qry = "SELECT appointment.user_id, user.fullname, user.contactno, user.email,
-appointment.complaint, serv.service_title
+appointment.complaint, serv.service_title, appointment.remarks
 FROM tbl_appointments as appointment
 INNER JOIN tbl_user as user on user.id = appointment.user_id
 INNER JOIN tbl_services as serv on serv.id = appointment.service_id
@@ -91,6 +91,7 @@ if ($action == 'approve') {
       $email = $row['email'];
       $complaint = $row['complaint'];
       $service_title = $row['service_title'];
+      $remarks = $row['remarks'];
 
       $str_notif = "
         <div class='text-muted small mt-1'>
@@ -104,14 +105,22 @@ if ($action == 'approve') {
 
       $sms_response = '';
       $email_response = '';
-      $message = "Hi $fullname! Your rejected appointment to Lj Cura Ob-Gyn Ultrasound Clinic.";
+      $sms_message = "Hi $fullname! Your rejected appointment to Lj Cura Ob-Gyn Ultrasound Clinic.";
+      $email_message = "Hi $fullname! Sorry, your appointment at LJ Cura OB-GYN Ultrasound Clinic due to ($remarks)
+      We're hoping for your kind understanding and consideration.
+      <br>
+      <br>
+      Yours sincerely,
+      <br>
+      LJ Cura OB-GYN Ultrasound Clinic";
+
       if ($contactno !== '') {
-        $sms = new Sms($contactno, $message);
+        $sms = new Sms($contactno, $sms_message);
         $sms_response = $sms->itexmo();
       }
 
       if ($email !== '') {
-        $email = new Email($email, $message);
+        $email = new Email($email, $email_message);
         $email->sendEmail();
       }
 

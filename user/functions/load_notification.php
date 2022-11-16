@@ -6,8 +6,8 @@ $user_id = $_SESSION['user_id'];
 
 $qry = "SELECT id, title, description
   FROM tbl_notification 
-  WHERE user_id = '$user_id'
-  order by id DESC
+  WHERE user_id IN ('$user_id', 0)
+  order by created_at DESC
   LIMIT 10";
 
 $result = $conn->query($qry);

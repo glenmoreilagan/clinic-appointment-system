@@ -68,6 +68,8 @@ $(document).ready(function () {
           $("#signinModal").modal('show');
           $(".loginError").text('');
           $("#signupModal input").val('');
+
+          alert('Registered Successfully');
         } else {
           $(".loginError").removeClass('text-success');
           $(".loginError").addClass('text-danger');
