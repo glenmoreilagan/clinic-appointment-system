@@ -19,7 +19,7 @@ include_once '../functions/session_config.php';
     <title>Announcements</title>
 
     <link rel="shortcut icon" href="../../image/favicon.png">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
 
     <!-- Choose your prefered color scheme -->
@@ -88,17 +88,17 @@ include_once '../functions/session_config.php';
                             alt="LJ CURA OB-GYN ULTRA SOUND CLINIC"></span>
                 </a>
                 <?php
-        // heres the settings for local or live
-        include '../../host_setting.php';
-        ?>
+                // heres the settings for local or live
+                include '../../host_setting.php';
+                ?>
                 <ul class="sidebar-nav">
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href=<?php echo $host . "user/dashboard/"; ?>>
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Dashboard</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                         <a class="sidebar-link" href=<?php echo $host . "user/announcements/"; ?>>
                             <i class="align-middle bi bi-megaphone"></i> <span class="align-middle">Announcements</span>
                         </a>
@@ -117,8 +117,7 @@ include_once '../functions/session_config.php';
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href=<?php echo $host . "user/feedback/"; ?>>
-                            <i class="align-middle" data-feather="user-check"></i> <span
-                                class="align-middle">Feedback</span>
+                            <i class="align-middle" data-feather="edit"></i> <span class="align-middle">Feedback</span>
                         </a>
                     </li>
                 </ul>
