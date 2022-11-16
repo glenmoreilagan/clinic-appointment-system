@@ -44,7 +44,7 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
     when appointment.is_completed = 1 AND appointment.status = 1 then 'Completed'
   end as status,
   appointment.service_id, 
-  services.service_title, services.amount as cost, 
+  services.service_title, payment.total_cost as cost, 
   user.fullname as client, user.address, user.contactno,
   payment.reference_no as refno
   FROM tbl_appointments as appointment 
