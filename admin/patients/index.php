@@ -291,6 +291,9 @@ $(document).ready(function() {
                   <td>
                     ${res.data[i].service_title}
                   </td>
+                  <td>
+                    ${res.data[i].total_cost}
+                  </td>
                 </tr>
               `;
                     }

@@ -102,7 +102,7 @@ if ($user_id && $appointment_id) {
 
         if ($email !== '') {
           $email = new Email($email, $message, 'Official Receipt');
-          $email->sendEmail();
+          $email->sendEmail(1);
         }
       }
 

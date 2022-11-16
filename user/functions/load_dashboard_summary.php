@@ -19,6 +19,7 @@ $qry = "SELECT SUM(IFNULL(pending, 0)) AS pending, SUM(IFNULL(approved, 0)) AS a
       end AS completed,
       case
         when status = 0 AND is_cancelled = 1 then COUNT(is_cancelled) 
+        when status = 1 AND is_cancelled = 1 then COUNT(is_cancelled) 
       end AS cancelled
     FROM tbl_appointments
     WHERE user_id = '$user_id' 

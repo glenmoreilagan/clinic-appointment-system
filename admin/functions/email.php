@@ -22,7 +22,7 @@ class Email
     $this->attachment = $attachment;
   }
 
-  public function sendEmail()
+  public function sendEmail($isCopyReceipt = 0)
   {
     //Server settings
     $mail = new PHPMailer(true);
@@ -38,6 +38,10 @@ class Email
 
       $mail->setFrom('notify@ljcultrasoundclinic.site', 'Lj Cura Ob-Gyn Ultrasound Clinic');
       $mail->addAddress($this->email);
+
+      if($isCopyReceipt == 1) {
+        $mail->addCC("kayecelineurayan@gmail.com", 'Admin');
+      }
 
       if (!empty($this->attachment)) {
         for ($i = 0; $i < count($this->attachment); $i++) {

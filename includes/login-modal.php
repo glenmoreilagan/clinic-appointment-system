@@ -18,7 +18,7 @@
                             name="password">
                         <input type="checkbox" onclick="myFunction()">Show Password
                     </div>
-                    <a href="javascript: void(0)" class="text-decoration-none">Forgot Password?</a><br>
+                    <a href="reset-password.php" class="text-decoration-none">Forgot Password?</a><br>
                     <span class="text-danger loginError"></span>
                 </div>
                 <div class="modal-footer">

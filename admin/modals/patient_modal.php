@@ -19,6 +19,7 @@
               <th>Date & Time</th>
               <th>Chief Complaint</th>
               <th>Service</th>
+              <th>Total Cost</th>
             </tr>
           </thead>
           <tbody id="patient_history_list"></tbody>
