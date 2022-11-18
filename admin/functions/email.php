@@ -39,8 +39,8 @@ class Email
       $mail->setFrom('notify@ljcultrasoundclinic.site', 'Lj Cura Ob-Gyn Ultrasound Clinic');
       $mail->addAddress($this->email);
 
-      if($isCopyReceipt == 1) {
-        $mail->addCC("kayecelineurayan@gmail.com", 'Admin');
+      if ($isCopyReceipt == 1) {
+        $mail->addCC("ljcultrasoundclinic@gmail.com", 'Admin');
       }
 
       if (!empty($this->attachment)) {
