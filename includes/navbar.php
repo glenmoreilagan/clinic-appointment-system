@@ -21,9 +21,9 @@
         </ul>
         <form class="d-flex">
             <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-2" data-bs-toggle="modal"
-                data-bs-target="#signupModal">Sign up</button>
+                data-bs-target="#signupModal">Register</button>
             <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal"
-                data-bs-target="#signinModal">Sign in</button>
+                data-bs-target="#signinModal">Log In</button>
         </form>
 
     </div>

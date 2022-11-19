@@ -15,7 +15,7 @@ if ($email) {
     $qry = "UPDATE tbl_user SET password = '$encrypted_new_password' WHERE email = '$email'";
     if ($conn->query($qry)) {
       $email_message = "Your reset password is: <u><b>$new_password</b></u> please change your temporary password after you login.";
-      $email = new Email($email, $email_message, 'Password Rest');
+      $email = new Email($email, $email_message, 'Password Reset');
       $email->sendEmail();
 
       echo json_encode(['status' => true, 'msg' => 'Reset Password sent to your email, please check.']);

@@ -4,20 +4,27 @@
         <div class="modal-content">
             <form action="functions/login_func.php" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title d-flex align-items-center">Sign In</h5>
+                    <h5 class="modal-title d-flex align-items-center">Log In</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" name="email"
+                            placeholder="name@example.com">
                         <label class="form-label">Email Address:</label>
-                        <input type="email" placeholder="Email" class="form-control shadow-none" name="email">
                     </div>
-                    <div class="mb-3">
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" name="password"
+                            placeholder="Password">
                         <label class="form-label">Password:</label>
-                        <input type="password" placeholder="Password" id="myInput" class="form-control shadow-none"
-                            name="password">
                         <input type="checkbox" onclick="myFunction()">Show Password
                     </div>
+                    <label class="form-label">Don't have an account?
+                        <a data-bs-target="#signupModal" data-bs-toggle="modal"
+                            style="color: blue; text-decoration: underline; cursor: pointer;"
+                            data-bs-dismiss="modal">Register
+                            here</a><br>
+                        <span class="text-danger loginError"></span></label><br>
                     <a href="reset-password.php" class="text-decoration-none">Forgot Password?</a><br>
                     <span class="text-danger loginError"></span>
                 </div>
@@ -32,7 +39,7 @@
 
 <script>
 function myFunction() {
-    var x = document.getElementById("myInput");
+    var x = document.getElementById("floatingPassword");
     if (x.type === "password") {
         x.type = "text";
     } else {
