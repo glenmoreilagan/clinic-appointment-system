@@ -142,6 +142,26 @@ include_once '../functions/session_config.php';
 
   <script>
     $(document).ready(function() {
+      const load_info = () => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/load_profile.php',
+          dataType: 'JSON',
+          success: function(res) {
+            if (res.status) {
+              $("input[name='fname']").val(res.data.fname);
+              $("input[name='mname']").val(res.data.mname);
+              $("input[name='lname']").val(res.data.lname);
+              $("input[name='contactno']").val(res.data.contactno);
+              $("textarea[name='address']").val(res.data.address);
+              $("input[name='email']").val(res.data.email);
+            } else {
+              toastr.error(res.msg);
+            }
+          }
+        });
+      }
+
       const save_info = (data, for_password = 0) => {
         data += `&for_password=${for_password}`;
 
@@ -153,7 +173,10 @@ include_once '../functions/session_config.php';
           success: function(res) {
             // console.log(res);
             if (res.status) {
-              $(".form-inputs").val('');
+              // $(".form-inputs").val('');
+              if (for_password == 1) {
+                $(".form-inputs-password").val('');
+              }
               toastr.success(res.msg);
             } else {
               toastr.error(res.msg);
@@ -228,6 +251,8 @@ include_once '../functions/session_config.php';
         let data_input = $(".form-inputs").serialize();
         save_info(data_input);
       });
+
+      load_info();
     });
   </script>
 </body>
