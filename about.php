@@ -62,7 +62,7 @@ if (!empty($_SESSION)) {
 
     <div class="container-fluid p-0">
         <div class="aboutus">
-            <img src="image/au.webp" class="d-block w-100" alt="...">
+            <img src="image/au.webp" class="d-block w-100 about-banner" alt="...">
             <div class="content-about">
                 <div class="title">About Us</div>
                 <div class="about">

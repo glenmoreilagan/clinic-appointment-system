@@ -5,31 +5,18 @@
 
   <div class="navbar-collapse collapse">
     <ul class="navbar-nav navbar-align">
-      <!-- <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
         <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown">
           <div class="position-relative">
-            <i class="align-middle" data-feather="bell-off"></i>
+            <i class="align-middle far fa-fw fa-bell"></i>
+
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
-          <div class="dropdown-menu-header">
-            4 New Notifications
-          </div>
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <div class="row no-gutters align-items-center">
-                <div class="col-2">
-                  <i class="text-success" data-feather="user-plus"></i>
-                </div>
-                <div class="col-10">
-                  <div class="text-dark">New connection</div>
-                  <div class="text-muted small mt-1">Anna accepted your request.</div>
-                </div>
-              </div>
-            </a>
-          </div>
+          <div class="dropdown-menu-header" id="notif-count"></div>
+          <div class="list-group" id="notif-details"></div>
         </div>
-      </li> -->
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
           <i class="align-middle" data-feather="settings"></i>
@@ -52,3 +39,46 @@
     </ul>
   </div>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function() {
+    const load_notification = () => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_notification.php',
+        dataType: 'JSON',
+        data: {},
+        success: function(res) {
+          // console.log(res);
+
+          const notif_count = res.data.length;
+          $("#notif-count").text(notif_count > 0 ? `${notif_count} New Notification` : '0 New Notification');
+          let str = ``;
+
+          if (notif_count > 0) {
+            for (let i in res.data) {
+              str += `
+                <a href="#" class="list-group-item">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-2">
+                      <i class="text-primary far fa-fw fa-bell" style='font-size: 22px;'></i>
+                    </div>
+                    <div class="col-10">
+                      <div class="text-dark">${res.data[i].title}</div>
+                      ${res.data[i].description}
+                      <div class="text-muted mt-1"></div>
+                    </div>
+                  </div>
+                </a>
+              `;
+            }
+            $("#notif-details").html(str);
+          }
+        }
+      });
+    }
+
+    load_notification();
+  });
+</script>

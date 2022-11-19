@@ -320,6 +320,20 @@ footer {
 
   .content-about {
     padding: 2em;
+    justify-content: start;
+    height: auto;
+  }
+
+  .about-banner{
+    height: 35vh !important;
+  }
+
+  .content-about .title {
+    font-size: 14px;
+  }
+
+  .content-about .about p {
+    font-size: 12px;
   }
 }
 

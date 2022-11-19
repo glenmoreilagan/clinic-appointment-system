@@ -1,5 +1,6 @@
 <?php
 include_once '../../config.php';
+include './notification_class.php';
 session_start();
 
 $user_id = $_SESSION['user_id'];
@@ -33,13 +34,15 @@ if ($conn->query($qry)) {
     $complaint = $row['complaint'];
     $service_title = $row['service_title'];
 
-    // $desc = "
-    //   <span><b>$fullname</b><span><br>
-    //   <span>$complaint</span><br>
-    //   <span>$service_title</span><br>
-    // ";
-    // $qry = "INSERT INTO tbl_notification(title, description)values('New Appointment', '$desc')";
-    // $conn->query($qry);
+    $str_notif = "
+        <div class='text-muted small mt-1'>
+          <span><b>$fullname</b></span><br>
+          <span>$complaint</span><br>
+          <span>$service_title</span><br>
+          <span>" . date('M d, Y H:i A') . "</span><br>
+        </div>";
+    $notif = new NotificationClass($conn);
+    $notif->save($user_id, 'New Appointment', mysqli_real_escape_string($conn, $str_notif));
   }
 
   echo json_encode(['status' => true, 'msg' => 'Saving Success!']);

@@ -48,6 +48,6 @@ li.sidebar-item {
 }
 
 .dropdown-menu.dropdown-menu-lg.dropdown-menu-right.py-0.show {
-  height: 420px;
+  max-height: 420px;
   overflow: scroll;
 }
