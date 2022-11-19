@@ -106,8 +106,7 @@ if ($action == 'approve') {
       $sms_response = '';
       $email_response = '';
       $sms_message = "Hi $fullname! Your rejected appointment to Lj Cura Ob-Gyn Ultrasound Clinic.";
-      $email_message = "Hi $fullname! Sorry, your appointment at LJ Cura OB-GYN Ultrasound Clinic due to ($remarks)
-      We're hoping for your kind understanding and consideration.
+      $email_message = "Hi $fullname! Sorry, your appointment at LJ Cura OB-GYN Ultrasound Clinic is rejected/cancelled due to ($remarks). We're hoping for your kind understanding and consideration.
       <br>
       <br>
       Yours sincerely,
