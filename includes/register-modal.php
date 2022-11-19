@@ -39,10 +39,12 @@
                             <input type="password" placeholder="Confirm Password" class="form-control shadow-none"
                                 name="cpassword">
                         </div>
-                        <a data-bs-target="#signinModal" data-bs-toggle="modal" style="color: blue;"
-                            data-bs-dismiss="modal">Already have an
-                            account?</a><br>
-                        <span class="text-danger loginError"></span>
+                        <label class="form-label">Already have an account?
+                            <a data-bs-target="#signinModal" data-bs-toggle="modal"
+                                style="color: blue; text-decoration: underline; cursor: pointer;"
+                                data-bs-dismiss="modal">Sign In
+                                here</a><br>
+                            <span class="text-danger loginError"></span></label>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

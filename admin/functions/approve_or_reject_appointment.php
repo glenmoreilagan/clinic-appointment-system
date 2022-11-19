@@ -38,6 +38,7 @@ if ($action == 'approve') {
       $email = $row['email'];
       $complaint = $row['complaint'];
       $service_title = $row['service_title'];
+      $remarks = $row['remarks'];
 
       $str_notif = "
         <div class='text-muted small mt-1'>
@@ -56,12 +57,15 @@ if ($action == 'approve') {
       $messageSms = "Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
       $messageEmail = "
         Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.
-        <br>
-        <br>
         Please fill out this 24 hours before your scheduled appointment.
         <br>
         <a href='" . $host . "health-declaration-form.php'>Health Declaration Form</a>
-      ";
+        <br>
+        <br>
+        Yours sincerely,
+        <br>
+        LJ Cura OB-GYN Ultrasound Clinic";
+
       if ($contactno !== '') {
         $sms = new Sms($contactno, $messageSms);
         $sms_response = $sms->itexmo();
@@ -91,7 +95,6 @@ if ($action == 'approve') {
       $email = $row['email'];
       $complaint = $row['complaint'];
       $service_title = $row['service_title'];
-      $remarks = $row['remarks'];
 
       $str_notif = "
         <div class='text-muted small mt-1'>
