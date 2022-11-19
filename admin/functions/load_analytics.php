@@ -370,10 +370,10 @@ function loadServicesChart_Monthly($conn, $month)
   for ($i = 1; $i <= $num_day_month; $i++) {
     if ($i != $num_day_month) {
       $str_concat .= "IF (DAY(date_schedule) = $i, COUNT(service_id), 0) AS d$i, ";
-      $order_concat .= "d$i ASC, ";
+      $order_concat .= "d$i DESC, ";
     } else {
       $str_concat .= "IF (DAY(date_schedule) = $i, COUNT(service_id), 0) AS d$i ";
-      $order_concat .= "d$i ASC ";
+      $order_concat .= "d$i DESC ";
     }
   }
 
