@@ -11,31 +11,55 @@ $address = isset($_POST['address']) ? mysqli_escape_string($conn, $_POST['addres
 $email = isset($_POST['email']) ? mysqli_escape_string($conn, $_POST['email']) : '';
 $password = isset($_POST['password']) ? mysqli_escape_string($conn, $_POST['password']) : '';
 $confirm_password = isset($_POST['confirm_password']) ? mysqli_escape_string($conn, $_POST['confirm_password']) : '';
+$for_password = isset($_POST['for_password']) ? mysqli_escape_string($conn, $_POST['for_password']) : '0';
 
-if ($password && $confirm_password) {
-  if ($password !== $confirm_password) {
+if ($for_password == 1) {
+  if ($password && $confirm_password) {
+    if ($password !== $confirm_password) {
+      echo json_encode(['status' => false, 'msg' => 'Please check password and confirm password!']);
+      return;
+    }
+  }
+
+  if (!$password || !$confirm_password) {
     echo json_encode(['status' => false, 'msg' => 'Please check password and confirm password!']);
     return;
   }
+
+  $qry = "UPDATE tbl_user SET 
+    password = '" . md5($password) . "'
+    WHERE id = '$user_id'
+  ";
 }
 
-if (!$password || !$confirm_password) {
-  echo json_encode(['status' => false, 'msg' => 'Please check password and confirm password!']);
-  return;
+if ($for_password == 0) {
+  if ($fname == '') {
+    echo json_encode(['status' => false, 'msg' => 'First Name is required!']);
+    return;
+  }
+  if ($lname == '') {
+    echo json_encode(['status' => false, 'msg' => 'Last Name is required!']);
+    return;
+  }
+  if ($contactno == '') {
+    return;
+  }
+  if ($email == '') {
+    echo json_encode(['status' => false, 'msg' => 'Email is required!']);
+    return;
+  }
+  $qry = "UPDATE tbl_user SET 
+    fname = '$fname',
+    mname = '$mname',
+    lname = '$lname',
+    fullname = '$fname $mname $lname',
+    contactno = '$contactno',
+    address = '$address',
+    email = '$email'
+    WHERE id = '$user_id'
+  ";
 }
 
-
-$qry = "UPDATE tbl_user SET 
-  fname = '$fname',
-  mname = '$mname',
-  lname = '$lname',
-  fullname = '$fname $mname $lname',
-  contactno = '$contactno',
-  address = '$address',
-  email = '$email',
-  password = '" . md5($password) . "'
-  WHERE id = '$user_id'
-";
 
 if ($conn->query($qry)) {
   echo json_encode(['status' => true, 'msg' => 'Saving Success!']);
