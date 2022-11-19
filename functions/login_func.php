@@ -18,7 +18,8 @@ $sql = "SELECT
     FROM tbl_user
     WHERE email = '$email' AND 
     password = '$password' AND 
-    role = 0 
+    role = 0 AND
+    email_verification = ''
     LIMIT 1";
 
 $result = mysqli_query($conn, $sql);

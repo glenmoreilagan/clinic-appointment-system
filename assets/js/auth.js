@@ -65,11 +65,11 @@ $(document).ready(function () {
           $(".loginError").text(res.msg);
 
           $("#signupModal").modal('hide');
-          $("#signinModal").modal('show');
+          // $("#signinModal").modal('show');
           $(".loginError").text('');
           $("#signupModal input").val('');
 
-          alert('Registered Successfully');
+          alert(res.msg);
         } else {
           $(".loginError").removeClass('text-success');
           $(".loginError").addClass('text-danger');
