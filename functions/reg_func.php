@@ -8,7 +8,7 @@ $fname = mysqli_real_escape_string($conn, $_POST['fname']);
 $mname = mysqli_real_escape_string($conn, $_POST['mname']);
 $lname = mysqli_real_escape_string($conn, $_POST['lname']);
 
-$fullname = $fname . ' ' . $mname . ', ' . $lname;
+$fullname = $fname . ' ' . $mname . '. ' . $lname;
 $address = mysqli_real_escape_string($conn, $_POST['address']);
 $contactnumber = mysqli_real_escape_string($conn, $_POST['contactnumber']);
 $email = mysqli_real_escape_string($conn, $_POST['email']);

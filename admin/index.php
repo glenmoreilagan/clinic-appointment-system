@@ -2,9 +2,9 @@
 session_start();
 
 if (!empty($_SESSION)) {
-  if (isset($_SESSION['email']) && isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-    header("Location: ./dashboard/");
-  }
+    if (isset($_SESSION['email']) && isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+        header("Location: ./dashboard/");
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -58,12 +58,17 @@ if (!empty($_SESSION)) {
                 <img src="../image/logooo.png">
                 <div class="inputs" style="padding: 20px; width: 300px;">
                     <h4 class="title">Login as Admin</h4>
-                    <label for="email"><i class="bi bi-envelope-fill" aria-hidden="true"></i>Email</label>
-                    <input name="email" class="form-control form-control-sm mb-3" type="text" id="email">
-
-                    <label for="password"><i class="bi bi-lock-fill"></i>Password</label>
-                    <input name="password" class="form-control form-control-sm" type="password" id="password">
-                    <small class="loginError"></small>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" name="email"
+                            placeholder="name@example.com">
+                        <label class="form-label">Email Address:</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" name="password"
+                            placeholder="Password">
+                        <label class="form-label">Password:</label>
+                        <input type="checkbox" onclick="myFunction()">Show Password
+                    </div>
 
                     <a href="..//reset-password.php" class="text-decoration-none">Forgot Password?</a><br>
                     <span class="text-danger loginError"></span>
@@ -83,6 +88,14 @@ if (!empty($_SESSION)) {
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 <script>
+function myFunction() {
+    var x = document.getElementById("floatingPassword");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
 $(document).ready(function() {
     $("#btnLogin").click(function(e) {
         e.preventDefault();
