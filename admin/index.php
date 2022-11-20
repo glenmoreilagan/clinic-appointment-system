@@ -58,20 +58,14 @@ if (!empty($_SESSION)) {
                 <img src="../image/logooo.png">
                 <div class="inputs" style="padding: 20px; width: 300px;">
                     <h4 class="title">Login as Admin</h4>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" name="email"
-                            placeholder="name@example.com">
-                        <label class="form-label">Email Address:</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="password"
-                            placeholder="Password">
-                        <label class="form-label">Password:</label>
-                        <input type="checkbox" onclick="myFunction()">Show Password
-                    </div>
+                    <label for="email"><i class="bi bi-envelope-fill" aria-hidden="true"></i>Email</label>
+                    <input name="email" class="form-control form-control-sm mb-3" type="text" id="email">
+
+                    <label for="password"><i class="bi bi-lock-fill"></i>Password</label>
+                    <input name="password" class="form-control form-control-sm" type="password" id="password">
+                    <small class="loginError"></small><br>
 
                     <a href="..//reset-password.php" class="text-decoration-none">Forgot Password?</a><br>
-                    <span class="text-danger loginError"></span>
 
                     <div class="action-btn mt-3">
                         <button class="btn btn-outline-danger btn-sm" onclick="window.history.back();">Cancel</button>
