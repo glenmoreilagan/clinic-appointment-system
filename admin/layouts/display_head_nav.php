@@ -31,7 +31,7 @@
           <!-- Profile</a> -->
           <!-- <a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Analytics</a> -->
           <!-- <div class="dropdown-divider"></div> -->
-          <a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a>
+          <a class="dropdown-item" href="/caps/admin/change-password">Change Password</a>
           <!-- <a class="dropdown-item" href="#">Help</a> -->
           <a class="dropdown-item" href="../functions/f_logout.php">Sign out</a>
         </div>
