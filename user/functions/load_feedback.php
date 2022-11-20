@@ -1,5 +1,8 @@
 <?php
 include_once '../../config.php';
+session_start();
+
+$user_id = $_SESSION['user_id'];
 
 $qry = "SELECT USER.fullname, fback.id, fback.feedback, fback.created_at,
   case 
@@ -11,6 +14,7 @@ $qry = "SELECT USER.fullname, fback.id, fback.feedback, fback.created_at,
   end as rating
 FROM tbl_feedback AS fback
 INNER JOIN tbl_user AS USER ON USER.id = fback.user_id
+WHERE fback.user_id = '$user_id'
 ORDER BY created_at DESC";
 
 $result = $conn->query($qry);
