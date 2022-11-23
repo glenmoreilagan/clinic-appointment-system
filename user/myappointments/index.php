@@ -182,9 +182,9 @@ include_once '../functions/session_config.php';
               `,
               res.data[i].complaint,
               `
-                Service: ${res.data[i].service_title}
+                <b>Service:</b> ${res.data[i].service_title}
                 <br>
-                Findings: ${res.data[i].findings}
+                <b>Findings:</b> ${res.data[i].findings}
               `,
               status_badge,
               `<tr>
