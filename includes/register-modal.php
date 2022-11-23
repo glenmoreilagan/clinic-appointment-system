@@ -62,8 +62,8 @@
                         <div class="form-floating col-md-6 mb-3">
                             <input type="email" class="form-control" id="floatingInput" name="contactnumber"
                                 placeholder="Contact Number (ex.
-                                09xxxxx)" onCopy="return false" onDrag="return false" onDrop="return false"
-                                onPaste="return false" autocomplete="off">
+                                09xxxxx)" minlength="11" maxlength="11" pattern="[0-9]{11}" onCopy="return false"
+                                onDrag="return false" onDrop="return false" onPaste="return false" autocomplete="off">
                             <label class="form-label">Contact Number:</label>
                         </div>
                         <div class="form-floating col-md-6 mb-3">

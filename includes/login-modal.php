@@ -24,9 +24,8 @@
                             style="color: blue; text-decoration: underline; cursor: pointer;"
                             data-bs-dismiss="modal">Register
                             here</a><br>
-                        <span class="text-danger loginError"></span></label><br>
-                    <a href="reset-password.php" class="text-decoration-none">Forgot Password?</a><br>
-                    <span class="text-danger loginError"></span>
+                        <a href="reset-password.php" class="text-decoration-none">Forgot Password?</a><br>
+                        <span class="text-danger loginError"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
