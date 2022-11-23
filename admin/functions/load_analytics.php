@@ -365,27 +365,31 @@ function loadServicesChart_Monthly($conn, $month)
   $added_filter = '';
   $added_filter .= " AND MONTH(date_schedule) = $today_month";
 
+  $main_concat = '';
   $str_concat = '';
   $order_concat = '';
   for ($i = 1; $i <= $num_day_month; $i++) {
     if ($i != $num_day_month) {
       $str_concat .= "IF (DAY(date_schedule) = $i, COUNT(service_id), 0) AS d$i, ";
       $order_concat .= "d$i DESC, ";
+      $main_concat .= "SUM(d$i) as d$i, ";
     } else {
       $str_concat .= "IF (DAY(date_schedule) = $i, COUNT(service_id), 0) AS d$i ";
       $order_concat .= "d$i DESC ";
+      $main_concat .= "SUM(d$i) as d$i ";
     }
   }
 
 
-  $qry = "SELECT serv.service_title, 
-    $str_concat
-    FROM tbl_appointments AS appt
-    INNER JOIN tbl_services AS serv ON serv.id = appt.service_id
-    WHERE 1=1 $added_filter
-    GROUP BY service_id
-    ORDER BY $order_concat
-    LIMIT 3";
+  $qry = " SELECT service_title, $main_concat FROM (
+      SELECT serv.service_title, 
+      $str_concat
+      FROM tbl_appointments AS appt
+      INNER JOIN tbl_services AS serv ON serv.id = appt.service_id
+      WHERE 1=1 $added_filter
+      GROUP BY service_id, DAY(date_schedule)
+    ) as tbl GROUP BY service_title 
+      ORDER BY $order_concat LIMIT 3";
 
   $result = $conn->query($qry);
 
