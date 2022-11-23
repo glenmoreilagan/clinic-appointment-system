@@ -609,34 +609,35 @@ function loadMonthlypregnantStatus($conn, $month)
     // sql query may comma sa dulo
     if ($i != $num_day_month) {
       $main_concat .= "SUM(d$i) as d$i,";
-      $str_concat .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i, ";
-      $str_concat1 .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i, ";
+      $str_concat .= "IF (DAY(date_paid) = $i, COUNT(is_pregnant), 0) AS d$i, ";
+      $str_concat1 .= "IF (DAY(date_paid) = $i, COUNT(is_pregnant), 0) AS d$i, ";
       $order_concat .= "d$i ASC, ";
     } else {
       // eto naman pag yung i at last day ay equal
       // same lang naman ginagawa pero 
       // inalis lang yung comma sa dulo ng string
       $main_concat .= "SUM(d$i) as d$i";
-      $str_concat .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i ";
-      $str_concat1 .= "IF (DAY(date_paid) = $i, COUNT(pregnant_status), 0) AS d$i ";
+      $str_concat .= "IF (DAY(date_paid) = $i, COUNT(is_pregnant), 0) AS d$i ";
+      $str_concat1 .= "IF (DAY(date_paid) = $i, COUNT(is_pregnant), 0) AS d$i ";
       $order_concat .= "d$i ASC ";
     }
   }
 
 
-  $qry = "SELECT pregnant_status, $main_concat FROM (
-    SELECT pregnant_status, 
+  $qry = "SELECT pregnant_status, is_pregnant, $main_concat FROM (
+    SELECT 'Not Pregnant' as pregnant_status, is_pregnant, 
     $str_concat
     FROM tbl_appointment_payment
-    WHERE pregnant_status = 'Not Pregnant' $added_filter
+    WHERE is_pregnant = 0 $added_filter
     GROUP BY DAY(date_paid)
     UNION ALL
-    SELECT pregnant_status, 
+    SELECT 'Pregnant' as pregnant_status, is_pregnant, 
     $str_concat1
     FROM tbl_appointment_payment
-    WHERE pregnant_status <> 'Not Pregnant' $added_filter
+    WHERE is_pregnant = 1 $added_filter
     GROUP BY DAY(date_paid)
-    ORDER BY $order_concat) as tbl GROUP BY tbl.pregnant_status";
+    ORDER BY $order_concat) as tbl 
+    GROUP BY tbl.is_pregnant";
 
   $result = $conn->query($qry);
 

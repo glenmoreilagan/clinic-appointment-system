@@ -118,7 +118,7 @@ include_once '../functions/session_config.php';
                     <tr>
                       <th>Date & Time</th>
                       <th>Chief Complaint</th>
-                      <th>Service</th>
+                      <th>Service & Findings</th>
                       <th>Status</th>
                       <th class="th-actions">Action</th>
                     </tr>
@@ -181,7 +181,11 @@ include_once '../functions/session_config.php';
                 ${res.data[i].date_schedule}
               `,
               res.data[i].complaint,
-              res.data[i].service_title,
+              `
+                Service: ${res.data[i].service_title}
+                <br>
+                Findings: ${res.data[i].findings}
+              `,
               status_badge,
               `<tr>
                 <td>
@@ -215,6 +219,7 @@ include_once '../functions/session_config.php';
           let date_schedule = result.date_schedule;
           let time_schedule = result.time_schedule;
           let service = result.service_title;
+          let findings = result.findings;
           let status_badge =
             result.status === 'Pending' ?
             `<span class="badge badge-success">${result.status}</span>` :
@@ -224,10 +229,10 @@ include_once '../functions/session_config.php';
             );
 
           let action_buttons = '';
-          action_buttons = result.status === 'Pending' ?
+          action_buttons += result.status === 'Pending' ?
             `<button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>` :
             '';
-          action_buttons = result.status === 'Approved' ?
+          action_buttons += result.status === 'Approved' ?
             `<button class="btn btn-danger btn-sm btnReject" id="r-${res.data[0].id}"><i class="align-middle fas fa-fw fa-times"></i> Reject</button>` :
             '';
           action_buttons +=
@@ -238,6 +243,7 @@ include_once '../functions/session_config.php';
           $("#viewMyAppointment_modal #schedule").html(
             `${date_schedule} at ${time_schedule}`);
           $("#viewMyAppointment_modal #service").html(`${service}`);
+          $("#viewMyAppointment_modal #findings").html(`${findings}`);
           $("#viewMyAppointment_modal #status").html(`${status_badge}`);
           $("#viewMyAppointment_modal .modal-footer").html(`${action_buttons}`);
         }

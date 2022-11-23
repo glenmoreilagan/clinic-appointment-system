@@ -14,6 +14,8 @@ $appointment_id = $_POST['appointment_id'] ? $_POST['appointment_id'] : '0';
 $total_cost = $cost + $other_cost;
 $date_paid = date('Y-m-d');
 
+$is_pregnant = $pregnant_status != 'Not Pregnant' ? 1 : 0;
+
 if ($user_id && $appointment_id) {
   $qry = "UPDATE tbl_appointments SET is_completed = 1 
   WHERE id = '$appointment_id' AND user_id = '$user_id'";
@@ -23,10 +25,10 @@ if ($user_id && $appointment_id) {
     $reference_no = GetSerialCode($user_id, $appointment_id);
 
     $qry = "INSERT INTO tbl_appointment_payment
-    (reference_no, user_id, date_paid, appointment_id, pregnant_status, 
+    (reference_no, user_id, date_paid, appointment_id, pregnant_status, is_pregnant,
     service_title, other_services, findings, cost, other_cost, total_cost)
     VALUES
-    ('$reference_no', '$user_id', '$date_paid', '$appointment_id', '$pregnant_status', 
+    ('$reference_no', '$user_id', '$date_paid', '$appointment_id', '$pregnant_status', '$is_pregnant',
     '$service_title', '$other_services', '$findings', '$cost', '$other_cost', '$total_cost')";
 
     if ($conn->query($qry)) {

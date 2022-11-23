@@ -13,6 +13,7 @@
         <h5 class="card-title"><span style="font-weight: 700;">Age: </span> <span style="font-weight: 100;" class="card-text" id="age"></span></h5>
         <h5 class="card-title"><span style="font-weight: 700;">Date & Time: </span> <span style="font-weight: 100;" class="card-text" id="schedule"></span></h5>
         <h5 class="card-title"><span style="font-weight: 700;">Service: </span> <span style="font-weight: 100;" class="card-text" id="service"></span></h5>
+        <h5 class="card-title"><span style="font-weight: 700;">Findings: </span> <span style="font-weight: 100;" class="card-text" id="findings"></span></h5>
       </div>
       <div class="modal-footer">
         <!-- <button class="btn btn-danger btn-sm" id="btnCancelAppointment">YES</button> -->
