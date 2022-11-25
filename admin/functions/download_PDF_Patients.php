@@ -19,7 +19,8 @@ $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email,
 appointment.complaint, appointment.age, 
 DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
 TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
-service.service_title, service.description
+service.service_title, service.description,
+IFNULL(payment.findings, '') as findings,
 FROM tbl_user AS cust
 INNER JOIN tbl_appointments AS appointment ON appointment.user_id = cust.id
 INNER JOIN tbl_services AS service ON service.id = appointment.service_id
@@ -65,6 +66,7 @@ if ($result->num_rows > 0) {
       $str .= tdata('Date & Time', 'text-align: center; padding-top: 20px; border-bottom: 1px solid; text-transform: uppercase; font-weight: bold;');
       $str .= tdata('Chief Complaint', 'text-align: center; padding-top: 20px; border-bottom: 1px solid; text-transform: uppercase; font-weight: bold;');
       $str .= tdata('Service', 'text-align: center; padding-top: 20px; border-bottom: 1px solid; text-transform: uppercase; font-weight: bold;');
+      $str .= tdata('Findings', 'text-align: center; padding-top: 20px; border-bottom: 1px solid; text-transform: uppercase; font-weight: bold;');
       $str .= closeTrow();
     }
 
@@ -72,6 +74,7 @@ if ($result->num_rows > 0) {
     $str .= tdata($row['time_schedule'] . " " . $row['date_schedule']);
     $str .= tdata($row['complaint']);
     $str .= tdata($row['service_title']);
+    $str .= tdata($row['findings']);
     $str .= closeTrow();
 
     $cust_id = $row['id'];

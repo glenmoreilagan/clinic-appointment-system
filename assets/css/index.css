@@ -199,7 +199,8 @@ button:hover {
 footer {
   bottom: 0px;
   width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+  background: white;
+  color: black;
   font-family: var(--main-font);
 }
 
@@ -230,7 +231,7 @@ footer {
   top: -10px;
   height: 2px;
   width: 100%;
-  background: #1a1a1a;
+  background: black;
 }
 
 .center .content .text {

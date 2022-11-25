@@ -47,6 +47,7 @@ if ($status == 'all') {
   DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
   service.service_title, service.description,
+  IFNULL(payment.findings, '') as findings,
   payment.total_cost
   FROM tbl_user AS cust
   INNER JOIN tbl_appointments AS appointment ON appointment.user_id = cust.id
@@ -68,6 +69,7 @@ if ($status == 'all') {
         'contactno' => $row['contactno'],
         'email' => $row['email'],
         'complaint' => $row['complaint'],
+        'findings' => $row['findings'],
         'date_schedule' => $row['date_schedule'],
         'time_schedule' => $row['time_schedule'],
         'service_title' => $row['service_title'],

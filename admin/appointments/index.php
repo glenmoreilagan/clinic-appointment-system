@@ -227,6 +227,7 @@ $(document).ready(function() {
         complaint: '',
         service_id: '',
         service_title: '',
+        findings: '',
         cost: 0.00
     }
 
@@ -435,6 +436,7 @@ $(document).ready(function() {
                     appointment_details_obj.complaint = res_data.complaint;
                     appointment_details_obj.service_id = res_data.service_id;
                     appointment_details_obj.service_title = res_data.service_title;
+                    appointment_details_obj.findings = res_data.findings;
                     appointment_details_obj.cost = res_data.cost;
                     $("input[name='other_charges']").val('0.00');
 
@@ -494,6 +496,9 @@ $(document).ready(function() {
                 </td>
                 <td>
                   ${res.data[0].service_title}
+                </td>
+                 <td>
+                  ${res.data[0].findings}
                 </td>
                 <td>
                   ${res.data[0].cost}

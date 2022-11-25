@@ -59,4 +59,12 @@ a {
             </div>
         </div>
     </div>
+    <div class="container ">
+        <div class="copyright">
+            <a href="index" style="text-decoration: none;">
+                <p class="font-weight-bold" style="text-align: center;">©LJ CURA OB-GYN ULTRASOUND CLINIC
+            </a><BR>
+            HMU IT-BA 4102</p>
+        </div>
+    </div>
 </footer>

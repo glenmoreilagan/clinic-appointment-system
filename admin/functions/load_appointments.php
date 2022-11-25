@@ -45,6 +45,7 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   end as status,
   appointment.service_id, 
   services.service_title, 
+  IFNULL(payment.findings, '') as findings,
   case
   when appointment.status = 0 AND appointment.is_cancelled = 0 then services.amount
     when appointment.is_cancelled = 1 AND appointment.status = 0 then services.amount
@@ -74,6 +75,7 @@ if ($result->num_rows > 0) {
       'time_schedule' => !empty($row['time_schedule']) ? $row['time_schedule'] : '',
       'age' => $row['age'],
       'remarks' => $row['remarks'],
+      'findings' => $row['findings'],
       'status' => $row['status'],
       'service_id' => $row['service_id'],
       'service_title' => $row['service_title'] !== NULL ? $row['service_title'] : '-',
