@@ -106,8 +106,8 @@ include_once '../functions/session_config.php';
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href=<?php echo $host . "user/feedback/"; ?>>
-                            <i class="align-middle" data-feather="edit"></i> <span class="align-middle">Feedback</span>
+                        <a class="sidebar-link" href=<?php echo $host . "user/period/"; ?>>
+                            <i class="align-middle" data-feather="edit"></i> <span class="align-middle">period</span>
                         </a>
                     </li>
                 </ul>
@@ -127,6 +127,26 @@ include_once '../functions/session_config.php';
                             <div id="fullcalendar"></div>
                         </div>
                     </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="table-responsive div-table-period">
+                                <table class="table table-striped table-hover table-period" id="table-period"
+                                    style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Date Started</th>
+                                            <th>Date Ended</th>
+                                            <th class="th-actions">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="period_list"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </main>
         </div>
@@ -137,6 +157,47 @@ include_once '../functions/session_config.php';
     <script src="../assets/js/app.js"></script>
     <script>
     $(document).ready(function() {
+        let tbl_period_calendar = $('#table-period').DataTable({
+            "responsive": true,
+            "dom": '<"top"f>rt<"bottom"ip><"clear">',
+            "pageLength": 10,
+            "scrollY": "80em",
+            "scrollX": true,
+            "scrollCollapse": true,
+            "fixedHeader": true,
+            "ordering": false,
+        });
+        const load_period = () => {
+            $.ajax({
+                method: 'POST',
+                url: '../functions/load_period.php',
+                dataType: 'JSON',
+                data: {},
+                success: function(res) {
+                    // console.log(res);
+                    let str = ``;
+                    let ready_data = [];
+                    for (let i in res.data) {
+                        ready_data.push([
+                            `<tr>
+                <td>${res.data[i].title}</td>
+              </tr>`,
+                            `<tr>
+                <td>${res.data[i].start}</td>
+              </tr>`,
+                            `<tr>
+                <td>${res.data[i].end}</td>
+              </tr>`,
+                        ]);
+                    }
+
+                    tbl_period_calendar.clear().rows.add(ready_data).draw();
+                }
+            });
+        }
+
+        load_period();
+
         let calendarEl = document.getElementById('fullcalendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
             themeSystem: 'bootstrap',

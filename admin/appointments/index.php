@@ -130,6 +130,16 @@ include_once '../functions/session_config.php';
                                 class="align-middle">Health Declaration</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href=<?php echo $host . "admin/users/"; ?>>
+                            <i class="align-middle fas fa-fw fa-users"></i> <span class="align-middle">Users</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href=<?php echo $host . "admin/reports/"; ?>>
+                            <i class="align-middle fas fa-fw fa-receipt"></i> <span class="align-middle">Reports</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
