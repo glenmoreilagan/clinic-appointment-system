@@ -1,4 +1,4 @@
-<div class="modal fade show" id="pdf_filter_modal" tabindex="-1" aria-modal="true" role="dialog">
+<div class="modal fade show" id="service_report_modal" tabindex="-1" aria-modal="true" role="dialog">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary btn-sm" id="btnDownload"><i class="fas fa-fw fa-download"></i> Download</button>
+        <button class="btn btn-primary btn-sm" id="btnDownload_service_report"><i class="fas fa-fw fa-download"></i> Download</button>
         <button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>
       </div>
     </div>

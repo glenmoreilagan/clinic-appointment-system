@@ -8,16 +8,10 @@ $mpdf = new \Mpdf\Mpdf();
 
 $added_filter = '';
 
-$date_start = isset($_GET['date_start']) ? $_GET['date_start'] : '';
-$date_end = isset($_GET['date_end']) ? $_GET['date_end'] : '';
-$service_id = isset($_GET['service_id']) ? $_GET['service_id'] : '';
+$user_id = isset($_GET['q']) ? $_GET['q'] : 0;
 
-if ($date_start != '' || $date_end != '') {
-  $added_filter .= " AND (DATE(appointment.date_schedule) BETWEEN '$date_start' AND '$date_end')";
-}
-
-if ($service_id) {
-  $added_filter .= " AND service.id = '$service_id'";
+if ($user_id) {
+  $added_filter .= " AND appointment.user_id = '$user_id'";
 }
 
 $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email,
@@ -32,7 +26,7 @@ INNER JOIN tbl_services AS service ON service.id = appointment.service_id
 INNER JOIN tbl_appointment_payment AS payment ON payment.appointment_id = appointment.id
 WHERE appointment.status = 1 AND appointment.is_completed = 1
 $added_filter
-ORDER BY cust.id";
+ORDER BY DATE(appointment.date_schedule) DESC";
 
 $result = $conn->query($qry);
 
@@ -45,15 +39,9 @@ if ($result->num_rows > 0) {
   $headers .= tdata('', 'padding-top: 20px;');
   $headers .= closeTrow();
 
-  $start = date("M d, Y", strtotime($date_start));
-  $end = date("M d, Y", strtotime($date_end));
-  $headers .= openTrow();
-  $headers .= tdata("<strong>Date Filter:</strong> $start to $end");
-  $headers .= closeTrow();
-
-  $headers .= openTrow();
-  $headers .= tdata('', 'border-top: 1px dotted;', 3);
-  $headers .= closeTrow();
+  // $headers .= openTrow();
+  // $headers .= tdata('', 'border-top: 1px dotted;', 3);
+  // $headers .= closeTrow();
 
   $i = 0;
   while ($row = $result->fetch_assoc()) {
@@ -105,7 +93,7 @@ $mpdf->setFooter('Page {PAGENO} - {DATE M d Y}');
 // print_r($_GET);
 // return;
 $mpdf->WriteHTML($output);
-$filename = 'patient_list_' . date('Y_m_d') . '.pdf';
+$filename = 'patient_' . date('Y_m_d') . '.pdf';
 // $mpdf->Output();
 $mpdf->Output($filename, 'D'); // for auto download
 
