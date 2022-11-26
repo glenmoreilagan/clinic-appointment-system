@@ -16,7 +16,7 @@ include_once '../functions/session_config.php';
   <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
   <meta name="author" content="Bootlab">
 
-  <title>Reports</title>
+  <title>Users</title>
 
   <link rel="shortcut icon" href="../../image/favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -31,8 +31,6 @@ include_once '../functions/session_config.php';
   <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
   <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/toastr/build/toastr.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
 </head>
 <!--
   HOW TO USE: 
@@ -100,12 +98,12 @@ include_once '../functions/session_config.php';
               <i class="align-middle fas fa-fw fa-hand-holding-heart"></i> <span class="align-middle">Health Declaration</span>
             </a>
           </li>
-          <li class="sidebar-item">
+          <li class="sidebar-item active">
             <a class="sidebar-link" href=<?php echo $host . "admin/users/"; ?>>
               <i class="align-middle fas fa-fw fa-users"></i> <span class="align-middle">Users</span>
             </a>
           </li>
-          <li class="sidebar-item active">
+          <li class="sidebar-item">
             <a class="sidebar-link" href=<?php echo $host . "admin/reports/"; ?>>
               <i class="align-middle fas fa-fw fa-receipt"></i> <span class="align-middle">Reports</span>
             </a>
@@ -122,25 +120,37 @@ include_once '../functions/session_config.php';
         <div class="container-fluid p-0">
           <div class="row mb-2 mb-xl-3">
             <div class="col-auto d-none d-sm-block">
-              <h3>Reports</h3>
+              <h3>Users</h3>
             </div>
           </div>
 
           <div class="card mb-3">
             <div class="card-body">
-              <div class="mb-3">
-                <button class="btn btn-primary" id="btn_service_report">Service Report</button>
+              <div class="table-responsive div-table-users">
+                <table class="table table-striped table-hover table-users" id="table-users" style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Contact</th>
+                      <th>Email</th>
+                      <th style="width: 120px;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="service_list"></tbody>
+                </table>
               </div>
             </div>
           </div>
+
         </div>
       </main>
     </div>
   </div>
 
   <!-- MODALS -->
-  <?php include_once '../modals/service_report_modal.php'; ?>
-  <?php include_once '../modals/ILoader.php'; ?>
+  <?php include_once '../modals/user_modal.php'; ?>
+  <?php include '../modals/ILoader.php'; ?>
 </body>
 
 </html>
@@ -150,51 +160,118 @@ include_once '../functions/session_config.php';
 
 <script>
   $(document).ready(function() {
-    const load_services = () => {
+    let user_id = 0;
+
+    let tbl_users = $('#table-users').DataTable({
+      "responsive": true,
+      "dom": '<"top"f>rt<"bottom"ip><"clear">',
+      "pageLength": 10,
+      "scrollY": "80em",
+      "scrollX": true,
+      "scrollCollapse": true,
+      "fixedHeader": true,
+    });
+
+    const load_user = (user_id = 0) => {
+      $("#ILoader").modal('show');
       $.ajax({
         method: 'POST',
-        url: '../functions/load_services.php',
+        url: '../functions/load_users.php',
         dataType: 'JSON',
         data: {
-          status: status
+          user_id: user_id
         },
         success: function(res) {
           // console.log(res);
           let str = ``;
+          let ready_data = [];
           for (let i in res.data) {
-            str += `
-              <option value="${res.data[i].id}">${res.data[i].service}</option>
-            `;
+            ready_data.push([
+              res.data[i].fullname,
+              res.data[i].address,
+              res.data[i].contactno,
+              res.data[i].email,
+              `<tr>
+                <td>
+                  <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-edit"></i> Edit</button>
+                </td>
+              </tr>`,
+            ]);
           }
-
-          $("#service").append(str);
+          tbl_users.clear().rows.add(ready_data).draw();
+          setTimeout(() => {
+            $("#ILoader").modal('hide');
+          }, 1000);
         }
       });
     }
 
-    $("#btn_service_report").click(function() {
-      $("#service_report_modal").modal('show');
+    const edit_user = (user_id) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/load_users.php',
+        dataType: 'JSON',
+        data: {
+          user_id: user_id
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            let result = res.data[0];
+            // let service = result.service;
+            // let description = result.description;
+            // let duration = result.duration;
+            // let amount = result.amount;
+
+            // $("input[name='service']").val(service);
+            // $("textarea[name='description']").val(description);
+            // $("input[name='duration']").val(duration);
+            // $("input[name='amount']").val(amount);
+
+            $(".modal-title").text('Edit User');
+            $("#user_modal").modal('show');
+          }
+        }
+      });
+    }
+
+
+    $(".table-users").on("click", ".btnEdit", function(e) {
+      e.preventDefault();
+
+      let user_id = $(this).attr('id').split('-')[1];
+      edit_user(user_id);
     });
 
-    $("#btnDownload_service_report").click(function() {
-      const date_start = $("input[name='date_start']").val();
-      const date_end = $("input[name='date_end']").val();
-      const service = $("select[name='service']").val();
+    $("#btnSaveUser").click(function(e) {
+      e.preventDefault();
 
-      if (!date_start) {
-        toastr.error("Date Start Required.");
-        return;
+      let service = $("input[name='service']").val();
+      let description = $("textarea[name='description']").val();
+      let duration = $("input[name='duration']").val();
+      let amount = $("input[name='amount']").val();
+
+      let data_input = {
+        user_id: user_id,
+        service: service,
+        description: description,
+        duration: duration,
+        amount: amount
       }
 
-      if (!date_end) {
-        toastr.error("Date End Required.");
+      if (data_input.service == "") {
+        toastr.error('Please input service.');
         return;
-      }
+      };
 
-      let filter = `?date_start=${date_start}&date_end=${date_end}&service_id=${service}`;
-      window.open(`../functions/download_PDF_service_report.php${filter}`, '_blank');
+      if (data_input.amount == "") {
+        toastr.error('Please input amount.');
+        return;
+      };
+
+      save_service(data_input);
     });
 
-    load_services();
+    load_user();
   });
 </script>

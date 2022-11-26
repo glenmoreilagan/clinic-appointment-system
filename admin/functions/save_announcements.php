@@ -17,13 +17,7 @@ if ($announcement_id == 0) {
     ('$title', '$description', '$effectivity_date')";
 
   if ($conn->query($qry)) {
-    $str_notif = "
-        <div class='text-muted small mt-1'>
-          <span><b>$title</b></span><br>
-          <span>$description</span><br>
-          <span> </span><br>
-          <span>" . date('M d, Y', strtotime($effectivity_date)) . "</span><br>
-        </div>";
+    $str_notif = "<div class='text-muted small mt-1'><span><b>$title</b></span><br><span>$description</span><br><span> </span><br><span>" . date('M d, Y', strtotime($effectivity_date)) . "</span><br></div>";
     $notif = new NotificationClass($conn);
     $notif->save(0, 'New Announcement', mysqli_real_escape_string($conn, $str_notif));
 

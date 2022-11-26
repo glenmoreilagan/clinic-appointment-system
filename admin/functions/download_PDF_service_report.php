@@ -85,7 +85,7 @@ if ($result->num_rows > 0) {
   $str .= openTrow();
   $str .= tdata('Grand Total:', 'width: 150px; text-align: left; padding-top: 20px; border-top: 1px solid; text-transform: uppercase; font-weight: bold;');
   $str .= tdata(number_format($grand_total_count, 0), 'width: 150px; text-align: right; padding-top: 20px; border-top: 1px solid; text-transform: uppercase; font-weight: bold;');
-  $str .= tdata(number_format($grand_total_service_cost, 2), 'width: 150px; text-align: right; padding-top: 20px; border-top: 1px solid; text-transform: uppercase; font-weight: bold;');
+  $str .= tdata('', 'width: 150px; text-align: right; padding-top: 20px; border-top: 1px solid; text-transform: uppercase; font-weight: bold;');
   // $str .= tdata(number_format($grand_total_other_cost, 2), 'width: 150px; text-align: right; padding-top: 20px; border-top: 1px solid; text-transform: uppercase; font-weight: bold;');
   $str .= tdata(number_format($grand_total_cost, 2), 'width: 150px; text-align: right; padding-top: 20px; border-top: 1px solid; text-transform: uppercase; font-weight: bold;');
   $str .= closeTrow();
