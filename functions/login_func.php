@@ -19,7 +19,8 @@ $sql = "SELECT
     WHERE email = '$email' AND 
     password = '$password' AND 
     role = 0 AND
-    email_verification = ''
+    email_verification = '' AND
+    is_deleted = 0
     LIMIT 1";
 
 $result = mysqli_query($conn, $sql);

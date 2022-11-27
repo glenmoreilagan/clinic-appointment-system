@@ -13,7 +13,7 @@ $qry = "SELECT cust.id,
   cust.fname, cust.mname, cust.lname, 
   cust.fullname, cust.address, cust.contactno, cust.email
   FROM tbl_user AS cust
-  WHERE role = 0
+  WHERE role = 0 AND is_deleted = 0
   $added_filter";
 
 $result = $conn->query($qry);

@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="form-group mb-1">
           <label for="date_schedule">Date</label></small>
-          <input name="date_schedule" id="date_schedule" type="date" class="form-control form-input">
+          <input name="date_schedule" id="date_schedule" type="date" class="form-control form-input" onkeydown="return false">
         </div>
         <div class="form-group mb-1">
           <label for="time_schedule">Time</label>

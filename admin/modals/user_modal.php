@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary btn-sm" id="btnSaveService"><i class="align-middle fas fa-fw fa-check"></i> Save</button>
+        <button class="btn btn-primary btn-sm" id="btnSaveUser"><i class="align-middle fas fa-fw fa-check"></i> Save</button>
         <button class="btn btn-outline-danger btn-sm" data-dismiss="modal"><i class="align-middle fas fa-fw fa-times"></i> Close</button>
       </div>
     </div>

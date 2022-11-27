@@ -134,7 +134,7 @@ include_once '../functions/session_config.php';
                       <th>Address</th>
                       <th>Contact</th>
                       <th>Email</th>
-                      <th style="width: 120px;">Action</th>
+                      <th style="width: 200px;">Action</th>
                     </tr>
                   </thead>
                   <tbody id="service_list"></tbody>
@@ -194,6 +194,7 @@ include_once '../functions/session_config.php';
               `<tr>
                 <td>
                   <button class="btn btn-primary btn-sm btnEdit" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-edit"></i> Edit</button>
+                  <button class="btn btn-danger btn-sm btnDelete" id="r-${res.data[i].id}"><i class="align-middle fas fa-fw fa-times"></i> Delete</button>
                 </td>
               </tr>`,
             ]);
@@ -218,15 +219,20 @@ include_once '../functions/session_config.php';
           // console.log(res);
           if (res.status) {
             let result = res.data[0];
-            // let service = result.service;
-            // let description = result.description;
-            // let duration = result.duration;
-            // let amount = result.amount;
+            let fname = result.fname;
+            let mname = result.mname;
+            let lname = result.lname;
+            let address = result.address;
+            let contactno = result.contactno;
+            let email = result.email;
+            user_id = result.id;
 
-            // $("input[name='service']").val(service);
-            // $("textarea[name='description']").val(description);
-            // $("input[name='duration']").val(duration);
-            // $("input[name='amount']").val(amount);
+            $("input[name='fname']").val(fname);
+            $("input[name='mname']").val(mname);
+            $("input[name='lname']").val(lname);
+            $("input[name='address']").val(address);
+            $("input[name='contactno']").val(contactno);
+            $("input[name='email']").val(email);
 
             $(".modal-title").text('Edit User');
             $("#user_modal").modal('show');
@@ -235,41 +241,105 @@ include_once '../functions/session_config.php';
       });
     }
 
+    const save_user = (data_input) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/save_user.php',
+        dataType: 'JSON',
+        data: data_input,
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+            $(".form-input").val('');
+            user_id = 0;
+            load_user();
+            $("#user_modal").modal('hide');
+          }
+        }
+      });
+    }
+
+    const delete_user = (user_id) => {
+      $.ajax({
+        method: 'POST',
+        url: '../functions/delete_user.php',
+        dataType: 'JSON',
+        data: {
+          user_id: user_id
+        },
+        success: function(res) {
+          // console.log(res);
+          if (res.status) {
+            toastr.success(res.msg);
+            $(".form-input").val('');
+            user_id = 0;
+            load_user();
+          }
+        }
+      });
+    }
 
     $(".table-users").on("click", ".btnEdit", function(e) {
       e.preventDefault();
 
-      let user_id = $(this).attr('id').split('-')[1];
-      edit_user(user_id);
+      let row_user_id = $(this).attr('id').split('-')[1];
+      user_id = row_user_id;
+      edit_user(row_user_id);
+    });
+
+    $(".table-users").on("click", ".btnDelete", function(e) {
+      e.preventDefault();
+
+      let row_user_id = $(this).attr('id').split('-')[1];
+      user_id = row_user_id;
+
+      if (confirm('Are your sure do you want to delete this user?') == true) {
+        delete_user(row_user_id);
+      }
     });
 
     $("#btnSaveUser").click(function(e) {
       e.preventDefault();
 
-      let service = $("input[name='service']").val();
-      let description = $("textarea[name='description']").val();
-      let duration = $("input[name='duration']").val();
-      let amount = $("input[name='amount']").val();
+      let fname = $("input[name='fname']").val();
+      let mname = $("input[name='mname']").val();
+      let lname = $("input[name='lname']").val();
+      let address = $("input[name='address']").val();
+      let contactno = $("input[name='contactno']").val();
+      let email = $("input[name='email']").val();
 
       let data_input = {
         user_id: user_id,
-        service: service,
-        description: description,
-        duration: duration,
-        amount: amount
+        fname: fname,
+        mname: mname,
+        lname: lname,
+        address: address,
+        contactno: contactno,
+        email: email
       }
 
-      if (data_input.service == "") {
-        toastr.error('Please input service.');
+      if (data_input.fname == "") {
+        toastr.error('Please input first name.');
         return;
       };
 
-      if (data_input.amount == "") {
-        toastr.error('Please input amount.');
+      if (data_input.lname == "") {
+        toastr.error('Please input last name.');
         return;
       };
 
-      save_service(data_input);
+      if (data_input.contactno == "") {
+        toastr.error('Please input contact no.');
+        return;
+      };
+
+      if (data_input.email == "") {
+        toastr.error('Please input email.');
+        return;
+      };
+
+      save_user(data_input);
     });
 
     load_user();
