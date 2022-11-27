@@ -126,7 +126,7 @@ include_once '../functions/session_config.php';
             </div>
           </div>
 
-          <div class="card mb-3">
+          <!-- <div class="card mb-3">
             <div class="card-body">
               <div class="table-responsive div-table-period">
                 <table class="table table-striped table-hover table-period" id="table-period" style="width: 100%;">
@@ -142,7 +142,7 @@ include_once '../functions/session_config.php';
                 </table>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
       </main>
