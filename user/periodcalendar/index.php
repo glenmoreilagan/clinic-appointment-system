@@ -10,28 +10,28 @@ include_once '../functions/session_config.php';
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
-    <meta name="author" content="Bootlab">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
+  <meta name="author" content="Bootlab">
 
-    <title>Period Calendar</title>
+  <title>Period Calendar</title>
 
-    <link rel="shortcut icon" href="../../image/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../../image/favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
 
-    <!-- Choose your prefered color scheme -->
-    <!-- <link href="css/light.css" rel="stylesheet"> -->
-    <!-- <link href="css/dark.css" rel="stylesheet"> -->
+  <!-- Choose your prefered color scheme -->
+  <!-- <link href="css/light.css" rel="stylesheet"> -->
+  <!-- <link href="css/dark.css" rel="stylesheet"> -->
 
-    <!-- BEGIN SETTINGS -->
-    <!-- Remove this after purchasing -->
-    <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
-    <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
+  <!-- BEGIN SETTINGS -->
+  <!-- Remove this after purchasing -->
+  <link class="js-stylesheet" href="../assets/css/light.css" rel="stylesheet">
+  <link class="js-stylesheet" href="../assets/css/forms.css" rel="stylesheet">
 
-    <style>
+  <style>
     /* .fc-prevYear-button,
     .fc-nextYear-button,
     .fc-prev-button,
@@ -53,13 +53,13 @@ include_once '../functions/session_config.php';
     } */
 
     td.fc-daygrid-day:hover {
-        cursor: pointer;
-        background-color: #E0EAFC;
+      cursor: pointer;
+      background-color: #E0EAFC;
     }
-    </style>
+  </style>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <!--
   HOW TO USE: 
@@ -70,209 +70,225 @@ include_once '../functions/session_config.php';
 -->
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
-    <div class="wrapper">
-        <nav id="sidebar" class="sidebar">
-            <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="#">
-                    <span class="align-middle"><img width="200" height="60" src="../../image/logo.png"
-                            alt="LJ CURA OB-GYN ULTRA SOUND CLINIC"></span>
-                </a>
-                <?php
-                // heres the settings for local or live
-                include '../../host_setting.php';
-                ?>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href=<?php echo $host . "user/dashboard/"; ?>>
-                            <i class="align-middle" data-feather="sliders"></i> <span
-                                class="align-middle">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href=<?php echo $host . "user/announcements/"; ?>>
-                            <i class="align-middle bi bi-megaphone"></i> <span class="align-middle">Announcements</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href=<?php echo $host . "user/myappointments/"; ?>>
-                            <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">My
-                                Appointments</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href=<?php echo $host . "user/periodcalendar/"; ?>>
-                            <i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Period
-                                Calendar</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href=<?php echo $host . "user/period/"; ?>>
-                            <i class="align-middle" data-feather="edit"></i> <span class="align-middle">period</span>
-                        </a>
-                    </li>
-                </ul>
+  <div class="wrapper">
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="#">
+          <span class="align-middle"><img width="200" height="60" src="../../image/logo.png" alt="LJ CURA OB-GYN ULTRA SOUND CLINIC"></span>
+        </a>
+        <?php
+        // heres the settings for local or live
+        include '../../host_setting.php';
+        ?>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a class="sidebar-link" href=<?php echo $host . "user/dashboard/"; ?>>
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href=<?php echo $host . "user/announcements/"; ?>>
+              <i class="align-middle bi bi-megaphone"></i> <span class="align-middle">Announcements</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href=<?php echo $host . "user/myappointments/"; ?>>
+              <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">My
+                Appointments</span>
+            </a>
+          </li>
+          <li class="sidebar-item active">
+            <a class="sidebar-link" href=<?php echo $host . "user/periodcalendar/"; ?>>
+              <i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Period
+                Calendar</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href=<?php echo $host . "user/period/"; ?>>
+              <i class="align-middle" data-feather="edit"></i> <span class="align-middle">period</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main">
+      <!-- THIS IS FOR HEADER NAVIGATION BAR -->
+      <?php include_once '../layouts/display_head_nav.php' ?>
+
+      <main class="content">
+        <div class="container-fluid p-0">
+          <h1 class="h3 mb-3">Period Calendar</h1>
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <div id="fullcalendar"></div>
             </div>
-        </nav>
+          </div>
 
-        <div class="main">
-            <!-- THIS IS FOR HEADER NAVIGATION BAR -->
-            <?php include_once '../layouts/display_head_nav.php' ?>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="table-responsive div-table-period">
+                <table class="table table-striped table-hover table-period" id="table-period" style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th>Description</th>
+                      <th>Date Started</th>
+                      <th>Date Ended</th>
+                      <th class="th-actions">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="period_list"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-            <main class="content">
-                <div class="container-fluid p-0">
-                    <h1 class="h3 mb-3">Period Calendar</h1>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div id="fullcalendar"></div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="table-responsive div-table-period">
-                                <table class="table table-striped table-hover table-period" id="table-period"
-                                    style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>Description</th>
-                                            <th>Date Started</th>
-                                            <th>Date Ended</th>
-                                            <th class="th-actions">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="period_list"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </main>
         </div>
+      </main>
     </div>
+  </div>
 
-    <?php include_once '../modals/newPeriod_modal.php' ?>
+  <?php include_once '../modals/newPeriod_modal.php' ?>
 
-    <script src="../assets/js/app.js"></script>
-    <script>
+  <script src="../assets/js/app.js"></script>
+  <script>
     $(document).ready(function() {
-        let tbl_period_calendar = $('#table-period').DataTable({
-            "responsive": true,
-            "dom": '<"top"f>rt<"bottom"ip><"clear">',
-            "pageLength": 10,
-            "scrollY": "80em",
-            "scrollX": true,
-            "scrollCollapse": true,
-            "fixedHeader": true,
-            "ordering": false,
-        });
-        const load_period = () => {
-            $.ajax({
-                method: 'POST',
-                url: '../functions/load_period.php',
-                dataType: 'JSON',
-                data: {},
-                success: function(res) {
-                    // console.log(res);
-                    let str = ``;
-                    let ready_data = [];
-                    for (let i in res.data) {
-                        ready_data.push([
-                            `<tr>
+      let tbl_period_calendar = $('#table-period').DataTable({
+        "responsive": true,
+        "dom": '<"top"f>rt<"bottom"ip><"clear">',
+        "pageLength": 10,
+        "scrollY": "80em",
+        "scrollX": true,
+        "scrollCollapse": true,
+        "fixedHeader": true,
+        "ordering": false,
+      });
+      const load_period = () => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/load_period.php',
+          dataType: 'JSON',
+          data: {},
+          success: function(res) {
+            // console.log(res);
+            let str = ``;
+            let ready_data = [];
+            for (let i in res.data) {
+              ready_data.push([
+                `<tr>
                 <td>${res.data[i].title}</td>
               </tr>`,
-                            `<tr>
+                `<tr>
                 <td>${res.data[i].start}</td>
               </tr>`,
-                            `<tr>
+                `<tr>
                 <td>${res.data[i].end}</td>
               </tr>`,
-                        ]);
-                    }
+              ]);
+            }
 
-                    tbl_period_calendar.clear().rows.add(ready_data).draw();
-                }
-            });
-        }
-
-        load_period();
-
-        let calendarEl = document.getElementById('fullcalendar');
-        let calendar = new FullCalendar.Calendar(calendarEl, {
-            themeSystem: 'bootstrap',
-            initialView: 'dayGridMonth',
-            initialDate: Date.now(),
-            headerToolbar: {
-                left: 'prev,next today',
-                // left: 'prevYear,prev,next,nextYear today',
-                right: 'title',
-                // right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                center: ''
-            },
-            events: '../functions/display_period_calendar.php',
-            selectable: true,
-            allDay: true,
-            select: async function(e) {
-                console.log(e);
-                let startStr = e.startStr;
-                let endStr = e.endStr;
-
-                let newEndStr = new Date(endStr);
-                newEndStr.setDate(newEndStr.getDate() - 1);
-                newEndStr.setMonth(newEndStr.getMonth());
-                newEndStr.setFullYear(newEndStr.getFullYear());
-
-                let year = newEndStr.getFullYear();
-                let month = newEndStr.getMonth() < 10 ? `0${newEndStr.getMonth()}` : newEndStr
-                    .getMonth();
-                let day = newEndStr.getDate() < 10 ? `0${newEndStr.getDate()}` : newEndStr
-                    .getDate();
-                let new_end_date = `${year}-${month}-${day}`;
-
-                $("input[name='start']").val(startStr);
-                $("input[name='end']").val(new_end_date);
-                $("input[name='end_hidden']").val(endStr);
-
-                $("#newPeriod_modal").modal('show');
-            },
+            tbl_period_calendar.clear().rows.add(ready_data).draw();
+          }
         });
+      }
 
-        setTimeout(function() {
-            calendar.render();
-        }, 250)
+      load_period();
 
-        const save_new_period = (data) => {
+      let calendarEl = document.getElementById('fullcalendar');
+      let calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap',
+        initialView: 'dayGridMonth',
+        initialDate: Date.now(),
+        headerToolbar: {
+          left: 'prev,next today',
+          // left: 'prevYear,prev,next,nextYear today',
+          right: 'title',
+          // right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          center: ''
+        },
+        events: '../functions/display_period_calendar.php',
+        selectable: true,
+        allDay: true,
+        select: async function(e) {
+          console.log(e);
+          let startStr = e.startStr;
+          let endStr = e.endStr;
+
+          let newEndStr = new Date(endStr);
+          newEndStr.setDate(newEndStr.getDate() - 1);
+          newEndStr.setMonth(newEndStr.getMonth());
+          newEndStr.setFullYear(newEndStr.getFullYear());
+
+          let year = newEndStr.getFullYear();
+          let month = newEndStr.getMonth() < 10 ? `0${newEndStr.getMonth()}` : newEndStr
+            .getMonth();
+          let day = newEndStr.getDate() < 10 ? `0${newEndStr.getDate()}` : newEndStr
+            .getDate();
+          let new_end_date = `${year}-${month}-${day}`;
+
+          $("input[name='start']").val(startStr);
+          $("input[name='end']").val(new_end_date);
+          $("input[name='end_hidden']").val(endStr);
+
+          $("#newPeriod_modal").modal('show');
+        },
+        eventClick: function(e) {
+          // console.log(e.event);
+          let id = e.event.id;
+          let title = e.event.title;
+
+          if (confirm(`Are you sure do you want to delete this [${title}]?`) == true) {
             $.ajax({
-                method: 'POST',
-                url: '../functions/save_period.php',
-                dataType: 'JSON',
-                data: data,
-                success: function(res) {
-                    // console.log(res);
-
-                    $("#newPeriod_modal").modal('hide');
-                    $(".form-input").val('');
-
-                    calendar.refetchEvents();
-                }
+              method: 'POST',
+              url: '../functions/delete_period.php',
+              dataType: 'JSON',
+              data: {
+                period_id: id
+              },
+              success: function(res) {
+                calendar.refetchEvents();
+              }
             });
-        }
+          }
+        },
+      });
 
-        $("#btnSaveNewPeriod").click((e) => {
-            e.preventDefault();
+      setTimeout(function() {
+        calendar.render();
+      }, 250)
 
-            let data_input = {
-                title: $("textarea[name='title']").val(),
-                start: $("input[name='start']").val(),
-                end: $("input[name='end']").val(),
-                end_hidden: $("input[name='end_hidden']").val()
-            };
+      const save_new_period = (data) => {
+        $.ajax({
+          method: 'POST',
+          url: '../functions/save_period.php',
+          dataType: 'JSON',
+          data: data,
+          success: function(res) {
+            // console.log(res);
 
-            save_new_period(data_input);
+            $("#newPeriod_modal").modal('hide');
+            $(".form-input").val('');
+
+            calendar.refetchEvents();
+          }
         });
+      }
+
+      $("#btnSaveNewPeriod").click((e) => {
+        e.preventDefault();
+
+        let data_input = {
+          title: $("textarea[name='title']").val(),
+          start: $("input[name='start']").val(),
+          end: $("input[name='end']").val(),
+          end_hidden: $("input[name='end_hidden']").val()
+        };
+
+        save_new_period(data_input);
+      });
     });
-    </script>
+  </script>
 </body>
 
 </html>
