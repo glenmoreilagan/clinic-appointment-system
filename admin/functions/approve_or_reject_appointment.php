@@ -46,11 +46,11 @@ if ($action == 'approve') {
 
       $sms_response = '';
       $email_response = '';
-      $patient_name = explode(' ', trim($fullname))[0];
+      // $patient_name = explode(' ', trim($fullname))[0];
 
-      $messageSms = "Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
+      $messageSms = "Hi $fullname. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
       $messageEmail = "
-        Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.
+        Hi $fullname. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.
         Please fill out this 24 hours before your scheduled appointment.
         <br>
         <a href='" . $host . "health-declaration-form.php'>Health Declaration Form</a>

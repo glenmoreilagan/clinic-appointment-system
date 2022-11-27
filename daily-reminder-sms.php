@@ -3,9 +3,9 @@ date_default_timezone_set('Asia/Manila');
 
 class Sms
 {
-  private $apicode = 'TR-STELL515474_0605Q';
-  private $passwd = 'susis2pid';
-  private $email = 'hrnndzstella.6@gmail.com';
+  private $apicode = 'TR-MERIL319479_ZJH6J';
+  private $passwd = 'ljcura2015';
+  private $email = 'blancomerilyn4@gmail.com';
   private $message;
   private $number = [];
 

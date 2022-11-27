@@ -14,7 +14,7 @@ $qry = "SELECT USER.fullname, fback.id, fback.feedback, fback.created_at,
   end as rating
 FROM tbl_feedback AS fback
 INNER JOIN tbl_user AS USER ON USER.id = fback.user_id
-WHERE fback.user_id = '$user_id'
+WHERE fback.user_id = '$user_id' AND fback.is_deleted != 1
 ORDER BY created_at DESC";
 
 $result = $conn->query($qry);

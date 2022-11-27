@@ -9,12 +9,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" name="email"
+                        <input type="email" class="form-control" id="emailt" name="email"
                             placeholder="name@example.com">
                         <label class="form-label">Email Address:</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="password"
+                        <input type="password" class="form-control" id="password" name="password"
                             placeholder="Password">
                         <label class="form-label">Password:</label>
                         <input type="checkbox" onclick="myFunction()">Show Password
@@ -38,8 +38,8 @@
 
 <script>
 function myFunction() {
-    var x = document.getElementById("floatingPassword");
-    if (x.type === "password") {
+    var x = document.getElementById('password');
+    if ((x.type) === "password") {
         x.type = "text";
     } else {
         x.type = "password";

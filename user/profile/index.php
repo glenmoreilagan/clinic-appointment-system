@@ -50,9 +50,9 @@ include_once '../functions/session_config.php';
                             alt="LJ CURA OB-GYN ULTRA SOUND CLINIC"></span>
                 </a>
                 <?php
-        // heres the settings for local or live
-        include '../../host_setting.php';
-        ?>
+                // heres the settings for local or live
+                include '../../host_setting.php';
+                ?>
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
                         <a class="sidebar-link" href=<?php echo $host . "user/dashboard/"; ?>>
@@ -124,12 +124,17 @@ include_once '../functions/session_config.php';
                                 <div class="col-md-4">
                                     <h4>Change Password</h4>
                                     <label for="">Password</label>
-                                    <input type="password" class="form-control form-inputs-password" name="password">
+                                    <input type="password" class="form-control form-inputs-password" id="password"
+                                        name="password">
 
                                     <label for="">Confirm Password</label>
                                     <input type="password" class="form-control form-inputs-password"
-                                        name="confirm_password">
-
+                                        name="confirm_password" id="confirm_password">
+                                    <input type="checkbox" onclick="myFunction()" id="show_cpass">
+                                    <label for="show_cpass">
+                                        Show Password
+                                    </label>
+                                    <br>
                                     <button class="btn btn-primary mt-3" id="btnSavePassword">SAVE</button>
                                 </div>
                             </div>
@@ -146,6 +151,18 @@ include_once '../functions/session_config.php';
     <script src="../../assets/toastr/toastr-customize.js"></script>
 
     <script>
+    function myFunction() {
+        var x = document.getElementById('password');
+        var y = document.getElementById('confirm_password');
+        if ((x.type || y.type) === "password") {
+            x.type = "text";
+            y.type = "text";
+        } else {
+            x.type = "password";
+            y.type = "password";
+        }
+    }
+
     $(document).ready(function() {
         const load_info = () => {
             $.ajax({
