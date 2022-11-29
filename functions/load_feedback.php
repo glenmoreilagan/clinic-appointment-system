@@ -2,7 +2,9 @@
 include '../config.php';
 
 $qry = "SELECT id, rating, feedback
-  FROM tbl_feedback ORDER BY created_at DESC LIMIT 9";
+  FROM tbl_feedback  
+  WHERE is_deleted = 0
+  ORDER BY created_at DESC LIMIT 9";
 
 $result = $conn->query($qry);
 
