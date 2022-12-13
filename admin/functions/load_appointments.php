@@ -38,10 +38,10 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
   appointment.age, appointment.remarks,
   case
-    when appointment.status = 0 AND appointment.is_cancelled = 0 then 'Pending'
-    when appointment.is_cancelled = 1 AND appointment.status = 0 then 'Cancelled'
-    when appointment.status = 1 AND appointment.is_completed = 0 then 'Approved'
-    when appointment.is_completed = 1 AND appointment.status = 1 then 'Completed'
+    when appointment.status = 0 AND appointment.is_cancelled = 0 AND appointment.is_cancelled = 0 then 'Pending'
+    when appointment.status = 1 AND appointment.is_completed = 0 AND appointment.is_cancelled = 0 then 'Approved'
+    when appointment.is_completed = 1 AND appointment.status = 1 AND appointment.is_cancelled = 0 then 'Completed'
+    when (appointment.is_cancelled = 1 AND appointment.status = 0) OR appointment.is_completed = 1 OR appointment.status = 1 then 'Cancelled'
   end as status,
   appointment.service_id, 
   services.service_title, 
