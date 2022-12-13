@@ -18,12 +18,12 @@
         </div> -->
         <div class="form-group mb-1">
           <label for="start">Start Date</label>
-          <input name="start" id="start" type="date" class="form-control form-input" readonly>
+          <input name="start" id="start" type="date" class="form-control form-input">
         </div>
         <div class="form-group mb-1">
           <label for="end">End Date</label>
-          <input name="end" id="end" type="date" class="form-control form-input" readonly>
-          <input name="end_hidden" id="end_hidden" type="hidden" class="form-control form-input">
+          <input name="end" id="end" type="date" class="form-control form-input">
+          <input name="end_hidden" id="end_hidden" type="date" class="form-control form-input">
         </div>
       </div>
       <div class="modal-footer">

@@ -306,6 +306,6 @@ include_once '../functions/session_config.php';
       update_appointments('reject', appointment_id);
     });
 
-    load_appointments();
+    setInterval(() => load_appointments(), 1000);
   });
 </script>
