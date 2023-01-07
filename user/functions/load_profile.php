@@ -4,7 +4,7 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 
-$qry = "SELECT id, fname, mname, lname, address, contactno, email 
+$qry = "SELECT id, fname, mname, lname, age, address, contactno, email 
   FROM tbl_user 
   WHERE id = '$user_id'
   LIMIT 1";
@@ -19,6 +19,7 @@ if ($result->num_rows > 0) {
       'fname' => $row['fname'],
       'mname' => $row['mname'],
       'lname' => $row['lname'],
+      'age' => $row['age'],
       'address' => $row['address'],
       'contactno' => $row['contactno'],
       'email' => $row['email'],

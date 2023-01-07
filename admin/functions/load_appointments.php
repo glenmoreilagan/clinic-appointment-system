@@ -36,7 +36,7 @@ switch ($status) {
 $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint, 
   DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
-  appointment.age, appointment.remarks,
+  appointment.remarks,
   case
     when appointment.status = 0 AND appointment.is_cancelled = 0 AND appointment.is_cancelled = 0 then 'Pending'
     when appointment.status = 1 AND appointment.is_completed = 0 AND appointment.is_cancelled = 0 then 'Approved'
@@ -52,7 +52,7 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
     when appointment.status = 1 AND appointment.is_completed = 0 then services.amount
     when appointment.is_completed = 1 AND appointment.status = 1 then payment.total_cost
   end as cost,
-  user.fullname as client, user.address, user.contactno,
+  user.fullname as client, user.age, user.address, user.contactno,
   payment.reference_no as refno
   FROM tbl_appointments as appointment 
   LEFT JOIN tbl_services as services on services.id = appointment.service_id
@@ -73,13 +73,13 @@ if ($result->num_rows > 0) {
       'complaint' => nl2br($row['complaint']),
       'date_schedule' => !empty($row['date_schedule']) ? $row['date_schedule'] : '',
       'time_schedule' => !empty($row['time_schedule']) ? $row['time_schedule'] : '',
-      'age' => $row['age'],
       'remarks' => $row['remarks'],
       'findings' => $row['findings'],
       'status' => $row['status'],
       'service_id' => $row['service_id'],
       'service_title' => $row['service_title'] !== NULL ? $row['service_title'] : '-',
       'client' => $row['client'],
+      'age' => $row['age'],
       'address' => $row['address'],
       'contactno' => $row['contactno'],
       'cost' => number_format($row['cost'], 2),

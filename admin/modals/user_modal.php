@@ -21,6 +21,10 @@
                     <input name="lname" id="lname" type="text" class="form-control form-input">
                 </div>
                 <div class="form-group mb-1">
+                    <label for="age">Age</label>
+                    <input name="age" id="age" type="text" class="form-control form-input">
+                </div>
+                <div class="form-group mb-1">
                     <label for="address">Address</label>
                     <input name="address" id="address" type="text" class="form-control form-input">
                 </div>

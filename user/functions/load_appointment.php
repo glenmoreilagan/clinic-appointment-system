@@ -15,7 +15,7 @@ if ($appointment_id !== 0) {
 $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint, 
   DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
-  appointment.age, appointment.remarks,
+  appointment.remarks,
   case
     when appointment.status = 0 AND appointment.is_cancelled = 0 then 'Pending'
     when (appointment.is_cancelled = 1 AND appointment.status = 0) OR (appointment.is_cancelled = 1 AND appointment.status = 1) then 'Cancelled'
@@ -30,7 +30,6 @@ $qry = "SELECT appointment.id, appointment.user_id, appointment.complaint,
   WHERE appointment.user_id = '$user_id' $added_filter
   GROUP BY appointment.id
   ORDER BY appointment.id DESC";
-  
 $result = $conn->query($qry);
 
 if ($result->num_rows > 0) {
@@ -42,7 +41,7 @@ if ($result->num_rows > 0) {
       'complaint' => nl2br($row['complaint']),
       'date_schedule' => !empty($row['date_schedule']) ? $row['date_schedule'] : '',
       'time_schedule' => !empty($row['time_schedule']) ? $row['time_schedule'] : '',
-      'age' => $row['age'],
+      // 'age' => $row['age'],
       'remarks' => $row['remarks'],
       'status' => $row['status'],
       'service_title' => $row['service_title'] !== NULL ? $row['service_title'] : '-',

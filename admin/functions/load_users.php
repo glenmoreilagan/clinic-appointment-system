@@ -11,7 +11,7 @@ if ($user_id) {
 
 $qry = "SELECT cust.id, 
   cust.fname, cust.mname, cust.lname, 
-  cust.fullname, cust.address, cust.contactno, cust.email
+  cust.fullname, cust.age, cust.address, cust.contactno, cust.email
   FROM tbl_user AS cust
   WHERE role = 0 AND is_deleted = 0
   $added_filter";
@@ -27,6 +27,7 @@ if ($result->num_rows > 0) {
       'mname' => $row['mname'],
       'lname' => $row['lname'],
       'fullname' => $row['fullname'],
+      'age' => $row['age'],
       'address' => $row['address'],
       'contactno' => $row['contactno'],
       'email' => $row['email'],

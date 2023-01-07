@@ -108,6 +108,9 @@ include_once '../functions/session_config.php';
                                     <label for="">Last Name</label>
                                     <input type="text" class="form-control form-inputs" name="lname">
 
+                                    <label for="">Age</label>
+                                    <input type="text" class="form-control form-inputs" name="age">
+
                                     <label for="">Contact No.</label>
                                     <input type="text" maxlength="11" pattern="[0-9]{11}"
                                         class="form-control form-inputs" name="contactno">
@@ -174,6 +177,7 @@ include_once '../functions/session_config.php';
                         $("input[name='fname']").val(res.data.fname);
                         $("input[name='mname']").val(res.data.mname);
                         $("input[name='lname']").val(res.data.lname);
+                        $("input[name='age']").val(res.data.age);
                         $("input[name='contactno']").val(res.data.contactno);
                         $("textarea[name='address']").val(res.data.address);
                         $("input[name='email']").val(res.data.email);
@@ -241,6 +245,7 @@ include_once '../functions/session_config.php';
             let fname = $("input[name='fname']").val();
             let mname = $("input[name='mname']").val();
             let lname = $("input[name='lname']").val();
+            let age = $("input[name='age']").val();
             let contactno = $("input[name='contactno']").val();
             let address = $("textarea[name='address']").val();
             let email = $("input[name='email']").val();
@@ -255,6 +260,10 @@ include_once '../functions/session_config.php';
             // }
             if (!lname) {
                 toastr.error("Last Name is required!");
+                return;
+            }
+            if (!age) {
+                toastr.error("Age is required!");
                 return;
             }
             if (!contactno) {

@@ -37,6 +37,7 @@ $(document).ready(function () {
     let fname = $("#signupModal input[name='fname']").val();
     let mname = $("#signupModal input[name='mname']").val();
     let lname = $("#signupModal input[name='lname']").val();
+    let age = $("#signupModal input[name='age']").val();
     let contactnumber = $("#signupModal input[name='contactnumber']").val();
     let address = $("#signupModal input[name='address']").val();
     let email = $("#signupModal input[name='email']").val();
@@ -51,6 +52,7 @@ $(document).ready(function () {
         fname: fname,
         mname: mname,
         lname: lname,
+        age: age,
         contactnumber: contactnumber,
         address: address,
         email: email,

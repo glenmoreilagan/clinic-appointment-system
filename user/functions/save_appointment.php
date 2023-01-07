@@ -7,18 +7,18 @@ $user_id = $_SESSION['user_id'];
 $complaint = isset($_POST['complaint']) ? mysqli_escape_string($conn, $_POST['complaint']) : '';
 $date_schedule = $_POST['date_schedule'];
 $time_schedule = $_POST['time_schedule'];
-$age = $_POST['age'];
+// $age = $_POST['age'];
 $service_id = $_POST['service_id'];
 
 $new_date_schedule = "$date_schedule $time_schedule";
 
 $qry = "INSERT INTO tbl_appointments
-  (user_id, complaint, date_schedule, age, service_id)
+  (user_id, complaint, date_schedule, service_id)
   values
-  ('$user_id', '$complaint', '$new_date_schedule', '$age', '$service_id')";
+  ('$user_id', '$complaint', '$new_date_schedule', '$service_id')";
 
 if ($conn->query($qry)) {
-  $qry = "SELECT user.id, user.fullname, appointment.complaint, services.service_title
+  $qry = "SELECT user.id, user.fullname, user.age, appointment.complaint, services.service_title
   FROM tbl_user as user
   INNER JOIN tbl_appointments as appointment ON appointment.user_id = user.id
   INNER JOIN tbl_services AS services ON services.id = appointment.service_id

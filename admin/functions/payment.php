@@ -32,7 +32,7 @@ if ($user_id && $appointment_id) {
     '$service_title', '$other_services', '$findings', '$cost', '$other_cost', '$total_cost')";
 
     if ($conn->query($qry)) {
-      $qry = "SELECT user.fullname, user.address, user.email, app.age
+      $qry = "SELECT user.fullname, user.address, user.email, user.age
       FROM tbl_user as user
       INNER JOIN tbl_appointments as app on app.user_id = user.id
       WHERE user.id = '$user_id' 

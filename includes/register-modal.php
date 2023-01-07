@@ -48,12 +48,15 @@
                             <label class="form-label">Middle Name:</label>
                         </div>
                         <div class="form-floating col-md-6 mb-3">
-                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Middle Name">
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
                             <label class="form-label">Last Name:</label>
                         </div>
                         <div class="form-floating col-md-6 mb-3">
-                            <input type="text" class="form-control" id="address" name="address"
-                                placeholder="Middle Name">
+                            <input type="text" class="form-control" id="age" name="age" placeholder="Age">
+                            <label class="form-label">Age:</label>
+                        </div>
+                        <div class="form-floating col-md-6 mb-3">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
                             <label class="form-label">Address:</label>
                         </div>
 

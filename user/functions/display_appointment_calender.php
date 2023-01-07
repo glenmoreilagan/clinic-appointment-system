@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 $qry = "SELECT id, user_id, complaint, 
   DATE(date_schedule) as date_schedule, 
   TIME(date_schedule) as time_schedule, 
-  age, remarks,
+  remarks,
   case
     when status = 0 AND is_completed = 0 then 'Pending'
     when status = 1 AND is_completed = 0 then 'Approved'
@@ -28,7 +28,7 @@ if ($result->num_rows > 0) {
       'complaint' => nl2br($row['complaint']),
       'date_schedule' => !empty($row['date_schedule']) ? $row['date_schedule'] : '',
       'time_schedule' => !empty($row['time_schedule']) ? $row['time_schedule'] : '',
-      'age' => $row['age'],
+      // 'age' => $row['age'],
       'remarks' => $row['remarks'],
       'status' => $row['status'],
 

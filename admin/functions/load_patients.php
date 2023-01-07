@@ -7,7 +7,7 @@ $status = $_POST['status'];
 
 if ($status == 'all') {
   $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email,
-  appointment.complaint, appointment.age, 
+  appointment.complaint, cust.age, 
   DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
   service.service_title, service.description,
@@ -43,7 +43,7 @@ if ($status == 'all') {
   $patient_id = $_POST['patient_id'];
 
   $qry = "SELECT cust.id, cust.fullname, cust.address, cust.contactno, cust.email,
-  appointment.complaint, appointment.age, 
+  appointment.complaint, cust.age, 
   DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
   TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule, 
   service.service_title, service.description,

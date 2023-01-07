@@ -13,10 +13,10 @@
                     <textarea name="complaint" placeholder="Symptomps/Reasons" id="complaint" type="text"
                         class="form-control form-input"></textarea>
                 </div>
-                <div class="form-group mb-1">
+                <!-- <div class="form-group mb-1">
                     <label for="age">Age</label>
-                    <input name="age" id="age" type="text" class="form-control form-input">
-                </div>
+                    <input name="age" id="age" type="text" class="form-control form-input" readonly>
+                </div> -->
                 <div class="form-group mb-1">
                     <label for="date_schedule">Date</label>
                     <input name="date_sched" id="date_schedule" type="date" class="form-control form-input" readonly>

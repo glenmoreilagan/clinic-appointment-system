@@ -6,6 +6,7 @@ $user_id = $_SESSION['user_id'];
 $fname = isset($_POST['fname']) ? mysqli_escape_string($conn, $_POST['fname']) : '';
 $mname = isset($_POST['mname']) ? mysqli_escape_string($conn, $_POST['mname']) : '';
 $lname = isset($_POST['lname']) ? mysqli_escape_string($conn, $_POST['lname']) : '';
+$age = isset($_POST['age']) ? mysqli_escape_string($conn, $_POST['age']) : '';
 $contactno = isset($_POST['contactno']) ? mysqli_escape_string($conn, $_POST['contactno']) : '';
 $address = isset($_POST['address']) ? mysqli_escape_string($conn, $_POST['address']) : '';
 $email = isset($_POST['email']) ? mysqli_escape_string($conn, $_POST['email']) : '';
@@ -53,6 +54,7 @@ if ($for_password == 0) {
     mname = '$mname',
     lname = '$lname',
     fullname = '$fname $mname $lname',
+    age = '$age',
     contactno = '$contactno',
     address = '$address',
     email = '$email'
