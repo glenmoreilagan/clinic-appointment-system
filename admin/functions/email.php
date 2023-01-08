@@ -52,7 +52,7 @@ class Email
       // $mail->addAttachment('../../image/logo.png');
 
       $mail->isHTML(true);
-      $mail->Subject = $this->subject ? $this->subject : 'Appointment';
+      $mail->Subject = $this->subject ? $this->subject : 'Appointment Confirmation';
       $mail->Body = $this->message;
       $mail->send();
     } catch (Exception $e) {

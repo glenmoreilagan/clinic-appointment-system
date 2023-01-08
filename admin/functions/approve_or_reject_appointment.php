@@ -13,9 +13,10 @@ $action = $_POST['action'];
 $appointment_id = $_POST['appointment_id'];
 $remarks = $_POST['remarks'];
 
-
 $qry = "SELECT appointment.user_id, user.fullname, user.contactno, user.email,
-appointment.complaint, serv.service_title, appointment.remarks
+appointment.complaint, serv.service_title, appointment.remarks,
+DATE_FORMAT(appointment.date_schedule, '%b %d %Y') as date_schedule, 
+TIME_FORMAT(appointment.date_schedule, '%I:%i %p') as time_schedule
 FROM tbl_appointments as appointment
 INNER JOIN tbl_user as user on user.id = appointment.user_id
 INNER JOIN tbl_services as serv on serv.id = appointment.service_id
@@ -39,6 +40,8 @@ if ($action == 'approve') {
       $complaint = $row['complaint'];
       $service_title = $row['service_title'];
       $remarks = $row['remarks'];
+      $date_schedule = $row['date_schedule'];
+      $time_schedule = $row['time_schedule'];
 
       $str_notif = "<div class='text-muted small mt-1'><span><b>$fullname</b></span><br><span>$complaint</span><br><span>$service_title</span><br><span>" . date('M d, Y H:i A') . "</span><br></div>";
       $notif = new NotificationClass($conn);
@@ -46,13 +49,21 @@ if ($action == 'approve') {
 
       $sms_response = '';
       $email_response = '';
-      // $patient_name = explode(' ', trim($fullname))[0];
+      $patient_name = explode(' ', trim($fullname))[0];
 
-      $messageSms = "Hi $fullname. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
+      $messageSms = "Hi $patient_name. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.";
       $messageEmail = "
         Hi $fullname. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.
-        Please fill out this 24 hours before your scheduled appointment.
         <br>
+        <b>Appointment Details:</b>
+        <br>
+        <b>Preffered Date:</b> $date_schedule
+        <br>
+        <b>Preffered Time:</b> $time_schedule
+        <br>
+        <b>Chief Complaint or Symptoms:</b> $complaint
+        <br>
+        Please fill out this 24 hours before your scheduled appointment.
         <a href='" . $host . "health-declaration-form.php'>Health Declaration Form</a>
         <br>
         <br>
