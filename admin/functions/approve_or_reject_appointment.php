@@ -55,13 +55,15 @@ if ($action == 'approve') {
       $messageEmail = "
         Hi $fullname. Thank you for choosing us! Your appointment with LJC Clinic was confirmed.
         <br>
-        <b>Appointment Details:</b>
+        <br>
+        <b>Appointment Details</b>
         <br>
         <b>Preffered Date:</b> $date_schedule
         <br>
         <b>Preffered Time:</b> $time_schedule
         <br>
         <b>Chief Complaint or Symptoms:</b> $complaint
+        <br>
         <br>
         Please fill out this 24 hours before your scheduled appointment.
         <a href='" . $host . "health-declaration-form.php'>Health Declaration Form</a>
