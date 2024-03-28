@@ -1,4 +1,4 @@
 vendor
-config.php
 caps.sql
 database.sql
+image/*
