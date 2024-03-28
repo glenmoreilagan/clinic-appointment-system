@@ -196,5 +196,9 @@ include_once '../functions/session_config.php';
     });
 
     load_services();
+    setTimeout(() => {
+      $("#statcompleted_modal").modal('hide');
+      $("#ILoader").modal('hide');
+    }, 3000);
   });
 </script>
